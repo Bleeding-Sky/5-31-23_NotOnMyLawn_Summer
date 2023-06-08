@@ -1,0 +1,6 @@
+acceleration
+max speed
+decelleration
+
+get input direction
+prospective speed = currentSpeed + (inputDir * acceleration)
