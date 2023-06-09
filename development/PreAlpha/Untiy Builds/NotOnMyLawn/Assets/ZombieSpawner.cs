@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadHitScript : MonoBehaviour
+public class ZombieSpawner : MonoBehaviour
 {
+    public GameObject zombie;
+    public Transform SpawnPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,10 +15,9 @@ public class HeadHitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnMouseDown()
-    {
-        Debug.Log("HeadHit");
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Instantiate(zombie, SpawnPoint.position, Quaternion.identity);
+        }
     }
 }

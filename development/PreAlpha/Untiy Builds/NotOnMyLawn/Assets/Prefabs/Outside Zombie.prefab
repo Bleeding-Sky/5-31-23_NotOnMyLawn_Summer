@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 520606569239086610}
   m_Layer: 0
   m_Name: Outside Zombie
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,10 +103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombRigidBody: {fileID: 6855661102063683405}
-  speed: 5.4
+  speed: 0.6
   z: 5
-  zLimit: -9
   y: -0.4
+  x: 0
+  xPosition: 0
+  SpawnPoint: {fileID: 309905190655705932, guid: 16b83ce23af01f54b96b15051371e839, type: 3}
+  zombieGoalPoint: {fileID: 2385844792007149526, guid: 634b6dba231fb554789cf98cefc455e5, type: 3}
 --- !u!50 &6855661102063683405
 Rigidbody2D:
   serializedVersion: 4

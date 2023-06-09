@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LegHitScript : MonoBehaviour
+public class HeadHitScript : MonoBehaviour
 {
     ZombieMovement ZombieHealth;
     // Start is called before the first frame update
@@ -18,8 +18,7 @@ public class LegHitScript : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Debug.Log("Leg Hit");
+        Debug.Log("HeadHit");
         ZombieHealth.KillZombie();
     }
-
 }
