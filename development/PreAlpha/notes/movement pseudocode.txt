@@ -3,4 +3,29 @@ max speed
 decelleration
 
 get input direction
-prospective speed = currentSpeed + (inputDir * acceleration)
+if input direction != 0
+	calculate new speed
+	cap speed
+	
+else if input direction = 0
+	if velocity != 0
+		calculate decelleration
+apply speed
+
+
+
+calculate new speed
+	float newSpeed = current x velocity + (inputDir * accel)
+	
+cap speed
+	if Math.Abs(newSpeed) >= maxSpeed
+		newSpeed = sign(newSpeed) * maxSpeed
+
+calculate decelleration
+	if (math.abs(current velocity) - decelleration < 0)
+		newSpeed = 0
+	else
+		signedDecelleration = sign(current x velocity) * decelleration
+		newSpeed = current x velocity - signedDecelleration
+apply speed
+	velocity = new vector2(newSpeed, 0)
