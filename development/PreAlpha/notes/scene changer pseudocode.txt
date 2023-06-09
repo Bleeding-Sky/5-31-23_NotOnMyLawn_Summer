@@ -1,0 +1,6 @@
+requires interactable script
+
+String SceneToLoad;
+
+if interactable.isActivated
+	Scenemanager.LoadScene(SceneToLoad)
