@@ -1,0 +1,14 @@
+GameObject Player
+float moveSpeed
+float health
+
+moveDirection
+
+playerXPos = Player.transform.position.x
+myXPos = transform.position.x
+if PlayerXPos > myXPos
+	moveDirection = 1
+else
+	moveDirection = -1
+
+velocity = moveDirection * moveSpeed

@@ -1,0 +1,9 @@
+int health
+
+Update
+	if health <= 0
+		destroy()
+
+onCollisionEnter
+	if collision.compareTag("Bullet")
+	Health -= collision.bulletInfo.damage
