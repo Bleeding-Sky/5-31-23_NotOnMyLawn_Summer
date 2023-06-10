@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ZombieMovement : MonoBehaviour
 {
-    public Rigidbody2D zombRigidBody;
     public float speed;
     public float z;
     private float zLimit;

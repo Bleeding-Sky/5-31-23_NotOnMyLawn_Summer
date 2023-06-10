@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieHealthAndDeath : MonoBehaviour
+public class ZombieAtWindowTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,13 @@ public class ZombieHealthAndDeath : MonoBehaviour
     {
         
     }
-    private void OnMouseDown()
+
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Zombie"))
+        {
+            Debug.Log("Zombie Reached Window");
+        }
     }
+
 }

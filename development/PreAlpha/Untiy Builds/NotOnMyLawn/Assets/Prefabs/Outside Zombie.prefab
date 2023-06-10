@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7189145770729623658}
   - component: {fileID: 6855661102063683405}
   - component: {fileID: 520606569239086610}
+  - component: {fileID: 707541581580912177}
+  - component: {fileID: 2774536114415592887}
   m_Layer: 0
   m_Name: Outside Zombie
   m_TagString: Zombie
@@ -102,7 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239d535f1dd9f594499bebe8806f48ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombRigidBody: {fileID: 6855661102063683405}
   speed: 0.6
   z: 5
   y: -0.4
@@ -144,7 +145,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754701418834425928}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -166,7 +167,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -182,6 +183,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &707541581580912177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754701418834425928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692407fcf7f48e1498a93412c0fe3ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2774536114415592887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754701418834425928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86042740593e0834fafb94454b7805f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ZombieAtGoalPoint: {fileID: 2385844792007149526, guid: 634b6dba231fb554789cf98cefc455e5, type: 3}
+  zombiePosition: 0
+  indoorZombie: {fileID: 4655407981058385939, guid: b7c56f45ff2b9734cb7aedabe5f3627e, type: 3}
+  windowLocation: {fileID: 15291388214648697, guid: 4eb0b619cfcacc64cad7a9ecbf7def1a, type: 3}
 --- !u!1 &5072334297201463512
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3711712889139505789
 Transform:
   m_ObjectHideFlags: 0
@@ -308,7 +337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3454610118204683462
 Transform:
   m_ObjectHideFlags: 0
@@ -416,7 +445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2733655946434384512
 Transform:
   m_ObjectHideFlags: 0
