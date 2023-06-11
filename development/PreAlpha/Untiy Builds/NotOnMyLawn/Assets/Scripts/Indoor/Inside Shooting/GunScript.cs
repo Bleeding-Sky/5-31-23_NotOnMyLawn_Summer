@@ -7,6 +7,7 @@ public class GunScript : MonoBehaviour
   
     public bool isPickedUp;
     public bool isAiming;
+    public bool canShoot;
 
     public Transform directonalAiming;
     public float bulletDir;
@@ -47,7 +48,7 @@ public class GunScript : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isPickedUp && isAiming)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isPickedUp && isAiming && canShoot)
         {
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
