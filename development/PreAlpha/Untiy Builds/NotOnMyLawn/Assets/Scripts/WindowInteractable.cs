@@ -12,6 +12,8 @@ public class WindowInteractable : MonoBehaviour
 
     public Rigidbody2D Player;
     public bool zombieThroughTheWindow;
+
+    public GameObject outsideGun;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,8 @@ public class WindowInteractable : MonoBehaviour
     {
         Camera1.SetActive(false);
         Camera2.SetActive(true);
+        outsideGun.SetActive(true);
+
         GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = false;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = false;
         Player.velocity = new Vector2(0, 0);
@@ -82,6 +86,8 @@ public class WindowInteractable : MonoBehaviour
     {
         Camera1.SetActive(true);
         Camera2.SetActive(false);
+        outsideGun.SetActive(false);
+
         GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = true;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = true;
     }

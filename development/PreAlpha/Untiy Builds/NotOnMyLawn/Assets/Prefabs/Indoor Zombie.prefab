@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4929739799835465587}
   - component: {fileID: 4938025116766517969}
   - component: {fileID: -4685214792183642919}
+  - component: {fileID: -3133756191251902174}
   m_Layer: 0
   m_Name: Indoor Zombie
   m_TagString: Zombie
@@ -215,3 +216,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.76, y: 1.94}
   m_Direction: 0
+--- !u!114 &-3133756191251902174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655407981058385939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e819ace86b7404d8472114227a5fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHealth: {fileID: 11400000, guid: a4bcbabc4b89f8940b50ae501975667d, type: 2}

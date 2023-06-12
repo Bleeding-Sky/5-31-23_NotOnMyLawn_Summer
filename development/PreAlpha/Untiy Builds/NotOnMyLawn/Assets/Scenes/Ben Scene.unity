@@ -137,6 +137,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 626788564}
     m_Modifications:
     - target: {fileID: 696458235861913350, guid: 87848181e51750d4b966e9ee33ca81d1, type: 3}
+      propertyPath: bulletAmount
+      value: 
+      objectReference: {fileID: 11400000, guid: a27779be9f6bc5840bfa17aea1e944cf, type: 2}
+    - target: {fileID: 696458235861913350, guid: 87848181e51750d4b966e9ee33ca81d1, type: 3}
       propertyPath: directonalAiming
       value: 
       objectReference: {fileID: 1330262062}

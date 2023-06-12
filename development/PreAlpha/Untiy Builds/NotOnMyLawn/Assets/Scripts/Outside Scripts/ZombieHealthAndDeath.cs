@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ZombieHealthAndDeath : MonoBehaviour
 {
+    public PlayerBulletCount bulletCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,10 @@ public class ZombieHealthAndDeath : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Destroy(gameObject);
+        if (bulletCount.bulletCount != 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
