@@ -8,6 +8,7 @@ public class BasicMovement : MonoBehaviour
     public float speed;
 
     public Rigidbody2D playerRigidBody;
+    public PlayerPositionTracker playerPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class BasicMovement : MonoBehaviour
     void Update()
     {
         horizontalDir = HorizontalMovement();
-
+        playerPosition.playerPosition = transform.position;
         if(horizontalDir != 0)
         {
             playerRigidBody.velocity = new Vector2(horizontalDir * speed, 0);

@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9b2ad51479b2742bf4fcc72b29e861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 5745795662583600288, guid: 20167edca44a23b49a190d9e369fd8e0, type: 3}
-  moveSpeed: 3.67
+  playerPosition: {fileID: 11400000, guid: cd0438e4455ada34e9ba8ce60d2c18cd, type: 2}
+  moveSpeed: 1.5
   moveDirection: 0
   myRigidbody2D: {fileID: 3645689088904636192}
 --- !u!114 &4938025116766517969
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94231fa3598eff54db8b464eead52cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 2
 --- !u!70 &-4685214792183642919
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

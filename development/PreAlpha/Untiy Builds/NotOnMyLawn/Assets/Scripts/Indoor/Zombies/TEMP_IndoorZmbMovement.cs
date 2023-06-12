@@ -5,7 +5,7 @@ using UnityEngine;
 public class TEMP_IndoorZmbMovement : MonoBehaviour
 {
 
-    public GameObject playerObject;
+    public PlayerPositionTracker playerPosition;
     public float moveSpeed;
     public int moveDirection;
     public Rigidbody2D myRigidbody2D;
@@ -19,7 +19,7 @@ public class TEMP_IndoorZmbMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float playerXPos = playerObject.transform.position.x;
+        float playerXPos = playerPosition.playerPosition.x;
         float myXPos = transform.position.x;
         
         if (playerXPos > myXPos)
