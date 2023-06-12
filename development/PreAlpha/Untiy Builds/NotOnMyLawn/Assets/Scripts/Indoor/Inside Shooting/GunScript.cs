@@ -18,15 +18,20 @@ public class GunScript : MonoBehaviour
     private Camera mainCamera;
     private Vector3 mousePos;
 
+    public PlayerBulletCount bulletAmount;
+    public float bulletCount;
+
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        bulletAmount.bulletCount = bulletCount;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if(isPickedUp && isAiming)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
@@ -51,6 +56,21 @@ public class GunScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && isPickedUp && isAiming && canShoot)
         {
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            bulletAmount.bulletCount = bulletAmount.bulletCount - 1;
+        }
+
+        if(bulletAmount.bulletCount != 0)
+        {
+            canShoot = true;
+        }
+        else if(bulletAmount.bulletCount == 0)
+        {
+            canShoot = false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            bulletAmount.ResetBulletCount();
         }
     }
 
