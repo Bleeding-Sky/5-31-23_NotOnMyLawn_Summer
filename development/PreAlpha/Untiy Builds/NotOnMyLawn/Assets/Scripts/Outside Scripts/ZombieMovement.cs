@@ -11,6 +11,13 @@ public class ZombieMovement : MonoBehaviour
     public float x;
 
     public float xPosition;
+    public float randomGoalPoint;
+    public float goalPoint;
+
+    public float ratio;
+    public float scaleNumber;
+
+    
 
     public Transform SpawnPoint;
     public Transform zombieGoalPoint;
@@ -18,10 +25,12 @@ public class ZombieMovement : MonoBehaviour
     void Start()
     {
         zLimit = z - 14;
+        ratio = .0654f;
         y = SpawnPoint.transform.position.y;
         x = SpawnPoint.transform.position.x;
         Debug.Log(SpawnPoint.transform.position);
         ZombieXPosition();
+        
     }
 
     // Update is called once per frame
@@ -38,6 +47,9 @@ public class ZombieMovement : MonoBehaviour
     void ZombieXPosition()
     {
         xPosition = Random.Range(-13, 14);
+        goalPoint = zombieGoalPoint.transform.position.x + (xPosition * ratio);
+        speed = .07077f * Mathf.Abs(xPosition);
+        
 
         if(xPosition > 0)
         {
@@ -51,27 +63,24 @@ public class ZombieMovement : MonoBehaviour
         {
             x = transform.position.x;
         }
-        Debug.Log(x);
     }
 
     void ZombieMoveToGoal()
     {
-        if(x > zombieGoalPoint.transform.position.x)
+        if(x > goalPoint)
         {
             x = x - (speed * Time.deltaTime);
-            Debug.Log("Right");
         }
-        else if(x < zombieGoalPoint.transform.position.x)
+        else if(x < goalPoint)
         {
             x = x + (speed * Time.deltaTime);
-            Debug.Log("Left");
         }
-        else if(x == zombieGoalPoint.transform.position.x)
+        else if(x == goalPoint)
         {
-            x = zombieGoalPoint.transform.position.x;
-            Debug.Log("Middle");
+            x = goalPoint;
         }
     }
+    
 
     public void KillZombie()
     {

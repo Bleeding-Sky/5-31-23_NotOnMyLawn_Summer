@@ -8,6 +8,8 @@ public class BulletFromGunScript : MonoBehaviour
     private Vector3 mousePos;
     private Rigidbody2D bulletRb;
     public float speed;
+
+    public PointTracker points;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +31,13 @@ public class BulletFromGunScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Platform"))
         {
+            Destroy(gameObject);
+        }
+        else if(collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Zombie"))
+        {
+            points.points = points.points + 10;
             Destroy(gameObject);
         }
     }

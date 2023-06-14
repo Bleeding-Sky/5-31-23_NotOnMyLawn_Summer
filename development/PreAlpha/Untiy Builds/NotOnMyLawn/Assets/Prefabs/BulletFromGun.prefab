@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  points: {fileID: 11400000, guid: 6e8c2b0a62dcec04097587ff3e23bf81, type: 2}

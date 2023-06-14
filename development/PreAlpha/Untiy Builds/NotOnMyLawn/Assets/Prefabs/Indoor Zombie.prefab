@@ -229,3 +229,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: {fileID: 11400000, guid: a4bcbabc4b89f8940b50ae501975667d, type: 2}
+  attackTimer: 0
+  startTimer: 0

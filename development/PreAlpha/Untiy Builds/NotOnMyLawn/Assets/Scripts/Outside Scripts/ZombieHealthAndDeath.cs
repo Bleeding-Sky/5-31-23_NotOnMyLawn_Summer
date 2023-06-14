@@ -5,6 +5,7 @@ using UnityEngine;
 public class ZombieHealthAndDeath : MonoBehaviour
 {
     public PlayerBulletCount bulletCount;
+    public PointTracker points;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class ZombieHealthAndDeath : MonoBehaviour
     {
         if (bulletCount.bulletCount != 0)
         {
+            points.points += 20;
             Destroy(gameObject);
         }
 

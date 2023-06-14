@@ -104,11 +104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239d535f1dd9f594499bebe8806f48ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.6
+  speed: 1.18
   z: 5
   y: -0.4
   x: 0
   xPosition: 0
+  randomGoalPoint: 0
+  goalPoint: 0
+  ratio: 0
+  scaleNumber: 0
   SpawnPoint: {fileID: 309905190655705932, guid: 16b83ce23af01f54b96b15051371e839, type: 3}
   zombieGoalPoint: {fileID: 2385844792007149526, guid: 634b6dba231fb554789cf98cefc455e5, type: 3}
 --- !u!50 &6855661102063683405
@@ -196,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletCount: {fileID: 11400000, guid: a27779be9f6bc5840bfa17aea1e944cf, type: 2}
+  points: {fileID: 11400000, guid: 6e8c2b0a62dcec04097587ff3e23bf81, type: 2}
 --- !u!114 &2774536114415592887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +217,7 @@ MonoBehaviour:
   zombiePosition: 0
   indoorZombie: {fileID: 4655407981058385939, guid: b7c56f45ff2b9734cb7aedabe5f3627e, type: 3}
   windowLocation: {fileID: 15291388214648697, guid: 4eb0b619cfcacc64cad7a9ecbf7def1a, type: 3}
+  Timer: 0
 --- !u!1 &5072334297201463512
 GameObject:
   m_ObjectHideFlags: 0
