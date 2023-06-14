@@ -9,6 +9,7 @@ public class WindowInteractable : MonoBehaviour
 
     public GameObject Camera1;
     public GameObject Camera2;
+    public GameObject Camera3;
 
     public Rigidbody2D Player;
     public bool zombieThroughTheWindow;
@@ -75,6 +76,8 @@ public class WindowInteractable : MonoBehaviour
     {
         Camera1.SetActive(false);
         Camera2.SetActive(true);
+        Camera3.SetActive(false);
+        
         outsideGun.SetActive(true);
 
         GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = false;
@@ -86,10 +89,12 @@ public class WindowInteractable : MonoBehaviour
     {
         Camera1.SetActive(true);
         Camera2.SetActive(false);
+        Camera3.SetActive(false);
         outsideGun.SetActive(false);
 
         GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = true;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = true;
     }
+
 
 }

@@ -17,19 +17,21 @@ public class ZombieMovement : MonoBehaviour
     public float ratio;
     public float scaleNumber;
 
-    
+ 
 
     public Transform SpawnPoint;
     public Transform zombieGoalPoint;
     // Start is called before the first frame update
     void Start()
     {
+      
         zLimit = z - 14;
         ratio = .0654f;
         y = SpawnPoint.transform.position.y;
         x = SpawnPoint.transform.position.x;
         Debug.Log(SpawnPoint.transform.position);
         ZombieXPosition();
+
         
     }
 

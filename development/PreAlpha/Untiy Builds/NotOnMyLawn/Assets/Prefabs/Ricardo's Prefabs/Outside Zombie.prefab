@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4666236434569470521}
   - {fileID: 3711712889139505789}
   - {fileID: 3454610118204683462}
   - {fileID: 2733655946434384512}
@@ -141,7 +142,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &520606569239086610
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -552,3 +553,81 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!1001 &5991475886616763015
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7105507986579429655}
+    m_Modifications:
+    - target: {fileID: 850514493309934671, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_Name
+      value: ZombieForTests
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 188
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.4480487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781744418939770757, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: zombiePosition
+      value: 
+      objectReference: {fileID: 2385844792007149526, guid: 634b6dba231fb554789cf98cefc455e5, type: 3}
+    - target: {fileID: 8781744418939770757, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+      propertyPath: zombieGoalPoint
+      value: 
+      objectReference: {fileID: 7105507986579429655}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+--- !u!4 &4666236434569470521 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1433326397168023742, guid: 75965a53f574d474684d07f26127bc84, type: 3}
+  m_PrefabInstance: {fileID: 5991475886616763015}
+  m_PrefabAsset: {fileID: 0}
