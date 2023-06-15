@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09339bf6086445a4d96f59a5b07c9d50, type: 3}
   m_Name: LandMine
   m_EditorClassIdentifier: 
-  <IsStackable>k__BackingField: 0
-  <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
-  <ItemImage>k__BackingField: {fileID: 0}
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 10
+  <Name>k__BackingField: Landmine
+  <ItemImage>k__BackingField: {fileID: 21300000, guid: d923f846453095c48b178ba51427e9ee, type: 3}

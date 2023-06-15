@@ -12,5 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b82ad949913b764faa3302634176b69, type: 3}
   m_Name: Trap Player Inventory
   m_EditorClassIdentifier: 
-  trapInventoryItems: []
+  trapInventoryItems:
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 2
+    item: {fileID: 11400000, guid: 46b78c518e9133445b9d7f7f419c40b1, type: 2}
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 7
+    item: {fileID: 11400000, guid: b72627f0698ea274ea0c0cef2a6c3f0e, type: 2}
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 0
+    item: {fileID: 0}
+  - quantity: 0
+    item: {fileID: 0}
   <Size>k__BackingField: 10
