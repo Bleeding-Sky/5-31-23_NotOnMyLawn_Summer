@@ -1,10 +1,14 @@
 read from top down view
 
 window has public GameObject 2Dcounterpart, holds 2D window object that it corresponds to
+
+(still havent done this stuff)
+{
 window has public viewWidth float
 	calculate viewXMin = position - .5 * viewWidth
 	calculate viewXMax = viewXMin + viewWidth
 	(use these to programatically set trigger bounds for window)
+}
 window has trigger field in front of it
 	zombie in trigger field
 		-zombie has public GameObject visibleThruWindow
@@ -33,6 +37,7 @@ window has trigger field in front of it
 		scaleDiff = zmbFarScale - zmbCloseScale
 		posDiff = zmbFarYPos - zmbWIndowYPos
 	
+[I AM HERE. TODO: EVERYTHING PAST THIS]
 	spawn zombie (gameObject tacViewZombie)
 		instantiate windowZmb 
 		add zombie to list of zombies in view
