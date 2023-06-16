@@ -5,10 +5,10 @@ using UnityEngine;
 public class TEMP_WindowView : MonoBehaviour
 {
 
-    public float zmbFarScale = 1;
-    public float zmbWindowScale = 5.22f;
-    public float zmbFarYPos = 2.3f;
-    public float zmbWindowYPos = .08f;
+    public float zmbFarScale = .85f;
+    public float zmbWindowScale = 3.92f;
+    public float zmbFarYPos = 1.27f;
+    public float zmbWindowYPos = .25f;
 
     public float windowRange = 7.5f;
     public float scaleDiff;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TEMP_TrackerTacviewWindow : MonoBehaviour
 {
 
-    public GameObject indoorCounterpart;
+    public GameObject wndwViewCounterpart;
     public float viewWidth;
     public float viewXMin;
     public float viewXMax;
@@ -38,7 +38,7 @@ public class TEMP_TrackerTacviewWindow : MonoBehaviour
             zombieTrackerScript.visibleThruWindow = gameObject;
 
             //create zombie in window view
-            indoorCounterpart.GetComponent<TEMP_WindowView>().SpawnZombie(collision.gameObject);
+            wndwViewCounterpart.GetComponent<WndwZmbTracker3D>().SpawnZmb(collision.gameObject);
 
         }
     }
