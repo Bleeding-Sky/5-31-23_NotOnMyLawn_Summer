@@ -13,6 +13,7 @@ public class TrapUIController : MonoBehaviour
 
     public List<TrapItem> initialItems = new List<TrapItem>();
 
+    public bool inTacticalViewRange;
     private void Start()
     {
         PrepareUI();
@@ -71,7 +72,7 @@ public class TrapUIController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKeyDown(KeyCode.E) && inTacticalViewRange)
         {
             if(trapMenuUI.isActiveAndEnabled == false)
             {
@@ -88,6 +89,22 @@ public class TrapUIController : MonoBehaviour
             {
                 trapMenuUI.Hidemenu();
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("TacticalView"))
+        {
+            inTacticalViewRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("TacticalView"))
+        {
+            inTacticalViewRange = false;
         }
     }
 }

@@ -18,20 +18,21 @@ public class WindowInteractable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+         zombieThroughTheWindow = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        canInteract();
-        if (windowView == true && isInteracting && !zombieThroughTheWindow)
+        if (Input.GetKeyDown(KeyCode.E) && windowView == true && isInteracting == false)
         {
             switchToOutside();
+            isInteracting = true;
         }
-        else if (Input.GetKeyUp(KeyCode.E) || zombieThroughTheWindow)
+        else if (Input.GetKeyDown(KeyCode.E) && isInteracting == true)
         {
             switchToInside();
+            isInteracting = false;
         }
 
     }
@@ -60,17 +61,6 @@ public class WindowInteractable : MonoBehaviour
         }
     }
 
-    private void canInteract()
-    {
-        if(Input.GetKey(KeyCode.E))
-        {
-            isInteracting = true;
-        }
-        else if(Input.GetKeyUp(KeyCode.E))
-        {
-            isInteracting = false;
-        }
-    }
 
     private void switchToOutside()
     {

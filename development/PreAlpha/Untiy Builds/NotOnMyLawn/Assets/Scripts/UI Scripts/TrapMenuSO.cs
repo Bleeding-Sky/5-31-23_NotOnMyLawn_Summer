@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -24,21 +25,82 @@ public class TrapMenuSO : ScriptableObject
         }
     }
 
-    public void AddItem(ItemScriptableObjects item, int quantity)
+    public int AddItem(ItemScriptableObjects item, int quantity)
+    {
+        if(item.IsStackable == false)
+        {
+            for (int i = 0; i < trapInventoryItems.Count; i++)
+            {
+                while (quantity > 0 && isInventoryFull() == false)
+                {
+                    quantity -= AddItemToFirstFreeSlot(item, 1);
+                }
+                InformAboutChange();
+                return quantity;
+            }
+        }
+        quantity = AddStackableItem(item, quantity);
+        InformAboutChange();
+        return quantity;
+    }
+
+    private int AddItemToFirstFreeSlot(ItemScriptableObjects item, int quantity)
+    {
+        TrapItem newItem = new TrapItem
+        {
+            item = item,
+            quantity = quantity,
+
+        };
+
+        for (int i = 0; i < trapInventoryItems.Count; i++)
+        {
+            if (trapInventoryItems[i].IsEmpty)
+            {
+                trapInventoryItems[i] = newItem;
+                return quantity;
+            }
+        }
+        return 0;
+    }
+
+
+    private bool isInventoryFull()
+        => trapInventoryItems.Where(item => item.IsEmpty).Any() == false;
+
+    private int AddStackableItem(ItemScriptableObjects item, int quantity)
     {
         for (int i = 0; i < trapInventoryItems.Count; i++)
         {
-            if(trapInventoryItems[i].IsEmpty)
+            if (trapInventoryItems[i].IsEmpty)
+                continue;
+            if (trapInventoryItems[i].item.ID == item.ID)
             {
-                trapInventoryItems[i] = new TrapItem
-                {
-                    item = item,
-                    quantity = quantity,
-                };
-                return;
+                int amountPossibleToTake =
+                        trapInventoryItems[i].item.MaxStackSize - trapInventoryItems[i].quantity;
 
+                if (quantity > amountPossibleToTake)
+                {
+                    trapInventoryItems[i] = trapInventoryItems[i]
+                        .ChangeQuantity(trapInventoryItems[i].item.MaxStackSize);
+                    quantity -= amountPossibleToTake;
+                }
+                else
+                {
+                    trapInventoryItems[i] = trapInventoryItems[i]
+                        .ChangeQuantity(trapInventoryItems[i].quantity + quantity);
+                    InformAboutChange();
+                    return 0;
+                }
             }
         }
+        while(quantity > 0 && isInventoryFull() == false)
+        {
+            int newQuantity = Mathf.Clamp(quantity, 0, item.MaxStackSize);
+            quantity -= newQuantity;
+            AddItemToFirstFreeSlot(item, newQuantity);
+        }
+        return quantity;
     }
 
     public void AddItem(TrapItem item)

@@ -21,14 +21,17 @@ public class SwitchToTactical : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        canInteract();
-        if(tacticalView == true && isInteracting)
+
+
+        if (Input.GetKeyDown(KeyCode.E) && tacticalView == true && isInteracting == false)
         {
             SwitchToMap();
+            isInteracting = true;
         }
-        else if(!isInteracting)
+        else if (Input.GetKeyDown(KeyCode.E) && isInteracting == true)
         {
             SwitchToHouse();
+            isInteracting = false;
         }
     }
 
