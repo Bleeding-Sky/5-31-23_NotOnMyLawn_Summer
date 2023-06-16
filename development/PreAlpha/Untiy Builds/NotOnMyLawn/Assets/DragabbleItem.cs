@@ -9,6 +9,7 @@ public class DragabbleItem : MonoBehaviour, IBeginDragHandler,
     public Vector3 screenPosition;
     public Vector3 worldPosition;
     public TrapPlacableScriptSO trap;
+    public PointTracker points;
     Transform parentAfterDrag;
 
 
@@ -37,16 +38,18 @@ public class DragabbleItem : MonoBehaviour, IBeginDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(trap.placable == false)
+        if(trap.placable == false || points.points < 100)
         {
             transform.SetParent(parentAfterDrag);
 
             transform.position = trapSlotPosition.position;
         }
-        else if(trap.placable == true)
+        else if(trap.placable == true && points.points >= 100)
         {
             Instantiate(landMine, worldPosition, Quaternion.identity);
-            Destroy(gameObject);
+            points.points -= 100;
+            transform.SetParent(parentAfterDrag);
+            transform.position = trapSlotPosition.position;
         }
       
     }

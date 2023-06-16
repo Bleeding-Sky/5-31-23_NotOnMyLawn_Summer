@@ -19,12 +19,13 @@ public class TEMP_HorizontalMovement : MonoBehaviour
     void Start()
     {
         currentMoveSpeed = holsteredMoveSpeed;
+        HolsterGun();
     }
 
     private void Update()
     {
         //toggles gunIsDrawn boolean, updates speed var, and updates states
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (gunIsDrawn)
             {

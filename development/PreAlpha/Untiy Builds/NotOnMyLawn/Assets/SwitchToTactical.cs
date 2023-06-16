@@ -12,6 +12,8 @@ public class SwitchToTactical : MonoBehaviour
     public bool isInteracting;
 
     public Rigidbody2D Player;
+
+    public GameObject TrapMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +28,13 @@ public class SwitchToTactical : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && tacticalView == true && isInteracting == false)
         {
             SwitchToMap();
+            TrapMenu.SetActive(true);
             isInteracting = true;
         }
         else if (Input.GetKeyDown(KeyCode.E) && isInteracting == true)
         {
             SwitchToHouse();
+            TrapMenu.SetActive(false);
             isInteracting = false;
         }
     }
@@ -67,7 +71,7 @@ public class SwitchToTactical : MonoBehaviour
         Camera1.SetActive(false);
         Camera2.SetActive(false);
         Camera3.SetActive(true);
-        GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = false;
+        GameObject.Find("Circle").GetComponent<TEMP_HorizontalMovement>().enabled = false;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = false;
         Player.velocity = new Vector2(0, 0);
     }
@@ -76,7 +80,7 @@ public class SwitchToTactical : MonoBehaviour
         Camera1.SetActive(true);
         Camera2.SetActive(false);
         Camera3.SetActive(false);
-        GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = true;
+        GameObject.Find("Circle").GetComponent<TEMP_HorizontalMovement>().enabled = true;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = true;
     }
 }

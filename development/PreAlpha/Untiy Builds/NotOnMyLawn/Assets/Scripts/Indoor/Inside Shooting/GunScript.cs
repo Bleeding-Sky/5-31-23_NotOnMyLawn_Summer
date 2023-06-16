@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-  
-    public bool isPickedUp;
-    public bool isAiming;
+    public bool isHolstered;
     public bool canShoot;
 
     public Transform directonalAiming;
@@ -32,7 +30,7 @@ public class GunScript : MonoBehaviour
     void Update()
     {
         
-        if(isPickedUp && isAiming)
+        if(isHolstered)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
             bulletDir = calculateDirection();
@@ -41,19 +39,19 @@ public class GunScript : MonoBehaviour
         }
 
         transform.position = directonalAiming.position;
-        if (isPickedUp && Input.GetAxisRaw("Fire2") == 1)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isHolstered)
         {
-            isAiming = true;
+            isHolstered = true;
         }
-        else if (isPickedUp && Input.GetAxisRaw("Fire2") == 0)
+        else if (Input.GetKeyDown(KeyCode.Mouse1)&&isHolstered)
         {
-            isAiming = false;
+            isHolstered = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
 
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isPickedUp && isAiming && canShoot)
+        if (Input.GetKeyDown(KeyCode.Mouse0)  && isHolstered && canShoot)
         {
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
             bulletAmount.bulletCount = bulletAmount.bulletCount - 1;
@@ -81,7 +79,7 @@ public class GunScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                isPickedUp = true;
+                
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
 

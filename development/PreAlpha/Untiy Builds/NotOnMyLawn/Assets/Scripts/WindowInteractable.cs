@@ -70,7 +70,7 @@ public class WindowInteractable : MonoBehaviour
         
         outsideGun.SetActive(true);
 
-        GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = false;
+        GameObject.Find("Circle").GetComponent<TEMP_HorizontalMovement>().enabled = false;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = false;
         Player.velocity = new Vector2(0, 0);
 
@@ -82,7 +82,7 @@ public class WindowInteractable : MonoBehaviour
         Camera3.SetActive(false);
         outsideGun.SetActive(false);
 
-        GameObject.Find("Circle").GetComponent<BasicMovement>().enabled = true;
+        GameObject.Find("Circle").GetComponent<TEMP_HorizontalMovement>().enabled = true;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = true;
     }
 
