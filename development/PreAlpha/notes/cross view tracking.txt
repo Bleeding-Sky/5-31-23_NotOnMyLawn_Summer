@@ -37,13 +37,15 @@ window has trigger field in front of it
 		scaleDiff = zmbFarScale - zmbCloseScale
 		posDiff = zmbFarYPos - zmbWIndowYPos
 	
-[I AM HERE. TODO: EVERYTHING PAST THIS]
+
 	spawn zombie (gameObject tacViewZombie)
 		instantiate windowZmb 
 		add zombie to list of zombies in view
-			((IF ZOMBIE FLASHES ONSCREEN AT DEFAULT POS FOR ONE FRAME))							instantiate at x position (windowXPos + zombie.xDisplace...)
+			((IF ZOMBIE FLASHES ONSCREEN AT DEFAULT POS FOR ONE FRAME))
+			instantiate at x position (windowXPos + zombie.xDisplace...)
 			//should spawn zombie at corresponding x position
 
+[I AM HERE. TODO: EVERYTHING PAST THIS]
 	update (every frame)
 		for each zombie in zmbsInView
 			x = windowPos + tacviewCounterpart.xDisplacement

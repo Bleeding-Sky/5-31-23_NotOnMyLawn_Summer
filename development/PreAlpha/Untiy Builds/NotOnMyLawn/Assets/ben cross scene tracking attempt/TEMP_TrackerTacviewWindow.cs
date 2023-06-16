@@ -37,6 +37,9 @@ public class TEMP_TrackerTacviewWindow : MonoBehaviour
             TEMP_TrackerTacticalZmb zombieTrackerScript = collision.GetComponent<TEMP_TrackerTacticalZmb>();
             zombieTrackerScript.visibleThruWindow = gameObject;
 
+            //create zombie in window view
+            indoorCounterpart.GetComponent<TEMP_WindowView>().SpawnZombie(collision.gameObject);
+
         }
     }
 
