@@ -54,17 +54,18 @@ public class TEMP_TrackerTacviewWindow : MonoBehaviour
         {
             //remove zombie from inView list
             zmbsInView.Remove(collision.gameObject);
+            KillZombie(collision.gameObject);
         }
     }
 
-    public void KillZombie(GameObject zmb)
+    public void KillZombie(GameObject tacviewZmb)
     {
         Debug.Log("Tacview window KillZmb script activated");
         //remove this zmb from the 2d window list
-        wndwViewCounterpart.GetComponent<WndwZmbTracker3D>().KillWndwZmb(zmb);
+        wndwViewCounterpart.GetComponent<WndwZmbTracker3D>().KillWndwZmb(tacviewZmb);
 
         //delete the tacview zombie
-        Destroy(zmb);
+        Destroy(tacviewZmb);
     }
 
 }
