@@ -181,9 +181,10 @@ GameObject:
   - component: {fileID: 7898650609298997093}
   - component: {fileID: 4909465797169769508}
   - component: {fileID: 937289470990186076}
+  - component: {fileID: 154554739409657905}
   m_Layer: 0
-  m_Name: Zombie
-  m_TagString: Untagged
+  m_Name: Tacview Zombie
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,7 +204,7 @@ Transform:
   - {fileID: 4975591322912258139}
   - {fileID: 1747995434598483951}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8757641703586043098
 BoxCollider2D:
@@ -306,3 +307,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   currentHealth: 0
+  myTrackerScript: {fileID: 0}
+--- !u!114 &154554739409657905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043361199756997840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41fccaadc7aa3544e854bc2495dedd9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleThruWindow: {fileID: 0}
+  xDisplacementFromWindow: 0
+  distanceFromHouse: 0
+  myHealthTracker: {fileID: 0}
