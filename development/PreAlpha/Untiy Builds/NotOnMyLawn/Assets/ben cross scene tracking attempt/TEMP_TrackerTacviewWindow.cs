@@ -20,27 +20,31 @@ public class TEMP_TrackerTacviewWindow : MonoBehaviour
         viewXMax = transform.position.x + .5f * viewWidth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
         if (collision.gameObject.CompareTag("Zombie"))
         {
-            //add zombie to inView list
-            zmbsInView.Add(collision.gameObject);
-            //add this window to zombie's data
-            TEMP_TrackerTacticalZmb zombieTrackerScript = collision.GetComponent<TEMP_TrackerTacticalZmb>();
-            zombieTrackerScript.visibleThruWindow = gameObject;
 
-            //create zombie in window view
-            wndwViewCounterpart.GetComponent<WndwZmbTracker3D>().SpawnZmb(collision.gameObject);
+            ProcessZmbInWindow(collision);
 
         }
+    }
+
+    /// <summary>
+    /// adds zombie to list of zombies in view + spawns it in the windowview
+    /// </summary>
+    /// <param name="collision"></param>
+    private void ProcessZmbInWindow(Collider2D collision)
+    {
+        //add zombie to inView list
+        zmbsInView.Add(collision.gameObject);
+        //add this window to zombie's data
+        TEMP_TrackerTacticalZmb zombieTrackerScript = collision.GetComponent<TEMP_TrackerTacticalZmb>();
+        zombieTrackerScript.visibleThruWindow = gameObject;
+
+        //create zombie in window view
+        wndwViewCounterpart.GetComponent<WndwZmbTracker3D>().SpawnZmb(collision.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -51,6 +55,16 @@ public class TEMP_TrackerTacviewWindow : MonoBehaviour
             //remove zombie from inView list
             zmbsInView.Remove(collision.gameObject);
         }
+    }
+
+    public void KillZombie(GameObject zmb)
+    {
+        Debug.Log("Tacview window KillZmb script activated");
+        //remove this zmb from the 2d window list
+        wndwViewCounterpart.GetComponent<WndwZmbTracker3D>().KillWndwZmb(zmb);
+
+        //delete the tacview zombie
+        Destroy(zmb);
     }
 
 }

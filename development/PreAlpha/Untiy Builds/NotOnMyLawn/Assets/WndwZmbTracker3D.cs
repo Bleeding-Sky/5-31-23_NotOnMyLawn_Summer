@@ -43,4 +43,22 @@ public class WndwZmbTracker3D : MonoBehaviour
         //add zombie to list of zombies in view
         zmbsInWindow.Add(newWindowZmb);
     }
+
+    public void KillWndwZmb(GameObject tacViewZmb)
+    {
+
+        //find zmb in list that matches tacview zmb
+        foreach (GameObject zmb in zmbsInWindow)
+        {
+            if (zmb.GetComponent<TEMP_WindowViewZombie>().tacviewCounterpart == tacViewZmb)
+            {
+                //for some reason the wndwview zmb list starts erroring
+                //if you dont remove the zombie from the list before
+                //destroying it???? but this doesnt happen in the tacview
+                //list so idk what this is but it works lmao fml
+                zmbsInWindow.Remove(zmb);
+                Destroy(zmb);
+            }
+        }
+    }
 }
