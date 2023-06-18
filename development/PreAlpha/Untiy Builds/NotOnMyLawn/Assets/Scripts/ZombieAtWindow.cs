@@ -11,6 +11,10 @@ public class ZombieAtWindow : MonoBehaviour
     public Transform windowLocation;
 
     public float Timer;
+
+    public WindowBoardsDamageScript boardHealth;
+    public float rebuildSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +31,16 @@ public class ZombieAtWindow : MonoBehaviour
 
         if(zombiePosition < -8.9)
         {
-            Debug.Log("Zombie Reached Window");
-            ShiftZombieIndoor();
+            if(boardHealth.windowBoardDamage > 0)
+            {
+                boardHealth.windowBoardDamage  = boardHealth.windowBoardDamage - (rebuildSpeed * Time.deltaTime);
+            }
+            else if(boardHealth.windowBoardDamage <= 0)
+            {
+                Debug.Log("Zombie Reached Window");
+                ShiftZombieIndoor();
+            }
+           
         }
     }
 

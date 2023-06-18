@@ -142,7 +142,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!61 &520606569239086610
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,6 +219,8 @@ MonoBehaviour:
   indoorZombie: {fileID: 4655407981058385939, guid: b7c56f45ff2b9734cb7aedabe5f3627e, type: 3}
   windowLocation: {fileID: 15291388214648697, guid: 4eb0b619cfcacc64cad7a9ecbf7def1a, type: 3}
   Timer: 0
+  boardHealth: {fileID: 11400000, guid: 39bc57b421afd8e45bf53431c4ebcf74, type: 2}
+  rebuildSpeed: 15
 --- !u!1 &5072334297201463512
 GameObject:
   m_ObjectHideFlags: 0
