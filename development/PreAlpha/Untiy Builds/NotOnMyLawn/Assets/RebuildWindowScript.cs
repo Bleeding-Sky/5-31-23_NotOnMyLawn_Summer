@@ -33,6 +33,7 @@ public class RebuildWindowScript : MonoBehaviour
 
         if(canRepair == true && Input.GetKey(KeyCode.C) && boardHealth.windowBoardDamage <= 120)
         {
+            Debug.Log("repairing");
             boardHealth.windowBoardDamage = boardHealth.windowBoardDamage + (rebuildSpeed * Time.deltaTime);
         }
         

@@ -71,7 +71,7 @@ public class SwitchToTactical : MonoBehaviour
         Camera1.SetActive(false);
         Camera2.SetActive(false);
         Camera3.SetActive(true);
-        GameObject.Find("Circle").GetComponent<TEMP_HorizontalMovement>().enabled = false;
+        GameObject.Find("Player").GetComponent<TEMP_HorizontalMovement>().enabled = false;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = false;
         Player.velocity = new Vector2(0, 0);
     }
@@ -80,7 +80,7 @@ public class SwitchToTactical : MonoBehaviour
         Camera1.SetActive(true);
         Camera2.SetActive(false);
         Camera3.SetActive(false);
-        GameObject.Find("Circle").GetComponent<TEMP_HorizontalMovement>().enabled = true;
+        GameObject.Find("Player").GetComponent<TEMP_HorizontalMovement>().enabled = true;
         GameObject.Find("Gun").GetComponent<GunScript>().enabled = true;
     }
 }

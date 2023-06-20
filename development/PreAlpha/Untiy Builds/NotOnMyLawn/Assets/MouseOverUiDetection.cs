@@ -20,12 +20,13 @@ public class MouseOverUiDetection : MonoBehaviour
     private void OnMouseEnter()
     {
         trap.placable = true;
+        Debug.Log("ON trap");
         
     }
 
     private void OnMouseExit()
     {
         trap.placable = false;
-        
+        Debug.Log("OFF trap");
     }
 }
