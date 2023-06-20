@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2456674181764809743}
   - component: {fileID: 1188619744559111178}
   - component: {fileID: 696458235861913350}
-  - component: {fileID: 3505001826253291808}
   - component: {fileID: 6628963432713556506}
   m_Layer: 0
   m_Name: Gun
@@ -174,25 +173,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c676144a57fa79642a6e137d1718a614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHolstered: 0
+  canShoot: 0
+  directonalAiming: {fileID: 6721888737901529533, guid: 89720448c2bf5f3468377b836fd90b17, type: 3}
   bulletDir: 0
-  isPickedUp: 0
-  isAiming: 0
   bullet: {fileID: 8976611542354829236, guid: fb416169450bfee4db56e569d2feaf57, type: 3}
   bulletTransform: {fileID: 2234864518213060561}
-  directonalAiming: {fileID: 6721888737901529533, guid: 89720448c2bf5f3468377b836fd90b17, type: 3}
---- !u!114 &3505001826253291808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6397237055323305719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57906d8de6ab72643b6a9b2f8ec32ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canInteract: 0
+  bulletAmount: {fileID: 0}
+  bulletCount: 0
 --- !u!58 &6628963432713556506
 CircleCollider2D:
   m_ObjectHideFlags: 0
