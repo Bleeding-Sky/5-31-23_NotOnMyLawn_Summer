@@ -12,6 +12,7 @@ TagManager:
   - Gun
   - TacticalView
   - TrapMenu
+  - BoardPile
   layers:
   - Default
   - TransparentFX

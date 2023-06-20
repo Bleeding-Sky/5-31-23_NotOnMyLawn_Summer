@@ -15,7 +15,7 @@ public class TEMP_HorizontalMovement : MonoBehaviour
 
     public Rigidbody2D myRigidbody2D;
     public TEMP_PlayerStates PlayerStates;
-
+    public PlayerPositionTracker playerPosition;
     void Start()
     {
         currentMoveSpeed = holsteredMoveSpeed;
@@ -37,6 +37,9 @@ public class TEMP_HorizontalMovement : MonoBehaviour
                 DrawGun();
             }
         }
+        //tracks the players positions for the zombies to follow
+        PositionTracker();
+
     }
 
     void FixedUpdate()
@@ -104,6 +107,11 @@ public class TEMP_HorizontalMovement : MonoBehaviour
         currentMoveSpeed = holsteredMoveSpeed;
 
         PlayerStates.gunIsDrawn = false;
+    }
+
+    private void PositionTracker()
+    {
+        playerPosition.playerPosition = transform.position;
     }
 
 }

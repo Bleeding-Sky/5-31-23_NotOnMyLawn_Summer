@@ -20,15 +20,18 @@ public class TEMP_IndoorZmbMovement : MonoBehaviour
     void Update()
     {
         float playerXPos = playerPosition.playerPosition.x;
-        float myXPos = transform.position.x;
+        float myXPos = transform.position.x; 
         
+
         if (playerXPos > myXPos)
         {
             moveDirection = 1;
+            
         }
         else if (playerXPos < myXPos)
         {
             moveDirection = -1;
+            
         }
 
         myRigidbody2D.velocity = new Vector2(moveSpeed * moveDirection, 0);
