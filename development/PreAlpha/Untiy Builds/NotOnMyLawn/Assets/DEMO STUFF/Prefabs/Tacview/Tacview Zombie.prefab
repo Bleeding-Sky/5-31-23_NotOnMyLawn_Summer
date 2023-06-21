@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 4909465797169769508}
   - component: {fileID: 937289470990186076}
   - component: {fileID: 154554739409657905}
+  - component: {fileID: 7233961386518942583}
   m_Layer: 0
   m_Name: Tacview Zombie
   m_TagString: Zombie
@@ -204,7 +205,7 @@ Transform:
   - {fileID: 4975591322912258139}
   - {fileID: 1747995434598483951}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8757641703586043098
 BoxCollider2D:
@@ -293,6 +294,7 @@ MonoBehaviour:
   windowObject: {fileID: 0}
   moveSpeed: 0.5
   myRigidbody2D: {fileID: 7898650609298997093}
+  canMove: 0
 --- !u!114 &937289470990186076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,3 +326,22 @@ MonoBehaviour:
   xDisplacementFromWindow: 0
   distanceFromHouse: 0
   myHealthTracker: {fileID: 0}
+--- !u!114 &7233961386518942583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043361199756997840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cc3225e428efc4ea8696e4387825d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowBoardHealth: {fileID: 11400000, guid: 39bc57b421afd8e45bf53431c4ebcf74, type: 2}
+  zombiePosition: {x: 0, y: 0}
+  windowPosition: {x: 0, y: 0}
+  boardsAreUp: 0
+  atWindow: 0
+  indoorZombie: {fileID: 4655407981058385939, guid: b7c56f45ff2b9734cb7aedabe5f3627e, type: 3}
+  indoorWindow: {x: -24.58, y: 99.23, z: 0}

@@ -8,12 +8,24 @@ public class TopviewZmbPathing : MonoBehaviour
     public GameObject windowObject;
     public float moveSpeed;
     public Rigidbody2D myRigidbody2D;
+    public bool canMove;
 
+    void Start()
+    {
+        canMove = true;
+    }
     // Update is called once per frame
     void Update()
     {
-        Vector2 movementVector = CalculateMovementVector();
-        myRigidbody2D.velocity = movementVector * moveSpeed;
+        if (canMove)
+        {
+            Vector2 movementVector = CalculateMovementVector();
+            myRigidbody2D.velocity = movementVector * moveSpeed;
+        }
+        else if(!canMove)
+        {
+            myRigidbody2D.velocity = new Vector2(0,0);
+        }
     }
 
     Vector2 CalculateMovementVector()

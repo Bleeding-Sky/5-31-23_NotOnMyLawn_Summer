@@ -19,6 +19,9 @@ public class RebuildWindowScript : MonoBehaviour
     public BoardTracker boardCounter;
     public int boardsOnWindow;
     public float timer;
+
+    public float boardCounterTracker;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,17 +36,11 @@ public class RebuildWindowScript : MonoBehaviour
 
         Rebuild();
 
-        if(canRepair == true && Input.GetKey(KeyCode.C) && boardsOnWindow != 3 && boardCounter.boardCounter !=0)
+        if(canRepair == true && Input.GetKey(KeyCode.C) && boardHealth.windowBoardDamage <= 120)
         {
             Debug.Log("repairing");
-            boardHealth.windowBoardDamage = boardHealth.windowBoardDamage + (rebuildSpeed * Time.deltaTime);
-            isRepairing = true;
-            timer += Time.deltaTime;
-        }
-
-        if(timer >= 2.5)
-        {
-            StartCoroutine(BoardPlacementDelay());
+            boardHealth.windowBoardDamage += 15*Time.deltaTime;
+            isRepairing = true;      
         }
         
     }
@@ -64,39 +61,37 @@ public class RebuildWindowScript : MonoBehaviour
     
     void Rebuild()
     {
-        if(boardsOnWindow == 3)
+        if(boardHealth.windowBoardDamage >= 120)
         {
             board1.SetActive(true);
             board2.SetActive(true);
             board3.SetActive(true);
+            boardsOnWindow = 3;
         }
-        else if(boardsOnWindow == 2)
+        else if(boardHealth.windowBoardDamage >= 80)
         {
             board1.SetActive(true);
             board2.SetActive(true);
             board3.SetActive(false);
+            boardsOnWindow = 2;
         }
-        else if (boardsOnWindow == 1)
+        else if (boardHealth.windowBoardDamage >= 40)
         {
             board1.SetActive(true);
             board2.SetActive(false);
             board3.SetActive(false);
+            boardsOnWindow = 1;
+
         }
-        else if (boardsOnWindow == 0)
+        else if (boardHealth.windowBoardDamage >= 0)
         {
             board1.SetActive(false);
             board2.SetActive(false);
             board3.SetActive(false);
+            boardsOnWindow = 0;
         }
     }
 
-    IEnumerator BoardPlacementDelay()
-    {
-        boardCounter.boardCounter -= 1;
-        boardsOnWindow += 1;
-        timer = 0;
-        yield return new WaitForSeconds(.5f);
-        
-
-    }
+    
+    
 }
