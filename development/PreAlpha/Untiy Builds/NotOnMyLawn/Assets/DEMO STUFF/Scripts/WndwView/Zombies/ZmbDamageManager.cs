@@ -42,7 +42,7 @@ public class ZmbDamageManager : MonoBehaviour
     public void Legshot()
     {
         healthScript.currentHealth -= legshotDmg;
-        points.points -= legshotPoints;
+        points.points += legshotPoints;
     }
 
 }
