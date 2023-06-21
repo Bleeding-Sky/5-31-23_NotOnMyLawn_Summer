@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e813a829f5d2e05458e5b2ffaa0c10de, type: 3}
   m_Name: Basic Gun Bullet Count
   m_EditorClassIdentifier: 
-  bulletCount: 0
+  bulletCount: 5.07
