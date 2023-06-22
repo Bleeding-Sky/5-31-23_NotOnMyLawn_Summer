@@ -6,6 +6,7 @@ public class TEMP_InteractableStates : MonoBehaviour
 {
     [Header("CONFIG")]
     public bool isInteractable = false;
+    public bool isToggleable = false;
 
     [Header("DEBUG")]
     public bool isActivated = false;
