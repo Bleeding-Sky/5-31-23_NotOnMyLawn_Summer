@@ -387,9 +387,10 @@ GameObject:
   - component: {fileID: 226874326}
   - component: {fileID: 226874325}
   - component: {fileID: 226874327}
+  - component: {fileID: 226874328}
   m_Layer: 8
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,6 +507,19 @@ MonoBehaviour:
   closedDoorSprite: {fileID: 566127867}
   player: {fileID: 1119507159}
   doorIsOpen: 0
+--- !u!114 &226874328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226874322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d88d4fddb1bd084f8136070a94e8f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHealth: 20
 --- !u!1 &246973813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,7 +2669,7 @@ Transform:
   - {fileID: 683580213}
   - {fileID: 1280573223}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &896972178
 GameObject:
@@ -6857,7 +6871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515890585582496656, guid: 64a161244382d5a4cbb57eac5988bb78, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8515890585582496656, guid: 64a161244382d5a4cbb57eac5988bb78, type: 3}
       propertyPath: m_LocalPosition.x

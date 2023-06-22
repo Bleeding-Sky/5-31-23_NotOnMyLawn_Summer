@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5562449271751838095}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4497800911470623036}
   - component: {fileID: 1124810447542367767}
   - component: {fileID: 6231067692648383537}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: legs
   m_TagString: Zombie
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4465411475694854414}
   - component: {fileID: 5585656783478379833}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 7145458882501581399}
   - component: {fileID: 7109168336747076506}
   - component: {fileID: 8507875251163796555}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: torso
   m_TagString: Zombie
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 7503351570066190558}
   - component: {fileID: 69213780371824719}
   - component: {fileID: 2424397654778226467}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: head
   m_TagString: Zombie
   m_Icon: {fileID: 0}
@@ -568,7 +568,9 @@ GameObject:
   - component: {fileID: 4929739799835465587}
   - component: {fileID: 4938025116766517969}
   - component: {fileID: -3133756191251902174}
-  m_Layer: 0
+  - component: {fileID: 1083213225193584238}
+  - component: {fileID: 2845469960770745231}
+  m_Layer: 9
   m_Name: Indoor Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94231fa3598eff54db8b464eead52cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  currentHealth: 5
   maxHealth: 5
   headshotDmg: 5
   bodyshotDmg: 2
@@ -657,6 +659,8 @@ MonoBehaviour:
   points: {fileID: 11400000, guid: 6e8c2b0a62dcec04097587ff3e23bf81, type: 2}
   bloodTransform: {x: 0, y: 0, z: 0}
   blood: {fileID: 2515840685064449282, guid: 14571e5ee4ffbd547b02549cb8f87097, type: 3}
+  directionFacing: 0
+  bloodDirection: 0
 --- !u!114 &-3133756191251902174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +676,66 @@ MonoBehaviour:
   PlayerHealth: {fileID: 11400000, guid: a4bcbabc4b89f8940b50ae501975667d, type: 2}
   attackTimer: 0
   startTimer: 0
+--- !u!114 &1083213225193584238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655407981058385939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff185b8215f37ea4f8eba0a00172acfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  doorHealthScript: {fileID: 0}
+  doorStateScript: {fileID: 0}
+--- !u!61 &2845469960770745231
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655407981058385939}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0061216354, y: 0.34891546}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.30216885, y: 3.2648895}
+  m_EdgeRadius: 0
 --- !u!1 &6907815762515067378
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6236453998667862315}
   - component: {fileID: 1490263929281411539}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
