@@ -163,3 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   points: {fileID: 11400000, guid: 6e8c2b0a62dcec04097587ff3e23bf81, type: 2}
+  normalizedDirection: {x: 0, y: 0, z: 0}
+  blood: {fileID: 2515840685064449282, guid: 14571e5ee4ffbd547b02549cb8f87097, type: 3}
+  bloodTransform: {x: 0, y: 0, z: 0}

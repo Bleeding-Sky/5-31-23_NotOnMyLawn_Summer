@@ -10,6 +10,11 @@ public class BulletFromGunScript : MonoBehaviour
     public float speed;
 
     public PointTracker points;
+    public Vector3 normalizedDirection;
+
+    public GameObject blood;
+    public Vector3 bloodTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +22,7 @@ public class BulletFromGunScript : MonoBehaviour
         bulletRb = GetComponent<Rigidbody2D>();
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
+        normalizedDirection = direction.normalized;
         Vector3 rotation = transform.position - mousePos;
         bulletRb.velocity = new Vector3(direction.x, direction.y).normalized * speed;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
@@ -31,6 +37,7 @@ public class BulletFromGunScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        bloodTransform = transform.position;
         if (collision.gameObject.CompareTag("Platform"))
         {
             Destroy(gameObject);
@@ -39,6 +46,12 @@ public class BulletFromGunScript : MonoBehaviour
         {
             points.points = points.points + 10;
             Destroy(gameObject);
+            
+        }
+        else if(collision.gameObject.CompareTag("Player"))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Physics2D.IgnoreCollision(player.GetComponent<CapsuleCollider2D>(), GetComponent<Collider2D>());
         }
     }
 }

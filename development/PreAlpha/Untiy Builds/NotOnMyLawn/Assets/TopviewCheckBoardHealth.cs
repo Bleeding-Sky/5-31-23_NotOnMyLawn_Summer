@@ -20,6 +20,8 @@ public class TopviewCheckBoardHealth : MonoBehaviour
     void Update()
     {
         TopviewZmbPathing zombiePath = GetComponent<TopviewZmbPathing>();
+        TEMP_IndoorZombieHealth zombieHealth = indoorZombie.GetComponent<TEMP_IndoorZombieHealth>();
+        TopviewZmbHealth tacZombieHealth = GetComponent<TopviewZmbHealth>();
         zombiePosition = transform.position;
         FindWindowPosition();
         checkForBoards();
@@ -32,6 +34,7 @@ public class TopviewCheckBoardHealth : MonoBehaviour
         else if (!boardsAreUp && atWindow)
         {
             zombiePath.canMove = false;
+            zombieHealth.currentHealth = tacZombieHealth.currentHealth;
             Instantiate(indoorZombie, indoorWindow, Quaternion.identity);
             Destroy(gameObject);
         }
