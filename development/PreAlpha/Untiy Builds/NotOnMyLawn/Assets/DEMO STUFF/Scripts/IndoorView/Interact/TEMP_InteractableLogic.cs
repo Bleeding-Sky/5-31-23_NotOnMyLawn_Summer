@@ -20,9 +20,23 @@ public class TEMP_InteractableLogic : MonoBehaviour
     {
         HandlePrompt();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        bool ableToActivate = stateHolder.isInteractable && stateHolder.isInRange;
+
+
+        if (Input.GetKeyDown(KeyCode.F) &&
+            ableToActivate)
         {
-            stateHolder.isActivated = true;
+            //if toggleable, toggle active status
+            if (stateHolder.isToggleable)
+            {
+                stateHolder.isActivated = !stateHolder.isActivated;
+            }
+            //if not toggleable, turn it on
+            else
+            {
+                stateHolder.isActivated = true;
+            }
+            
         }
 
     }
