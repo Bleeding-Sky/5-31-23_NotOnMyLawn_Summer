@@ -1,0 +1,7 @@
+Move- WASD
+RMB- Holster/Draw gun
+LMB- Shoot (while drawn)
+R - reload
+E - interact with window / trap computer
+F - open/close door
+C - hold to barricade window
