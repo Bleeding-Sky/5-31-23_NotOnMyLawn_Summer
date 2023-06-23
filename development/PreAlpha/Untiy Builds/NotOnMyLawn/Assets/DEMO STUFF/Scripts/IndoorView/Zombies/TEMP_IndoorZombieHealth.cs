@@ -51,6 +51,7 @@ public class TEMP_IndoorZombieHealth : MonoBehaviour
     {
         currentHealth -= headshotDmg;
         points.points += headshotPoints;
+        bloodTransform.y = bloodTransform.y + 1.3f;
         Instantiate(blood, bloodTransform, Quaternion.Euler(0,bloodDirection,0));
     }
 
@@ -65,6 +66,7 @@ public class TEMP_IndoorZombieHealth : MonoBehaviour
     {
         currentHealth -= legshotDmg;
         points.points += legshotPoints;
+        bloodTransform.y = bloodTransform.y - 1;
         Instantiate(blood, bloodTransform, Quaternion.Euler(0, bloodDirection, 0));
     }
 

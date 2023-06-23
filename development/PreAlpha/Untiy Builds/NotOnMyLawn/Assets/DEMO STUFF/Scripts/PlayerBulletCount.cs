@@ -10,7 +10,7 @@ public class PlayerBulletCount : ScriptableObject
 
     public void ResetBulletCount()
     {
-        bulletCount = 10;
+        bulletCount = 6;
     }
 }
 

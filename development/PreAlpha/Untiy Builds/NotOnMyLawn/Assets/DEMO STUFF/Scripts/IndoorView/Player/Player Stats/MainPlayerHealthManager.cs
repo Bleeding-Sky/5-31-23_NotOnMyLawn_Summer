@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainPlayerHealthManager : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class MainPlayerHealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(health.health == 0)
+        {
+            Debug.Log("You Died");
+            ResetGame();
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,5 +28,10 @@ public class MainPlayerHealthManager : MonoBehaviour
         {
             Debug.Log("Player Hit");
         }
+    }
+
+    void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

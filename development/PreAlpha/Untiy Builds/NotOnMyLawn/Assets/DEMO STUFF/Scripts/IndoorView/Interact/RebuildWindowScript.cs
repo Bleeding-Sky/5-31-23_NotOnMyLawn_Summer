@@ -8,7 +8,9 @@ public class RebuildWindowScript : MonoBehaviour
     public GameObject board2;
     public GameObject board3;
 
+    public GameObject window3D;
     public WindowBoardsDamageScript boardHealth;
+    
 
     public bool canRepair;
     public float rebuildSpeed;
@@ -33,7 +35,7 @@ public class RebuildWindowScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         Rebuild();
 
         if(canRepair == true && Input.GetKey(KeyCode.C) && boardHealth.windowBoardDamage <= 120)
@@ -63,31 +65,51 @@ public class RebuildWindowScript : MonoBehaviour
     {
         if(boardHealth.windowBoardDamage >= 120)
         {
+            WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(true);
             board2.SetActive(true);
             board3.SetActive(true);
+
+            WindowRebuild.Board1.SetActive(true);
+            WindowRebuild.Board2.SetActive(true);
+            WindowRebuild.Board3.SetActive(true);
             boardsOnWindow = 3;
         }
         else if(boardHealth.windowBoardDamage >= 80)
         {
+            WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(true);
             board2.SetActive(true);
             board3.SetActive(false);
+
+            WindowRebuild.Board1.SetActive(true);
+            WindowRebuild.Board2.SetActive(true);
+            WindowRebuild.Board3.SetActive(false);
             boardsOnWindow = 2;
         }
         else if (boardHealth.windowBoardDamage >= 40)
         {
+            WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(true);
             board2.SetActive(false);
             board3.SetActive(false);
+
+            WindowRebuild.Board1.SetActive(true);
+            WindowRebuild.Board2.SetActive(false);
+            WindowRebuild.Board3.SetActive(false);
             boardsOnWindow = 1;
 
         }
         else if (boardHealth.windowBoardDamage >= 0)
         {
+            WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(false);
             board2.SetActive(false);
             board3.SetActive(false);
+
+            WindowRebuild.Board1.SetActive(false);
+            WindowRebuild.Board2.SetActive(false);
+            WindowRebuild.Board3.SetActive(false);
             boardsOnWindow = 0;
         }
     }

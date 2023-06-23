@@ -85,7 +85,7 @@ public class ZombieTacViewSpawner : MonoBehaviour
 
     IEnumerator ZombieSpawnDelay()
     {
-        ZombieSpawnTimer = Random.Range(1, 4);
+        ZombieSpawnTimer = Random.Range(1, 3);
         Debug.Log(ZombieSpawnTimer);
         SpawnZombie = false;
         yield return new WaitForSeconds(ZombieSpawnTimer);
