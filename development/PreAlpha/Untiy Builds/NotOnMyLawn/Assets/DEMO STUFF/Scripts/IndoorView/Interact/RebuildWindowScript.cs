@@ -10,7 +10,7 @@ public class RebuildWindowScript : MonoBehaviour
 
     public GameObject window3D;
     public WindowBoardsDamageScript boardHealth;
-    
+    public PointTracker point;
 
     public bool canRepair;
     public float rebuildSpeed;
@@ -23,6 +23,7 @@ public class RebuildWindowScript : MonoBehaviour
     public float timer;
 
     public float boardCounterTracker;
+    private bool boardPlaced;
 
     // Start is called before the first frame update
     void Start()
@@ -42,9 +43,20 @@ public class RebuildWindowScript : MonoBehaviour
         {
             Debug.Log("repairing");
             boardHealth.windowBoardDamage += 15*Time.deltaTime;
+            timer += Time.deltaTime;
             isRepairing = true;      
         }
+        else if(Input.GetKeyUp(KeyCode.C))
+        {
+            isRepairing = false;
+            
+        }
         
+        if(timer >= 1.5f)
+        {
+            point.points += 10;
+            timer = 0;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -60,6 +72,8 @@ public class RebuildWindowScript : MonoBehaviour
             canRepair = false;
         }
     }
+
+
     
     void Rebuild()
     {
@@ -75,7 +89,7 @@ public class RebuildWindowScript : MonoBehaviour
             WindowRebuild.Board3.SetActive(true);
             boardsOnWindow = 3;
         }
-        else if(boardHealth.windowBoardDamage >= 80)
+        else if(boardHealth.windowBoardDamage >= 60)
         {
             WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(true);
@@ -87,7 +101,7 @@ public class RebuildWindowScript : MonoBehaviour
             WindowRebuild.Board3.SetActive(false);
             boardsOnWindow = 2;
         }
-        else if (boardHealth.windowBoardDamage >= 40)
+        else if (boardHealth.windowBoardDamage > 0)
         {
             WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(true);
@@ -100,7 +114,7 @@ public class RebuildWindowScript : MonoBehaviour
             boardsOnWindow = 1;
 
         }
-        else if (boardHealth.windowBoardDamage >= 0)
+        else if (boardHealth.windowBoardDamage <= 0)
         {
             WindowRebuild3D WindowRebuild = window3D.GetComponent<WindowRebuild3D>();
             board1.SetActive(false);
