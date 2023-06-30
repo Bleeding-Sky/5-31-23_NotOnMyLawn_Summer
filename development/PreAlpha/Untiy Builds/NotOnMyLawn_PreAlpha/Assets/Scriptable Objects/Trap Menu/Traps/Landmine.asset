@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ec79c543cef354ba4e2192f1a91edf, type: 3}
   m_Name: Landmine
   m_EditorClassIdentifier: 
-  Trap: {fileID: 0}
-  TrapCost: 0
+  Trap: {fileID: 2922449883505175110, guid: aeca7025ff9e5674b8c4fc4da48dc492, type: 3}
+  TrapCost: 150
