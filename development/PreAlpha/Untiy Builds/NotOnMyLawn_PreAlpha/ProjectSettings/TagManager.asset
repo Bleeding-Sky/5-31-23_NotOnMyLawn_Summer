@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Zombie
+  - TacticalView
+  - BoardPile
+  - Window
+  - Platform
+  - Door
+  - Gun
+  - Trap
+  - Item
   layers:
   - Default
   - TransparentFX
