@@ -1,0 +1,3 @@
+[item name]_[script function]
+
+Requiring components: only require components if it will be on the same object

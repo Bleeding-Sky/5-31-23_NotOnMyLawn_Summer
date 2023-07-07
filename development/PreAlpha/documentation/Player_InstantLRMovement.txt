@@ -1,0 +1,6 @@
+Player_InstantLRMovement
+	gets/processes LR movement input
+	reads GunIsDrawn state from Player_States SO
+		changes currentMoveSpeed based on state
+	calculates newVelocity from inputDirection and currentMoveSpeed
+	updates Player_States isWalking and faceDirection based on calculated newVelocity

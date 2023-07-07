@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player States
   m_EditorClassIdentifier: 
   isWalking: 0
-  faceDirection: 0
+  faceDirection: 1
   gunIsDrawn: 0
