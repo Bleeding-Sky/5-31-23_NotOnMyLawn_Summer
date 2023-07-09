@@ -1,0 +1,30 @@
+zmb manager
+	-will MAYBE hold list of all zmbMaster in the scene
+
+zmbMaster object
+	-has refs to:
+		-tacview
+		-window
+		-indoor
+	-holds health, status, and current target
+	-has method for damageZmb(float damageValue)
+	-has method for killZmb()
+		-deletes zmb in all views
+		-fields are nullable, since not all views will be active at all times
+
+tacview zmb
+	-has refs to:
+		-master
+	-sends trap damage to master zombie object
+
+window zmb
+	-has refs to:
+		-master
+		-tacview
+	-sends bullet damage to master zombie object
+	-gets position from tacview zmb
+
+indoor zmb
+	-has refs to:
+		-master
+	-sends damage to master zombie object
