@@ -60,12 +60,14 @@ public class Revolver_GunScript : MonoBehaviour
 
     public void FaceMouse(float RotationZ)
     {
-        GunLocation.localRotation = GunRotation.localRotation;
+        Arm_Rotation zRotation = GunRotation.GetComponent<Arm_Rotation>();
+        float rotZ = zRotation.itemRotation; 
+        transform.localRotation = Quaternion.Euler(0,0,rotZ-90);
     }
 
     public void CalculateDirection()
     {
-        GunLocation.transform.position = handPosition.position;
+        transform.position = handPosition.position;
 
         armPosition = GunRotation.transform.position;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

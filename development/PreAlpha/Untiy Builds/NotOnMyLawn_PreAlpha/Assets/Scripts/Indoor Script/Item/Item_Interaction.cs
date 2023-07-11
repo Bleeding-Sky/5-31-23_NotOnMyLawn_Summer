@@ -7,6 +7,9 @@ public class Item_Interaction : MonoBehaviour
     public GameObject player;
     public GameObject hand;
     private GameObject itemNearBy;
+    public Transform armRotationPos;
+    public Transform handPos;
+    public GameObject Inventory;
 
     public bool itemInRange;
 
@@ -34,8 +37,7 @@ public class Item_Interaction : MonoBehaviour
             FindClosestItem();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                itemsInField.Remove(itemsInField[closestElement]);
-                PickUpItem();
+                InteractableIdentification();
             }
         }
     }
@@ -46,21 +48,23 @@ public class Item_Interaction : MonoBehaviour
         BoxCollider2D gunCollider = closetItem.GetComponent<BoxCollider2D>();
         GunScript.pickedUp = true;
         GunScript.player = player;
-        GunScript.GunLocation.transform.parent = hand.transform;
+        GunScript.gameObject.transform.parent = hand.transform;
+        GunScript.GunRotation = armRotationPos;
+        GunScript.handPosition = handPos;
         gunCollider.enabled = false;
         closetItem = null;
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Gun"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             itemsInField.Add(collision.gameObject);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Gun"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             itemInRange = true;           
         }
@@ -68,7 +72,7 @@ public class Item_Interaction : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Gun"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             itemInRange = false;
             itemsInField.Remove(collision.gameObject);
@@ -99,5 +103,25 @@ public class Item_Interaction : MonoBehaviour
         pythagDistance = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y));
 
         return pythagDistance;
+    }
+
+    public void InteractableIdentification()
+    {
+        Interaction_Identification Interactable = closetItem.GetComponent<Interaction_Identification>();
+        if(Interactable.isItem && !Interactable.isEnviormentObject)
+        {
+            Item_Interaction ItemInteraction = GetComponent<Item_Interaction>();
+            Inventory_Script inventoryStorage = Inventory.GetComponent<Inventory_Script>();
+            inventoryStorage.ItemInteractionScript = ItemInteraction;
+            inventoryStorage.storeItems(closetItem);
+            
+
+        }
+        else if(!Interactable.isItem && Interactable.isEnviormentObject)
+        {
+            Enviorment_Interaction window = closetItem.GetComponent<Enviorment_Interaction>();
+
+            window.Interact();
+        }
     }
 }
