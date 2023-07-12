@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tacviewScript: {fileID: 801005061}
-  windowScript: {fileID: 0}
-  indoorScript: {fileID: 0}
+  windowScript: {fileID: 1447616713}
+  indoorScript: {fileID: 1566659416}
   health: 5
   isCrawiling: 0
   targetPos: {x: 0, y: 0, z: 0}
@@ -438,8 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27769422dea374e48b559143c5f83c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterScript: {fileID: 0}
-  tacviewScript: {fileID: 0}
+  masterScript: {fileID: 95568508}
+  tacviewScript: {fileID: 801005061}
 --- !u!212 &1447616714
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34b96aff7c4641429bee1ff0e28e177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterScript: {fileID: 0}
+  masterScript: {fileID: 95568508}
 --- !u!212 &1566659417
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -580,7 +580,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.62019205, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -598,7 +598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566659415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7794927, y: 0.17057903, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
