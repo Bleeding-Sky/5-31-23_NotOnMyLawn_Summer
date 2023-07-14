@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gun_Information : MonoBehaviour
 {
+    //Gun objects will take the information from this script and apply it to the gun that its attached to
     [Header("Gun Stats")]
     public int bulletCount;
     public float fireRate;
@@ -11,5 +12,10 @@ public class Gun_Information : MonoBehaviour
     public GameObject bulletType;
 
     [Header("Gun Configurations")]
-    public GameObject rotationAndAimingPoint;
+    public Transform rotationAndAimingPoint;
+    public Transform handPos;
+    public GameObject player;
+
+    [Header("Gun State")]
+    public bool isPickedUp;
 }

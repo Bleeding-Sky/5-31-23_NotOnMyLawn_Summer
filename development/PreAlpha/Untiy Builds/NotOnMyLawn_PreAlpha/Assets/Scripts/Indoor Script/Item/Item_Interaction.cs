@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class Item_Interaction : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject hand;
-    private GameObject itemNearBy;
-    public Transform armRotationPos;
-    public Transform handPos;
-    public GameObject Inventory;
 
-    public bool itemInRange;
-
+    [Header("DEBUG")]
     public List<GameObject> itemsInField;
+    public bool itemInRange;
     public Vector3 playerPosition;
-
+    public GameObject Inventory;
     public GameObject closetItem;
     public float lastItem;
     public int itemLength;
     public int closestElement;
 
 
-    // Start is called before the first frame update
+    //establishes that there is no item to begin with
     void Start()
     {
         itemInRange = false;
@@ -31,32 +25,18 @@ public class Item_Interaction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //keeps track of the player position and an interactable is in range it finds the closest interactable and identifies if its an item or enviornment
        playerPosition = transform.position;
        if(itemInRange)
         {
             FindClosestItem();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                InteractableIdentification();
-            }
+            InteractableIdentification();
         }
-    }
-
-    public void PickUpItem()
-    {
-        Revolver_GunScript GunScript = closetItem.GetComponent<Revolver_GunScript>();
-        BoxCollider2D gunCollider = closetItem.GetComponent<BoxCollider2D>();
-        GunScript.pickedUp = true;
-        GunScript.player = player;
-        GunScript.gameObject.transform.parent = hand.transform;
-        GunScript.GunRotation = armRotationPos;
-        GunScript.handPosition = handPos;
-        gunCollider.enabled = false;
-        closetItem = null;
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //once the interactable is in range it adds it to the list
         if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             itemsInField.Add(collision.gameObject);
@@ -64,6 +44,7 @@ public class Item_Interaction : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //if a collision is an interactable then it sets in range to true
         if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             itemInRange = true;           
@@ -72,22 +53,30 @@ public class Item_Interaction : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //if an item leaves it sets the in range to false and removes objects from the list
         if(collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             itemInRange = false;
             itemsInField.Remove(collision.gameObject);
         }    
     }
+
+    //A function to find the closest interactable
     public void FindClosestItem()
     {   
+        //gets the list length and sets what the last item is to infinity inorder to ensure no item is bigger than the initial closest item
         itemLength = itemsInField.Count;
         lastItem = Mathf.Infinity;
+
+        //goes through each interactable and determines the closest interactable
         for (int i = 0; i < itemLength; i++)
         {
+            //triangulates the actual closest distance using pythag theorum
             Vector3 distanceFromPlayer = itemsInField[i].transform.position - playerPosition;
             float distance;
-            distance = calculateDistance(distanceFromPlayer);
+            distance = CalculateDistance(distanceFromPlayer);
 
+            //if the current distance is less then the last item then it is the closest
             if(distance < lastItem)
             {
                 closetItem = itemsInField[i];
@@ -97,7 +86,9 @@ public class Item_Interaction : MonoBehaviour
         }
         lastItem = Mathf.Infinity;
     }
-    public float calculateDistance(Vector3 distance)
+
+    //calculates the distance of one object from another
+    public float CalculateDistance(Vector3 distance)
     {
         float pythagDistance;
         pythagDistance = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y));
@@ -105,23 +96,29 @@ public class Item_Interaction : MonoBehaviour
         return pythagDistance;
     }
 
+    //once the closest item is found this function determines whether the interactable is item or enviornment
     public void InteractableIdentification()
     {
         Interaction_Identification Interactable = closetItem.GetComponent<Interaction_Identification>();
+        //if the interaction is an item it puts it in the inventory
         if(Interactable.isItem && !Interactable.isEnviormentObject)
         {
-            Item_Interaction ItemInteraction = GetComponent<Item_Interaction>();
-            Inventory_Script inventoryStorage = Inventory.GetComponent<Inventory_Script>();
-            inventoryStorage.ItemInteractionScript = ItemInteraction;
-            inventoryStorage.storeItems(closetItem);
-            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Item_PickedUp itemAssignment = GetComponent<Item_PickedUp>();
+                Item_Interaction ItemInteraction = GetComponent<Item_Interaction>();
+                Inventory_Script inventoryStorage = Inventory.GetComponent<Inventory_Script>();
 
+                inventoryStorage.itemAssignment = itemAssignment;
+                inventoryStorage.ItemInteractionScript = ItemInteraction;
+                inventoryStorage.StoreItems(closetItem);
+            }
         }
+        //if the interaction is an envionrmental object it interacts with it
         else if(!Interactable.isItem && Interactable.isEnviormentObject)
         {
-            Enviorment_Interaction window = closetItem.GetComponent<Enviorment_Interaction>();
-
-            window.Interact();
+            Enviorment_Interaction enviornment = closetItem.GetComponent<Enviorment_Interaction>();
+            enviornment.Interact(closetItem);
         }
     }
 }

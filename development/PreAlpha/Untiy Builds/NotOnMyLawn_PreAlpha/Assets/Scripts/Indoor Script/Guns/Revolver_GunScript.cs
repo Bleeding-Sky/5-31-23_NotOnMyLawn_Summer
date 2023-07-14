@@ -7,7 +7,6 @@ public class Revolver_GunScript : MonoBehaviour
     [Header("CONFIG")]
     public Transform firingPoint;
     public GameObject bullet;
-    public Transform GunLocation;
     public Transform GunRotation;
     public Transform handPosition;
     public GameObject player;
@@ -23,8 +22,8 @@ public class Revolver_GunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         Gun_Information gunSpecs = GetComponent<Gun_Information>();
+        gunSpecs.isPickedUp = false;
         bulletAmount = gunSpecs.bulletCount;
         firingRate = gunSpecs.fireRate;
         recoil = gunSpecs.recoil;
@@ -35,17 +34,16 @@ public class Revolver_GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        SetGunObjects();
         if (pickedUp)
         {
-            Rigidbody2D GunRigidBody = GetComponent<Rigidbody2D>();
             CalculateDirection();
-        }
 
-        if(Input.GetKeyDown(KeyCode.Mouse0) && canFire)
-        {
-            Shoot();
-            StartCoroutine(DetermineFireRate());
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
+            {
+                Shoot();
+                StartCoroutine(DetermineFireRate());
+            }
         }
     }
 
@@ -58,7 +56,7 @@ public class Revolver_GunScript : MonoBehaviour
         bulletAmount -= 1;
     }
 
-    public void FaceMouse(float RotationZ)
+    public void FaceMouse()
     {
         Arm_Rotation zRotation = GunRotation.GetComponent<Arm_Rotation>();
         float rotZ = zRotation.itemRotation; 
@@ -68,12 +66,8 @@ public class Revolver_GunScript : MonoBehaviour
     public void CalculateDirection()
     {
         transform.position = handPosition.position;
-
         armPosition = GunRotation.transform.position;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mousePos - transform.position;
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        FaceMouse(rotZ);
+        FaceMouse();
     }
 
     IEnumerator DetermineFireRate()
@@ -88,4 +82,12 @@ public class Revolver_GunScript : MonoBehaviour
         playerRB.AddForce(transform.right * recoil);
     }
     
+    public void SetGunObjects()
+    {
+        Gun_Information gunSpecs = GetComponent<Gun_Information>();
+        GunRotation = gunSpecs.rotationAndAimingPoint;
+        handPosition = gunSpecs.handPos;
+        player = gunSpecs.player;
+        pickedUp = gunSpecs.isPickedUp;
+    }
 }

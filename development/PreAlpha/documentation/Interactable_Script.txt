@@ -1,0 +1,46 @@
+Interactable_Script
+
+This Script is the central hub for all the interactions that occur between the player
+and their surroundings.
+
+There are 2 major functions that this scripts serves which is finding the closest interactable
+and then based on that determining wheter it is an Item or Enviornemental Object
+
+It does the former by calculating all the objects distance from a point on the player and then
+sorting by which is the closest
+
+After it does this either the item or enviornment has an Interaction_Identification script. This script is set up before hand where
+you select whether the object is an item or enviornement and then select what type of item or enviornment it is
+
+This will tell the program how to interact. 
+
+INSTRUCTIONS FOR MAKING INTERACTABLES
+
+-ENVIORNMENTS
+Enviornements are pretty simple
+When you create an eniornement object attach 2 things the Interaction_Identification and the Enviornement_Interaction
+
+Interaction_Identification was already explained above but 
+Enviornment_Interaction Serves a purpose of being a trigger for every enviornment object 
+it'll what to do for very different interaction case and interact with the object according to
+its enviornment type. Create the Enviornment type if it doesnt exist and add what you want it to do in the Enviornment_Interaction
+Script.
+-ITEMS
+Items are a little bit more tricky but not by much
+When creating a new item there are is only one necessary script Which is Interaction_Identification.
+
+Again Interaction_Identification was already explained above
+The rest is upt to the individual item and what it does. if the item needs to be activated somehow
+like inherting player information and stuff like that the item will have to go through the Item_PickedUp
+Script. if it is a new item type you will have to make a new function in the Item_PickedUp script in order 
+to craft what you want to happen to the item once it is picked up
+
+For example
+Gun Objects have 2 scripts Gun_Information and their main gun script the Item_PickedUp script has instructions for
+giving the Gun_Information the player's arm rotation, hand position, and the player's game object. The Gun_Information
+script then gives those values to the guns main script in order to function properly when they are in the 
+player's hand.
+
+--------
+
+This is the basis for all interaction right now and i hope it is intuitive enough to make sense  
