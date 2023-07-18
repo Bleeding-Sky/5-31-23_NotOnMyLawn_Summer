@@ -117,7 +117,7 @@ public class Item_Interaction : MonoBehaviour
         //if the interaction is an envionrmental object it interacts with it
         else if(!Interactable.isItem && Interactable.isEnviormentObject)
         {
-            Enviorment_Interaction enviornment = closetItem.GetComponent<Enviorment_Interaction>();
+            Enviorment_Interaction enviornment = GetComponent<Enviorment_Interaction>();
             enviornment.Interact(closetItem);
         }
     }

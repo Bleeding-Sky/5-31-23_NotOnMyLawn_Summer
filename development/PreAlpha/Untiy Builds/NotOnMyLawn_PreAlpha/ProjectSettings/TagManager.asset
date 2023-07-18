@@ -13,6 +13,7 @@ TagManager:
   - Gun
   - Trap
   - Item
+  - InteractableField
   layers:
   - Default
   - TransparentFX
