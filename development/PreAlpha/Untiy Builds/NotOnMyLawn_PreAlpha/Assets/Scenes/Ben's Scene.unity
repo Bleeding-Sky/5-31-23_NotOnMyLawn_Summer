@@ -1037,7 +1037,7 @@ MonoBehaviour:
   currentMoveSpeed: 0
   myRigidbody2D: {fileID: 2081131407}
   playerStates: {fileID: 11400000, guid: d83f1532688626f4a808fbef395b1aea, type: 2}
-  playerPosition: {fileID: 0}
+  playerPosition: {fileID: 11400000, guid: 9d4f749b0819d6a47aeb80292bc5bbfe, type: 2}
 --- !u!50 &2081131407
 Rigidbody2D:
   serializedVersion: 4
