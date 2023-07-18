@@ -1,13 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Obj_WindowTracker : MonoBehaviour
 {
-    public Obj_TacviewTracker tacviewTrackerScript;
 
-    //typically a window, an anchor point present in both tacview and window scenes
-    public Vector3 anchorPos; 
+    [Header("CONFIG")]
+    public Obj_TacviewTracker tacviewTrackerScript;
+    //OPTIONAL: script can read position of anchor object and set anchorPos accordingly
+    public GameObject anchorObject;
+    //object can ALSO be configured with just an anchor position
+    public Vector3 anchorPos;
+    
+
+    private void Start()
+    {
+        if (anchorObject != null)
+        {
+            anchorPos = anchorObject.transform.position;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,7 +40,7 @@ public class Obj_WindowTracker : MonoBehaviour
         float myXDisplacement = anchorPos.x + tacviewXDisplacement;
         float myZDisplacement = anchorPos.z + tacviewDistanceFromTarget;
 
-        transform.position = new Vector3(myXDisplacement, anchorPos.y, myZDisplacement);
+        transform.position = new Vector3(myXDisplacement, 0, myZDisplacement);
     }
 
 }

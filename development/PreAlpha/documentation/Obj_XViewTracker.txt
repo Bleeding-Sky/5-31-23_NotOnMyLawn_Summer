@@ -1,0 +1,38 @@
+Obj_TacviewTracker
+	CONFIG
+		anchorObject
+			(optional)
+			the anchor object: an object present in both views
+			that is used to sync the positions. if this is NOT
+			null, then anchorPos is set to its position in the
+			Start method
+		anchorPos
+			the position that anchors both views together.
+			unneeded if an anchor object is set
+
+	calculates displacements
+		displacement = object position - anchor position
+		basically the x and y coords with respect to the anchor
+
+
+Obj_WindowTracker
+	CONFIG
+		tacviewTrackerScript (WindowTracker ONLY)
+			reference to the corresponding TacviewTracker script 
+			on the object's Tacview counterpart
+		anchorObject
+			(optional)
+			the anchor object: an object present in both views
+			that is used to sync the positions. if this is NOT
+			null, then anchorPos is set to its position in the
+			Start method
+		anchorPos
+			the position that anchors both views together.
+			unneeded if an anchor object is set
+
+	matches tacview counterpart's position
+		reads the X and Y displacements of tacview,
+		then translates those displacements to X and Z displacements,
+		and sets the object's position to those X and Z displacements
+		relative to the anchor's position,
+		Y is set to 0(floor level)
