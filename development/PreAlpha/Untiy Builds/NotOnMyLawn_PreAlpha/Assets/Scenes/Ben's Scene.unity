@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 801005063}
   - component: {fileID: 801005062}
   - component: {fileID: 801005061}
+  - component: {fileID: 801005064}
   m_Layer: 0
   m_Name: tacviewZmb
   m_TagString: Untagged
@@ -417,9 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterScript: {fileID: 95568508}
-  targetPos: {x: -5.04, y: -4.41}
-  xDisplacementFromTarget: 0
-  distanceFromTarget: 0
+  targetPos: {x: 0, y: 0}
 --- !u!212 &801005062
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -487,6 +486,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &801005064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801005060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2894862ee2f1b429fe76efa0125d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorPos: {x: -5.04, y: -4.01}
+  xDisplacementFromTarget: 0
+  distanceFromTarget: 0
 --- !u!1 &1098703037
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +604,7 @@ GameObject:
   - component: {fileID: 1447616715}
   - component: {fileID: 1447616714}
   - component: {fileID: 1447616713}
+  - component: {fileID: 1447616716}
   m_Layer: 0
   m_Name: windowZmb
   m_TagString: Untagged
@@ -604,14 +619,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447616712}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27769422dea374e48b559143c5f83c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   masterScript: {fileID: 95568508}
   tacviewScript: {fileID: 801005061}
-  targetPos: {x: 6.35, y: -4.29, z: 0}
 --- !u!212 &1447616714
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -679,6 +693,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1447616716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447616712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8384d209a1aac7b40bfd0d54533afaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tacviewTrackerScript: {fileID: 801005064}
+  anchorPos: {x: 6.35, y: -4.29, z: 0}
 --- !u!1 &1566659415
 GameObject:
   m_ObjectHideFlags: 0
