@@ -1,3 +1,5 @@
 [item name]_[script function]
 
 Requiring components: only require components if it will be on the same object
+
+ALL WINDOWVIEW OBJECTS: SPRITE SHOULD BE DISPLACED SO THE POSITION OF THE OBJECT IS AT THE BOTTOM EDGE OF THE SPRITE
