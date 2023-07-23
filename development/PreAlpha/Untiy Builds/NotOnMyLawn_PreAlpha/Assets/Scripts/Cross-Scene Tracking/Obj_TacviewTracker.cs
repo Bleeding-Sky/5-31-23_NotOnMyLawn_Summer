@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class Obj_TacviewTracker : MonoBehaviour
 {
     [Header("CONFIG")]  
@@ -10,16 +13,20 @@ public class Obj_TacviewTracker : MonoBehaviour
     //object can ALSO be configured with just an anchor position
     public Vector2 anchorPos;
 
+    public GameObject wndwviewPrefab;
+
     [Header("DEBUG")]
     public float xDisplacementFromTarget;
     public float distanceFromTarget;
 
     private void Start()
     {
+        //initialize anchorPos if an anchor object is given
         if (anchorObject != null)
         {
             anchorPos = anchorObject.transform.position;
         }
+
     }
 
     // Update is called once per frame
