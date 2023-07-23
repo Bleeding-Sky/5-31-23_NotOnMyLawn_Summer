@@ -11,6 +11,7 @@ public class Interaction_Identification : MonoBehaviour
     [Header("Enviornment Type")]
     public bool isWindow;
     public bool isDoor;
+    public bool isBackgroundDoor;
 
     [Header("Item Type")]
     public bool isGun;

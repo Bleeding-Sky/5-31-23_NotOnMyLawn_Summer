@@ -15,6 +15,7 @@ public class Gun_Information : MonoBehaviour
     public Transform rotationAndAimingPoint;
     public Transform handPos;
     public GameObject player;
+    public GameObject AimingField;
 
     [Header("Gun State")]
     public bool isPickedUp;

@@ -10,6 +10,7 @@ public class Revolver_GunScript : MonoBehaviour
     public Transform GunRotation;
     public Transform handPosition;
     public GameObject player;
+    public GameObject aimingPoint;
 
     [Header("DEBUG")]
     private int bulletAmount;
@@ -51,6 +52,8 @@ public class Revolver_GunScript : MonoBehaviour
     {
         canFire = false;
         Bullet_Script bulletDirection = bullet.GetComponent<Bullet_Script>();
+        Gun_Aiming aiming = aimingPoint.GetComponent<Gun_Aiming>();
+        bulletDirection.firingPos = aimingPoint.transform.position;
         bulletDirection.bulletDirectionPosition = armPosition;
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
         bulletAmount -= 1;
@@ -89,5 +92,6 @@ public class Revolver_GunScript : MonoBehaviour
         handPosition = gunSpecs.handPos;
         player = gunSpecs.player;
         pickedUp = gunSpecs.isPickedUp;
+        aimingPoint = gunSpecs.AimingField;
     }
 }

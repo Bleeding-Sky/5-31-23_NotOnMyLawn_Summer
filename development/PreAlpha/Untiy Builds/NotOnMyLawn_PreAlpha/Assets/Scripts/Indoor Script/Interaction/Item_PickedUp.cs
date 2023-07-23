@@ -8,6 +8,7 @@ public class Item_PickedUp : MonoBehaviour
     public GameObject hand;
     public Transform armRotationPos;
     public Transform handPos;
+    public GameObject AimingArea;
     
     public void DetermineItemType(GameObject item)
     {
@@ -27,6 +28,7 @@ public class Item_PickedUp : MonoBehaviour
         GunInfo.gameObject.transform.parent = hand.transform;
         GunInfo.rotationAndAimingPoint = armRotationPos;
         GunInfo.handPos = handPos;
+        GunInfo.AimingField = AimingArea;
         gunCollider.enabled = false;
     }
 }
