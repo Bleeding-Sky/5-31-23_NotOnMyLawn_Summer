@@ -1,0 +1,11 @@
+layer is TacView (last layer on the list)
+rigidbody2d
+	-body type kinematic
+box collider2d
+obj_tacviewTracker script
+	-anchorObject OR anchorPosition must be set to coords of anchor object
+	-set wndwview prefab to the objects corresponding windowview prefab
+
+
+
+object will be reflexted in window view when it enters the window's trigger

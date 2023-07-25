@@ -1,0 +1,23 @@
+Tacview_GenWndwEnv
+	is to be placed on the tactical view anchor, typically a window
+	requires a box collider on the game object
+
+	contains a list of all objects that are currently visible in the tactical view
+
+	Start
+		ensures box collider is a trigger, not a collider
+
+	OnTriggerEnter
+		checks that object that entered the trigger is:
+			on the tacview layer
+			has a tacview tracker script
+			and is not already in the scripts list of objects in the tacview
+		if true, the object is registered in the list of tacview objects and
+		a counterpart to the object is created in the window view
+
+	createWindowViewObject
+		takes a tacview tracker as an argument
+		instantiates the tacview object's designated windowview prefab
+		configures the windowview object with info from the tacview object's tracker script
+
+		windowview object is now synced to the tacview object

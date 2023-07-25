@@ -1,0 +1,3 @@
+add window tracker script on an empty object
+create a child object that has a sprite renderer
+	-change sprite object's transform so its bottom edge is on the 0,0,0 point of the parent empty object
