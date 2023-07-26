@@ -1,3 +1,8 @@
 add window tracker script on an empty object
-create a child object that has a sprite renderer
-	-change sprite object's transform so its bottom edge is on the 0,0,0 point of the parent empty object
+create a child object that has a sprite renderer AND a boxcollider2d
+	-MAKE SURE SPRITE IS CENTERED
+	-do this by setting the parent position to (0,0,0) before creating sprite child object
+	
+set the windowTracker script's "sprite child object" field to the child object with the spriterenderer and boxcollider
+
+if its not centered then the sprite won't spawn at the right height in the window view

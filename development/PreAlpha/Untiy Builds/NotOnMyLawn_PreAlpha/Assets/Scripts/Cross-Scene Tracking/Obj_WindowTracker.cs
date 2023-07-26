@@ -12,6 +12,8 @@ public class Obj_WindowTracker : MonoBehaviour
     public GameObject windowviewAnchorObject;
     //object can ALSO be configured with just an anchor position
     public Vector3 windowviewAnchorPos;
+
+    public GameObject spriteChildObject;
     
 
     private void Start()
@@ -40,7 +42,7 @@ public class Obj_WindowTracker : MonoBehaviour
         float myXDisplacement = windowviewAnchorPos.x + tacviewXDisplacement;
         float myZDisplacement = windowviewAnchorPos.z + tacviewDistanceFromTarget;
 
-        transform.position = new Vector3(myXDisplacement, 0, myZDisplacement);
+        transform.position = new Vector3(myXDisplacement, transform.position.y, myZDisplacement);
     }
 
 }

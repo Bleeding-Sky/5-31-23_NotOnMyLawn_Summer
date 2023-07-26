@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -62,14 +63,30 @@ public class Tacview_GenWndwEnv : MonoBehaviour
     /// <param name="tacviewTrackerScript"></param>
     public void createWindowviewObject(Obj_TacviewTracker tacviewTrackerScript)
     {
+
         //instantiate new object in the window view and save its tracker script
-        GameObject wndwObject = Instantiate(tacviewTrackerScript.wndwviewPrefab, new Vector3(0,-50,0), Quaternion.identity);
+        GameObject wndwObject = Instantiate(tacviewTrackerScript.wndwviewPrefab, new Vector3(0, -50, 0), Quaternion.identity);
         Obj_WindowTracker wndwTrackerScript = wndwObject.GetComponent<Obj_WindowTracker>();
 
+        wndwObject.transform.position = new Vector3(0, CalculateYSpawnOffset(wndwTrackerScript), 0);
+
         //configure the tracker script with the tacview object's info
-        wndwTrackerScript.tacviewTrackerScript= tacviewTrackerScript;
+        wndwTrackerScript.tacviewTrackerScript = tacviewTrackerScript;
         wndwTrackerScript.windowviewAnchorPos = windowviewCounterpart.transform.position;
 
 
+    }
+
+    /// <summary>
+    /// finds the correct y value to spawn a window object at so that its bottom edge is at y=0
+    /// </summary>
+    /// <param name="wndwObject"></param>
+    /// <param name="wndwTrackerScript"></param>
+    private float CalculateYSpawnOffset(Obj_WindowTracker wndwTrackerScript)
+    {
+        //find correct y value to spawn object at
+        Bounds spriteBounds = wndwTrackerScript.spriteChildObject.GetComponent<BoxCollider2D>().bounds;
+        float spawnY = (spriteBounds.center.y + spriteBounds.extents.y) - spriteBounds.center.y;
+        return spawnY;
     }
 }

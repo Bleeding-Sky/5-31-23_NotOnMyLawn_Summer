@@ -58,7 +58,7 @@ public class Obj_TacviewTracker : MonoBehaviour
         anchorObject= newAchorObject;
         anchorPos = anchorObject.transform.position;
 
-        Debug.Log("new anchor registered");
+        //Debug.Log("new anchor registered");
     }
 
 }
