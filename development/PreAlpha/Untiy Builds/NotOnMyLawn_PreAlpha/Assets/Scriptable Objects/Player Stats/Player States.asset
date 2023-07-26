@@ -15,3 +15,4 @@ MonoBehaviour:
   isWalking: 0
   faceDirection: 1
   gunIsDrawn: 0
+  boardsOnPlayer: 6

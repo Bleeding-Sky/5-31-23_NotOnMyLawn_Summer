@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 49
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.46226418, g: 0.08940014, b: 0.22549953, a: 1}
   m_FlipX: 0
@@ -148,10 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 8655501911348761679}
   bullet: {fileID: 3135732857517920457, guid: 1cb7ede4e10b41f4faebcab91a40208d, type: 3}
-  GunLocation: {fileID: 0}
   GunRotation: {fileID: 0}
   handPosition: {fileID: 0}
   player: {fileID: 0}
+  aimingPoint: {fileID: 0}
   canFire: 0
   armPosition: {x: 0, y: 0, z: 0}
   pickedUp: 0
@@ -172,6 +172,10 @@ MonoBehaviour:
   recoil: 0
   bulletType: {fileID: 3135732857517920457, guid: 1cb7ede4e10b41f4faebcab91a40208d, type: 3}
   rotationAndAimingPoint: {fileID: 0}
+  handPos: {fileID: 0}
+  player: {fileID: 0}
+  AimingField: {fileID: 0}
+  isPickedUp: 0
 --- !u!114 &3853846513747636097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +192,7 @@ MonoBehaviour:
   isEnviormentObject: 0
   isWindow: 0
   isDoor: 0
+  isBackgroundDoor: 0
   isGun: 1
   isBandage: 0
 --- !u!1 &7083565188354138988

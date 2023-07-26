@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3734968145489859578}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ExitPoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5668587074097906049}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ExitPoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ Transform:
   - {fileID: 5777049987417191848}
   - {fileID: 4104204524151545366}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7385729418181885872
 GameObject:
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1246976447231706210}
   - component: {fileID: 4894453535755046178}
   - component: {fileID: 4071121650938182187}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BackGround Door 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 2589093833381768244}
   - component: {fileID: 1090439505313070163}
   - component: {fileID: 4927156442843540796}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BackGround Door 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

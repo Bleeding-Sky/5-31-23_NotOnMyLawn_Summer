@@ -12,6 +12,7 @@ public class Interaction_Identification : MonoBehaviour
     public bool isWindow;
     public bool isDoor;
     public bool isBackgroundDoor;
+    public bool isBoardPile;
 
     [Header("Item Type")]
     public bool isGun;

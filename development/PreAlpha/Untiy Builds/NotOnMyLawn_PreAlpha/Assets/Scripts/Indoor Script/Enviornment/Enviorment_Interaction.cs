@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,11 +17,29 @@ public class Enviorment_Interaction : MonoBehaviour
         {
             WindowInteraction(Enviornment);
         }
+        else if(enviornmentType.isBoardPile)
+        {
+            BoardPileInteraction(Enviornment);
+        }
+    }
+
+    private void BoardPileInteraction(GameObject Enviornment)
+    {
+        BoardPile_Script boardPile = Enviornment.GetComponent<BoardPile_Script>();
+        if(Input.GetKey(KeyCode.W))
+        {
+            boardPile.PickUpBoard();
+        }
+        else if(Input.GetKeyUp(KeyCode.W))
+        {
+            boardPile.ResetBoardPickUp();
+        }
     }
 
     private void WindowInteraction(GameObject Enviornment)
     {
         Window_Interact window = Enviornment.GetComponent<Window_Interact>();
+        Window_Barricade windowRebuild = Enviornment.GetComponent<Window_Barricade>();
         Player_InHand objectInHands = handInv.GetComponent<Player_InHand>();
 
         if (Input.GetKeyDown(KeyCode.E) && !window.Interacting)
@@ -36,6 +55,14 @@ public class Enviorment_Interaction : MonoBehaviour
             window.switchToInside();
             window.Interacting = false;
             
+        }
+        if (Input.GetKey(KeyCode.W) && windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory)
+        {
+            windowRebuild.AddBoard();
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            windowRebuild.timer = 0;
         }
     }
 

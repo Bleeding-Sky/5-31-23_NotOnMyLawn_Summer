@@ -15,4 +15,5 @@ public class Player_States : ScriptableObject
 
     //handled by Input_Holster
     public bool gunIsDrawn;
+    public int boardsOnPlayer;
 }
