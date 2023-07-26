@@ -40,8 +40,16 @@ public class Tacview_GenWndwEnv : MonoBehaviour
             if (colTacviewTracker != null &&
                 !objectsInTacview.Contains(colTacviewTracker))
             {
+                //add to list and create corresponding window object
                 objectsInTacview.Add(colTacviewTracker);
                 createWindowviewObject(colTacviewTracker);
+
+                //also register this window as the object's anchor if not already registered
+                if (colTacviewTracker.anchorObject != gameObject) 
+                {
+                    colTacviewTracker.RegisterNewAnchor(gameObject); 
+                }
+                
             }
             
         }
