@@ -1,0 +1,39 @@
+bullet object
+	bulletdata.cs
+		public float headshotDmgVal
+		public float bodyshotDmgVal
+		public float legshotDmgVal
+		public SO bulletDamageValsSO
+	smgBulletData.cs
+		public class smgBulletData : bulletdata
+			(inherits from bulletdata)
+			
+		start
+			headshotDmgVal = bulletDamageValsSO.smgHeadshotDmgVal
+			bodyshotDmgVal = bulletDamageValsSO.smgBodyshotDmgVal
+			legshotDmgVal = bulletDamageValsSO.smgLegshotDmgVal
+	bulletDamageValues (scriptable object)
+		//SMG
+		smgHeadshotDmgVal = 10
+		smgBodyshotDmgVal = 5
+		smgLegshotDmgVal = 3
+	
+		//pistol
+		pistolHeadshotDmgVal = 15
+		...etc
+
+headshotDetector.cs - on head child object that has a boxcollider
+	public zmbMaster masterScript
+
+	oncollisionenter2d
+		if col.comparetag("Bullet")
+			//call headshot method on master script with dmg value from bullet
+			masterScript.headshot(col.gameObject.getComponent<(bulletdata)>().headshotDmg
+
+	bodyshotDetector.cs and legShotDetector.cs are same as above with diff methods
+
+master
+	public void headshot(float damageVal)
+	public void bodyshot(float damageVal)
+	public void legshot(float damageVal)
+	//unfinished pseudocode: each method should calculate limb health + chance of stumble/crit
