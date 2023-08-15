@@ -15,8 +15,23 @@ public class Zmb_Master : MonoBehaviour
     public bool isCrawiling = false;
     public Vector3 targetPos;
 
+    public void headshot(float dmgVal)
+    {
+
+    }
+
+    public void bodyshot(float dmgVal)
+    {
+
+    }
+
+    public void legshot(float dmgVal)
+    {
+
+    }
+
     /// <summary>
-    /// damages the zombie for a specified float value
+    /// damages the zombie for a specified float value (OUTDATED)
     /// </summary>
     /// <param name="damage"></param>
     public void DamageZmb(float damage)
