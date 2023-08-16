@@ -5,8 +5,6 @@ using UnityEngine;
 public class Zmb_Tacview : MonoBehaviour
 {
     public Zmb_Master masterScript;
- 
-    public Vector2 targetPos;
 
     // Start is called before the first frame update
     void Start()

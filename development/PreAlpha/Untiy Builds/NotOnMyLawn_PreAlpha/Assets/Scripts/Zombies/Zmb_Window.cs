@@ -6,7 +6,11 @@ using UnityEngine;
 public class Zmb_Window : MonoBehaviour
 {
     public Zmb_Master masterScript;
-    public Zmb_Tacview tacviewScript; 
+
+    /*NOTE
+     * this script needs to handle checking for and reporting damage
+     * done to a zombie in the window view.
+     */
 
     // Start is called before the first frame update
     void Start()

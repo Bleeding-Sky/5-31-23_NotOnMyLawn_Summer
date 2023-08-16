@@ -1,0 +1,41 @@
+current implementation:
+each scene's zombie has damage regions
+all damage detectors have ref to master script
+
+-what is the purpose of the master script?
+	-masterscript MUST handle stumble/crit calculations AND destroying
+	zmbs on death
+	-also handles any other info like damage levels on different limbs
+	or status effects (stumbling bleeding etc)
+		-should be held as states
+	-MAYBE RENAME TO ZMB_STATUSMANAGER? since it keeps track of the status
+
+headshots on different scenes SHOULD be handled exactly the same
+	-master should be a damage manager? since it no longer handles any
+	tracking
+	-would then handle all damage calcs and kill zombies on death
+		-needs reference to each view of said zombie to destroy them
+		on death
+		-tacview should link window zombie to master when creating it
+conclusion: make master script a damage manager. would require some refactoring
+	to get necessary references (listed above)
+
+REVIEW:
+what does each zombie view need?
+	-tacview
+		-pathing
+		-trap damage detector
+	-window
+		-body region damage detectors
+	-indoor
+		-pathing
+		-body region damage detectors
+	TODO: test making all views of zombies children of the master
+	(ADDED TO GITHUB PROJECT)
+		-see if they move the whole object
+		-see if master can fetch damage detector scripts
+
+NEXT JOB: (ADDED TO GITHUB PROJECT)
+-can this be simplified with a damageReporter script for each scene?
+	-LEARN EVENT SYSTEM: each detector should raise an event, master could
+	read those events??????????

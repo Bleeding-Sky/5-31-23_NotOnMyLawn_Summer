@@ -7,27 +7,27 @@ using UnityEngine.UIElements;
 
 public class Zmb_Master : MonoBehaviour
 {
+    //used for destroying all views of the zombie when it dies
     public Zmb_Tacview? tacviewScript;
     public Zmb_Window? windowScript;
     public Zmb_Indoor? indoorScript;
 
     public float health;
     public bool isCrawiling = false;
-    public Vector3 targetPos;
 
     public void headshot(float dmgVal)
     {
-
+        Debug.Log("headshot detected for " + dmgVal + " damage");
     }
 
     public void bodyshot(float dmgVal)
     {
-
+        Debug.Log("bodyshot detected for " + dmgVal + " damage");
     }
 
     public void legshot(float dmgVal)
     {
-
+        Debug.Log("legshot detected for " + dmgVal + " damage");
     }
 
     /// <summary>

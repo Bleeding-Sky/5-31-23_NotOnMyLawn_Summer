@@ -6,7 +6,7 @@ using UnityEngine;
 public class bulletDmgValues : ScriptableObject
 {
     //TEST
-    public float testHeadDmg = 10;
-    public float testBodyDmg = 5;
-    public float testLegDmg = 3;
+    public float testHeadDmg;
+    public float testBodyDmg;
+    public float testLegDmg;
 }

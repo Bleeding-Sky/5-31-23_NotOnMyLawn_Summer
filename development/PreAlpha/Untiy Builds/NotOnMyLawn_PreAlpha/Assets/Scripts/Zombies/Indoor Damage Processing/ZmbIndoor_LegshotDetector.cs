@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class indoor_zmbLegshotDetector : MonoBehaviour
+public class ZmbIndoor_LegshotDetector : MonoBehaviour
 {
     public Zmb_Master zmbMasterScript;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
