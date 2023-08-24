@@ -17,17 +17,17 @@ public class Zmb_Master : MonoBehaviour
 
     public void headshot(float dmgVal)
     {
-        Debug.Log("headshot detected for " + dmgVal + " damage");
+        Debug.Log($"headshot detected for {dmgVal} damage");
     }
 
     public void bodyshot(float dmgVal)
     {
-        Debug.Log("bodyshot detected for " + dmgVal + " damage");
+        Debug.Log($"bodyshot detected for {dmgVal} damage");
     }
 
     public void legshot(float dmgVal)
     {
-        Debug.Log("legshot detected for " + dmgVal + " damage");
+        Debug.Log($"legshot detected for {dmgVal} damage");
     }
 
     /// <summary>

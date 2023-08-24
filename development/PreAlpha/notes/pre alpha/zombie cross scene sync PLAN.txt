@@ -39,3 +39,4 @@ NEXT JOB: (ADDED TO GITHUB PROJECT)
 -can this be simplified with a damageReporter script for each scene?
 	-LEARN EVENT SYSTEM: each detector should raise an event, master could
 	read those events??????????
+	-DID NOT END UP DOING THIS
