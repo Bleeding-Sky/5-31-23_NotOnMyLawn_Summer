@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Zmb_Tacview : MonoBehaviour
 {
-    public Zmb_Master masterScript;
+    public Zmb_StatusManager masterScript;
 
     // Start is called before the first frame update
     void Start()

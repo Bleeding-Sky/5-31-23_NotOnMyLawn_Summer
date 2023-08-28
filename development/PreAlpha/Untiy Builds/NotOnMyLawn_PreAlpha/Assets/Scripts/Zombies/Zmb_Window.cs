@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Zmb_Window : MonoBehaviour
 {
-    public Zmb_Master masterScript;
+    public Zmb_StatusManager masterScript;
 
     /*NOTE
      * this script needs to handle checking for and reporting damage

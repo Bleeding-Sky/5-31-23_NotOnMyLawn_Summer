@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Zmb_Indoor : MonoBehaviour
 {
-    public Zmb_Master masterScript;
+    public Zmb_StatusManager masterScript;
 
     // Start is called before the first frame update
     void Start()

@@ -5,7 +5,10 @@ using UnityEngine.UIElements;
 
 #nullable enable
 
-public class Zmb_Master : MonoBehaviour
+/// <summary>
+/// handles health tracking, status effect tracking/calculations, and death
+/// </summary>
+public class Zmb_StatusManager : MonoBehaviour
 {
     //used for destroying all views of the zombie when it dies
     public Zmb_Tacview? tacviewScript;
@@ -13,6 +16,8 @@ public class Zmb_Master : MonoBehaviour
     public Zmb_Indoor? indoorScript;
 
     public float health;
+
+    //statuses
     public bool isCrawiling = false;
 
     public void headshot(float dmgVal)

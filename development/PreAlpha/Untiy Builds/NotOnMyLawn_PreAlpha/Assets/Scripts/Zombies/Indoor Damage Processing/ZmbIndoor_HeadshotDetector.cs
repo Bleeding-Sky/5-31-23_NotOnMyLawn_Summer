@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class ZmbIndoor_HeadshotDetector : MonoBehaviour
 {
-    public Zmb_Master zmbMasterScript;
+    public Zmb_StatusManager zmbStatusScript;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +13,7 @@ public class ZmbIndoor_HeadshotDetector : MonoBehaviour
         {
             //call headshot method on master w/ bullet headshot dmg value
             float bulletHeadDmg = collision.gameObject.GetComponent<bulletData>().headDmg;
-            zmbMasterScript.headshot(bulletHeadDmg);
+            zmbStatusScript.headshot(bulletHeadDmg);
         }
     }
 }
