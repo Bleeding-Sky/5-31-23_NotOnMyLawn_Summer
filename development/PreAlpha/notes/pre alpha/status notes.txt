@@ -1,0 +1,26 @@
+legs can break when shot -> crawling
+legs getting hit by high damage -> chance of stumble
+body getting hit by high damage -> low chance of stun
+head getting hit by high damage -> chance of stun
+
+TOP PRIORITY BASICS:
+stumble
+	-zmb move speed briefly slowed down
+	-body doubles over to regain balance
+stun
+	-zombie is hit by brief pushing force on the top of its body
+	-wavers back and forth to try and not fall backwards
+crawling
+	-zombie has broken/missing legs
+	-crawls at 1/3 speed
+
+SECOND PRIORITY:
+burning
+	-deals fire damage when attacking
+	-shakes off the fire after a brief time, giving a speed boost as it shakes
+enraged
+	-occurs after a headshot stun
+	-zombie charges forward a set distance
+
+HOW TO CALCULATE?
+	-TODO
