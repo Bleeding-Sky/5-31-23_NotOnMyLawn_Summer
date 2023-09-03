@@ -23,4 +23,9 @@ enraged
 	-zombie charges forward a set distance
 
 HOW TO CALCULATE?
-	-TODO
+	-beyond the scope of these notes
+	
+NEXT STEPS:
+	-create stumble, stun, and crawling methods on statusManager that flip the statuses
+	-create limb damage methods to track limb health + add limb health to SO
+	-create methods to manage overall health
