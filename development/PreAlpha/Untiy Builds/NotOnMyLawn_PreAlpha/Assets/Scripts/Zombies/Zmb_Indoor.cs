@@ -28,6 +28,6 @@ public class Zmb_Indoor : MonoBehaviour
     /// <param name="damage"></param>
     void IndoorDmg(float damage)
     {
-        masterScript.DamageZmb(damage);
+        masterScript.damageHealth(damage);
     }
 }

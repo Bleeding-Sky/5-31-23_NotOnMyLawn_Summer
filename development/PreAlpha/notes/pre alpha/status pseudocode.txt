@@ -33,3 +33,5 @@ void doOverallDamage(damageVal)
 	}
 -leg damage is halved, head damage is 1.5'd
 -those limb damage methods use global headDmgMultiplier and legDmgMultiplier vars
+
+TODO: set up zombieData SO and create status methods

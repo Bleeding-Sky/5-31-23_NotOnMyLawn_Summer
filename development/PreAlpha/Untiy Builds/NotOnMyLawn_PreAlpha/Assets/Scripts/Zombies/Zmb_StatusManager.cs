@@ -15,33 +15,52 @@ public class Zmb_StatusManager : MonoBehaviour
     public Zmb_Window? windowScript;
     public Zmb_Indoor? indoorScript;
 
+    //health trackers
     public float health;
+    public float headHealth;
+    public float bodyHealth;
+    public float legHealth;
+
+    //incoming damage multipliers
+    public float headDmgMultiplier = 1.5f;
+    public float bodyDmgMultiplier = 1;
+    public float legDmgMultiplier = .5f;
 
     //statuses
-    public bool isCrawiling = false;
+    public bool isStumbling = false;
+    public bool isStunned = false;
+    public bool isCrawling = false;
 
     public void headshot(float dmgVal)
     {
         Debug.Log($"headshot detected for {dmgVal} damage");
+
+        headHealth -= dmgVal;
+        damageHealth(dmgVal * headDmgMultiplier);
     }
 
     public void bodyshot(float dmgVal)
     {
         Debug.Log($"bodyshot detected for {dmgVal} damage");
+
+        bodyHealth -= dmgVal;
+        damageHealth(dmgVal * bodyDmgMultiplier);
     }
 
     public void legshot(float dmgVal)
     {
         Debug.Log($"legshot detected for {dmgVal} damage");
+
+        legHealth -= dmgVal;
+        damageHealth(dmgVal * legDmgMultiplier);
     }
 
     /// <summary>
-    /// damages the zombie for a specified float value (OUTDATED)
+    /// damages the zombie for a specified float value
     /// </summary>
-    /// <param name="damage"></param>
-    public void DamageZmb(float damage)
+    public void damageHealth(float dmgVal)
     {
-        health -= damage;
+        health -= dmgVal;
     }
 
     /// <summary>

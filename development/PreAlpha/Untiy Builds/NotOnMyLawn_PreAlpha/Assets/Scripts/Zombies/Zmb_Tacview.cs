@@ -24,7 +24,7 @@ public class Zmb_Tacview : MonoBehaviour
     /// <param name="damage"></param>
     void TacviewDmg(float damage)
     {
-        masterScript.DamageZmb(damage);
+        masterScript.damageHealth(damage);
     }
 
 }
