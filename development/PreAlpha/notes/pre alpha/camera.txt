@@ -1,0 +1,4 @@
+player is far on the side of the screen, opposite of the side their mouse is on
+	-makes it so you cant see whats behind you without checking
+-tiny box that player can move left and right in without moving the camera from their movement
+-most of the time average the player's position and the cursor position, tho keep player on the far side of the screen still
