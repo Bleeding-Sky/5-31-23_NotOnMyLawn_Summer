@@ -30,6 +30,6 @@ public class Zmb_Window : MonoBehaviour
     /// <param name="damage"></param>
     void WindowDmg(float damage)
     {
-        masterScript.damageHealth(damage);
+        masterScript.DamageHealth(damage);
     }
 }

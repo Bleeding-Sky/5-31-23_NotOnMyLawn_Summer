@@ -13,7 +13,7 @@ public class ZmbIndoor_HeadshotDetector : MonoBehaviour
         {
             //call headshot method on master w/ bullet headshot dmg value
             float bulletHeadDmg = collision.gameObject.GetComponent<bulletData>().headDmg;
-            zmbStatusScript.headshot(bulletHeadDmg);
+            zmbStatusScript.Headshot(bulletHeadDmg);
         }
     }
 }

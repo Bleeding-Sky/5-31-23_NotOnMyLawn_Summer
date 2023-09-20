@@ -302,7 +302,16 @@ MonoBehaviour:
   windowScript: {fileID: 0}
   indoorScript: {fileID: 1566659416}
   health: 5
-  isCrawiling: 0
+  headHealth: 0
+  bodyHealth: 0
+  legHealth: 0
+  headDmgMultiplier: 0
+  bodyDmgMultiplier: 0
+  legDmgMultiplier: 0
+  isStumbling: 0
+  isStunned: 0
+  isCrawling: 0
+  dataSO: {fileID: 11400000, guid: d8f7123d1a716b24199de7b3b73961c3, type: 2}
 --- !u!4 &95568509
 Transform:
   m_ObjectHideFlags: 0
@@ -1144,7 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb8caaac201b8543ad26a73fef821d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zmbMasterScript: {fileID: 2115007812}
+  zmbStatusScript: {fileID: 0}
 --- !u!61 &961814132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1556,7 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94584e127bdb70749b0620cba43716b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zmbMasterScript: {fileID: 2115007812}
+  zmbStatusScript: {fileID: 0}
 --- !u!61 &1551796363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1974,7 +1983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3be61c9fd076a84d8ffc9c290aac3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zmbMasterScript: {fileID: 2115007812}
+  zmbStatusScript: {fileID: 0}
 --- !u!61 &1892821814
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2237,7 +2246,16 @@ MonoBehaviour:
   windowScript: {fileID: 0}
   indoorScript: {fileID: 0}
   health: 30
-  isCrawiling: 0
+  headHealth: 0
+  bodyHealth: 0
+  legHealth: 0
+  headDmgMultiplier: 1.5
+  bodyDmgMultiplier: 1
+  legDmgMultiplier: 0.5
+  isStumbling: 0
+  isStunned: 0
+  isCrawling: 0
+  dataSO: {fileID: 0}
 --- !u!4 &2115007813
 Transform:
   m_ObjectHideFlags: 0

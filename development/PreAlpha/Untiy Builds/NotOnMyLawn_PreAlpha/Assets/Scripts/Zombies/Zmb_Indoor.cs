@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// reports damage to the master script and calculates logic for
 /// stumbles and limb damage (destroy head, break legs, etc)
+/// OLD DEFINITION, NOW THIS IS HANDLED BY STATUSMANAGER
 /// </summary>
 public class Zmb_Indoor : MonoBehaviour
 {
@@ -22,12 +23,4 @@ public class Zmb_Indoor : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// sends damage value to master script
-    /// </summary>
-    /// <param name="damage"></param>
-    void IndoorDmg(float damage)
-    {
-        masterScript.damageHealth(damage);
-    }
 }
