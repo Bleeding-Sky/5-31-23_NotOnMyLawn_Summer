@@ -88,6 +88,7 @@ public class Zmb_StatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         //fetch all health values
         health = dataSO.zombieHealth;
         headHealth = dataSO.headMaxHealth;
@@ -107,7 +108,6 @@ public class Zmb_StatusManager : MonoBehaviour
         if (health <= 0)
         {
             KillZmb();
-            Debug.Log("zombie killed");
         }
     }
 
