@@ -1,0 +1,17 @@
+zombiemanager spawns a new zombie
+	-has location where zombie is spawned
+	-creates new zombie master
+	-gives zombie master the location
+	-zombie master calls its own initialization method with location data
+zombie master spawns all views of the zombie
+	-spawn in tacview, register that gameObject in master
+	-makes it a child of the master
+	-tacview spawns in the window, links that to the master
+	-also makes it a child of the master
+master spawns indoor view
+	-when tacview zombie reaches the target, it calls a method on the master to move zombie to indoor
+	NOTE: tacview needs to know about the master so it can report that the zmb reached the target AND so it can link the window zmb to the master script
+
+	-demo implementation: master spawns indoor zmb at that window and despawns all others
+	-evenually: zombie should crawl through the window on window + indoor views, and despawn on tacview, and once its crawled in, THEN it spawns indoors
+	-MAKE THE INDOOR ZMB A CHILD OF THE MASTER
