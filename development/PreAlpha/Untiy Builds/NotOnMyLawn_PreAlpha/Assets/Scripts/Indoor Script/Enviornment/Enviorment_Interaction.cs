@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enviorment_Interaction : MonoBehaviour
 {
+    public GameObject player;
     public GameObject playerBody;
     public GameObject handInv;
     public GameObject Inventory;
@@ -56,7 +57,7 @@ public class Enviorment_Interaction : MonoBehaviour
             window.Interacting = false;
             
         }
-        if (Input.GetKey(KeyCode.W) && windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory)
+        if (Input.GetKey(KeyCode.W) && windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory && !window.Interacting)
         {
             windowRebuild.AddBoard();
         }
@@ -68,14 +69,17 @@ public class Enviorment_Interaction : MonoBehaviour
 
     private void DisablePlayer(GameObject objectInHand)
     {
+        Player_InstantLRMovement playerMovement = player.GetComponent<Player_InstantLRMovement>();
         if(objectInHand == null)
         {
+            playerMovement.enabled = false;
             handInv.SetActive(false);
             playerBody.SetActive(false);
             Inventory.SetActive(false);
         }
         else
         {
+            playerMovement.enabled = false;
             handInv.SetActive(false);
             CheckForGunInHandInteractionOn(objectInHand);
             playerBody.SetActive(false);
@@ -85,14 +89,17 @@ public class Enviorment_Interaction : MonoBehaviour
     }
     private void EnablePlayer(GameObject objectInHand)
     {
+        Player_InstantLRMovement playerMovement = player.GetComponent<Player_InstantLRMovement>();
         if (objectInHand == null)
         {
+            playerMovement.enabled = true;
             handInv.SetActive(true);
             playerBody.SetActive(true);
             Inventory.SetActive(true);
         }
         else
         {
+            playerMovement.enabled = true;
             handInv.SetActive(true);
             CheckForGunInHandInteractionOn(objectInHand);
             playerBody.SetActive(true);
