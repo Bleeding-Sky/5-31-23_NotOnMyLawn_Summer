@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Zmb_Tacview : MonoBehaviour
 {
-    public Zmb_Master masterScript;
- 
-    public Vector2 targetPos;
+    public Zmb_StatusManager masterScript;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +24,7 @@ public class Zmb_Tacview : MonoBehaviour
     /// <param name="damage"></param>
     void TacviewDmg(float damage)
     {
-        masterScript.DamageZmb(damage);
+        masterScript.DamageHealth(damage);
     }
 
 }

@@ -1,0 +1,37 @@
+void doStumble()
+	{
+		isStumbling = true;
+	}
+
+void endStumble()
+	{
+		isStumbling = false;
+	}
+
+-repeat with dostun, endstun, and docrawl methods. eventually these will start animations, change sprites, do effects
+
+limb health SO
+	float headMaxHealth
+	float torsoMaxHealth
+	float legMaxHealth
+
+start: getting the limb health from the SO
+	headHealth = zmbHealthSO.headMaxHealth
+	torsoHealth = zmbHealthSO.torsoMaxHealth
+	legHealth = zmbHealthSO.legMaxHealth
+
+doHeadDamage(float damageVal)
+	{
+		headHealth -= damageVal;
+		//if damage big enough, do stun
+	}
+-repeat with other limbs. legs have notes on stumble and crawl activation, etc
+
+void doOverallDamage(damageVal)
+	{
+		overallHealth -= damageVal;
+	}
+-leg damage is halved, head damage is 1.5'd
+-those limb damage methods use global headDmgMultiplier and legDmgMultiplier vars
+
+TODO: set up zombieData SO and create status methods
