@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 7182534510413796586}
-  firingPos: {x: 5.80412, y: 3.7732716, z: 0}
+  firingPos: {x: -0.69711876, y: 2.4123476, z: 0}
   bulletStartPosition: {x: 0, y: 0, z: 0}
-  bulletDirectionPosition: {x: -13.912435, y: -0.06811297, z: 0.0036465141}
-  bulletSpeed: 129.3
+  bulletDirectionPosition: {x: -11.209868, y: -0.069021404, z: 0.0036465141}
+  bulletSpeed: 130
 --- !u!50 &7182534510413796586
 Rigidbody2D:
   serializedVersion: 4
