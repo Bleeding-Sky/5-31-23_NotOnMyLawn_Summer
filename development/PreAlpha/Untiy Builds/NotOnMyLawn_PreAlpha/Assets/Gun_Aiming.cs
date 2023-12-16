@@ -34,9 +34,9 @@ public class Gun_Aiming : MonoBehaviour
     {
         gunScale = gunFiringArea.transform.localScale;
 
-        followMouse();
-        DetermineCircleSize();
-        calculateShootingPosition();
+        //followMouse();
+        //DetermineCircleSize();
+       // calculateShootingPosition();
     }
 
     private void calculateShootingPosition()

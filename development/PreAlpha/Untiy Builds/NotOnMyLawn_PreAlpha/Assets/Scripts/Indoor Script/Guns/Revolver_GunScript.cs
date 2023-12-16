@@ -13,7 +13,7 @@ public class Revolver_GunScript : MonoBehaviour
     public GameObject aimingPoint;
 
     [Header("DEBUG")]
-    private int bulletAmount;
+    public int bulletAmount;
     private float firingRate;
     private float recoil;
     public bool canFire;
@@ -52,8 +52,11 @@ public class Revolver_GunScript : MonoBehaviour
     {
         canFire = false;
         Bullet_Script bulletDirection = bullet.GetComponent<Bullet_Script>();
-        Gun_Aiming aiming = aimingPoint.GetComponent<Gun_Aiming>();
-        bulletDirection.firingPos = aimingPoint.transform.position;
+        //Gun_Aiming aiming = aimingPoint.GetComponent<Gun_Aiming>();
+        
+        Vector3 circlePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        circlePos.z = 0;
+        bulletDirection.firingPos = circlePos;
         bulletDirection.bulletDirectionPosition = armPosition;
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
         bulletAmount -= 1;

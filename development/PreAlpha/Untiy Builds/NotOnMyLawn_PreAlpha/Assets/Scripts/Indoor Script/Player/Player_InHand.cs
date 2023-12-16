@@ -73,16 +73,16 @@ public class Player_InHand : MonoBehaviour
             Interaction_Identification equippedItem = objectInHand.GetComponent<Interaction_Identification>();
             if(equippedItem.isGun)
             {
-                AimingArea.SetActive(true);
+                //AimingArea.SetActive(true);
             }
             else if(!equippedItem.isGun)
             {
-                AimingArea.SetActive(false);
+                //AimingArea.SetActive(false);
             }
         }
         else if(!itemInHand)
         {
-            AimingArea.SetActive(false);
+            //AimingArea.SetActive(false);
         }
     }
 }
