@@ -13,7 +13,7 @@ public class Player_InHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetermineIfItemInHand();
+        
         if(Input.GetKeyDown(KeyCode.Q))
         {
             DropItemInHand();
@@ -37,6 +37,7 @@ public class Player_InHand : MonoBehaviour
             objectInHand.SetActive(true);
             objectInHand.transform.parent = gameObject.transform;
             itemInHand = true;
+            DetermineIfItemInHand();
         }
     }
 
@@ -49,6 +50,7 @@ public class Player_InHand : MonoBehaviour
         holdItem.transform.parent = Inventory.transform;
         holdItem.SetActive(false);
         itemInHand = true;
+        DetermineIfItemInHand();
 
     }
 
@@ -73,6 +75,8 @@ public class Player_InHand : MonoBehaviour
             Interaction_Identification equippedItem = objectInHand.GetComponent<Interaction_Identification>();
             if(equippedItem.isGun)
             {
+                Gun_Information gunInfo = objectInHand.GetComponent<Gun_Information>();
+                gunInfo.coolingDown = false;
                 //AimingArea.SetActive(true);
             }
             else if(!equippedItem.isGun)

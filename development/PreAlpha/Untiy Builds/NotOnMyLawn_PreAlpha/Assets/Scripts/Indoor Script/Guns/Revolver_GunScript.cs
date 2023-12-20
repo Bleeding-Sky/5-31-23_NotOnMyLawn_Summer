@@ -39,6 +39,7 @@ public class Revolver_GunScript : MonoBehaviour
         if (pickedUp)
         {
             CalculateDirection();
+            CheckIfFireable();
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
             {
@@ -78,7 +79,10 @@ public class Revolver_GunScript : MonoBehaviour
 
     IEnumerator DetermineFireRate()
     {
+        Gun_Information gunSpecs = GetComponent<Gun_Information>();
+        gunSpecs.coolingDown = true;
         yield return new WaitForSeconds(firingRate);
+        gunSpecs.coolingDown = false;
         canFire = true;
     }
 
@@ -96,5 +100,14 @@ public class Revolver_GunScript : MonoBehaviour
         player = gunSpecs.player;
         pickedUp = gunSpecs.isPickedUp;
         aimingPoint = gunSpecs.AimingField;
+    }
+
+    public void CheckIfFireable()
+    {
+        Gun_Information gunSpecs = GetComponent<Gun_Information>();
+        if (gunSpecs.coolingDown != true && bulletAmount > 0)
+        {
+            canFire = true;
+        }
     }
 }

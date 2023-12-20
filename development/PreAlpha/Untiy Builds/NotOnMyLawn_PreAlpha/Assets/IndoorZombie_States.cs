@@ -5,7 +5,6 @@ using UnityEngine;
 public class IndoorZombie_States : MonoBehaviour
 {
     public bool isAttacking;
-    public bool isAlert;
     public bool isWalking;
     public bool isTripping;
     public bool isShambling;

@@ -9,6 +9,7 @@ public class Gun_Information : MonoBehaviour
     public int bulletCount;
     public float fireRate;
     public float recoil;
+    public bool coolingDown;
     public GameObject bulletType;
 
     [Header("Gun Configurations")]

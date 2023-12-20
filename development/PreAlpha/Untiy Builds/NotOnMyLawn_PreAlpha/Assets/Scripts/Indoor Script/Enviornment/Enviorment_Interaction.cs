@@ -112,7 +112,7 @@ public class Enviorment_Interaction : MonoBehaviour
         Interaction_Identification gameObjectInHand = objectInHand.GetComponent<Interaction_Identification>();
         if(gameObjectInHand.isGun && gameObjectInHand.isItem)
         {
-            aiming.SetActive(false);
+            
             Debug.Log("object in hand");
         }
         else
@@ -126,7 +126,7 @@ public class Enviorment_Interaction : MonoBehaviour
         Interaction_Identification gameObjectInHand = objectInHand.GetComponent<Interaction_Identification>();
         if (gameObjectInHand.isGun && gameObjectInHand.isItem)
         {
-            aiming.SetActive(true);
+            
         }
         else
         {
