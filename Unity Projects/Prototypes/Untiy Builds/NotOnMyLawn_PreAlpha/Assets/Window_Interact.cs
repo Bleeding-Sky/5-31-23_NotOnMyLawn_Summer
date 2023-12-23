@@ -18,18 +18,28 @@ public class Window_Interact : MonoBehaviour
         Interacting = false;
     }
 
+    /// <summary>
+    /// Switches the view to the inside of the house
+    /// </summary>
     public void switchToInside()
     {
         OutsideCam.SetActive(false);
         InsideCam.SetActive(true);
     }
 
+    /// <summary>
+    /// Switches the view to the outside of the house
+    /// </summary>
     public void switchToOutside()
     {
         OutsideCam.SetActive(true);
         InsideCam.SetActive(false);
     }
 
+    /// <summary>
+    /// Ignore the collision of anythng other than the interaction field
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(!collision.gameObject.CompareTag("InteractableField"))

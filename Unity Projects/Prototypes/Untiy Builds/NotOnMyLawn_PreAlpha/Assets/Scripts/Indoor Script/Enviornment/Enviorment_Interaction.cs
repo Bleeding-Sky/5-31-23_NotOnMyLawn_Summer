@@ -11,6 +11,10 @@ public class Enviorment_Interaction : MonoBehaviour
     public GameObject Inventory;
     public GameObject aiming;
 
+    /// <summary>
+    /// Interacts with the enviornment depending on which enviornmental item it is
+    /// </summary>
+    /// <param name="Enviornment"></param>
     public void Interact(GameObject Enviornment)
     {
         Interaction_Identification enviornmentType = Enviornment.GetComponent<Interaction_Identification>();
@@ -24,25 +28,42 @@ public class Enviorment_Interaction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Interaction for the Board Pile 
+    /// </summary>
+    /// <param name="Enviornment"></param>
     private void BoardPileInteraction(GameObject Enviornment)
     {
         BoardPile_Script boardPile = Enviornment.GetComponent<BoardPile_Script>();
+
+        //If Presses W then Picks up board
         if(Input.GetKey(KeyCode.W))
         {
             boardPile.PickUpBoard();
         }
         else if(Input.GetKeyUp(KeyCode.W))
+        //resets if the key is let go
         {
             boardPile.ResetBoardPickUp();
         }
     }
 
+    /// <summary>
+    /// Interaction if the enviornment is a window object
+    /// </summary>
+    /// <param name="Enviornment"></param>
     private void WindowInteraction(GameObject Enviornment)
     {
         Window_Interact window = Enviornment.GetComponent<Window_Interact>();
         Window_Barricade windowRebuild = Enviornment.GetComponent<Window_Barricade>();
         Player_InHand objectInHands = handInv.GetComponent<Player_InHand>();
+        /*
+         * Two different interactions based on what key the 
+         * player presses. Either the player looks through the window 
+         * or the player rebuilds the window.
+         */
 
+        //Look through window interaction
         if (Input.GetKeyDown(KeyCode.E) && !window.Interacting)
         {
             DisablePlayer(objectInHands.objectInHand);
@@ -57,6 +78,8 @@ public class Enviorment_Interaction : MonoBehaviour
             window.Interacting = false;
             
         }
+
+        //Rebuild window interaction
         if (Input.GetKey(KeyCode.W) && windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory && !window.Interacting)
         {
             windowRebuild.AddBoard();
@@ -67,9 +90,15 @@ public class Enviorment_Interaction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Disables the players object and abilities 
+    /// </summary>
+    /// <param name="objectInHand"></param>
     private void DisablePlayer(GameObject objectInHand)
     {
         Player_InstantLRMovement playerMovement = player.GetComponent<Player_InstantLRMovement>();
+
+        //Disabling based on if there is no object in hand
         if(objectInHand == null)
         {
             playerMovement.enabled = false;
@@ -77,6 +106,7 @@ public class Enviorment_Interaction : MonoBehaviour
             playerBody.SetActive(false);
             Inventory.SetActive(false);
         }
+        //Disabling based on if there is an object in the players hand
         else
         {
             playerMovement.enabled = false;
@@ -87,9 +117,16 @@ public class Enviorment_Interaction : MonoBehaviour
             Inventory.SetActive(false);
         }
     }
+
+    /// <summary>
+    /// Renables the player's game object and abilities
+    /// </summary>
+    /// <param name="objectInHand"></param>
     private void EnablePlayer(GameObject objectInHand)
     {
         Player_InstantLRMovement playerMovement = player.GetComponent<Player_InstantLRMovement>();
+
+        //Enabling based on if there is no object in hand
         if (objectInHand == null)
         {
             playerMovement.enabled = true;
@@ -97,6 +134,7 @@ public class Enviorment_Interaction : MonoBehaviour
             playerBody.SetActive(true);
             Inventory.SetActive(true);
         }
+        //Enabling based on if there is an object in the players hand
         else
         {
             playerMovement.enabled = true;
@@ -107,6 +145,12 @@ public class Enviorment_Interaction : MonoBehaviour
             Inventory.SetActive(true);
         }
     }
+
+    /// <summary>
+    /// NOT used currently but was used for the Gun Aiming object.
+    /// Kept in case we need to reuse it again.
+    /// </summary>
+    /// <param name="objectInHand"></param>
     private void CheckForGunInHandInteractionOn(GameObject objectInHand)
     {
         Interaction_Identification gameObjectInHand = objectInHand.GetComponent<Interaction_Identification>();
@@ -121,6 +165,11 @@ public class Enviorment_Interaction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// NOT used currently but was used for the Gun Aiming object.
+    /// Kept in case we need to reuse it again.
+    /// </summary>
+    /// <param name="objectInHand"></param>
     private void CheckForGunInHandInteractionOff(GameObject objectInHand)
     {
         Interaction_Identification gameObjectInHand = objectInHand.GetComponent<Interaction_Identification>();

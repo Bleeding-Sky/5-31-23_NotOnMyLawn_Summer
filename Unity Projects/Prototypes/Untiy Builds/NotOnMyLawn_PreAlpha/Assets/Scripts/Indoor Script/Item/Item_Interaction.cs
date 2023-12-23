@@ -34,6 +34,10 @@ public class Item_Interaction : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// once an interactable is in range then the item is added to the list of close objects
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //once the interactable is in range it adds it to the list
@@ -42,6 +46,11 @@ public class Item_Interaction : MonoBehaviour
             itemsInField.Add(collision.gameObject);
         }
     }
+
+    /// <summary>
+    /// As long as there is an item in range then it will be interactable
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerStay2D(Collider2D collision)
     {
         //if a collision is an interactable then it sets in range to true
@@ -51,6 +60,11 @@ public class Item_Interaction : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Once the item leaves the field then it is removed from the list
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         //if an item leaves it sets the in range to false and removes objects from the list
@@ -61,7 +75,9 @@ public class Item_Interaction : MonoBehaviour
         }    
     }
 
-    //A function to find the closest interactable
+    /// <summary>
+    /// A function to find the closest interactable
+    /// </summary>
     public void FindClosestItem()
     {   
         //gets the list length and sets what the last item is to infinity inorder to ensure no item is bigger than the initial closest item
@@ -87,7 +103,11 @@ public class Item_Interaction : MonoBehaviour
         lastItem = Mathf.Infinity;
     }
 
-    //calculates the distance of one object from another
+    /// <summary>
+    /// calculates the distance of one object from another
+    /// </summary>
+    /// <param name="distance"></param>
+    /// <returns></returns>
     public float CalculateDistance(Vector3 distance)
     {
         float pythagDistance;
@@ -96,7 +116,9 @@ public class Item_Interaction : MonoBehaviour
         return pythagDistance;
     }
 
-    //once the closest item is found this function determines whether the interactable is item or enviornment
+    /// <summary>
+    /// once the closest item is found this function determines whether the interactable is item or enviornment
+    /// </summary>
     public void InteractableIdentification()
     {
         Interaction_Identification Interactable = closetItem.GetComponent<Interaction_Identification>();

@@ -22,6 +22,9 @@ public class Room_Script : MonoBehaviour
         PlayerTracking();
     }
 
+    /// <summary>
+    /// Tracks the player through the map and sets their location depending on if the plaer is in the room
+    /// </summary>
     public void PlayerTracking()
     {
         Collider2D[] PlayersInRoom = Physics2D.OverlapAreaAll(RoomPointA.position,RoomPointB.position);
@@ -37,6 +40,9 @@ public class Room_Script : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Draws the room depending on where the corners of the room are
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         if (RoomPoint == null)
@@ -46,6 +52,10 @@ public class Room_Script : MonoBehaviour
         Gizmos.DrawWireCube(center, area);
     }
 
+    /// <summary>
+    /// Calculates where the center of the rectangle is
+    /// </summary>
+    /// <returns></returns>
     private Vector2 CenterOfRectangle()
     {
         float width = RoomPointB.position.x - RoomPointA.position.x;
@@ -56,6 +66,10 @@ public class Room_Script : MonoBehaviour
         return centerPoint;
     }
 
+    /// <summary>
+    /// Calculates what the size of the room is
+    /// </summary>
+    /// <returns></returns>
     private Vector2 AreaOfRectangle()
     {
         float width = RoomPointB.position.x - RoomPointA.position.x;

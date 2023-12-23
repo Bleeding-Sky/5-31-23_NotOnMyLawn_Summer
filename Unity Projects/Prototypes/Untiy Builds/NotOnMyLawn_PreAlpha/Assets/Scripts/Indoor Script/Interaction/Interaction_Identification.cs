@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Interaction_Identification : MonoBehaviour
 {
+    /* 
+     * This script will be attached to every type of 
+     * enviornment and or object to determine what type
+     * of interaction the player will have with the object
+     */
     [Header("Interaction Type")]
     public bool isItem;
     public bool isEnviormentObject;

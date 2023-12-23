@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEditor;
 public class IndoorZombie_PlayerDetection : MonoBehaviour
 {
+    /*
+     * Experimental script that provides some type of field of
+     * view so that it can see the player and other objects
+     */
 
     public float zombieViewRadius;
     [Range(0,360)]

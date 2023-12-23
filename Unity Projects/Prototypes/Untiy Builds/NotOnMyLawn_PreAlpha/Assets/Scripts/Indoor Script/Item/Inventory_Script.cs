@@ -17,6 +17,14 @@ public class Inventory_Script : MonoBehaviour
     public GameObject handInv;
     public int numberPressed;
     public int lastInventorySlotChosen;
+
+    /*
+    * The item list essentially acts as the abstract version of 
+    * the inventory. The order and way that the inventory looks in 
+    * this list will be how it is in the visual one once that gets
+    * integrated
+    */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +44,10 @@ public class Inventory_Script : MonoBehaviour
         }
     }
 
-    //Stores the item in an item list
+    /// <summary>
+    /// Stores the item in the item list
+    /// </summary>
+    /// <param name="InteractedItem"></param>
     public void StoreItems(GameObject InteractedItem)
     {
         //Goes through each item in the list and looks for the nearest empty slot
@@ -58,7 +69,10 @@ public class Inventory_Script : MonoBehaviour
         maxInventorySize = currentMaxInventorySize;
     }
 
-    //gets the players input from the number keys and uses that to choose an item in the inventory
+    /// <summary>
+    /// Gets the players input from the number keys and uses that to choose an item in the inventory
+    /// </summary>
+    /// <param name="numberKeyPressed"></param>
     public void ChosenInventorySlot(int numberKeyPressed)
     {
         int inventorySlot = numberKeyPressed - 1;
@@ -91,7 +105,11 @@ public class Inventory_Script : MonoBehaviour
         lastInventorySlotChosen = inventorySlot;
     }
 
-    //function that gets the inputted number and returns it to the numberPressed variable to select the inventory slot
+    /// <summary>
+    /// function that gets the inputted number and returns it 
+    /// to the numberPressed variable to select the inventory slot
+    /// </summary>
+    /// <returns></returns>
     public int GetPressedNumber()
     {
         for (int number = 0; number <= 9; number++)

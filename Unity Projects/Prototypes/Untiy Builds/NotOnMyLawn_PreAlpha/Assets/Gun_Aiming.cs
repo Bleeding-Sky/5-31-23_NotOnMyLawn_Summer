@@ -21,6 +21,12 @@ public class Gun_Aiming : MonoBehaviour
     public float circleGrowthRate;
 
     public Vector3 firingPos;
+
+    /*
+     * NOT USED CURRENTLY BUT IS BEING KEPT SO
+     * THAT WE CAN REINTEGRATED IF WE WANT THE AIMING FIELD AGAIN
+     */
+
     // Start is called before the first frame update
     void Start()
     {

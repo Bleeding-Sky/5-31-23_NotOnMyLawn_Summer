@@ -33,7 +33,10 @@ public class DragabbleTrap : MonoBehaviour, IBeginDragHandler,
         
     }
 
-    //Event system that detects when the item is beggining to be dragged
+    /// <summary>
+    /// Event system that detects when the item is beggining to be dragged
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
         //This sets the objects parent to a variable to reset it later 
@@ -44,7 +47,10 @@ public class DragabbleTrap : MonoBehaviour, IBeginDragHandler,
         transform.SetAsLastSibling();
     }
 
-    //Event system that detects whether the object is being dragged
+    /// <summary>
+    /// Event system that detects whether the object is being dragged
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
         //takes the mouse's position on screen and sets the
@@ -57,7 +63,10 @@ public class DragabbleTrap : MonoBehaviour, IBeginDragHandler,
         worldPosition.z = 0;
     }
 
-    //Event system that detects when the player lets go of the trap
+    /// <summary>
+    /// Event system that detects when the player lets go of the trap
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
         if (trapPlacability.placable)

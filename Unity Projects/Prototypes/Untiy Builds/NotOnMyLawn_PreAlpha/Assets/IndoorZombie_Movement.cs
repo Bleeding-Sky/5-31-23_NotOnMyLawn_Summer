@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class IndoorZombie_Movement : MonoBehaviour
 {
+    [Header("CONFIG")]
+    public int strength;
+    public int coolDown;
+    public float windUp;
+    public float normalZombieSpeed;
+    public float attackArea;
+    public LayerMask Player;
+
+    [Header("DEBUG")]
     public Player_PositionTracker playerPosition;
     public IndoorZombie_States zombieStates;
     public Transform attackPoint;
     public Vector3 zombiePosition;
-    public float normalZombieSpeed;
-    public float attackArea;
-    public LayerMask Player;
     public Collider2D[] players;
-    public int strength;
-    public int coolDown;
-    public float windUp;
     public bool recharging;
     public bool playerInRange;
     // Update is called once per frame
@@ -37,6 +40,9 @@ public class IndoorZombie_Movement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chooses the direction is facing based on the player's relative position to the zombie
+    /// </summary>
     private void FacingDirection()
     {
         float playerDirection = playerPosition.playerPosition.x - zombiePosition.x;
@@ -50,12 +56,18 @@ public class IndoorZombie_Movement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chases the player through zombie speed and player position
+    /// </summary>
     private void ChasingPlayer()
     {
         zombieStates.isChasing = true;
         transform.position = Vector3.MoveTowards(transform.position, playerPosition.playerPosition, normalZombieSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Draws the attack area so that it is visible
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
@@ -63,6 +75,10 @@ public class IndoorZombie_Movement : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackArea);
     }
+
+    /// <summary>
+    /// Starts the Attack 
+    /// </summary>
     public void InitiateAttack()
     {
         foreach(Collider2D player in players)
@@ -71,6 +87,11 @@ public class IndoorZombie_Movement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Attacks once the wind up is over
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
     public IEnumerator Attack(Collider2D player)
     {
         if (playerInRange == true)
@@ -84,6 +105,11 @@ public class IndoorZombie_Movement : MonoBehaviour
         recharging = false;  
     }
 
+    /// <summary>
+    /// Winds up for an attack
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
     public IEnumerator WindUp(Collider2D player)
     {
         recharging = true;
@@ -94,6 +120,9 @@ public class IndoorZombie_Movement : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Determines what the zombie is currently doing
+    /// </summary>
     public void DetermineState()
     {
         IndoorZombie_States state = GetComponent<IndoorZombie_States>();
@@ -114,6 +143,9 @@ public class IndoorZombie_Movement : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Detects if the player is in the attack range of the player
+    /// </summary>
     public void DetectPlayer()
     {
         players = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackArea, Player);

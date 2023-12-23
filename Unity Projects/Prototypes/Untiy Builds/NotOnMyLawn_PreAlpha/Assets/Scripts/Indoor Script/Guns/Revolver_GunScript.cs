@@ -49,20 +49,33 @@ public class Revolver_GunScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shoots a bullet from the gun
+    /// </summary>
     public void Shoot()
     {
+        //Disables the firing for the gun
         canFire = false;
         Bullet_Script bulletDirection = bullet.GetComponent<Bullet_Script>();
         //Gun_Aiming aiming = aimingPoint.GetComponent<Gun_Aiming>();
-        
+
+        //Calculates the direction in which the mouse cursor is facing
         Vector3 circlePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         circlePos.z = 0;
+
+        //Sets the bullets trajectory with the direction  
         bulletDirection.firingPos = circlePos;
         bulletDirection.bulletDirectionPosition = armPosition;
+
+        //Creates bullet and updates the amount
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
         bulletAmount -= 1;
+
     }
 
+    /// <summary>
+    /// Transforms the gun object's rotation to face the mouse and arm
+    /// </summary>
     public void FaceMouse()
     {
         Arm_Rotation zRotation = GunRotation.GetComponent<Arm_Rotation>();
@@ -70,6 +83,9 @@ public class Revolver_GunScript : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0,0,rotZ-90);
     }
 
+    /// <summary>
+    /// Calculates the direection and poition of the the hand object
+    /// </summary>
     public void CalculateDirection()
     {
         transform.position = handPosition.position;
@@ -77,6 +93,10 @@ public class Revolver_GunScript : MonoBehaviour
         FaceMouse();
     }
 
+    /// <summary>
+    /// Sets the Fire rate of the object
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DetermineFireRate()
     {
         Gun_Information gunSpecs = GetComponent<Gun_Information>();
@@ -86,12 +106,19 @@ public class Revolver_GunScript : MonoBehaviour
         canFire = true;
     }
 
+    /// <summary>
+    /// NOT currently being used but kept in case we wanna incorperate this in any way.
+    /// </summary>
     public void Recoil()
     {
         Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
         playerRB.AddForce(transform.right * recoil);
     }
-    
+
+    /// <summary>
+    /// Updates the gun objects with it's gun information objects
+    /// so that the gun is always oriented correctly
+    /// </summary>
     public void SetGunObjects()
     {
         Gun_Information gunSpecs = GetComponent<Gun_Information>();
@@ -102,6 +129,9 @@ public class Revolver_GunScript : MonoBehaviour
         aimingPoint = gunSpecs.AimingField;
     }
 
+    /// <summary>
+    /// Checks if the gun can be fired through the cooldown and the bullet amount
+    /// </summary>
     public void CheckIfFireable()
     {
         Gun_Information gunSpecs = GetComponent<Gun_Information>();

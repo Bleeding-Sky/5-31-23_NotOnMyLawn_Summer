@@ -11,14 +11,11 @@ public class Arm_Rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Determines the direction the arm will follow the mouse at
+        //Determines the direction the arm will follow the mouse 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         itemRotation = rotZ;
         transform.localRotation = Quaternion.Euler(0, 0, rotZ);
-        
-
-
     }
 }
