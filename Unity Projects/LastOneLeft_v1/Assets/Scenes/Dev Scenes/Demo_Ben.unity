@@ -1669,7 +1669,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1834561921
+--- !u!1001 &3824972008153796935
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1736,4 +1736,4 @@ SceneRoots:
   - {fileID: 1706418162}
   - {fileID: 1279075048}
   - {fileID: 179621272}
-  - {fileID: 1834561921}
+  - {fileID: 3824972008153796935}
