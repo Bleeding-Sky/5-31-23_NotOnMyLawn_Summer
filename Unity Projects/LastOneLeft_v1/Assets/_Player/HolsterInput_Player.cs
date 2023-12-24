@@ -16,14 +16,23 @@ public class HolsterInput_Player : MonoBehaviour
             //holster gun if drawn
             if (playerStates.gunIsDrawn)
             {
-                playerStates.gunIsDrawn = false;
+                HolsterGun();
             }
             //draw gun if not drawn
             else if (!playerStates.gunIsDrawn)
             {
-                playerStates.gunIsDrawn = true;
+                DrawGun();
             }
         }
     }
 
+    private void HolsterGun()
+    {
+        playerStates.gunIsDrawn = false;
+    }
+
+    private void DrawGun()
+    {
+        playerStates.gunIsDrawn = true;
+    }
 }
