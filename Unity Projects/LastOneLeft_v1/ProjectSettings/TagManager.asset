@@ -8,6 +8,8 @@ TagManager:
   - Window Anchor
   - Gun
   - Bullet
+  - Platform
+  - Zombie
   layers:
   - Default
   - TransparentFX

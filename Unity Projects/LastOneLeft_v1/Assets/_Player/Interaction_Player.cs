@@ -39,6 +39,7 @@ public class Interaction_Player : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("ITem Hit");
         //once the interactable is in range it adds it to the list
         if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
@@ -128,11 +129,11 @@ public class Interaction_Player : MonoBehaviour
             {
                 ItemInteraction_Player itemAssignment = GetComponent<ItemInteraction_Player>();
                 Interaction_Player ItemInteraction = GetComponent<Interaction_Player>();
-               // Inventory_Script inventoryStorage = Inventory.GetComponent<Inventory_Script>();
+                Inventory_Player inventoryStorage = Inventory.GetComponent<Inventory_Player>();
 
-                //inventoryStorage.itemAssignment = itemAssignment;
-                //inventoryStorage.ItemInteractionScript = ItemInteraction;
-                //inventoryStorage.StoreItems(closetItem);
+                inventoryStorage.itemAssignment = itemAssignment;
+                inventoryStorage.ItemInteractionScript = ItemInteraction;
+                inventoryStorage.StoreItems(closetItem);
             }
         }
         //if the interaction is an envionrmental object it interacts with it

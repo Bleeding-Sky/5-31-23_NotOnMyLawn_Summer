@@ -33,7 +33,18 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     /// <param name="Enviornment"></param>
     private void BoardPileInteraction(GameObject Enviornment)
     {
-        
+        BoardPile_Environment boardPile = Enviornment.GetComponent<BoardPile_Environment>();
+
+        //If Presses W then Picks up board
+        if (Input.GetKey(KeyCode.W))
+        {
+            boardPile.PickUpBoard();
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        //resets if the key is let go
+        {
+            boardPile.ResetBoardPickUp();
+        }
     }
 
     /// <summary>
@@ -42,7 +53,40 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     /// <param name="Enviornment"></param>
     private void WindowInteraction(GameObject Enviornment)
     {
-        
+        WindowInteraction_Enviornment window = Enviornment.GetComponent<WindowInteraction_Enviornment>();
+        WindowBarricade_Enviornment windowRebuild = Enviornment.GetComponent<WindowBarricade_Enviornment>();
+        HandInventory_Player objectInHands = handInv.GetComponent<HandInventory_Player>();
+        /*
+         * Two different interactions based on what key the 
+         * player presses. Either the player looks through the window 
+         * or the player rebuilds the window.
+         */
+
+        //Look through window interaction
+        if (Input.GetKeyDown(KeyCode.E) && !window.Interacting)
+        {
+            DisablePlayer(objectInHands.objectInHand);
+            window.switchToOutside();
+            window.Interacting = true;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && window.Interacting)
+        {
+            EnablePlayer(objectInHands.objectInHand);
+            window.switchToInside();
+            window.Interacting = false;
+
+        }
+
+        //Rebuild window interaction
+        if (Input.GetKey(KeyCode.W) && windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory && !window.Interacting)
+        {
+            windowRebuild.AddBoard();
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            windowRebuild.timer = 0;
+        }
     }
 
     /// <summary>
