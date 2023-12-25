@@ -42,29 +42,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     /// <param name="Enviornment"></param>
     private void WindowInteraction(GameObject Enviornment)
     {
-        WindowInteraction_Enviornment window = Enviornment.GetComponent<WindowInteraction_Enviornment>();
-        WindowBarricade_Enviornment windowRebuild = Enviornment.GetComponent<WindowBarricade_Enviornment>();
-        HandInventory_Player objectInHands = handInv.GetComponent<HandInventory_Player>();
-        /*
-         * Two different interactions based on what key the 
-         * player presses. Either the player looks through the window 
-         * or the player rebuilds the window.
-         */
-
-        //Look through window interaction
-        if (Input.GetKeyDown(KeyCode.E) && !window.Interacting)
-        {
-            DisablePlayer(objectInHands.objectInHand);
-            window.switchToOutside();
-            window.Interacting = true;
-
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && window.Interacting)
-        {
-            EnablePlayer(objectInHands.objectInHand);
-            window.switchToInside();
-            window.Interacting = false;
-        }
+        
     }
 
     /// <summary>
