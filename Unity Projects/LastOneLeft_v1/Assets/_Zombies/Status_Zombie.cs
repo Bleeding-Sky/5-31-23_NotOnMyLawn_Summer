@@ -10,6 +10,8 @@ public class Status_Zombie : MonoBehaviour
     public bool isStumbling = false;
     public bool isStunned = false;
     public bool isCrawling = false;
+    public bool isAttacking = false;
+    public bool isChasing = false;
 
 
     // Start is called before the first frame update
@@ -72,6 +74,39 @@ public class Status_Zombie : MonoBehaviour
     {
         isCrawling = false;
     }
+
+    /// <summary>
+    /// applies the attack status
+    /// </summary>
+    public void DoAttack()
+    {
+        isAttacking = true;
+    }
+
+    /// <summary>
+    /// removes the attack status
+    /// </summary>
+    public void StopAttack()
+    {
+        isAttacking = false;
+    }
+
+    /// <summary>
+    /// applies the chase status
+    /// </summary>
+    public void DoChase()
+    {
+        isChasing = true;
+    }
+
+    /// <summary>
+    /// removes the chase status
+    /// </summary>
+    public void StopChase()
+    {
+        isChasing = false;
+    }
+
     #endregion
 
 }
