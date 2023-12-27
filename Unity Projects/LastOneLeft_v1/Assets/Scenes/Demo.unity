@@ -5246,6 +5246,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4600918533373064548, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
+      propertyPath: m_Name
+      value: Sprite
+      objectReference: {fileID: 0}
     - target: {fileID: 6194747334794827082, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
       propertyPath: overheadAnchorObject
       value: 
