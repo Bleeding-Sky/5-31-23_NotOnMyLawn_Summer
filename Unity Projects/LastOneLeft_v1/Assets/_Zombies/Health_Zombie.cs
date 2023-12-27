@@ -43,5 +43,35 @@ public class Health_Zombie : MonoBehaviour
         legDmgMultiplier = dataSO.legDmgMultiplier;
     }
 
+    //limb and overall damage
+    #region damage methods
+    public void Headshot(float dmgVal)
+    {
+        headHealth -= dmgVal;
+        DamageHealth(dmgVal * headDmgMultiplier);
+    }
+
+    public void Bodyshot(float dmgVal)
+    {
+        bodyHealth -= dmgVal;
+        DamageHealth(dmgVal * bodyDmgMultiplier);
+    }
+
+    public void Legshot(float dmgVal)
+    {
+        legHealth -= dmgVal;
+        DamageHealth(dmgVal * legDmgMultiplier);
+    }
+
+    /// <summary>
+    /// damages the zombie for a specified float value
+    /// </summary>
+    public void DamageHealth(float dmgVal)
+    {
+        health -= dmgVal;
+        Debug.Log($"zombie damaged for {dmgVal} damage");
+    }
+
+    #endregion
 
 }
