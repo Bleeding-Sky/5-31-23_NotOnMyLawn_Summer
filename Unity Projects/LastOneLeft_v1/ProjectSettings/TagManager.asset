@@ -40,9 +40,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Indoor
+  - Window
+  - Overhead
   m_SortingLayers:
   - name: Default
     uniqueID: 0

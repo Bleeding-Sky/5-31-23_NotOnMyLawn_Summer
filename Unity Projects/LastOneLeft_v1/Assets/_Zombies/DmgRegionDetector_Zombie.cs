@@ -13,7 +13,12 @@ public class DmgRegionDetector_Zombie : MonoBehaviour
     private void Start()
     {
         BoxCollider2D myCollider = GetComponent<BoxCollider2D>();
-        myCollider.isTrigger = true;
+
+        //ensure collider is a trigger
+        if (!myCollider.isTrigger)
+        {
+            myCollider.isTrigger = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
