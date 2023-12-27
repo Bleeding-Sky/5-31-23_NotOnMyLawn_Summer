@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ZombieData")]
 public class Data_Zombie : ScriptableObject
 {
-
+    [Header("CONFIG")]
     public float zombieMaxHealth;
 
     public float headMaxHealth;

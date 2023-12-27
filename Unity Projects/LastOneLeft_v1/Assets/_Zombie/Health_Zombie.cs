@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Health_Zombie : MonoBehaviour
 {
+    [Header("CONFIG")]
+    //data scriptable object
+    public Data_Zombie dataSO;
 
+    [Header("DEBUG")]
     //health trackers
     public float health;
     public float headHealth;
@@ -16,8 +20,7 @@ public class Health_Zombie : MonoBehaviour
     public float bodyDmgMultiplier;
     public float legDmgMultiplier;
 
-    //data scriptable object
-    public Data_Zombie dataSO;
+    
 
     // Start is called before the first frame update
     void Start()

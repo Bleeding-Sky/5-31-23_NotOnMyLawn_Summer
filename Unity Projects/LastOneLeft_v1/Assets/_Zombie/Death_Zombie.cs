@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Death_Zombie : MonoBehaviour
 {
-
+    [Header("DEBUG")]
     //used for retrieving current health value from health script
     public Health_Zombie healthScript;
 

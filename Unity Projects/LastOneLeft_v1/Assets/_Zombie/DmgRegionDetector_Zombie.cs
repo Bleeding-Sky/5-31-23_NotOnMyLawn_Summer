@@ -5,8 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class DmgRegionDetector_Zombie : MonoBehaviour
 {
+    //region enum for config
     public enum DmgRegionEnum { Head, Body, Legs };
 
+    [Header("CONFIG")]
     public DmgRegionEnum Region;
     public Health_Zombie zmbHealthScript;
 

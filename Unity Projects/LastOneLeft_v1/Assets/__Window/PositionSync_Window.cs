@@ -9,10 +9,13 @@ public class PositionSync_Window : MonoBehaviour
 {
 
     [Header("CONFIG")]
+    public GameObject spriteChildObject;
+
+    [Header("DEBUG")] //can be configured, but is typically set
+                      //automatically on creation of window object
     public ObjectTracker_Overhead overheadTrackerScript;
     public GameObject windowAnchorObject;
 
-    public GameObject spriteChildObject;
 
     // Start is called before the first frame update
     void Start()

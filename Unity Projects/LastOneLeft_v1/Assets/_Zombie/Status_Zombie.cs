@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Status_Zombie : MonoBehaviour
 {
-
+    [Header("DEBUG")]
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
     public bool isStumbling = false;

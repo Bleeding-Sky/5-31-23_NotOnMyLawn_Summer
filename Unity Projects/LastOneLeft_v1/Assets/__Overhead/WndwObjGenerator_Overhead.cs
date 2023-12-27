@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class WndwObjGenerator_Overhead : MonoBehaviour
 {
-
-    public List<ObjectTracker_Overhead> overheadObjectsList = new List<ObjectTracker_Overhead>();
+    [Header("CONFIG")]
     public GameObject windowAnchorObject;
+
+    [Header("DEBUG")]
+    public List<ObjectTracker_Overhead> overheadObjectsList = new List<ObjectTracker_Overhead>();
+    
 
     // Start is called before the first frame update
     void Start()
