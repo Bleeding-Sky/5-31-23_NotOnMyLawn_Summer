@@ -79,6 +79,7 @@ public class Revolver_Item : MonoBehaviour
     {
         ArmRotation_Player zRotation = GunRotation.GetComponent<ArmRotation_Player>();
         float rotZ = zRotation.itemRotation;
+        Debug.Log(-(rotZ-90));
         transform.localRotation = Quaternion.Euler(0, 0, rotZ - 90);
     }
 

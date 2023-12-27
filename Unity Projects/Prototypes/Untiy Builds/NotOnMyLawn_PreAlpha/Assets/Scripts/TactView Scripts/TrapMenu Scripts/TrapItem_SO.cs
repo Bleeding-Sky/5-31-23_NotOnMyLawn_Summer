@@ -6,6 +6,5 @@ using UnityEngine;
 public class TrapItem_SO : ScriptableObject
 {
     public GameObject Trap;
-
     public int TrapCost;
 }
