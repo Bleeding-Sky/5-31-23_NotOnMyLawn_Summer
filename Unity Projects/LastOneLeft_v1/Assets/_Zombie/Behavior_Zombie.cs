@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Behavior_Zombies : MonoBehaviour
+public class Behavior_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
     public int strength;
