@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 8936502522062321887}
-  firingPos: {x: 0, y: 0, z: 0}
+  firingPos: {x: -1.3043243, y: 1.5542693, z: 0}
   bulletStartPosition: {x: 0, y: 0, z: 0}
-  bulletDirectionPosition: {x: 0, y: 0, z: 0}
+  bulletDirectionPosition: {x: 4.0659566, y: 1.1199863, z: 0.1381857}
   bulletSpeed: 130

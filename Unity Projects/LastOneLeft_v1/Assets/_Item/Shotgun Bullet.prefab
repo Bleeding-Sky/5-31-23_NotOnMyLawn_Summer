@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6534684069453831091}
   - component: {fileID: 7285229500812259279}
   - component: {fileID: 8319180066746718575}
+  - component: {fileID: 6975846595836323195}
   m_Layer: 7
   m_Name: Shotgun Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,6 +166,20 @@ MonoBehaviour:
   firingPos: {x: 0, y: 0, z: 0}
   bulletStartPosition: {x: 0, y: 0, z: 0}
   bulletDirectionPosition: {x: 0, y: 0, z: 0}
-  xDirection: 0
-  yDirection: 0
-  bulletSpeed: 1
+  xDirection: -0.95105654
+  yDirection: 0.309017
+  bulletSpeed: 19.09
+--- !u!114 &6975846595836323195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996389672159248934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bfe95a698031c49bd0f4a3a79eb80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDataSO: {fileID: 11400000, guid: ca4d52dd6a5e3b64c8a99d77c513946b, type: 2}
+  damage: 0

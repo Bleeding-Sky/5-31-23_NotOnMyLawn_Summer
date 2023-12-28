@@ -46,27 +46,41 @@ public class Shotgun_Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         SetGunObjects();
+        if (pickedUp)
+        {
+            CalculateDirection();
+            CalculateAngles();
+            CheckIfFireable();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
+            {
+                Shoot();
+                StartCoroutine(DetermineFireRate());
+            }
+        }
+    }
+    /// <summary>
+    /// Calculates the angle that the bullet will take and that the cone will move in
+    /// </summary>
+    public void CalculateAngles()
+    {
         //Determines the direction the arm will follow the mouse 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
         rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         coneDirection = -(rotZ - 90);
-        Shoot();
-
     }
+
 
     public void Shoot()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
+            canFire = false;
             rand = new System.Random();
             float angleDifference = shotSpread / 2;
             float angle1 = rotZ - angleDifference;
             float angle2 = rotZ + angleDifference;
             float decidedAngle;
-
+            
             for (int i = 0; i < 5; i++)
             {
                 decidedAngle = rand.Next((int)angle1, (int)angle2);
@@ -81,9 +95,26 @@ public class Shotgun_Item : MonoBehaviour
                 Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
                 bulletAmount -= 1;
             }
-            
-            
-        }
+    }
+
+    /// <summary>
+    /// Transforms the gun object's rotation to face the mouse and arm
+    /// </summary>
+    public void FaceMouse()
+    {
+        ArmRotation_Player zRotation = GunRotation.GetComponent<ArmRotation_Player>();
+        float rotZ = zRotation.itemRotation;
+        transform.localRotation = Quaternion.Euler(0, 0, rotZ - 90);
+    }
+
+    /// <summary>
+    /// Calculates the direection and poition of the the hand object
+    /// </summary>
+    public void CalculateDirection()
+    {
+        transform.position = handPosition.position;
+        armPosition = GunRotation.transform.position;
+        FaceMouse();
     }
 
     /// <summary>
@@ -98,6 +129,28 @@ public class Shotgun_Item : MonoBehaviour
         player = gunSpecs.player;
         pickedUp = gunSpecs.isPickedUp;
         aimingPoint = gunSpecs.AimingField;
+    }
+
+    /// <summary>
+    /// Sets the Fire rate of the object
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator DetermineFireRate()
+    {
+        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
+        gunSpecs.coolingDown = true;
+        yield return new WaitForSeconds(firingRate);
+        gunSpecs.coolingDown = false;
+        canFire = true;
+    }
+
+    public void CheckIfFireable()
+    {
+        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
+        if (gunSpecs.coolingDown != true && bulletAmount > 0)
+        {
+            canFire = true;
+        }
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
