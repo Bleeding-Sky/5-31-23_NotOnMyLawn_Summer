@@ -66,7 +66,7 @@ public class Revolver_Item : MonoBehaviour
         //Sets the bullets trajectory with the direction  
         bulletDirection.firingPos = circlePos;
         bulletDirection.bulletDirectionPosition = armPosition;
-
+        Debug.Log(armPosition);
         //Creates bullet and updates the amount
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
         bulletAmount -= 1;
@@ -79,7 +79,6 @@ public class Revolver_Item : MonoBehaviour
     {
         ArmRotation_Player zRotation = GunRotation.GetComponent<ArmRotation_Player>();
         float rotZ = zRotation.itemRotation;
-        Debug.Log(-(rotZ-90));
         transform.localRotation = Quaternion.Euler(0, 0, rotZ - 90);
     }
 

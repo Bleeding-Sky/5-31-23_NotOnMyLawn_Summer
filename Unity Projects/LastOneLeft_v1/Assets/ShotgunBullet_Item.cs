@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Item : MonoBehaviour
+public class ShotgunBullet_Item : MonoBehaviour
 {
     public Rigidbody2D bulletRB;
 
     public Vector3 firingPos;
     public Vector3 bulletStartPosition;
     public Vector3 bulletDirectionPosition;
+    public float xDirection;
+    public float yDirection;
 
     public float bulletSpeed;
     // Start is called before the first frame update
@@ -18,7 +20,7 @@ public class Bullet_Item : MonoBehaviour
         bulletStartPosition = transform.position;
         Vector3 direction = firingPos - bulletDirectionPosition;
         Debug.Log(new Vector3(direction.x, direction.y, 0).normalized);
-        bulletRB.velocity = new Vector3(direction.x, direction.y, 0).normalized * bulletSpeed;
+        bulletRB.velocity = new Vector3(xDirection, yDirection, 0).normalized * bulletSpeed;
 
     }
 
