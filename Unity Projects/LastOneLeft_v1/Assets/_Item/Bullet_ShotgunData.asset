@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc40c98534047e40a9d17b9bb7b0899, type: 3}
   m_Name: Bullet_ShotgunData
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 2

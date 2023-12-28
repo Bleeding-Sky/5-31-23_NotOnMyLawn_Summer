@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun_Item : MonoBehaviour
+public class Rifle_Item : MonoBehaviour
 {
     public System.Random rand;
     public float rotZ;
@@ -52,7 +52,7 @@ public class Shotgun_Item : MonoBehaviour
             CalculateDirection();
             CalculateAngles();
             CheckIfFireable();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
+            if (Input.GetKey(KeyCode.Mouse0) && canFire)
             {
                 Shoot();
                 StartCoroutine(DetermineFireRate());
@@ -66,7 +66,7 @@ public class Shotgun_Item : MonoBehaviour
     {
         //Determines the direction the arm will follow the mouse 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mousePos - transform.position;
+        Vector2 direction = mousePos - armPosition;
         rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         coneDirection = -(rotZ - 90);
     }
@@ -81,20 +81,17 @@ public class Shotgun_Item : MonoBehaviour
         float angle2 = rotZ + angleDifference;
         float decidedAngle;
 
-        for (int i = 0; i < 5; i++)
-        {
-            decidedAngle = rand.Next((int)angle1, (int)angle2);
-            xDirection = Math.Cos((Math.PI / 180) * decidedAngle);
-            yDirection = Math.Sin((Math.PI / 180) * decidedAngle);
-            ShotgunBullet_Item bulletDirection = bullet.GetComponent<ShotgunBullet_Item>();
+        decidedAngle = rand.Next((int)angle1, (int)angle2);
+        xDirection = Math.Cos((Math.PI / 180) * decidedAngle);
+        yDirection = Math.Sin((Math.PI / 180) * decidedAngle);
+        ShotgunBullet_Item bulletDirection = bullet.GetComponent<ShotgunBullet_Item>();
 
-            bulletDirection.xDirection = (float)xDirection;
-            bulletDirection.yDirection = (float)yDirection;
+        bulletDirection.xDirection = (float)xDirection;
+        bulletDirection.yDirection = (float)yDirection;
 
-            //Creates bullet and updates the amount
-            Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-            bulletAmount -= 1;
-        }
+        //Creates bullet and updates the amount
+        Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
+        bulletAmount -= 1;
 
     }
 
@@ -163,5 +160,4 @@ public class Shotgun_Item : MonoBehaviour
 
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
     }
-    
 }
