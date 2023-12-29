@@ -6,6 +6,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
 {
     [Header("CONFIG")]
     public GameObject windowAnchorObject;
+    public GameObject windowViewParentObject;
 
     [Header("DEBUG")]
     public List<ObjectTracker_Overhead> overheadObjectsList = new List<ObjectTracker_Overhead>();
@@ -56,15 +57,28 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     /// <param name="overheadTrackerScript"></param>
     public void createWindowviewObject(ObjectTracker_Overhead overheadTrackerScript)
     {
+        GameObject parentObject;
+        //if its a zombie, make it a child of its master obj.
+        if (overheadTrackerScript.isZombie)
+        {
+            parentObject = overheadTrackerScript.ZmbMasterParentObj;
+        }
+        //if its not a zombie, make it a child of the window view obj
+        else
+        {
+            parentObject = windowViewParentObject;
+        }
 
         //instantiate new object in the window view and save its tracker script
-        GameObject wndwObject = Instantiate(overheadTrackerScript.windowViewPrefab, new Vector3(0, -50, 0), Quaternion.identity);
+        GameObject wndwObject = Instantiate(overheadTrackerScript.windowViewPrefab, parentObject.transform);
         PositionSync_Window wndwTrackerScript = wndwObject.GetComponent<PositionSync_Window>();
 
         wndwObject.transform.position = new Vector3(0, CalculateYSpawnOffset(wndwTrackerScript), 0);
 
         //configure the tracker script with the tacview object's info
         wndwTrackerScript.overheadTrackerScript = overheadTrackerScript;
+
+        
 
 
     }

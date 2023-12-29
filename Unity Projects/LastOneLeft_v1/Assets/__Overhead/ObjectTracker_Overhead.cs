@@ -13,6 +13,9 @@ public class ObjectTracker_Overhead : MonoBehaviour
 
     //window view prefab of this object for use by window view environment generation script
     public GameObject windowViewPrefab;
+    [Header("CONFIG (Zombie Only)")]
+    public bool isZombie;
+    public GameObject ZmbMasterParentObj;
 
     [Header("DEBUG")]
     public Vector2 overheadAnchorPos;
