@@ -168,7 +168,7 @@ MonoBehaviour:
   bulletDirectionPosition: {x: 0, y: 0, z: 0}
   xDirection: 0.9975641
   yDirection: 0.06975647
-  bulletSpeed: 10
+  bulletSpeed: 180
 --- !u!114 &6975846595836323195
 MonoBehaviour:
   m_ObjectHideFlags: 0
