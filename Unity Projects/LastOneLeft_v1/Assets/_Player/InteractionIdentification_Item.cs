@@ -22,4 +22,5 @@ public class InteractionIdentification_Item : MonoBehaviour
     [Header("Item Type")]
     public bool isGun;
     public bool isBandage;
+    public bool isMeleeWeapon;
 }

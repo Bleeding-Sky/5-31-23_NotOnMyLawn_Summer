@@ -18,9 +18,13 @@ public class ItemInteraction_Player : MonoBehaviour
     {
         InteractionIdentification_Item itemType = item.GetComponent<InteractionIdentification_Item>();
 
-        if (itemType.isGun)
+        if(itemType.isGun)
         {
             PickedUpGun(item);
+        }
+        else if (itemType.isMeleeWeapon)
+        {
+            PickedUpMelee(item);
         }
     }
 
@@ -41,5 +45,19 @@ public class ItemInteraction_Player : MonoBehaviour
         GunInfo.handPos = handPos;
         GunInfo.AimingField = AimingArea;
         gunCollider.enabled = false;
+    }
+
+    public void PickedUpMelee(GameObject melee)
+    {
+        EquippedMelee_Item meleeInfo = melee.GetComponent<EquippedMelee_Item>();
+        BoxCollider2D weaponCollider = melee.GetComponent<BoxCollider2D>();
+
+        //Enables the melee weapons stats
+        meleeInfo.player = player;
+        meleeInfo.handPos = handPos;
+        meleeInfo.rotationAndAimingPoint = armRotationPos;
+        meleeInfo.pickedUp = true;
+
+        weaponCollider.enabled = false;
     }
 }

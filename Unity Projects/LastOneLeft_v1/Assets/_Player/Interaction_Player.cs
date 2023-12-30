@@ -39,7 +39,7 @@ public class Interaction_Player : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("ITem Hit");
+        Debug.Log("Item Hit");
         //once the interactable is in range it adds it to the list
         if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
