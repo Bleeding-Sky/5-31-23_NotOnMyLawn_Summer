@@ -51,9 +51,5 @@ public class Spawner_Zombie : MonoBehaviour
         pathingScript.target = overheadAnchorTransform;
     }
 
-    public void SpawnIndoorZombie()
-    {
-
-    }
 
 }
