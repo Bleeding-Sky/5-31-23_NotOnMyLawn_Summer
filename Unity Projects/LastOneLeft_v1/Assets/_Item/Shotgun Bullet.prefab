@@ -135,7 +135,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -166,8 +166,8 @@ MonoBehaviour:
   firingPos: {x: 0, y: 0, z: 0}
   bulletStartPosition: {x: 0, y: 0, z: 0}
   bulletDirectionPosition: {x: 0, y: 0, z: 0}
-  xDirection: 0.9975641
-  yDirection: 0.06975647
+  xDirection: -0.9998477
+  yDirection: -0.017452406
   bulletSpeed: 180
 --- !u!114 &6975846595836323195
 MonoBehaviour:

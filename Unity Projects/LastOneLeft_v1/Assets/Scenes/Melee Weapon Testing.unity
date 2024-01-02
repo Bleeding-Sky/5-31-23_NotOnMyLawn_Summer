@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemRotation: 0
+  tracker: {fileID: 11400000, guid: 7d509ac04ffcf3a4c9682f0dc1339a34, type: 2}
 --- !u!1 &133002041
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,13 +957,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a239e7a4bc14794b9d3fdaad0ada59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackArea: 1.07
+  attackArea: 1
+  knockback: 10
+  damage: 10
   attackPoint: {fileID: 2106070965}
   enemies: []
   Enemy:
     serializedVersion: 2
     m_Bits: 512
-  bat: {fileID: 0}
+  enemiesInRange: 0
+  tracker: {fileID: 11400000, guid: 7d509ac04ffcf3a4c9682f0dc1339a34, type: 2}
+  enemy: {fileID: 0}
 --- !u!114 &436082636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4155,9 +4160,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 8.22
+  m_AngularDrag: 1
   m_GravityScale: 5.05
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4169,7 +4174,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!114 &1504720370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5517,6 +5522,10 @@ PrefabInstance:
     - target: {fileID: 82496028551284931, guid: 9ae71ddf449856d41b2781b1914056f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305952031587277084, guid: 9ae71ddf449856d41b2781b1914056f3, type: 3}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6572610395511005815, guid: 9ae71ddf449856d41b2781b1914056f3, type: 3}
       propertyPath: m_Name

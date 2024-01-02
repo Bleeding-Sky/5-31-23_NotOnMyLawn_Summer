@@ -6,4 +6,5 @@ using UnityEngine;
 public class PositionTracker_Player : ScriptableObject
 {
     public Vector3 playerPosition;
+    public int playerDirection;
 }
