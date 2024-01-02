@@ -33,7 +33,7 @@ public class Spawner_Zombie : MonoBehaviour
     /// spawns a new zombie master object as a child of the zombies parent object.
     /// adds new child overhead zombie to that zombie master object and configures it
     /// </summary>
-    void SpawnOverheadZmb()
+    public void SpawnOverheadZmb()
     {
         //instantiate master object as child of "zombies" parent object
         GameObject masterObject = Instantiate(testZmbMasterPrefab, this.transform);
@@ -51,7 +51,7 @@ public class Spawner_Zombie : MonoBehaviour
         pathingScript.target = overheadAnchorTransform;
     }
 
-    void SpawnIndoorZombie()
+    public void SpawnIndoorZombie()
     {
 
     }
