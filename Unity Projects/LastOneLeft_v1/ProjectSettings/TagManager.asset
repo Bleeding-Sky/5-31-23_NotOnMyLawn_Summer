@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Platform
   - Zombie
+  - Overhead Window
   layers:
   - Default
   - TransparentFX
