@@ -12,6 +12,7 @@ public class Spawner_Zombie : MonoBehaviour
     public GameObject testZmbOverheadPrefab;
     public GameObject testZmbMasterPrefab;
     public Vector2 spawnPosition;
+    public Transform overheadAnchorTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +31,9 @@ public class Spawner_Zombie : MonoBehaviour
 
     /// <summary>
     /// spawns a new zombie master object as a child of the zombies parent object.
-    /// adds new child overhead zombie to that zombie master object.
+    /// adds new child overhead zombie to that zombie master object and configures it
     /// </summary>
-    void SpawnOverheadZmb()
+    public void SpawnOverheadZmb()
     {
         //instantiate master object as child of "zombies" parent object
         GameObject masterObject = Instantiate(testZmbMasterPrefab, this.transform);
@@ -44,6 +45,11 @@ public class Spawner_Zombie : MonoBehaviour
         newOverheadZmb.transform.position = spawnPosition;
         ObjectTracker_Overhead zmbTrackerScript = newOverheadZmb.GetComponent<ObjectTracker_Overhead>();
         zmbTrackerScript.ZmbMasterParentObj = masterObject;
+
+        //set target for pathfinding
+        OverheadPathing_Zombie pathingScript = newOverheadZmb.GetComponent<OverheadPathing_Zombie>();
+        pathingScript.target = overheadAnchorTransform;
     }
+
 
 }

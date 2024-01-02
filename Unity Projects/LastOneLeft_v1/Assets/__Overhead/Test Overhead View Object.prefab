@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5796898006508182482}
   - component: {fileID: 5250456366583859725}
   - component: {fileID: 6194747334794827082}
+  - component: {fileID: 7831422817150975022}
   m_Layer: 31
   m_Name: Test Overhead View Object
   m_TagString: Untagged
@@ -121,9 +122,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overheadAnchorObject: {fileID: 0}
   windowViewPrefab: {fileID: 2117569241431429427, guid: 151ed4d9f914f6a49a2045432d4c5150, type: 3}
+  isZombie: 0
+  ZmbMasterParentObj: {fileID: 0}
   overheadAnchorPos: {x: 0, y: 0}
   xDisplacementFromAnchor: 0
   distanceFromAnchor: 0
+--- !u!114 &7831422817150975022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819504649797504586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &4600918533373064548
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +154,7 @@ GameObject:
   - component: {fileID: 1303215273113346159}
   - component: {fileID: 2962064079234240644}
   m_Layer: 31
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_FlipX: 0

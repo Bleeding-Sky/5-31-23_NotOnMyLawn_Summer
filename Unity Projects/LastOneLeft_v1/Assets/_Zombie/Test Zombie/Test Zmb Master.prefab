@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6470166366742787441}
   - component: {fileID: 8881376049565037847}
   - component: {fileID: 3029257139352069340}
+  - component: {fileID: -4016313578569193360}
   m_Layer: 0
   m_Name: Test Zmb Master
   m_TagString: Untagged
@@ -84,3 +85,15 @@ MonoBehaviour:
   isCrawling: 0
   isAttacking: 0
   isChasing: 0
+--- !u!114 &-4016313578569193360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304906090293909137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a7727230e788a48b817e691c591907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
