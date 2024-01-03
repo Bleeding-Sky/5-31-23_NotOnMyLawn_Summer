@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Zmb Overhead
       objectReference: {fileID: 0}
+    - target: {fileID: 1819504649797504586, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
+      propertyPath: m_TagString
+      value: Zombie
+      objectReference: {fileID: 0}
     - target: {fileID: 2962064079234240644, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
       propertyPath: m_Size.x
       value: 0.95
@@ -134,9 +138,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1819504649797504586, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1085300702094080365}
-    - targetCorrespondingSourceObject: {fileID: 1819504649797504586, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8974727744292016161}
   m_SourcePrefab: {fileID: 100100000, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
 --- !u!1 &4924695510521249216 stripped
 GameObject:
@@ -231,16 +232,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   myAgent: {fileID: 0}
---- !u!114 &8974727744292016161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4924695510521249216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b93c6f83593d6444b1e5c238f4b3c33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indoorSpawnerScript: {fileID: 0}
