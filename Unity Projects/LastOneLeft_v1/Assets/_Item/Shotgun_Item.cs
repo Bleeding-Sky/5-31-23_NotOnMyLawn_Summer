@@ -66,7 +66,7 @@ public class Shotgun_Item : MonoBehaviour
     {
         //Determines the direction the arm will follow the mouse 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mousePos - transform.position;
+        Vector2 direction = mousePos - armPosition;
         rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         coneDirection = -(rotZ - 90);
     }
@@ -145,6 +145,9 @@ public class Shotgun_Item : MonoBehaviour
         canFire = true;
     }
 
+    /// <summary>
+    /// Checks if the gun is able to fire based on various conditions
+    /// </summary>
     public void CheckIfFireable()
     {
         GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
@@ -154,6 +157,12 @@ public class Shotgun_Item : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// gets the angles of the cone from the original angle
+    /// </summary>
+    /// <param name="angleInDegrees"></param>
+    /// <param name="angleIsGlobal"></param>
+    /// <returns></returns>
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)

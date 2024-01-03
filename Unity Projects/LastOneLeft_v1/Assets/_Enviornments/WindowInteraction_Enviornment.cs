@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class WindowInteraction_Enviornment : MonoBehaviour
 {
     public bool Interacting;
     public bool lookingThroughWindow;
 
-    public GameObject OutsideCam;
-    public GameObject InsideCam;
-
+    public CameraManagement cameraManager;
+    public CameraManagement.Cameras IndoorCamera;
+    public CameraManagement.Cameras WindowView;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +23,7 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     /// </summary>
     public void switchToInside()
     {
-        OutsideCam.SetActive(false);
-        InsideCam.SetActive(true);
+        cameraManager.currentCamera = IndoorCamera;
     }
 
     /// <summary>
@@ -31,8 +31,7 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     /// </summary>
     public void switchToOutside()
     {
-        OutsideCam.SetActive(true);
-        InsideCam.SetActive(false);
+        cameraManager.currentCamera = WindowView;
     }
 
     /// <summary>

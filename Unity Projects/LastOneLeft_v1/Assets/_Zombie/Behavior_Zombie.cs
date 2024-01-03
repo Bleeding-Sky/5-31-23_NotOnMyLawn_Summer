@@ -111,11 +111,8 @@ public class Behavior_Zombie : MonoBehaviour
     public IEnumerator WindUp(Collider2D player)
     {
         recharging = true;
-        Debug.Log("winding up");
         yield return new WaitForSeconds(windUp);
         StartCoroutine(Attack(player));
-        Debug.Log("wound up");
-
     }
 
     /// <summary>

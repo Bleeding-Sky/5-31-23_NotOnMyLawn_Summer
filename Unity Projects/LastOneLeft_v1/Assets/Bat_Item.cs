@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,14 @@ public class Bat_Item : MonoBehaviour
 {
     private EquippedMelee_Item bat;
     private Rigidbody2D enemyRB;
+    private float xDirection;
+    private float yDirection;
 
     [Header("CONFIG")]
     public float attackArea;
     public float knockback;
     public float damage;
+    public float cooldown;
 
     [Header("DEBUG")]
     public Transform attackPoint;
@@ -19,6 +23,7 @@ public class Bat_Item : MonoBehaviour
     public bool enemiesInRange;
     public PositionTracker_Player tracker;
     public Collider2D enemy;
+    public bool recharging;
 
     // Start is called before the first frame update
     void Start()
@@ -30,31 +35,32 @@ public class Bat_Item : MonoBehaviour
     void Update()
     {
         EnemiesInRange();
-
-        //Updates the local scale of the item as the player is holding it
-        if (bat.pickedUp)
-        {
-            transform.localScale = new Vector3(1, 1 * tracker.playerDirection, 1);
-        }
-
         //Attacks if conditions are met
-        if (bat.pickedUp && Input.GetKeyDown(KeyCode.Mouse0) && enemiesInRange)
+        if (bat.pickedUp && Input.GetKeyDown(KeyCode.Mouse0) && enemiesInRange && !recharging)
         {
-            Attack();
+            Vector2 knockbackDirection = bat.KnockbackDirection();
+            Attack(knockbackDirection);
         }
-    }
+    }    
 
     /// <summary>
     /// The player attacks and applies the knockback to the enemy
     /// </summary>
-    public void Attack()
+    public void Attack(Vector2 direction)
     {
-        Debug.Log("Attack");
         enemyRB.velocity = Vector2.zero;
-        enemyRB.velocity = new Vector2(1 * tracker.playerDirection, 1) * knockback;
+        enemyRB.velocity = direction * knockback;
         Health_Zombie enemyHealth = enemy.GetComponent<Health_Zombie>();
         enemyHealth.DamageHealth(damage);
+        StartCoroutine(WeaponCooldown());
 
+    }
+
+    public IEnumerator WeaponCooldown()
+    {
+        recharging = true;
+        yield return new WaitForSeconds(cooldown);
+        recharging = false;
     }
 
     /// <summary>
@@ -82,7 +88,6 @@ public class Bat_Item : MonoBehaviour
             //only gets the first item in the array
             if(count < 1)
             {
-                Debug.Log("Enemy in Range");
                 enemyRB = player.GetComponent<Rigidbody2D>();
                 enemiesInRange = true;
                 enemy = player;
