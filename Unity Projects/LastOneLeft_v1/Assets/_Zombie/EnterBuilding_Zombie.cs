@@ -22,9 +22,15 @@ public class EnterBuilding_Zombie : MonoBehaviour
     {
         //delete all children (other views of the zombie)
         Transform[] outdoorViews = GetComponentsInChildren<Transform>();
+        
         foreach (Transform view in outdoorViews)
         {
-            Destroy(view);
+            //this makes the object NOT delete itself, since
+            //getcomponentsinchildren ALSO gets components in self
+            if (view != transform)
+            {
+                Destroy(view.gameObject);
+            }
         }
 
         //spawn indoor zombie as child of master object

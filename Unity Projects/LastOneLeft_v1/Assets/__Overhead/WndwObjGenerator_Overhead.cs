@@ -7,6 +7,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     [Header("CONFIG")]
     public GameObject windowAnchorObject;
     public GameObject windowViewParentObject;
+    public float floorYValue = 0;
 
     [Header("DEBUG")]
     public List<ObjectTracker_Overhead> overheadObjectsList = new List<ObjectTracker_Overhead>();
@@ -84,7 +85,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     }
 
     /// <summary>
-    /// finds the correct y value to spawn a window object at so that its bottom edge is at y=0
+    /// finds the correct y value to spawn a window object at so that its bottom edge is at floorYValue
     /// </summary>
     /// <param name="wndwObject"></param>
     /// <param name="wndwTrackerScript"></param>
@@ -92,7 +93,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     {
         //find correct y value to spawn object at
         Bounds spriteBounds = wndwTrackerScript.spriteChildObject.GetComponent<BoxCollider2D>().bounds;
-        float spawnY = (spriteBounds.center.y + spriteBounds.extents.y) - spriteBounds.center.y;
+        float spawnY = spriteBounds.extents.y + floorYValue;
         return spawnY;
     }
 

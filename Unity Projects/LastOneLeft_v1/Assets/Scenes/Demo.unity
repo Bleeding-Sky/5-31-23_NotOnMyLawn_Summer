@@ -6291,6 +6291,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1990245667}
     m_Modifications:
+    - target: {fileID: 2697460834471212369, guid: d9002f2d6f0417a44bd2d34420d8d6c4, type: 3}
+      propertyPath: indoorWindowTransform
+      value: 
+      objectReference: {fileID: 1524241573}
     - target: {fileID: 4640871236639188509, guid: d9002f2d6f0417a44bd2d34420d8d6c4, type: 3}
       propertyPath: windowAnchorObject
       value: 

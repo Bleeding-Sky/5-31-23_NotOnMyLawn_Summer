@@ -97,3 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a7727230e788a48b817e691c591907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indoorZmbPrefab: {fileID: 3258556968829016637, guid: 319a4cad37092a64ba267e570677cc10, type: 3}
