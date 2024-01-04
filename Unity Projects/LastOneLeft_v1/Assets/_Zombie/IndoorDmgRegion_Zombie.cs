@@ -10,7 +10,7 @@ public class IndoorDmgRegion_Zombie : MonoBehaviour
 
     [Header("CONFIG")]
     public DmgRegionEnum Region;
-    public Health_Zombie zmbHealthScript;
+    public DmgReporter_Zombie damageReporterScript;
 
     private void Start()
     {
@@ -28,17 +28,7 @@ public class IndoorDmgRegion_Zombie : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             float damageTaken = collision.gameObject.GetComponent<BulletDmg_Item>().damage;
-
-            switch (Region)
-            {
-                case DmgRegionEnum.Head:
-                    zmbHealthScript.Headshot(damageTaken); break;
-                case DmgRegionEnum.Body:
-                    zmbHealthScript.Bodyshot(damageTaken); break;
-                case DmgRegionEnum.Legs:
-                    zmbHealthScript.Legshot(damageTaken); break;
-
-            }
+            damageReporterScript.TakeDamage(damageTaken, Region);
         }
     }
 }
