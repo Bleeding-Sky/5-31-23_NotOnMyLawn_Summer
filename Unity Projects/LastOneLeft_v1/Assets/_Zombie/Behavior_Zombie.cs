@@ -24,17 +24,17 @@ public class Behavior_Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Status_Zombie state = GetComponent<Status_Zombie>();
+        
         zombiePosition = transform.position;
         DetectPlayer();
         DetermineState();
 
-        if (state.isChasing && !recharging)
+        if (zombieStates.isChasing && !recharging)
         {
             ChasingPlayer();
             FacingDirection();
         }
-        else if (state.isAttacking && !recharging)
+        else if (zombieStates.isAttacking && !recharging)
         {
             InitiateAttack();
         }
