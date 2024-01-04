@@ -17,7 +17,9 @@ public class GunInformation_Item : MonoBehaviour
     public Transform handPos;
     public GameObject player;
     public GameObject AimingField;
+    public States_Player playerStates;
 
     [Header("Gun State")]
     public bool isPickedUp;
+    public bool windowMode;
 }

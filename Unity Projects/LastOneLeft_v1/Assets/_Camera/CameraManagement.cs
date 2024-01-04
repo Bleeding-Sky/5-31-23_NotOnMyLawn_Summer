@@ -11,5 +11,7 @@ public class CameraManagement : ScriptableObject
     public enum Cameras { Indoor, Overhead, Window};
     public Cameras currentCamera;
     public bool changingCameras;
-    
+
+   
+
 }

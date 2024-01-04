@@ -9,6 +9,11 @@ public class CameraInitilaizer : MonoBehaviour
     private CameraManagement.Cameras CameraEnum;
     public CinemachineVirtualCamera[] cameras;
     public CinemachineVirtualCamera currentCamera;
+
+    void Start()
+    {
+        CameraEnum = CameraManagement.Cameras.Indoor;
+    }
     // Update is called once per frame
     void Update()
     {

@@ -12,6 +12,7 @@ public class States_Player : ScriptableObject
     //handled by Player_Movement
     public bool isWalking;
     public int faceDirection;
+    public bool lookingThroughWindow;
 
     //handled by Input_Holster
     public bool gunIsDrawn;

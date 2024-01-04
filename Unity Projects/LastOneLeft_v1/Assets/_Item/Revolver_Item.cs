@@ -35,13 +35,15 @@ public class Revolver_Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
+        gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
         SetGunObjects();
         if (pickedUp)
         {
             CalculateDirection();
             CheckIfFireable();
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && !gunSpecs.windowMode)
             {
                 Shoot();
                 StartCoroutine(DetermineFireRate());

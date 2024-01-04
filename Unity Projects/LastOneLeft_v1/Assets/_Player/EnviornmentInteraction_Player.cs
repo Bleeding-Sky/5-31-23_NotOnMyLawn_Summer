@@ -9,6 +9,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     public GameObject handInv;
     public GameObject Inventory;
     public GameObject aiming;
+    public States_Player playerStates;
 
     /// <summary>
     /// Interacts with the enviornment depending on which enviornmental item it is
@@ -68,6 +69,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
             DisablePlayer(objectInHands.objectInHand);
             window.switchToOutside();
             window.Interacting = true;
+            playerStates.lookingThroughWindow = true;
 
         }
         else if (Input.GetKeyDown(KeyCode.E) && window.Interacting)
@@ -75,6 +77,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
             EnablePlayer(objectInHands.objectInHand);
             window.switchToInside();
             window.Interacting = false;
+            playerStates.lookingThroughWindow = false;
 
         }
 
@@ -101,19 +104,19 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         if (objectInHand == null)
         {
             playerMovement.enabled = false;
-            handInv.SetActive(false);
+            //handInv.SetActive(false);
             playerBody.SetActive(false);
-            Inventory.SetActive(false);
+            //Inventory.SetActive(false);
         }
         //Disabling based on if there is an object in the players hand
         else
         {
             playerMovement.enabled = false;
-            handInv.SetActive(false);
+            //handInv.SetActive(false);
             CheckForGunInHandInteractionOn(objectInHand);
             playerBody.SetActive(false);
-            objectInHand.SetActive(false);
-            Inventory.SetActive(false);
+            //objectInHand.SetActive(false);
+            //Inventory.SetActive(false);
         }
     }
 
@@ -129,19 +132,19 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         if (objectInHand == null)
         {
             playerMovement.enabled = true;
-            handInv.SetActive(true);
+            //handInv.SetActive(true);
             playerBody.SetActive(true);
-            Inventory.SetActive(true);
+            //Inventory.SetActive(true);
         }
         //Enabling based on if there is an object in the players hand
         else
         {
             playerMovement.enabled = true;
-            handInv.SetActive(true);
+            //handInv.SetActive(true);
             CheckForGunInHandInteractionOn(objectInHand);
             playerBody.SetActive(true);
-            objectInHand.SetActive(true);
-            Inventory.SetActive(true);
+            //objectInHand.SetActive(true);
+            //Inventory.SetActive(true);
         }
     }
 
