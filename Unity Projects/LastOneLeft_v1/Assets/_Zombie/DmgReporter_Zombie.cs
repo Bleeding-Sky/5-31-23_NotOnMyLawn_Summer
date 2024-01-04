@@ -14,15 +14,7 @@ public class DmgReporter_Zombie : MonoBehaviour
 
     private void Start()
     {
-        //make sure the box collider is a trigger
-
-        BoxCollider2D myCollider = GetComponent<BoxCollider2D>();
-
-        //ensure collider is a trigger
-        if (!myCollider.isTrigger)
-        {
-            myCollider.isTrigger = true;
-        }
+        
     }
 
     /// <summary>

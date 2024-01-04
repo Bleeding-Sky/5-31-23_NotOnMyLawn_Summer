@@ -12,7 +12,6 @@ public class Spawner_Zombie : MonoBehaviour
     public GameObject testZmbOverheadPrefab;
     //for spawning as children in hierarchy
     public GameObject testZmbMasterPrefab;
-    public Health_Zombie zmbHealthScript;
     public Vector2 spawnPosition;
     public Transform overheadAnchorTransform;
 
@@ -50,7 +49,7 @@ public class Spawner_Zombie : MonoBehaviour
 
         //add ref to health script in overhead damage script
         DmgReporter_Zombie overheadDmgScript = newOverheadZmb.GetComponent<DmgReporter_Zombie>();
-        overheadDmgScript.zmbHealthScript = zmbHealthScript;
+        overheadDmgScript.zmbHealthScript = masterObject.GetComponent<Health_Zombie>();
 
         //set target for pathfinding
         OverheadPathing_Zombie pathingScript = newOverheadZmb.GetComponent<OverheadPathing_Zombie>();

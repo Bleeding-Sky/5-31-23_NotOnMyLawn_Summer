@@ -44,5 +44,14 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //configure indoor zombie components
         newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = statusScript;
+        newIndoorZombie.GetComponent<DmgReporter_Zombie>().zmbHealthScript = GetComponent<Health_Zombie>();
+
+        //give health script to all the damage regions
+        IndoorDmgRegion_Zombie[] damageRegions = GetComponentsInChildren<IndoorDmgRegion_Zombie>();
+        foreach (IndoorDmgRegion_Zombie damageRegionScript in damageRegions)
+        {
+            damageRegionScript.zmbHealthScript = GetComponent<Health_Zombie>();
+        }
+
     }
 }

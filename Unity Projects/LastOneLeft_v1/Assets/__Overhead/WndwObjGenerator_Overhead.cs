@@ -74,12 +74,20 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
         GameObject wndwObject = Instantiate(overheadTrackerScript.windowViewPrefab, parentObject.transform);
         PositionSync_Window wndwTrackerScript = wndwObject.GetComponent<PositionSync_Window>();
 
+        //align bottom edge with ground y level
         wndwObject.transform.position = new Vector3(0, CalculateYSpawnOffset(wndwTrackerScript), 0);
 
         //configure the tracker script with the tacview object's info
         wndwTrackerScript.overheadTrackerScript = overheadTrackerScript;
 
-        
+        //if its a zombie, get its damage script and give the ref to the dmg reporter
+        //TODO: make this not bad
+        if (overheadTrackerScript.isZombie)
+        {
+            //get script from parent object form earlier (????FUCK?????)
+            DmgReporter_Zombie wndwDmgReporter = wndwObject.GetComponent<DmgReporter_Zombie>();
+            wndwDmgReporter.zmbHealthScript = parentObject.GetComponent<Health_Zombie>();
+        }
 
 
     }
