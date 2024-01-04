@@ -120,16 +120,16 @@ public class Behavior_Zombie : MonoBehaviour
     /// </summary>
     public void DetermineState()
     {
-        Status_Zombie state = GetComponent<Status_Zombie>();
+        
         if (!playerInRange && !recharging)
         {
-            state.DoChase();
-            state.StopAttack();
+            zombieStates.DoChase();
+            zombieStates.StopAttack();
         }
         else if (playerInRange)
         {
-            state.DoAttack();
-            state.StopChase();
+            zombieStates.DoAttack();
+            zombieStates.StopChase();
         }
     }
 

@@ -36,10 +36,11 @@ public class Revolver_Item : MonoBehaviour
     void Update()
     {
         GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
+        
         SetGunObjects();
         if (pickedUp)
         {
+            gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
             CalculateDirection();
             CheckIfFireable();
 
