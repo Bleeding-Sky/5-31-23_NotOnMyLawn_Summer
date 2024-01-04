@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class DmgRegionDetector_Zombie : MonoBehaviour
+public class IndoorDmgRegion_Zombie : MonoBehaviour
 {
     //region enum for config
     public enum DmgRegionEnum { Head, Body, Legs };

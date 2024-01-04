@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
-  zmbHealthScript: {fileID: 1641291491487817995}
+  zmbHealthScript: {fileID: 0}
 --- !u!1 &2069074798051649344
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
-  zmbHealthScript: {fileID: 1641291491487817995}
+  zmbHealthScript: {fileID: 0}
 --- !u!1 &3258556968829016637
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,10 +385,7 @@ GameObject:
   - component: {fileID: 1903218005054290989}
   - component: {fileID: 5328139431432445220}
   - component: {fileID: 1928268526346961763}
-  - component: {fileID: 7177840655764492321}
   - component: {fileID: 7156212124528582418}
-  - component: {fileID: 1641291491487817995}
-  - component: {fileID: 9159138056875998583}
   m_Layer: 9
   m_Name: Test Zmb Indoor
   m_TagString: Zombie
@@ -469,29 +466,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerPosition: {fileID: 11400000, guid: 7d509ac04ffcf3a4c9682f0dc1339a34, type: 2}
-  zombieStates: {fileID: 7177840655764492321}
+  zombieStates: {fileID: 0}
   attackPoint: {fileID: 4031214186798022365}
   zombiePosition: {x: 0, y: 0, z: 0}
   players: []
   recharging: 0
   playerInRange: 0
---- !u!114 &7177840655764492321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3258556968829016637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05e8782ba95c234479a03a5231eaec6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStumbling: 0
-  isStunned: 0
-  isCrawling: 0
-  isAttacking: 0
-  isChasing: 0
 --- !u!50 &7156212124528582418
 Rigidbody2D:
   serializedVersion: 4
@@ -519,39 +499,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1641291491487817995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3258556968829016637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5362f6536f00a4444a4701e2e7de5648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dataSO: {fileID: 11400000, guid: 0ac83539fedef6b4a83314759353d3ae, type: 2}
-  health: 0
-  headHealth: 0
-  bodyHealth: 0
-  legHealth: 0
-  headDmgMultiplier: 0
-  bodyDmgMultiplier: 0
-  legDmgMultiplier: 0
---- !u!114 &9159138056875998583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3258556968829016637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d874f9e28b0e5374eb3a41b8b3fec0a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthScript: {fileID: 1641291491487817995}
 --- !u!1 &3425004451975172809
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,4 +709,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
-  zmbHealthScript: {fileID: 1641291491487817995}
+  zmbHealthScript: {fileID: 0}

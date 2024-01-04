@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d874f9e28b0e5374eb3a41b8b3fec0a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthScript: {fileID: 0}
+  healthScript: {fileID: 6470166366742787441}
 --- !u!114 &3029257139352069340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,3 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indoorZmbPrefab: {fileID: 3258556968829016637, guid: 319a4cad37092a64ba267e570677cc10, type: 3}
+  statusScript: {fileID: 3029257139352069340}

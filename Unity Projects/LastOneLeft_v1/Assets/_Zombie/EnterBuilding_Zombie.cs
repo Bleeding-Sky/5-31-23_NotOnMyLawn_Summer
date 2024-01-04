@@ -13,6 +13,9 @@ public class EnterBuilding_Zombie : MonoBehaviour
     [Header("CONFIG")]
     public GameObject indoorZmbPrefab;
 
+    //passed to indoor zombie for behavior purposes
+    public Status_Zombie statusScript;
+
     /// <summary>
     /// destroys all outside views of a zombie and spawns an indoor view of it at
     /// a given transform, specifying the indoor position of the window.
@@ -38,5 +41,8 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //set zmb pos to the pos of the window inside, like it crawled thru
         newIndoorZombie.transform.position = indoorWindowTransform.position;
+
+        //configure indoor zombie components
+        newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = statusScript;
     }
 }
