@@ -126,12 +126,16 @@ PrefabInstance:
       objectReference: {fileID: 2174515126876518660, guid: 3e3e9831c09caf54693a0d7e501e1494, type: 3}
     m_RemovedComponents:
     - {fileID: 7831422817150975022, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
+    - {fileID: 6194747334794827082, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1819504649797504586, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
-      insertIndex: 3
+      insertIndex: -1
       addedObject: {fileID: 1149841286633534736}
+    - targetCorrespondingSourceObject: {fileID: 1819504649797504586, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3953907371123570635}
     - targetCorrespondingSourceObject: {fileID: 1819504649797504586, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5681735543274359655}
@@ -199,6 +203,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3953907371123570635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924695510521249216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2e17d575c9afd4b927239f7ce72965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overheadAnchorObject: {fileID: 0}
+  windowViewPrefab: {fileID: 2174515126876518660, guid: 3e3e9831c09caf54693a0d7e501e1494, type: 3}
+  overheadAnchorTransform: {fileID: 0}
+  xDisplacementFromAnchor: 0
+  distanceFromAnchor: 0
+  ZmbMasterParentObj: {fileID: 0}
 --- !u!195 &5681735543274359655
 NavMeshAgent:
   m_ObjectHideFlags: 0

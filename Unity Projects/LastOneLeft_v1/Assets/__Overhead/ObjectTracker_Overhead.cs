@@ -13,12 +13,10 @@ public class ObjectTracker_Overhead : MonoBehaviour
 
     //window view prefab of this object for use by window view environment generation script
     public GameObject windowViewPrefab;
-    [Header("CONFIG (Zombie Only)")]
-    public bool isZombie;
-    public GameObject ZmbMasterParentObj;
+    
 
     [Header("DEBUG")]
-    public Vector2 overheadAnchorPos;
+    public Transform overheadAnchorTransform;
     public float xDisplacementFromAnchor;
     public float distanceFromAnchor;
 
@@ -29,14 +27,14 @@ public class ObjectTracker_Overhead : MonoBehaviour
         {
             overheadAnchorObject = GameObject.FindWithTag("Overhead Anchor");
         }
+
+        //fetch transform from anchor object for constant position tracking
+        overheadAnchorTransform = overheadAnchorObject.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //update local tracking of anchor's position every frame
-        overheadAnchorPos = overheadAnchorObject.transform.position;
-
         CalculateDisplacements();
     }
 
@@ -46,7 +44,7 @@ public class ObjectTracker_Overhead : MonoBehaviour
     void CalculateDisplacements()
     {
         Vector3 myPos = transform.position;
-        xDisplacementFromAnchor = myPos.x - overheadAnchorPos.x;
-        distanceFromAnchor = myPos.y - overheadAnchorPos.y;
+        xDisplacementFromAnchor = myPos.x - overheadAnchorTransform.position.x;
+        distanceFromAnchor = myPos.y - overheadAnchorTransform.position.y;
     }
 }

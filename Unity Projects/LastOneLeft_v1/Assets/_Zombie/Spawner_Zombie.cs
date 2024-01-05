@@ -44,7 +44,7 @@ public class Spawner_Zombie : MonoBehaviour
 
         //configure position and register master in overhead tracker script
         newOverheadZmb.transform.position = spawnPosition;
-        ObjectTracker_Overhead zmbTrackerScript = newOverheadZmb.GetComponent<ObjectTracker_Overhead>();
+        ZombieTracker_Overhead zmbTrackerScript = newOverheadZmb.GetComponent<ZombieTracker_Overhead>();
         zmbTrackerScript.ZmbMasterParentObj = masterObject;
 
         //add ref to health script in overhead damage script

@@ -11,7 +11,6 @@ public class ZmbAtWindow_Overhead : MonoBehaviour
     [Header("CONFIG")]
     public Transform indoorWindowTransform;
 
-
     [Header("DEBUG")]
     //retrieved from overhead zombie when it reaches the window
     public EnterBuilding_Zombie zmbMasterEnterBuildingScript;
@@ -20,14 +19,17 @@ public class ZmbAtWindow_Overhead : MonoBehaviour
     {
         if (collision.CompareTag("Zombie"))
         {
+            //NOTE: lots of getcomponents :( info needs to be passed, so we cant do events
+            //      so idk how this could be done better. but this is pretty sloppy/slow
 
-            //retrieve enterbuilding script from master and call the method on it
-            //done by getting master obj ref from overhead tracker, then getting the enterbuilding script
 
-            //TODO:
-            //HOLY SHIT this sucks. needs to be streamlined bc getcomponent is slow
-            ObjectTracker_Overhead overheadTrackerScript = collision.GetComponent<ObjectTracker_Overhead>();
-            zmbMasterEnterBuildingScript = overheadTrackerScript.ZmbMasterParentObj.GetComponent<EnterBuilding_Zombie>();
+            //retrieve ref to master obj from zombietracker script
+            GameObject ZmbMasterObj = collision.GetComponent<ZombieTracker_Overhead>().ZmbMasterParentObj;
+
+            //get EnterBuilding script on master object
+            zmbMasterEnterBuildingScript = ZmbMasterObj.GetComponent<EnterBuilding_Zombie>();
+
+            //call EnterBuilding on the script to spawn zombie indoors
             zmbMasterEnterBuildingScript.EnterBuilding(indoorWindowTransform);
         }
     }
