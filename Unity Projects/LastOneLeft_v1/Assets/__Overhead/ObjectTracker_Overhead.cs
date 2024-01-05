@@ -9,13 +9,12 @@ public class ObjectTracker_Overhead : MonoBehaviour
 {
 
     [Header("CONFIG")]
-    public GameObject overheadAnchorObject;
-
     //window view prefab of this object for use by window view environment generation script
     public GameObject windowViewPrefab;
     
 
     [Header("DEBUG")]
+    public GameObject overheadAnchorObject;//CAN be set manually for testing purposes
     public Transform overheadAnchorTransform;
     public float xDisplacementFromAnchor;
     public float distanceFromAnchor;

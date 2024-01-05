@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sprite
       objectReference: {fileID: 0}
+    - target: {fileID: 5250456366583859725, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5796898006508182482, guid: 54ff83f67a9e5154c9077a44be570c86, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0.5
