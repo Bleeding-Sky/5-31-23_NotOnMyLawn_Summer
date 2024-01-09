@@ -11,11 +11,8 @@ public class Death_Zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //fetch health script if it is not applied thru inscpector
-        if (healthScript == null)
-        { 
-            healthScript = GetComponent<Health_Zombie>(); 
-        }
+        //fetch health script for health monitoring
+        healthScript = GetComponent<Health_Zombie>(); 
     }
 
     // Update is called once per frame

@@ -13,8 +13,17 @@ public class EnterBuilding_Zombie : MonoBehaviour
     [Header("CONFIG")]
     public GameObject indoorZmbPrefab;
 
+    [Header("DEBUG")]
     //passed to indoor zombie for behavior purposes
     public Status_Zombie statusScript;
+    public Health_Zombie healthScript;
+
+    private void Start()
+    {
+        //fetch master scripts
+        statusScript = GetComponent<Status_Zombie>();
+        healthScript = GetComponent<Health_Zombie>();
+    }
 
     /// <summary>
     /// destroys all outside views of a zombie and spawns an indoor view of it at
@@ -47,7 +56,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //save damage reporter script for dmg region config, and give it the health script
         DmgReporter_Zombie indoorDmgReporterScript = newIndoorZombie.GetComponent<DmgReporter_Zombie>();
-        indoorDmgReporterScript.zmbHealthScript = GetComponent<Health_Zombie>();
+        indoorDmgReporterScript.zmbHealthScript = healthScript;
 
         //link damage regions to indoor damage reporter
         IndoorDmgRegion_Zombie[] damageRegions = GetComponentsInChildren<IndoorDmgRegion_Zombie>();
