@@ -59,8 +59,8 @@ public class EnterBuilding_Zombie : MonoBehaviour
         indoorDmgReporterScript.zmbHealthScript = healthScript;
 
         //link damage regions to indoor damage reporter
-        IndoorDmgRegion_Zombie[] damageRegions = GetComponentsInChildren<IndoorDmgRegion_Zombie>();
-        foreach (IndoorDmgRegion_Zombie damageRegionScript in damageRegions)
+        DamageRegion_Zombie[] damageRegions = GetComponentsInChildren<DamageRegion_Zombie>();
+        foreach (DamageRegion_Zombie damageRegionScript in damageRegions)
         {
             damageRegionScript.damageReporterScript = indoorDmgReporterScript;
         }

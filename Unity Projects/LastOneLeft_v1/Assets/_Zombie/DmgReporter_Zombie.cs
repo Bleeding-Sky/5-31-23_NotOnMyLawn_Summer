@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static IndoorDmgRegion_Zombie;
 
 /// <summary>
 /// Attached to an Overhead zombie. reports damage to the health script on the zombie's master object
