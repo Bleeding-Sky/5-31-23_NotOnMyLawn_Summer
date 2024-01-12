@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//region enum for config
-public enum DmgRegionEnum { Head, Body, Legs };
-
 [RequireComponent(typeof(BoxCollider2D))]
 public class DamageRegion_Zombie : MonoBehaviour
 {

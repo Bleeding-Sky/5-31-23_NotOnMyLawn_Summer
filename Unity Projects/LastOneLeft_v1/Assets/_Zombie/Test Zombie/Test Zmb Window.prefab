@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 4050446914161332000}
   - component: {fileID: 6001947277256035210}
   m_Layer: 0
-  m_Name: Test Zmb Window 1
+  m_Name: Test Zmb Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

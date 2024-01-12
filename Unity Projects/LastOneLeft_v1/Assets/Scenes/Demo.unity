@@ -581,51 +581,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &179621270
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 179621272}
-  - component: {fileID: 179621271}
-  m_Layer: 0
-  m_Name: Input Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &179621271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179621270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133c26360ef45564799ad132420d6e89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
---- !u!4 &179621272
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179621270}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &197839992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,7 +973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4ea6545003cd24da4920890cb2f431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testZmbOverheadPrefab: {fileID: 4924695510521249216, guid: 5fc99125a39b302479d8cee040a5186c, type: 3}
+  testZmbOverheadPrefab: {fileID: 53446707410528238, guid: 8c317f963ab524440828529487d0aca3, type: 3}
   testZmbMasterPrefab: {fileID: 8304906090293909137, guid: 7d986e6d448150a4a9d4274564431751, type: 3}
   spawnPosition: {x: -20, y: 15}
   overheadAnchorTransform: {fileID: 338823012}
@@ -4548,6 +4503,8 @@ GameObject:
   - component: {fileID: 1706418165}
   - component: {fileID: 1706418164}
   - component: {fileID: 1706418163}
+  - component: {fileID: 1706418167}
+  - component: {fileID: 1706418166}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -4655,6 +4612,73 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1.07}
   m_Size: {x: 0.88, y: 3.3}
   m_Direction: 0
+--- !u!114 &1706418166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706418161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: fecf6cbe961061d489f7f046421ff95a, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e212dc9e-bee5-45f3-a1a0-f9d37d3b63f5
+    m_ActionName: Indoor/HMove[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4fded2ad-b987-4085-85f6-5125c45f4a77
+    m_ActionName: Indoor/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1706418167}
+        m_TargetAssemblyTypeName: HolsterInput_Player, Assembly-CSharp
+        m_MethodName: OnHolsterDraw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f4f44d66-4fe6-46d2-9390-cfad7b8e41b8
+    m_ActionName: Indoor/Holster/Draw[/Keyboard/leftShift]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Indoor
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1706418167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706418161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133c26360ef45564799ad132420d6e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
 --- !u!1 &1721392691
 GameObject:
   m_ObjectHideFlags: 0
@@ -5836,7 +5860,6 @@ SceneRoots:
   - {fileID: 1990245667}
   - {fileID: 1417967106}
   - {fileID: 1524241573}
-  - {fileID: 179621272}
   - {fileID: 2053435257}
   - {fileID: 1535785518}
   - {fileID: 691808565}
