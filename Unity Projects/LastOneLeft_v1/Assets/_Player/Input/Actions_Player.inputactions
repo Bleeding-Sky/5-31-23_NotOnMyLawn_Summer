@@ -1,5 +1,5 @@
 {
-    "name": "Controls_Player",
+    "name": "Actions_Player",
     "maps": [
         {
             "name": "Indoor",
@@ -66,6 +66,17 @@
                     "action": "HMove",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "541640a3-f56d-4e21-a303-3e494f3badfa",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

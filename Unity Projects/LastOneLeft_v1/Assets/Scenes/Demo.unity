@@ -4502,9 +4502,9 @@ GameObject:
   - component: {fileID: 1706418162}
   - component: {fileID: 1706418165}
   - component: {fileID: 1706418164}
+  - component: {fileID: 1706418166}
   - component: {fileID: 1706418163}
   - component: {fileID: 1706418167}
-  - component: {fileID: 1706418166}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -4638,7 +4638,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1706418163}
+        m_TargetAssemblyTypeName: Movement_Player, Assembly-CSharp
+        m_MethodName: OnMoveAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e212dc9e-bee5-45f3-a1a0-f9d37d3b63f5
     m_ActionName: Indoor/HMove[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
@@ -4648,9 +4660,9 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1706418167}
-        m_TargetAssemblyTypeName: HolsterInput_Player, Assembly-CSharp
+        m_TargetAssemblyTypeName: HolsterDrawToggle_Player, Assembly-CSharp
         m_MethodName: OnHolsterDraw
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

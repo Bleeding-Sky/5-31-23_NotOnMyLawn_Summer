@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Movement_Player : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class Movement_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetMovementInput();
         ProcessGunStatus();
 
         float newVelocity = inputDirection * currentMoveSpeed;
@@ -36,22 +36,16 @@ public class Movement_Player : MonoBehaviour
         //sends player's position to scriptable object
         playerPosition.playerPosition = transform.position;
     }
-    /// <summary>
-    /// clears and then sets input direction variable based on L/R input keys
-    /// </summary>
-    private void GetMovementInput()
-    {
-        inputDirection = 0;
 
-        //L movement
-        if (Input.GetKey(KeyCode.A))
+    public void OnMoveAction(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.performed)
         {
-            inputDirection--;
+            inputDirection = actionContext.ReadValue<float>();
         }
-        //R movement
-        if (Input.GetKey(KeyCode.D))
+        else if (actionContext.canceled)
         {
-            inputDirection++;
+            inputDirection = 0;
         }
     }
 
