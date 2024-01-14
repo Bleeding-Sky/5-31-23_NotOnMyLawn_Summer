@@ -6,18 +6,20 @@ using UnityEngine;
 public class CameraInitilaizer : MonoBehaviour
 {
     public CameraManagement cameraManager;
-    private CameraManagement.Cameras CameraEnum;
+    public CameraManagement.Cameras CameraEnum;
     public CinemachineVirtualCamera[] cameras;
     public CinemachineVirtualCamera currentCamera;
 
     void Start()
     {
-        CameraEnum = CameraManagement.Cameras.Indoor;
+        cameraManager.currentEnum = CameraManagement.Cameras.Indoor;
+        SwitchToCamera(CameraEnum);
+        Debug.Log("switchFirst");
     }
     // Update is called once per frame
     void Update()
     {
-        CameraEnum = cameraManager.currentCamera;
+        CameraEnum = cameraManager.currentEnum;
         SwitchToCamera(CameraEnum);
     }
 
@@ -27,12 +29,15 @@ public class CameraInitilaizer : MonoBehaviour
         {
             case CameraManagement.Cameras.Indoor:
                 currentCamera = cameras[0];
+                cameraManager.currentCamera = currentCamera.gameObject;
                 break;
             case CameraManagement.Cameras.Overhead:
                 currentCamera = cameras[1];
+                cameraManager.currentCamera = currentCamera.gameObject;
                 break;
             case CameraManagement.Cameras.Window:
                 currentCamera = cameras[2];
+                cameraManager.currentCamera = currentCamera.gameObject;
                 break;
         }
         EstablishCamera();
@@ -49,5 +54,6 @@ public class CameraInitilaizer : MonoBehaviour
                 camera.Priority = 0;
             }
         }
+        
     }
 }

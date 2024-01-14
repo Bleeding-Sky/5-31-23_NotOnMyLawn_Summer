@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Window : MonoBehaviour
+public class ShotgunBullet_Window : MonoBehaviour
 {
     public Rigidbody bulletRB;
     public Vector3 bulletDirection;
@@ -13,9 +13,7 @@ public class Bullet_Window : MonoBehaviour
     void Start()
     {
         transform.position = startingPosition.position;
-        bulletDirection = mousePos - startingPosition.position;
-        Debug.Log(bulletDirection.normalized);
-        bulletRB.velocity = bulletDirection.normalized * speed;
+        bulletRB.velocity = bulletDirection * speed;
     }
 
     /// <summary>
@@ -42,6 +40,4 @@ public class Bullet_Window : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-   
 }

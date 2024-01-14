@@ -9,9 +9,9 @@ public class CameraManagement : ScriptableObject
 {
     [SerializeField]
     public enum Cameras { Indoor, Overhead, Window};
-    public Cameras currentCamera;
+    public Cameras currentEnum;
     public bool changingCameras;
+    public GameObject currentCamera;
 
-   
-
+    
 }

@@ -11,13 +11,15 @@ public class GunInformation_Item : MonoBehaviour
     public float recoil;
     public bool coolingDown;
     public GameObject bulletType;
+    public GameObject windowBullet;
 
     [Header("Gun Configurations")]
     public Transform rotationAndAimingPoint;
     public Transform handPos;
     public GameObject player;
-    public GameObject AimingField;
+    public GameObject currentCamera;
     public States_Player playerStates;
+    public CameraManagement cameraManager;
 
     [Header("Gun State")]
     public bool isPickedUp;

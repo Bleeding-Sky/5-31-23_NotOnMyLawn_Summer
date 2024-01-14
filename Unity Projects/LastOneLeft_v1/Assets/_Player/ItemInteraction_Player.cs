@@ -44,7 +44,6 @@ public class ItemInteraction_Player : MonoBehaviour
         GunInfo.gameObject.transform.parent = hand.transform;
         GunInfo.rotationAndAimingPoint = armRotationPos;
         GunInfo.handPos = handPos;
-        GunInfo.AimingField = AimingArea;
         gunCollider.enabled = false;
     }
 

@@ -19,7 +19,6 @@ public class ShotgunBullet_Item : MonoBehaviour
         //Initiates the bullet direction and speed
         bulletStartPosition = transform.position;
         Vector3 direction = firingPos - bulletDirectionPosition;
-        Debug.Log(new Vector3(direction.x, direction.y, 0).normalized);
         bulletRB.velocity = new Vector3(xDirection, yDirection, 0).normalized * bulletSpeed;
 
     }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c6a5d7e1519f948bfa524ae47cb7b6, type: 3}
   m_Name: Camera Manager
   m_EditorClassIdentifier: 
-  currentCamera: 2
+  currentEnum: 2
   changingCameras: 0
+  currentCamera: {fileID: 0}

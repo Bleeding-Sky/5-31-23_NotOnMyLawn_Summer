@@ -23,7 +23,6 @@ public class Rifle_Item : MonoBehaviour
     [Header("DEBUG")]
     public int bulletAmount;
     private float firingRate;
-    private float recoil;
     public bool canFire;
     public Vector3 armPosition;
     public bool pickedUp;
@@ -38,7 +37,6 @@ public class Rifle_Item : MonoBehaviour
         gunSpecs.isPickedUp = false;
         bulletAmount = gunSpecs.bulletCount;
         firingRate = gunSpecs.fireRate;
-        recoil = gunSpecs.recoil;
         canFire = true;
         pickedUp = false;
     }
@@ -126,7 +124,6 @@ public class Rifle_Item : MonoBehaviour
         handPosition = gunSpecs.handPos;
         player = gunSpecs.player;
         pickedUp = gunSpecs.isPickedUp;
-        aimingPoint = gunSpecs.AimingField;
     }
 
     /// <summary>

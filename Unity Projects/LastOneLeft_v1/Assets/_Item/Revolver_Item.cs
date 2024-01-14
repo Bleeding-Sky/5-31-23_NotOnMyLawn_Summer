@@ -128,7 +128,7 @@ public class Revolver_Item : MonoBehaviour
         handPosition = gunSpecs.handPos;
         player = gunSpecs.player;
         pickedUp = gunSpecs.isPickedUp;
-        aimingPoint = gunSpecs.AimingField;
+
     }
 
     /// <summary>
