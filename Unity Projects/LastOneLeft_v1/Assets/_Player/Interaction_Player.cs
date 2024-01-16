@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction_Player : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Interaction_Player : MonoBehaviour
     public float lastItem;
     public int itemLength;
     public int closestElement;
-
+    public bool interacting;
 
     //establishes that there is no item to begin with
     void Start()
@@ -123,24 +124,32 @@ public class Interaction_Player : MonoBehaviour
     {
         InteractionIdentification_Item Interactable = closetItem.GetComponent<InteractionIdentification_Item>();
         //if the interaction is an item it puts it in the inventory
-        if (Interactable.isItem && !Interactable.isEnviormentObject)
+        if (Interactable.isItem && !Interactable.isEnviormentObject && interacting)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ItemInteraction_Player itemAssignment = GetComponent<ItemInteraction_Player>();
-                Interaction_Player ItemInteraction = GetComponent<Interaction_Player>();
-                Inventory_Player inventoryStorage = Inventory.GetComponent<Inventory_Player>();
+            ItemInteraction_Player itemAssignment = GetComponent<ItemInteraction_Player>();
+            Interaction_Player ItemInteraction = GetComponent<Interaction_Player>();
+            Inventory_Player inventoryStorage = Inventory.GetComponent<Inventory_Player>();
 
-                inventoryStorage.itemAssignment = itemAssignment;
-                inventoryStorage.ItemInteractionScript = ItemInteraction;
-                inventoryStorage.StoreItems(closetItem);
-            }
+            inventoryStorage.itemAssignment = itemAssignment;
+            inventoryStorage.ItemInteractionScript = ItemInteraction;
+            inventoryStorage.StoreItems(closetItem);
+            interacting = false;
         }
+
         //if the interaction is an envionrmental object it interacts with it
-        else if (!Interactable.isItem && Interactable.isEnviormentObject)
+        else if (!Interactable.isItem && Interactable.isEnviormentObject && interacting)
         {
             EnviornmentInteraction_Player enviornment = GetComponent<EnviornmentInteraction_Player>();
             enviornment.Interact(closetItem);
+            interacting = false;
+        }
+    }
+
+    public void InteractionAction(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.started)
+        {
+            interacting = true;
         }
     }
 }

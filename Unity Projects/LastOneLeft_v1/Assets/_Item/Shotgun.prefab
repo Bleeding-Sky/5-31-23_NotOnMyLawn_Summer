@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 1034649645444695422}
   - component: {fileID: 3388439202707094620}
   - component: {fileID: 6653176371907901096}
+  - component: {fileID: 3898725105919272616}
   m_Layer: 8
   m_Name: Shotgun
   m_TagString: Gun
@@ -212,7 +213,7 @@ MonoBehaviour:
   canFire: 0
   armPosition: {x: 0, y: 0, z: 0}
   pickedUp: 0
-  shotSpread: 45
+  shotSpread: 14
 --- !u!61 &5873607951084566234
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -275,11 +276,15 @@ MonoBehaviour:
   recoil: 0
   coolingDown: 0
   bulletType: {fileID: 3092487318744206373, guid: a4a59a7a05a8bbb4d8c9a6bb44e1703a, type: 3}
+  windowBullet: {fileID: 4184650886467805441, guid: 7926a41ea5f8c3e42af58bc591ec83e6, type: 3}
   rotationAndAimingPoint: {fileID: 0}
   handPos: {fileID: 0}
   player: {fileID: 0}
-  AimingField: {fileID: 0}
+  currentCamera: {fileID: 0}
+  playerStates: {fileID: 0}
+  cameraManager: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
   isPickedUp: 0
+  windowMode: 0
 --- !u!114 &3388439202707094620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +305,7 @@ MonoBehaviour:
   isBoardPile: 0
   isGun: 1
   isBandage: 0
+  isMeleeWeapon: 0
 --- !u!50 &6653176371907901096
 Rigidbody2D:
   serializedVersion: 4
@@ -327,3 +333,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3898725105919272616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752533165236721999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c3bc3141819594a806e73d3fd1e978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunSpecs: {fileID: 0}
+  worldPos: {x: 0, y: 0, z: 0}
+  startingPosition: {x: 0, y: 0, z: 0}
+  anglePhi: 0
+  angleTheta: 0
+  spread: 4
+  bullet: {fileID: 0}
+  canFire: 0

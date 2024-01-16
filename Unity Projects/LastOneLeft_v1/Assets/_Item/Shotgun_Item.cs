@@ -50,6 +50,7 @@ public class Shotgun_Item : MonoBehaviour
         if (pickedUp)
         {
             gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
+            gunSpecs.currentCamera = gunSpecs.cameraManager.currentCamera;
             CalculateDirection();
             CalculateAngles();
             CheckIfFireable();

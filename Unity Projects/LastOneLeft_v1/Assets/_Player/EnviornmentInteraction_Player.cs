@@ -11,6 +11,10 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     public GameObject aiming;
     public States_Player playerStates;
 
+    private void Start()
+    {
+        playerStates.lookingThroughWindow = false;
+    }
     /// <summary>
     /// Interacts with the enviornment depending on which enviornmental item it is
     /// </summary>
@@ -64,7 +68,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
          */
 
         //Look through window interaction
-        if (Input.GetKeyDown(KeyCode.E) && !window.Interacting)
+        if (!window.Interacting)
         {
             DisablePlayer(objectInHands.objectInHand);
             window.switchToOutside();
@@ -72,7 +76,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
             playerStates.lookingThroughWindow = true;
 
         }
-        else if (Input.GetKeyDown(KeyCode.E) && window.Interacting)
+        else if (window.Interacting)
         {
             EnablePlayer(objectInHands.objectInHand);
             window.switchToInside();

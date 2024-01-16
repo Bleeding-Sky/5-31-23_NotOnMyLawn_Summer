@@ -1576,6 +1576,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1034649645444695422, guid: 6829849e9cdec3644a3bb76200a90360, type: 3}
+      propertyPath: playerStates
+      value: 
+      objectReference: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
     - target: {fileID: 5481611561688964472, guid: 6829849e9cdec3644a3bb76200a90360, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.85737133
@@ -2631,7 +2635,7 @@ MonoBehaviour:
   handInv: {fileID: 815360365}
   Inventory: {fileID: 1386175589}
   aiming: {fileID: 0}
-  playerStates: {fileID: 0}
+  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
 --- !u!114 &1149686779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2649,7 +2653,7 @@ MonoBehaviour:
   armRotationPos: {fileID: 109062174}
   handPos: {fileID: 1401537143}
   AimingArea: {fileID: 0}
-  playerStates: {fileID: 0}
+  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
 --- !u!114 &1149686780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3483,6 +3487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraManager: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
+  CameraEnum: 0
   cameras:
   - {fileID: 944752614}
   - {fileID: 865018957}
@@ -5849,6 +5854,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4429338698467595112, guid: 9ae71ddf449856d41b2781b1914056f3, type: 3}
+      propertyPath: playerStates
+      value: 
+      objectReference: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
     - target: {fileID: 6572610395511005815, guid: 9ae71ddf449856d41b2781b1914056f3, type: 3}
       propertyPath: m_Name
       value: Rifle

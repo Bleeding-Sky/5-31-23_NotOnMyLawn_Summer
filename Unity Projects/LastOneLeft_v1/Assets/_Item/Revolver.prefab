@@ -184,12 +184,12 @@ MonoBehaviour:
   recoil: 0
   coolingDown: 0
   bulletType: {fileID: 3092487318744206373, guid: a4a59a7a05a8bbb4d8c9a6bb44e1703a, type: 3}
-  windowBullet: {fileID: 0}
+  windowBullet: {fileID: 4539929668432797422, guid: 21cc353d2ac26574ab64e599cca9cd88, type: 3}
   rotationAndAimingPoint: {fileID: 0}
   handPos: {fileID: 0}
   player: {fileID: 0}
   currentCamera: {fileID: 0}
-  playerStates: {fileID: 0}
+  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
   cameraManager: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
   isPickedUp: 0
   windowMode: 0

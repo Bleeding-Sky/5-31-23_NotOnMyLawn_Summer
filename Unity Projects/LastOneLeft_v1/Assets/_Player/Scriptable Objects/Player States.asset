@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player States
   m_EditorClassIdentifier: 
   isWalking: 0
-  faceDirection: -1
-  lookingThroughWindow: 0
+  faceDirection: 1
+  lookingThroughWindow: 1
   gunIsDrawn: 0
   boardsOnPlayer: 6

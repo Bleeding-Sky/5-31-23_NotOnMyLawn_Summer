@@ -19,6 +19,7 @@ public class Rifle_Item : MonoBehaviour
     public Transform handPosition;
     public GameObject player;
     public GameObject aimingPoint;
+    GunInformation_Item gunSpecs;
 
     [Header("DEBUG")]
     public int bulletAmount;
@@ -33,7 +34,7 @@ public class Rifle_Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
+        gunSpecs = GetComponent<GunInformation_Item>();
         gunSpecs.isPickedUp = false;
         bulletAmount = gunSpecs.bulletCount;
         firingRate = gunSpecs.fireRate;
@@ -47,10 +48,12 @@ public class Rifle_Item : MonoBehaviour
         SetGunObjects();
         if (pickedUp)
         {
+            gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
+            gunSpecs.currentCamera = gunSpecs.cameraManager.currentCamera;
             CalculateDirection();
             CalculateAngles();
             CheckIfFireable();
-            if (Input.GetKey(KeyCode.Mouse0) && canFire)
+            if (Input.GetKey(KeyCode.Mouse0) && canFire && !gunSpecs.windowMode)
             {
                 Shoot();
                 StartCoroutine(DetermineFireRate());
@@ -119,7 +122,6 @@ public class Rifle_Item : MonoBehaviour
     /// </summary>
     public void SetGunObjects()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
         GunRotation = gunSpecs.rotationAndAimingPoint;
         handPosition = gunSpecs.handPos;
         player = gunSpecs.player;
@@ -132,7 +134,6 @@ public class Rifle_Item : MonoBehaviour
     /// <returns></returns>
     IEnumerator DetermineFireRate()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
         gunSpecs.coolingDown = true;
         yield return new WaitForSeconds(firingRate);
         gunSpecs.coolingDown = false;
@@ -141,7 +142,6 @@ public class Rifle_Item : MonoBehaviour
 
     public void CheckIfFireable()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
         if (gunSpecs.coolingDown != true && bulletAmount > 0)
         {
             canFire = true;
