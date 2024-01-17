@@ -19,16 +19,20 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     /// Interacts with the enviornment depending on which enviornmental item it is
     /// </summary>
     /// <param name="Enviornment"></param>
-    public void Interact(GameObject Enviornment)
+    public void Interact(GameObject Enviornment, int actionType)
     {
         InteractionIdentification_Item enviornmentType = Enviornment.GetComponent<InteractionIdentification_Item>();
-        if (enviornmentType.isWindow)
+        if (enviornmentType.isWindow && actionType == 0)
         {
             WindowInteraction(Enviornment);
         }
-        else if (enviornmentType.isBoardPile)
+        else if(enviornmentType.isWindow && actionType != 0)
         {
-            BoardPileInteraction(Enviornment);
+            WindowRebuildInteraction(Enviornment, actionType);
+        }
+        else if (enviornmentType.isBoardPile && actionType != 0)
+        {
+            BoardPileInteraction(Enviornment, actionType);
         }
     }
 
@@ -36,16 +40,16 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     /// Interaction for the Board Pile 
     /// </summary>
     /// <param name="Enviornment"></param>
-    private void BoardPileInteraction(GameObject Enviornment)
+    private void BoardPileInteraction(GameObject Enviornment, int actionType)
     {
         BoardPile_Environment boardPile = Enviornment.GetComponent<BoardPile_Environment>();
 
         //If Presses W then Picks up board
-        if (Input.GetKey(KeyCode.W))
+        if (actionType == 1)
         {
             boardPile.PickUpBoard();
         }
-        else if (Input.GetKeyUp(KeyCode.W))
+        else if (actionType == 2)
         //resets if the key is let go
         {
             boardPile.ResetBoardPickUp();
@@ -85,12 +89,21 @@ public class EnviornmentInteraction_Player : MonoBehaviour
 
         }
 
+    }
+
+    private void WindowRebuildInteraction(GameObject Enviornment, int actionType)
+    {
+        WindowInteraction_Enviornment window = Enviornment.GetComponent<WindowInteraction_Enviornment>();
+        WindowBarricade_Enviornment windowRebuild = Enviornment.GetComponent<WindowBarricade_Enviornment>();
+        HandInventory_Player objectInHands = handInv.GetComponent<HandInventory_Player>();
+
+
         //Rebuild window interaction
-        if (Input.GetKey(KeyCode.W) && windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory && !window.Interacting)
+        if (windowRebuild.boardsOnWindow != 3 && windowRebuild.boardsInInventory && !window.Interacting && actionType == 1)
         {
             windowRebuild.AddBoard();
         }
-        else if (Input.GetKeyUp(KeyCode.W))
+        else if(actionType == 2)
         {
             windowRebuild.timer = 0;
         }

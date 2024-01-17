@@ -15,6 +15,7 @@ public class Interaction_Player : MonoBehaviour
     public int itemLength;
     public int closestElement;
     public bool interacting;
+    public int interactionType;
 
     //establishes that there is no item to begin with
     void Start()
@@ -140,8 +141,15 @@ public class Interaction_Player : MonoBehaviour
         else if (!Interactable.isItem && Interactable.isEnviormentObject && interacting)
         {
             EnviornmentInteraction_Player enviornment = GetComponent<EnviornmentInteraction_Player>();
-            enviornment.Interact(closetItem);
-            interacting = false;
+            enviornment.Interact(closetItem, interactionType);
+            if(interactionType == 0 || interactionType == 2)
+            {
+                interacting = false;
+            }
+            else if(interactionType == 1)
+            {
+                interacting = true;
+            }
         }
     }
 
@@ -149,6 +157,22 @@ public class Interaction_Player : MonoBehaviour
     {
         if (actionContext.started)
         {
+            interactionType = 0;
+            interacting = true;
+        }
+    }
+
+    public void SecondaryInteractionAction(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.performed)
+        {
+            interactionType = 1;
+            interacting = true;
+            Debug.Log("Interaction");
+        }
+        else if (actionContext.canceled)
+        {
+            interactionType = 2;
             interacting = true;
         }
     }
