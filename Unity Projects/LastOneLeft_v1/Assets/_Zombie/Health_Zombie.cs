@@ -27,6 +27,7 @@ public class Health_Zombie : MonoBehaviour
     private void Awake()
     {
         statusScript = GetComponent<Status_Zombie>();
+        limbLossScript = GetComponent <LimbLoss_Zombie>();
         FetchHealthValues();
     }
 

@@ -9,7 +9,7 @@ public class Death_Zombie : MonoBehaviour
     public Health_Zombie healthScript;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //fetch health script for health monitoring
         healthScript = GetComponent<Health_Zombie>(); 
