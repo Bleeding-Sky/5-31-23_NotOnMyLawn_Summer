@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6470166366742787441}
   - component: {fileID: 8881376049565037847}
   - component: {fileID: 3029257139352069340}
+  - component: {fileID: 6260966416785929294}
   - component: {fileID: -4016313578569193360}
   m_Layer: 0
   m_Name: Test Zmb Master
@@ -48,7 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataSO: {fileID: 11400000, guid: 0ac83539fedef6b4a83314759353d3ae, type: 2}
-  health: 0
+  statusScript: {fileID: 0}
+  limbLossScript: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
   headHealth: 0
   bodyHealth: 0
   legHealth: 0
@@ -80,11 +84,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e8782ba95c234479a03a5231eaec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headshotStunChance: 40
+  bodyshotStunChance: 20
+  stumbleChance: 30
+  fallForwardChance: 50
+  headshotFallBackwardChance: 60
+  bodyshotFallBackwardChance: 30
   isStumbling: 0
   isStunned: 0
+  isFallenForward: 0
+  isFallenBackward: 0
   isCrawling: 0
   isAttacking: 0
   isChasing: 0
+--- !u!114 &6260966416785929294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304906090293909137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f002ecc480f35249ba816a22960c556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armLossChance: 20
+  bothArmsLossChance: 50
+  legBreakChance: 60
+  headBreakChance: 50
+  highHealthHeadBreakEndureChance: 70
+  lowHealthHeadBreakEndureChance: 50
+  statusScript: {fileID: 0}
+  healthScript: {fileID: 0}
 --- !u!114 &-4016313578569193360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +131,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indoorZmbPrefab: {fileID: 3258556968829016637, guid: 319a4cad37092a64ba267e570677cc10, type: 3}
   statusScript: {fileID: 3029257139352069340}
+  healthScript: {fileID: 0}

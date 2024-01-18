@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab20c7a2aa6e55b46ac241566c9bd3dd, type: 3}
   m_Name: TestZmb Data
   m_EditorClassIdentifier: 
-  zombieMaxHealth: 25
-  headMaxHealth: 10
-  bodyMaxHealth: 20
-  legMaxHealth: 8
+  zombieMaxHealth: 30
+  headMaxHealth: 6
+  bodyMaxHealth: 12
+  legMaxHealth: 3
   headDmgMultiplier: 1.5
   bodyDmgMultiplier: 1
   legDmgMultiplier: 0.5

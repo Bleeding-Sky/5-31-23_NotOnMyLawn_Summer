@@ -9,8 +9,12 @@ public class Health_Zombie : MonoBehaviour
     public Data_Zombie dataSO;
 
     [Header("DEBUG")]
+    [SerializeField] Status_Zombie statusScript;
+    [SerializeField] LimbLoss_Zombie limbLossScript;
+
     //health trackers
-    public float health;
+    public float maxHealth;
+    public float currentHealth;
     public float headHealth;
     public float bodyHealth;
     public float legHealth;
@@ -20,11 +24,9 @@ public class Health_Zombie : MonoBehaviour
     public float bodyDmgMultiplier;
     public float legDmgMultiplier;
 
-    
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        statusScript = GetComponent<Status_Zombie>();
         FetchHealthValues();
     }
 
@@ -34,7 +36,8 @@ public class Health_Zombie : MonoBehaviour
     private void FetchHealthValues()
     {
         //fetch all health values
-        health = dataSO.zombieMaxHealth;
+        maxHealth = dataSO.zombieMaxHealth;
+        currentHealth = maxHealth;
         headHealth = dataSO.headMaxHealth;
         bodyHealth = dataSO.bodyMaxHealth;
         legHealth = dataSO.legMaxHealth;
@@ -51,18 +54,46 @@ public class Health_Zombie : MonoBehaviour
     public void Headshot(float dmgVal)
     {
         headHealth -= dmgVal;
+
+        //attempt to stun if head has health
+        //attempt to break head if its health is 0
+        if (headHealth > 0)
+        {
+            statusScript.AttemptStun(DmgRegionEnum.Head);
+        }
+        else
+        {
+            limbLossScript.AttemptHeadBreak(maxHealth, currentHealth);
+        }
+
         DamageHealth(dmgVal * headDmgMultiplier);
     }
 
     public void Bodyshot(float dmgVal)
     {
+        //attempt stun and arm loss regardless of body health
         bodyHealth -= dmgVal;
+        statusScript.AttemptStun(DmgRegionEnum.Body);
+        limbLossScript.AttemptArmLoss(bodyHealth);
         DamageHealth(dmgVal * bodyDmgMultiplier);
+
     }
 
     public void Legshot(float dmgVal)
     {
         legHealth -= dmgVal;
+
+        //attempt stumble if legs have health remaining
+        //attempt to break legs if legs have no health
+        if(legHealth > 0)
+        {
+            statusScript.AttemptStumble();
+        }
+        else
+        {
+            limbLossScript.AttemptLegBreak();
+        }
+
         DamageHealth(dmgVal * legDmgMultiplier);
     }
 
@@ -71,8 +102,7 @@ public class Health_Zombie : MonoBehaviour
     /// </summary>
     public void DamageHealth(float dmgVal)
     {
-        health -= dmgVal;
-        Debug.Log($"zombie damaged for {dmgVal} damage");
+        currentHealth -= dmgVal;
     }
 
     #endregion

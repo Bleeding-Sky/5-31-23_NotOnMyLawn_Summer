@@ -18,7 +18,7 @@ public class Death_Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (healthScript.health <= 0)
+        if (healthScript.currentHealth <= 0)
         {
             KillZmb();
         }

@@ -4,29 +4,102 @@ using UnityEngine;
 
 public class Status_Zombie : MonoBehaviour
 {
+    [Header("CONFIG")]
+    //calculations for these are roll-under, no meets beats
+    [SerializeField] float headshotStunChance = 40;
+    [SerializeField] float bodyshotStunChance = 20;
+    [SerializeField] float stumbleChance = 30;
+    [SerializeField] float fallForwardChance = 50;
+    [SerializeField] float headshotFallBackwardChance = 60;
+    [SerializeField] float bodyshotFallBackwardChance = 30;
+
     [Header("DEBUG")]
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
     public bool isStumbling = false;
     public bool isStunned = false;
+    public bool isFallenForward = false;
+    public bool isFallenBackward = false;
     public bool isCrawling = false;
     public bool isAttacking = false;
     public bool isChasing = false;
 
+    #region Attempt to apply status
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// determines if a stumble occurs
+    /// </summary>
+    public void AttemptStumble()
     {
-        
+        if (isStumbling)
+        {
+            AttemptFallForward();
+            return;
+        }
+
+        if (RNGRolls_System.RollUnder(stumbleChance)) { DoStumble(); }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// determines if a stun occurs
+    /// </summary>
+    /// <param name="damagedRegion"></param>
+    public void AttemptStun(DmgRegionEnum damagedRegion)
     {
-        
+        if (isStunned)
+        {
+            AttemptFallBackward(damagedRegion);
+            return;
+        }
+
+        float successCutoff = 0;
+
+        if (damagedRegion == DmgRegionEnum.Head)
+        {
+            successCutoff = headshotStunChance;
+        }
+        else if (damagedRegion == DmgRegionEnum.Body)
+        {
+            successCutoff = bodyshotStunChance;
+        }
+        else
+        { Debug.Log("Error detected in AttemptStun damagedRegion argument"); }
+
+        if (RNGRolls_System.RollUnder(successCutoff)) { DoStun(); }
     }
 
-    #region status methods
+    /// <summary>
+    /// determines if the zombie falls forward
+    /// </summary>
+    public void AttemptFallForward()
+    {
+        if (RNGRolls_System.RollUnder(fallForwardChance)) { DoFallForward(); }
+    }
+
+    /// <summary>
+    /// determines if the zombie falls backward
+    /// </summary>
+    /// <param name="damagedRegion"></param>
+    public void AttemptFallBackward(DmgRegionEnum damagedRegion)
+    {
+        float successCutoff = 0;
+
+        if (damagedRegion == DmgRegionEnum.Head)
+        {
+            successCutoff = headshotFallBackwardChance;
+        }
+        else if (damagedRegion == DmgRegionEnum.Body)
+        {
+            successCutoff = bodyshotFallBackwardChance;
+        }
+        else
+        { Debug.Log("Error detected in AttemptFallBackward damagedRegion argument"); }
+
+        if (RNGRolls_System.RollUnder(successCutoff)) { DoFallBackward(); }
+    }
+    #endregion
+
+    #region apply status
     /// <summary>
     /// applies the stumble status
     /// </summary>
@@ -57,6 +130,26 @@ public class Status_Zombie : MonoBehaviour
     public void StopStun()
     {
         isStunned = false;
+    }
+
+    public void DoFallForward()
+    {
+        isFallenForward = true;
+    }
+
+    public void StopFallForward()
+    {
+        isFallenForward = false;
+    }
+
+    public void DoFallBackward()
+    {
+        isFallenBackward = true;
+    }
+
+    public void StopFallBackward()
+    {
+        isFallenBackward = false;
     }
 
     /// <summary>

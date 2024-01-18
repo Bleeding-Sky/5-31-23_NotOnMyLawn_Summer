@@ -70,7 +70,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
         {
             //set parent object so zombie spawns as child of it's master object
             parentObject = (overheadTrackerScript as ZombieTracker_Overhead).ZmbMasterParentObj;
-            Debug.Log("ZOMBIE DETECTD AT WINDOW");
+            //Debug.Log("ZOMBIE DETECTD AT WINDOW");
             isZombie = true;
         }
         //if its not a zombie, make it a child of the window view obj
