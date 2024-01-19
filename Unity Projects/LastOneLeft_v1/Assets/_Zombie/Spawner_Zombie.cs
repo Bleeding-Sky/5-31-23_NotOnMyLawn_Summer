@@ -54,6 +54,10 @@ public class Spawner_Zombie : MonoBehaviour
         //set target for pathfinding
         OverheadPathing_Zombie pathingScript = newOverheadZmb.GetComponent<OverheadPathing_Zombie>();
         pathingScript.target = overheadAnchorTransform;
+
+        //grab the sprite renderers for spritecontroller
+        masterObject.GetComponent<SpriteController_Zombie>().fetchSpriteRenderers();
+
     }
 
 

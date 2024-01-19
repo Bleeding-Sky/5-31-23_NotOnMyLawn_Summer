@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Status_Zombie))]
+[RequireComponent(typeof(Health_Zombie))]
+
 /// <summary>
 /// placed on zombie master object. destroys outdoor views of the zombie when it reaches a window
 /// and spawns an indoor variant indoors at the corresponding window
@@ -17,6 +20,13 @@ public class EnterBuilding_Zombie : MonoBehaviour
     //passed to indoor zombie for behavior purposes
     public Status_Zombie statusScript;
     public Health_Zombie healthScript;
+
+    [SerializeField] SpriteController_Zombie spriteControllerScript;
+
+    private void Awake()
+    {
+        spriteControllerScript = GetComponent<SpriteController_Zombie>();
+    }
 
     private void Start()
     {
@@ -64,6 +74,9 @@ public class EnterBuilding_Zombie : MonoBehaviour
         {
             damageRegionScript.damageReporterScript = indoorDmgReporterScript;
         }
+
+        //refresh renderers when spawning indoors
+        spriteControllerScript.fetchSpriteRenderers();
 
     }
 }

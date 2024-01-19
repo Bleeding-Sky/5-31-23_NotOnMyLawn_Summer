@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(  typeof(Status_Zombie), 
+                    typeof(Health_Zombie), 
+                    typeof(SpriteController_Zombie))]
+
 public class LimbLoss_Zombie : MonoBehaviour
 {
 
@@ -16,17 +20,32 @@ public class LimbLoss_Zombie : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] Health_Zombie healthScript;
-    public bool headBroken = false;
-    public bool oneArmLost = false;
-    public bool bothArmsLost = false;
-    public bool legsBroken = false;
+    [SerializeField] SpriteController_Zombie spriteController;
+    public bool headless = false;
+    public bool oneArmBroken = false;
+    public bool armless = false;
+    public bool legless = false;
 
     private void Awake()
     {
         statusScript = GetComponent<Status_Zombie>();
         healthScript = GetComponent<Health_Zombie>();
+        spriteController = GetComponent<SpriteController_Zombie>();
     }
 
+    private void Start()
+    {
+        UpdateSprite();
+    }
+
+    //CHANGE THIS SO IT ONLY HAPPENS WHEN NECESSARY
+    private void Update()
+    {
+        spriteController.fetchSpriteRenderers();
+        UpdateSprite();
+    }
+
+    #region Attempt Part Break Methods
 
     /// <summary>
     /// rolls to break the zombie's head if its head health is at 0
@@ -74,12 +93,16 @@ public class LimbLoss_Zombie : MonoBehaviour
             BreakLegs();
         }
     }
+    #endregion
 
+    #region Break Part Methods
 
     public void BreakHead(float maxHealth, float currentHealth)
     {
-        headBroken = true;
+        headless = true;
         AttemptEndureHeadBreak(maxHealth, currentHealth);
+
+        UpdateSprite();
     }
 
     private void AttemptEndureHeadBreak(float maxHealth, float currentHealth)
@@ -105,20 +128,38 @@ public class LimbLoss_Zombie : MonoBehaviour
 
     public void LoseArm()
     {
-        if (oneArmLost)
+        //break one arm if no arms broken, break other arm if one arm broken
+        if (!armless)
         {
-            bothArmsLost = true;
+            if (oneArmBroken)
+            {
+                armless = true;
+                oneArmBroken = false;
+            }
+            else if (!oneArmBroken)
+            {
+                oneArmBroken = true;
+            }
         }
-        else if (!oneArmLost)
-        {
-            oneArmLost = true;
-        }
+
+        UpdateSprite();
     }
 
     public void BreakLegs()
     {
-        legsBroken = true;
+        legless = true;
         statusScript.isCrawling = true;
+
+        UpdateSprite();
+    }
+    #endregion
+
+    /// <summary>
+    /// calls method on a spritecontroller to change sprite according to limb status booleans
+    /// </summary>
+    public void UpdateSprite()
+    {
+        spriteController.changeSprite(headless, oneArmBroken, armless, legless);
     }
 
 }
