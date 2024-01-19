@@ -90,7 +90,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
         wndwTrackerScript.overheadTrackerScript = overheadTrackerScript;
 
         //set up zombie damage reporter
-        if (isZombie) { SetUpZmbDamageReporter(wndwObject, parentObject); }
+        if (isZombie) { SetUpZombie(wndwObject, parentObject); }
 
     }
 
@@ -108,17 +108,20 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     }
 
     /// <summary>
-    /// configures the window view zombie's damage reporter with refs from the zombie's master object
+    /// configures the window view zombie's damage reporter with refs from the zombie's master object.
+    /// also refreshes the zombie's sprite controller so it has correct sprites
     /// </summary>
     /// <param name="windowViewZombieObj"></param>
     /// <param name="zombieMasterObject"></param>
-    private void SetUpZmbDamageReporter(GameObject windowViewZombieObj, GameObject zombieMasterObject)
+    private void SetUpZombie(GameObject windowViewZombieObj, GameObject zombieMasterObject)
     {
         //access the window zombie's damage reporter
         DmgReporter_Zombie wndwDmgReporter = windowViewZombieObj.GetComponent<DmgReporter_Zombie>();
 
         //give it the health script from the window zombie's parent object
         wndwDmgReporter.zmbHealthScript = zombieMasterObject.GetComponent<Health_Zombie>();
+
+        zombieMasterObject.GetComponent<SpriteController_Zombie>().Refresh();
 
     }
 

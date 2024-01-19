@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4466327211436155182}
   - component: {fileID: 4063889580122408216}
   - component: {fileID: 5523137899565297987}
+  - component: {fileID: -7352614781819777273}
   m_Layer: 31
   m_Name: Test Zmb Overhead
   m_TagString: Zombie
@@ -74,14 +75,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.95, y: 1}
+    oldSize: {x: 5, y: 5}
     newSize: {x: 0.95, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2, y: 3.2}
   m_EdgeRadius: 0
 --- !u!50 &5399449620101174439
 Rigidbody2D:
@@ -151,8 +152,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2cf29bb8f811afc49b66f392f4b4d75d, type: 3}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 77c0bea438ab4cf428a9e30dfe2d43ce, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,3 +230,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zmbHealthScript: {fileID: 0}
+--- !u!114 &-7352614781819777273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53446707410528238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642b4f32b6a024d44b67fe5a9d7d1b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: 0
+  mySpriteRenderer: {fileID: 0}

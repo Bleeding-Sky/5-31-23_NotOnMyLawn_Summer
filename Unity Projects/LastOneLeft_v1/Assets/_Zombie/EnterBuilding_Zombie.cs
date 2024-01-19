@@ -76,7 +76,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
         }
 
         //refresh renderers when spawning indoors
-        spriteControllerScript.fetchSpriteRenderers();
+        spriteControllerScript.Refresh();
 
     }
 }

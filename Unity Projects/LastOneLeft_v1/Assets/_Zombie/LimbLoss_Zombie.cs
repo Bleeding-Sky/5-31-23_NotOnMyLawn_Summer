@@ -35,15 +35,9 @@ public class LimbLoss_Zombie : MonoBehaviour
 
     private void Start()
     {
-        UpdateSprite();
+        ChangeSprite();
     }
 
-    //CHANGE THIS SO IT ONLY HAPPENS WHEN NECESSARY
-    private void Update()
-    {
-        spriteController.fetchSpriteRenderers();
-        UpdateSprite();
-    }
 
     #region Attempt Part Break Methods
 
@@ -102,7 +96,7 @@ public class LimbLoss_Zombie : MonoBehaviour
         headless = true;
         AttemptEndureHeadBreak(maxHealth, currentHealth);
 
-        UpdateSprite();
+        ChangeSprite();
     }
 
     private void AttemptEndureHeadBreak(float maxHealth, float currentHealth)
@@ -142,7 +136,7 @@ public class LimbLoss_Zombie : MonoBehaviour
             }
         }
 
-        UpdateSprite();
+        ChangeSprite();
     }
 
     public void BreakLegs()
@@ -150,16 +144,16 @@ public class LimbLoss_Zombie : MonoBehaviour
         legless = true;
         statusScript.isCrawling = true;
 
-        UpdateSprite();
+        ChangeSprite();
     }
     #endregion
 
     /// <summary>
     /// calls method on a spritecontroller to change sprite according to limb status booleans
     /// </summary>
-    public void UpdateSprite()
+    public void ChangeSprite()
     {
-        spriteController.changeSprite(headless, oneArmBroken, armless, legless);
+        spriteController.ActivateSpriteChangers(headless, oneArmBroken, armless, legless);
     }
 
 }

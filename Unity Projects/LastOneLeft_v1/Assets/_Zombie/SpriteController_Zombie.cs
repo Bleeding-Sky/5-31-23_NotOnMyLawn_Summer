@@ -13,7 +13,13 @@ public class SpriteController_Zombie : MonoBehaviour
 
     [Header("DEBUG")]
     [SerializeField] List<SpriteData_Zombie> sprites;
-    public SpriteRenderer[] childrenSpriteRenderers;
+    public List<SpriteChanger_Zombie> childrenSpriteChangers;
+
+    //local tracking of recent sprite bools
+    public bool local_isHeadless = false;
+    public bool local_isOneArm = false;
+    public bool local_isArmless = false;
+    public bool local_isLegless = false;
 
     private void Awake()
     {
@@ -24,35 +30,64 @@ public class SpriteController_Zombie : MonoBehaviour
     /// <summary>
     /// refreshes the sprite renderer list
     /// </summary>
-    public void fetchSpriteRenderers()
+    public void FetchSpriteChangers()
     {
-        childrenSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        GetComponentsInChildren(childrenSpriteChangers);
     }
 
     /// <summary>
-    /// changes zombie sprite based on limb status
+    /// tells all children sprite changers to change their sprites.
+    /// also updates local bools to reflect most recent sprite info.
     /// </summary>
     /// <param name="isHeadless"></param>
     /// <param name="isOneArm"></param>
     /// <param name="isArmless"></param>
     /// <param name="isLegless"></param>
-    public void changeSprite(bool isHeadless, bool isOneArm, bool isArmless, bool isLegless)
+    public void ActivateSpriteChangers(bool isHeadless, bool isOneArm, bool isArmless, bool isLegless)
     {
 
-        foreach (SpriteData_Zombie spriteData in sprites)
-        {
-            bool correctHeadState = isHeadless == spriteData.headless;
-            bool correctOneArmState = isOneArm == spriteData.oneArm;
-            bool correctArmlessState = isArmless == spriteData.armless;
-            bool correctLegState = isLegless == spriteData.legless;
+        UpdateLocalBools(isHeadless, isOneArm, isArmless, isLegless);
 
-            if (correctHeadState && correctOneArmState &&
-                correctArmlessState && correctLegState)
+        foreach (SpriteChanger_Zombie spriteChanger in childrenSpriteChangers)
+        {
+            if (spriteChanger != null)
             {
-                foreach (SpriteRenderer renderer in childrenSpriteRenderers)
-                renderer.sprite = spriteData.sprite;
+                spriteChanger.ChangeSprite(sprites, isHeadless, isOneArm, isArmless, isLegless);
             }
+            
         }
+    }
+
+    /// <summary>
+    /// activates all sprite changers to change their sprites to match the locally saved sprite info
+    /// </summary>
+    private void UpdateSprites()
+    {
+        ActivateSpriteChangers(local_isHeadless, local_isOneArm, local_isArmless, local_isLegless);
+    }
+
+    /// <summary>
+    /// updates locally saved bools for sprite info
+    /// </summary>
+    /// <param name="isHeadless"></param>
+    /// <param name="isOneArm"></param>
+    /// <param name="isArmless"></param>
+    /// <param name="isLegless"></param>
+    private void UpdateLocalBools(bool isHeadless, bool isOneArm, bool isArmless, bool isLegless)
+    {
+        local_isHeadless = isHeadless;
+        local_isOneArm = isOneArm;
+        local_isArmless = isArmless;
+        local_isLegless = isLegless;
+    }
+
+    /// <summary>
+    /// fetches all sprite renderers in children and updates them with most recent limb status
+    /// </summary>
+    public void Refresh()
+    {
+        FetchSpriteChangers();
+        UpdateSprites();
     }
     
 }
