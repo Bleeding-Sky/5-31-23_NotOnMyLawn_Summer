@@ -21,6 +21,13 @@ public class Behavior_Zombie : MonoBehaviour
     public bool recharging;
     public bool playerInRange;
 
+    public float scaleFloat;
+
+    private void Start()
+    {
+        scaleFloat = transform.localScale.x;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -48,11 +55,11 @@ public class Behavior_Zombie : MonoBehaviour
         float playerDirection = playerPosition.playerPosition.x - zombiePosition.x;
         if (playerDirection > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(scaleFloat, transform.localScale.y, transform.localScale.z);
         }
         else if (playerDirection <= 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-scaleFloat, transform.localScale.y, transform.localScale.z);
         }
     }
 
