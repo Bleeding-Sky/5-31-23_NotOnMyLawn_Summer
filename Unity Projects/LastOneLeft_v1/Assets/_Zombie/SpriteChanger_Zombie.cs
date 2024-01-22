@@ -15,10 +15,12 @@ public class SpriteChanger_Zombie : MonoBehaviour
 
     [Header("DEBUG")]
     [SerializeField] SpriteRenderer mySpriteRenderer;
+    [SerializeField] HitboxChanger_Zombie hitboxChangerScript;
 
     private void Awake()
     {
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        hitboxChangerScript = GetComponent<HitboxChanger_Zombie>();
     }
 
     private void Update()
@@ -52,6 +54,10 @@ public class SpriteChanger_Zombie : MonoBehaviour
         }
         //TODO: make it consider its view and choose the sprite that matches the bools AND is in its view
         //cant do this yet because we dont have view specifric sprites
+
+        //change hitboxes to match sprite
+        hitboxChangerScript.ChangeHitbox(isHeadless, isLegless);
+
     }
 
 }
