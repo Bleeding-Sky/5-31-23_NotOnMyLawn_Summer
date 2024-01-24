@@ -20,7 +20,11 @@ public class SpriteChanger_Zombie : MonoBehaviour
     private void Awake()
     {
         mySpriteRenderer = GetComponent<SpriteRenderer>();
-        hitboxChangerScript = GetComponent<HitboxChanger_Zombie>();
+
+        if (view != ViewEnum.Overhead)
+        {
+            hitboxChangerScript = GetComponent<HitboxChanger_Zombie>();
+        }
     }
 
     private void Update()
@@ -55,9 +59,11 @@ public class SpriteChanger_Zombie : MonoBehaviour
         //TODO: make it consider its view and choose the sprite that matches the bools AND is in its view
         //cant do this yet because we dont have view specifric sprites
 
-        //change hitboxes to match sprite
-        hitboxChangerScript.ChangeHitbox(isHeadless, isLegless);
-
+        if (view != ViewEnum.Overhead)
+        {
+            //change hitboxes to match sprite
+            hitboxChangerScript.ChangeHitbox(isHeadless, isLegless);
+        }
     }
 
 }

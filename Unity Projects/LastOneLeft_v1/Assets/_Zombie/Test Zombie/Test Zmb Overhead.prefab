@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 5399449620101174439}
   - component: {fileID: 7524999680231197858}
   - component: {fileID: 3773056827304322993}
-  - component: {fileID: 4466327211436155182}
-  - component: {fileID: 4063889580122408216}
   - component: {fileID: 5523137899565297987}
   - component: {fileID: -7352614781819777273}
+  - component: {fileID: 6301386136626031206}
+  - component: {fileID: 718337556352143965}
   m_Layer: 31
   m_Name: Test Zmb Overhead
   m_TagString: Zombie
@@ -71,7 +71,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -82,7 +82,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 3.2}
+  m_Size: {x: 1.2, y: 1.81}
   m_EdgeRadius: 0
 --- !u!50 &5399449620101174439
 Rigidbody2D:
@@ -181,42 +181,6 @@ MonoBehaviour:
   xDisplacementFromAnchor: 0
   distanceFromAnchor: 0
   ZmbMasterParentObj: {fileID: 0}
---- !u!195 &4466327211436155182
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53446707410528238}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &4063889580122408216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53446707410528238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 726138fa93b8da846ab0d03470ea15d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  myAgent: {fileID: 0}
 --- !u!114 &5523137899565297987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +208,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: 0
   mySpriteRenderer: {fileID: 0}
+  hitboxChangerScript: {fileID: 0}
+--- !u!195 &6301386136626031206
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53446707410528238}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.53
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.75
+  m_BaseOffset: 0.99
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &718337556352143965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53446707410528238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726138fa93b8da846ab0d03470ea15d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  myAgent: {fileID: 0}
