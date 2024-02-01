@@ -85,9 +85,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e8782ba95c234479a03a5231eaec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stumbleDuration: 1
+  stumbleChance: 30
+  stunDuration: 3
   headshotStunChance: 40
   bodyshotStunChance: 20
-  stumbleChance: 30
+  fallenDuration: 5
   fallForwardChance: 50
   headshotFallBackwardChance: 60
   bodyshotFallBackwardChance: 30
@@ -98,6 +101,9 @@ MonoBehaviour:
   isCrawling: 0
   isAttacking: 0
   isChasing: 0
+  stumbleTimeRemaining: 0
+  stunTimeRemaining: 0
+  fallenTimeRemaining: 0
 --- !u!114 &6260966416785929294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +144,7 @@ MonoBehaviour:
   indoorZmbPrefab: {fileID: 3258556968829016637, guid: 319a4cad37092a64ba267e570677cc10, type: 3}
   statusScript: {fileID: 3029257139352069340}
   healthScript: {fileID: 0}
+  spriteControllerScript: {fileID: 0}
 --- !u!114 &7300352260598685500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,4 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteListSO: {fileID: 11400000, guid: 6fd087b7c36ac09438bb81e164e2df2d, type: 2}
   sprites: []
-  childrenSpriteRenderers: []
+  childrenSpriteChangers: []
+  local_isHeadless: 0
+  local_isOneArm: 0
+  local_isArmless: 0
+  local_isLegless: 0
