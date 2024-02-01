@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum zombieStatusEnum { Idle, Stumbling, Stunned, FallenForward, FallenBackward, Crawling }
-
 public class Status_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
@@ -21,13 +19,13 @@ public class Status_Zombie : MonoBehaviour
     [SerializeField] float headshotFallBackwardChance = 60;
     [SerializeField] float bodyshotFallBackwardChance = 30;
 
+    [SerializeField] float enrageDuration = 2;
+
     [Header("DEBUG")]
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
-    public bool isStumbling = false;
-    public bool isStunned = false;
-    public bool isFallenForward = false;
-    public bool isFallenBackward = false;
+    ZmbStandingStateEnum standingState = ZmbStandingStateEnum.NoStatus;
+
     public bool isCrawling = false;
     public bool isAttacking = false;
     public bool isChasing = false;
@@ -35,15 +33,22 @@ public class Status_Zombie : MonoBehaviour
     [SerializeField] float stumbleTimeRemaining;
     [SerializeField] float stunTimeRemaining;
     [SerializeField] float fallenTimeRemaining;
+    [SerializeField] float enrageTimeRemaining;
 
-    zombieStatusEnum statusEnum = zombieStatusEnum.Idle;
 
     private void Update()
     {
         //checks if status is active, then decrements its timer and checks if it == 0 and should end
-        #region decrement status timers
+        if (!isCrawling) { UpdateStandingStatusTimers(); }
 
-        if (isStumbling)
+    }
+
+    /// <summary>
+    /// decrements the currently active status effect & removes it when the timer hits 0
+    /// </summary>
+    private void UpdateStandingStatusTimers()
+    {
+        if (standingState == ZmbStandingStateEnum.Stumbling)
         {
             stumbleTimeRemaining -= Time.deltaTime;
             if (stumbleTimeRemaining <= 0)
@@ -52,7 +57,7 @@ public class Status_Zombie : MonoBehaviour
             }
         }
 
-        if (isStunned)
+        if (standingState == ZmbStandingStateEnum.Stunned)
         {
             stunTimeRemaining -= Time.deltaTime;
             if (stunTimeRemaining <= 0)
@@ -61,33 +66,89 @@ public class Status_Zombie : MonoBehaviour
             }
         }
 
-        if (isFallenForward || isFallenBackward)
+        if (standingState == ZmbStandingStateEnum.FallenForward ||
+            standingState == ZmbStandingStateEnum.FallenBackward)
         {
             fallenTimeRemaining -= Time.deltaTime;
             if (fallenTimeRemaining <= 0)
             {
-                if (isFallenForward) { StopFallForward(); }
-                else if (isFallenBackward) { StopFallBackward(); }
+                if (standingState == ZmbStandingStateEnum.FallenForward) { StopFallForward(); }
+                else if (standingState == ZmbStandingStateEnum.FallenBackward) { StopFallBackward(); }
             }
         }
 
-        #endregion
-
+        if (standingState == ZmbStandingStateEnum.Enraged)
+        {
+            enrageTimeRemaining -= Time.deltaTime;
+            if (enrageTimeRemaining <= 0)
+            {
+                StopEnrage();
+            }
+        }
     }
+
+    //attempts to apply appropriate statuses based on current zombie state and incoming damage region
+    #region Incoming Damage Processors
+
+    public void ProcessHeadshotStatus()
+    {
+        //ensure prerequisite state is active, then attempt state change
+        if (standingState == ZmbStandingStateEnum.NoStatus)
+        {
+            AttemptStun(DmgRegionEnum.Head);
+        }
+        else if (standingState == ZmbStandingStateEnum.Stunned)
+        {
+            AttemptFallBackward(DmgRegionEnum.Head);
+        }
+    }
+
+    public void ProcessBodyshotStatus()
+    {
+        //ensure prerequisite state is active
+        if (standingState == ZmbStandingStateEnum.NoStatus)
+        {
+            //attempt proper state change
+            AttemptStun(DmgRegionEnum.Body);
+
+        }
+        else if (standingState == ZmbStandingStateEnum.Stunned)
+        {
+            AttemptFallBackward(DmgRegionEnum.Body);
+        }
+    }
+
+    public void ProcessLegshotStatus()
+    {
+        //if zombie has no status, attempt a stumble
+        //if zombie is stumbling, attempt a fall forward
+        //if zombie is stunned and recieves leg damage, attempt a stumble
+
+        //ensure prerequisite state is active
+        if (standingState == ZmbStandingStateEnum.NoStatus)
+        {
+            //attempt proper state change
+            AttemptStumble();
+        }
+        else if (standingState == ZmbStandingStateEnum.Stumbling)
+        {
+            AttemptFallForward();
+        }
+        else if (standingState == ZmbStandingStateEnum.Stunned)
+        {
+            AttemptStumble();
+        }
+    }
+
+    #endregion
 
     #region "attempt status" methods
 
     /// <summary>
     /// determines if a stumble occurs
     /// </summary>
-    public void AttemptStumble()
+    void AttemptStumble()
     {
-        if (isStumbling)
-        {
-            AttemptFallForward();
-            return;
-        }
-
         if (RNGRolls_System.RollUnder(stumbleChance)) { DoStumble(); }
     }
 
@@ -95,14 +156,8 @@ public class Status_Zombie : MonoBehaviour
     /// determines if a stun occurs
     /// </summary>
     /// <param name="damagedRegion"></param>
-    public void AttemptStun(DmgRegionEnum damagedRegion)
+    void AttemptStun(DmgRegionEnum damagedRegion)
     {
-        if (isStunned)
-        {
-            AttemptFallBackward(damagedRegion);
-            return;
-        }
-
         float successCutoff = 0;
 
         if (damagedRegion == DmgRegionEnum.Head)
@@ -122,7 +177,7 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// determines if the zombie falls forward
     /// </summary>
-    public void AttemptFallForward()
+    void AttemptFallForward()
     {
         if (RNGRolls_System.RollUnder(fallForwardChance)) { DoFallForward(); }
     }
@@ -131,7 +186,7 @@ public class Status_Zombie : MonoBehaviour
     /// determines if the zombie falls backward
     /// </summary>
     /// <param name="damagedRegion"></param>
-    public void AttemptFallBackward(DmgRegionEnum damagedRegion)
+    void AttemptFallBackward(DmgRegionEnum damagedRegion)
     {
         float successCutoff = 0;
 
@@ -154,31 +209,38 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// applies the stumble status
     /// </summary>
-    public void DoStumble()
+    void DoStumble()
     {
-        isStumbling = true;
+        standingState = ZmbStandingStateEnum.Stumbling;
         stumbleTimeRemaining = stumbleDuration;
     }
 
     /// <summary>
     /// applies the stun status
     /// </summary>
-    public void DoStun()
+    void DoStun()
     {
-        isStunned = true;
+        standingState = ZmbStandingStateEnum.Stunned;
         stunTimeRemaining = stunDuration;
     }
 
-    public void DoFallForward()
+    void DoFallForward()
     {
-        isFallenForward = true;
+        standingState = ZmbStandingStateEnum.FallenForward;
         fallenTimeRemaining = fallenDuration;
     }
 
-    public void DoFallBackward()
+    void DoFallBackward()
     {
-        isFallenBackward = true;
+        standingState = ZmbStandingStateEnum.FallenBackward;
         fallenTimeRemaining = fallenDuration;
+    }
+
+    void DoEnrage()
+    {
+        standingState = ZmbStandingStateEnum.Enraged;
+        enrageTimeRemaining = enrageDuration;
+
     }
 
     /// <summary>
@@ -212,27 +274,32 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// removes the stumble status
     /// </summary>
-    public void StopStumble()
+    void StopStumble()
     {
-        isStumbling = false;
+        standingState = ZmbStandingStateEnum.NoStatus;
     }
 
     /// <summary>
     /// removes the stun status
     /// </summary>
-    public void StopStun()
+    void StopStun()
     {
-        isStunned = false;
+        standingState = ZmbStandingStateEnum.NoStatus;
     }
 
-    public void StopFallForward()
+    void StopFallForward()
     {
-        isFallenForward = false;
+        standingState = ZmbStandingStateEnum.NoStatus;
     }
 
-    public void StopFallBackward()
+    void StopFallBackward()
     {
-        isFallenBackward = false;
+        standingState = ZmbStandingStateEnum.NoStatus;
+    }
+
+    void StopEnrage()
+    {
+        standingState = ZmbStandingStateEnum.Stumbling;
     }
 
     /// <summary>

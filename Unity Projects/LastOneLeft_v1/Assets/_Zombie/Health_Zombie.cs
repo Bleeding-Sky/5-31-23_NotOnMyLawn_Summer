@@ -60,7 +60,7 @@ public class Health_Zombie : MonoBehaviour
         //attempt to break head if its health is 0
         if (headHealth > 0)
         {
-            statusScript.AttemptStun(DmgRegionEnum.Head);
+            statusScript.ProcessHeadshotStatus();
         }
         else
         {
@@ -74,7 +74,7 @@ public class Health_Zombie : MonoBehaviour
     {
         //attempt stun and arm loss regardless of body health
         bodyHealth -= dmgVal;
-        statusScript.AttemptStun(DmgRegionEnum.Body);
+        statusScript.ProcessBodyshotStatus();
         limbLossScript.AttemptArmLoss(bodyHealth);
         DamageHealth(dmgVal * bodyDmgMultiplier);
 
@@ -88,7 +88,7 @@ public class Health_Zombie : MonoBehaviour
         //attempt to break legs if legs have no health
         if(legHealth > 0)
         {
-            statusScript.AttemptStumble();
+            statusScript.ProcessLegshotStatus();
         }
         else
         {

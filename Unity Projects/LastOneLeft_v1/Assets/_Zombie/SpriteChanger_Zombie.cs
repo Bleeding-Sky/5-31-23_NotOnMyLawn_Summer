@@ -29,7 +29,7 @@ public class SpriteChanger_Zombie : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"renderer = {mySpriteRenderer}");
+        //Debug.Log($"renderer = {mySpriteRenderer}");
     }
 
     /// <summary>
