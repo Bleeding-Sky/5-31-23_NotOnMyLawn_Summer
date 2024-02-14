@@ -24,7 +24,7 @@ public class Status_Zombie : MonoBehaviour
     [Header("DEBUG")]
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
-    ZmbStandingStateEnum standingState = ZmbStandingStateEnum.NoStatus;
+    public ZmbStandingStateEnum standingState = ZmbStandingStateEnum.NoStatus;
 
     public bool isCrawling = false;
     public bool isAttacking = false;

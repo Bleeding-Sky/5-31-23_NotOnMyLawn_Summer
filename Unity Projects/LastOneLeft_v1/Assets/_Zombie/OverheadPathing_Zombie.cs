@@ -9,9 +9,15 @@ public class OverheadPathing_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
     public Transform target;
+    [SerializeField] float normalSpeed = 3.5f;
+    [SerializeField] float stunSpeed = 0;
+    [SerializeField] float stumbleSpeed = 1.5f;
+    [SerializeField] float fallenMoveSpeed = 0;
+    [SerializeField] float enragedSpeed = 9;
 
     [Header("DEBUG")]
     public NavMeshAgent myAgent;
+    public Status_Zombie statusScript; //passed in by spawner_zombie script
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +36,40 @@ public class OverheadPathing_Zombie : MonoBehaviour
     {
         //set destination to the position of the target every frame
         myAgent.SetDestination(target.position);
+        UpdateAgentSpeedBasedOnStatus();
+
+    }
+
+    private void UpdateAgentSpeedBasedOnStatus()
+    {
+        float currentSpeed = 0;
+        switch (statusScript.standingState)
+        {
+            case ZmbStandingStateEnum.NoStatus:
+                currentSpeed = normalSpeed;
+                break;
+
+            case ZmbStandingStateEnum.Stunned:
+                currentSpeed = stunSpeed;
+                break;
+
+            case ZmbStandingStateEnum.Stumbling:
+                currentSpeed = stumbleSpeed;
+                break;
+
+            case ZmbStandingStateEnum.FallenForward:
+                currentSpeed = fallenMoveSpeed;
+                break;
+
+            case ZmbStandingStateEnum.FallenBackward:
+                currentSpeed = fallenMoveSpeed;
+                break;
+
+            case ZmbStandingStateEnum.Enraged:
+                currentSpeed = enragedSpeed;
+                break;
+        }
+
+        myAgent.speed = currentSpeed;
     }
 }

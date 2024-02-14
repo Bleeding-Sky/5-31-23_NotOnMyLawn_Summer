@@ -58,6 +58,10 @@ public class Spawner_Zombie : MonoBehaviour
         //grab the sprite renderers for spritecontroller
         masterObject.GetComponent<SpriteController_Zombie>().Refresh();
 
+        //give zombie states script ref to overhead movement script for state-specific movement changes
+        Status_Zombie statusScript = masterObject.GetComponent<Status_Zombie>();
+        newOverheadZmb.GetComponent<OverheadPathing_Zombie>().statusScript = statusScript;
+
     }
 
 
