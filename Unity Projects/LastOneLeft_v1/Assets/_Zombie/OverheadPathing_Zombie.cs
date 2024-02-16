@@ -9,11 +9,11 @@ public class OverheadPathing_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
     public Transform target;
-    [SerializeField] float normalSpeed = 3.5f;
+    [SerializeField] float normalSpeed = 3;
     [SerializeField] float stunSpeed = 0;
     [SerializeField] float stumbleSpeed = 1.5f;
     [SerializeField] float fallenMoveSpeed = 0;
-    [SerializeField] float enragedSpeed = 9;
+    [SerializeField] float enragedSpeed = 5;
 
     [Header("DEBUG")]
     public NavMeshAgent myAgent;

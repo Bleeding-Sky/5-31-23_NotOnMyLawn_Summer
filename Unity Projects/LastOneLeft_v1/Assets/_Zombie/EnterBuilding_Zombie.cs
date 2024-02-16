@@ -44,7 +44,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
     {
         //delete all children (other views of the zombie)
         Transform[] outdoorViews = GetComponentsInChildren<Transform>();
-        
+
         foreach (Transform view in outdoorViews)
         {
             //this makes the object NOT delete itself, since
@@ -63,6 +63,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //configure indoor zombie components
         newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = statusScript;
+        SetUpBehaviorStatusMonitoring(newIndoorZombie);
 
         //save damage reporter script for dmg region config, and give it the health script
         DmgReporter_Zombie indoorDmgReporterScript = newIndoorZombie.GetComponent<DmgReporter_Zombie>();
@@ -78,5 +79,16 @@ public class EnterBuilding_Zombie : MonoBehaviour
         //refresh renderers when spawning indoors
         spriteControllerScript.Refresh();
 
+    }
+
+    /// <summary>
+    /// gives a ref (to the status script) to the behavior script so it can change move speed
+    /// based on the zombie's state
+    /// </summary>
+    /// <param name="newIndoorZombie"></param>
+    private void SetUpBehaviorStatusMonitoring(GameObject newIndoorZombie)
+    {
+        Behavior_Zombie indoorBhvrScript = newIndoorZombie.GetComponent<Behavior_Zombie>();
+        indoorBhvrScript.statusScript = GetComponent<Status_Zombie>();
     }
 }

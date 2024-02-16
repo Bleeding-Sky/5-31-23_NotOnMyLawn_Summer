@@ -5,12 +5,19 @@ using UnityEngine;
 public class Behavior_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
-    public int strength;
-    public int coolDown;
-    public float windUp;
-    public float normalZombieSpeed;
-    public float attackArea;
+    public int strength = 1;
+    public int coolDown = 1;
+    public float windUp = .25f;
+    public float moveSpeed = 1;
+    public float attackArea = .5f;
     public LayerMask Player;
+
+    //vars for speed switching (due to zombie state changes)
+    [SerializeField] float normalSpeed = 1;
+    [SerializeField] float stunSpeed = 0;
+    [SerializeField] float stumbleSpeed = .5f;
+    [SerializeField] float fallenMoveSpeed = 0;
+    [SerializeField] float enragedSpeed = 2.5f;
 
     [Header("DEBUG")]
     public PositionTracker_Player playerPosition;
@@ -23,6 +30,8 @@ public class Behavior_Zombie : MonoBehaviour
 
     public float scaleFloat;
 
+    public Status_Zombie statusScript;
+
     private void Start()
     {
         scaleFloat = transform.localScale.x;
@@ -31,7 +40,9 @@ public class Behavior_Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //set speed before moving
+        ChangeSpeedBasedOnStatus();
+
         zombiePosition = transform.position;
         DetectPlayer();
         DetermineState();
@@ -69,7 +80,7 @@ public class Behavior_Zombie : MonoBehaviour
     private void ChasingPlayer()
     {
         zombieStates.DoChase();
-        transform.position = Vector3.MoveTowards(transform.position, playerPosition.playerPosition, normalZombieSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, playerPosition.playerPosition, moveSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -159,6 +170,42 @@ public class Behavior_Zombie : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+    /// <summary>
+    /// reads the current state of the zombie and changes speed to appropriate variable
+    /// </summary>
+    private void ChangeSpeedBasedOnStatus()
+    {
+        float currentSpeed = 0;
+        switch (statusScript.standingState)
+        {
+            case ZmbStandingStateEnum.NoStatus:
+                currentSpeed = normalSpeed;
+                break;
+
+            case ZmbStandingStateEnum.Stunned:
+                currentSpeed = stunSpeed;
+                break;
+
+            case ZmbStandingStateEnum.Stumbling:
+                currentSpeed = stumbleSpeed;
+                break;
+
+            case ZmbStandingStateEnum.FallenForward:
+                currentSpeed = fallenMoveSpeed;
+                break;
+
+            case ZmbStandingStateEnum.FallenBackward:
+                currentSpeed = fallenMoveSpeed;
+                break;
+
+            case ZmbStandingStateEnum.Enraged:
+                currentSpeed = enragedSpeed;
+                break;
+        }
+
+        moveSpeed = currentSpeed;
     }
 
 }

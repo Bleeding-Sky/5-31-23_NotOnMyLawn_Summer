@@ -94,16 +94,15 @@ MonoBehaviour:
   fallForwardChance: 50
   headshotFallBackwardChance: 60
   bodyshotFallBackwardChance: 30
-  isStumbling: 0
-  isStunned: 0
-  isFallenForward: 0
-  isFallenBackward: 0
+  enrageDuration: 2
+  standingState: 0
   isCrawling: 0
   isAttacking: 0
   isChasing: 0
   stumbleTimeRemaining: 0
   stunTimeRemaining: 0
   fallenTimeRemaining: 0
+  enrageTimeRemaining: 0
 --- !u!114 &6260966416785929294
 MonoBehaviour:
   m_ObjectHideFlags: 0
