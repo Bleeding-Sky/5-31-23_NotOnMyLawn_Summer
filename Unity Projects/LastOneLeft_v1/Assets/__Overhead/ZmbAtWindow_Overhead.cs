@@ -30,7 +30,7 @@ public class ZmbAtWindow_Overhead : MonoBehaviour
             zmbMasterEnterBuildingScript = ZmbMasterObj.GetComponent<EnterBuilding_Zombie>();
 
             //call EnterBuilding on the script to spawn zombie indoors
-            zmbMasterEnterBuildingScript.EnterBuilding(indoorWindowTransform);
+            zmbMasterEnterBuildingScript.StartEnterBuilding(indoorWindowTransform);
         }
     }
 }

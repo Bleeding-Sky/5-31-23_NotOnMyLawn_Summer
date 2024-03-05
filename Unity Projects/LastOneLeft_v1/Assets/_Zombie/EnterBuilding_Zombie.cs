@@ -15,11 +15,17 @@ public class EnterBuilding_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
     public GameObject indoorZmbPrefab;
+    public float enterBuildingDuration = 3;
 
     [Header("DEBUG")]
     //passed to indoor zombie for behavior purposes
     public Status_Zombie statusScript;
     public Health_Zombie healthScript;
+    //indoor window transform where zombie will spawn
+    public Transform localcopy_indoorWindowTranform;
+    public bool isEnteringBuilding;
+    public float enterBuildingTimeRemaining;
+    
 
     [SerializeField] SpriteController_Zombie spriteControllerScript;
 
@@ -40,7 +46,24 @@ public class EnterBuilding_Zombie : MonoBehaviour
     /// a given transform, specifying the indoor position of the window.
     /// </summary>
     /// <param name="indoorWindowTransform"></param>
-    public void EnterBuilding(Transform indoorWindowTransform)
+    public void StartEnterBuilding(Transform indoorWindowTransform)
+    {
+        //flip isEnteringBuilding bool
+        //start timer for entering building
+
+        //TODO: add timer stuff to update method so it counts down and then calls moveInside
+
+        //temp for now so functionality doesnt break
+        MoveInside(indoorWindowTransform);
+
+    }
+
+    /// <summary>
+    /// deletes all outside views of the zombie and spawns/configures it's indoor variant at the
+    /// window's position inside. basically moves the zombie inside the building
+    /// </summary>
+    /// <param name="indoorWindowTransform"></param>
+    private void MoveInside(Transform indoorWindowTransform)
     {
         //delete all children (other views of the zombie)
         Transform[] outdoorViews = GetComponentsInChildren<Transform>();
@@ -60,7 +83,15 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //set zmb pos to the pos of the window inside, like it crawled thru
         newIndoorZombie.transform.position = indoorWindowTransform.position;
+        ConfigureIndoorComponents(newIndoorZombie);
+    }
 
+    /// <summary>
+    /// sets up all components necessary for indoor zombie functioning
+    /// </summary>
+    /// <param name="newIndoorZombie"></param>
+    private void ConfigureIndoorComponents(GameObject newIndoorZombie)
+    {
         //configure indoor zombie components
         newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = statusScript;
         SetUpBehaviorStatusMonitoring(newIndoorZombie);
@@ -78,7 +109,6 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //refresh renderers when spawning indoors
         spriteControllerScript.Refresh();
-
     }
 
     /// <summary>
