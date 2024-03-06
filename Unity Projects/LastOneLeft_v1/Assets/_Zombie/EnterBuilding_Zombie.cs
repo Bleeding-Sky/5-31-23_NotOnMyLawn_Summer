@@ -23,7 +23,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
     public Health_Zombie healthScript;
     //indoor window transform where zombie will spawn
     public Transform localcopy_indoorWindowTranform;
-    public bool isEnteringBuilding;
+    public bool isEnteringBuilding = false;
     public float enterBuildingTimeRemaining;
     
 
@@ -41,20 +41,38 @@ public class EnterBuilding_Zombie : MonoBehaviour
         healthScript = GetComponent<Health_Zombie>();
     }
 
+    private void Update()
+    {
+        if (isEnteringBuilding)
+        {
+            AttemptMoveInside();
+        }
+    }
+
+    private void AttemptMoveInside()
+    {
+        enterBuildingTimeRemaining -= Time.deltaTime;
+        if (enterBuildingTimeRemaining <= 0)
+        {
+            MoveInside(localcopy_indoorWindowTranform);
+        }
+    }
+
     /// <summary>
-    /// destroys all outside views of a zombie and spawns an indoor view of it at
-    /// a given transform, specifying the indoor position of the window.
+    /// saves local copy of the window's indoor transform and initiates timed process
+    /// for entering building. update method will move the zombie inside when the 
+    /// process completes.
     /// </summary>
     /// <param name="indoorWindowTransform"></param>
     public void StartEnterBuilding(Transform indoorWindowTransform)
     {
-        //flip isEnteringBuilding bool
-        //start timer for entering building
+        //begin timer for entering building
+        isEnteringBuilding = true;
+        enterBuildingTimeRemaining = enterBuildingDuration;
 
-        //TODO: add timer stuff to update method so it counts down and then calls moveInside
+        //save indoor window transform for moving inside later
+        localcopy_indoorWindowTranform = indoorWindowTransform;
 
-        //temp for now so functionality doesnt break
-        MoveInside(indoorWindowTransform);
 
     }
 
@@ -84,6 +102,8 @@ public class EnterBuilding_Zombie : MonoBehaviour
         //set zmb pos to the pos of the window inside, like it crawled thru
         newIndoorZombie.transform.position = indoorWindowTransform.position;
         ConfigureIndoorComponents(newIndoorZombie);
+
+        isEnteringBuilding = false;
     }
 
     /// <summary>
