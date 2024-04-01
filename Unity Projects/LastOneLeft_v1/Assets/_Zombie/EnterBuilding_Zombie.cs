@@ -25,6 +25,8 @@ public class EnterBuilding_Zombie : MonoBehaviour
     public Transform localcopy_indoorWindowTranform;
     public bool isEnteringBuilding = false;
     public float enterBuildingTimeRemaining;
+
+    public bool isReadyToSpawnInside = false;
     
 
     [SerializeField] SpriteController_Zombie spriteControllerScript;
@@ -49,15 +51,6 @@ public class EnterBuilding_Zombie : MonoBehaviour
         }
     }
 
-    private void AttemptMoveInside()
-    {
-        enterBuildingTimeRemaining -= Time.deltaTime;
-        if (enterBuildingTimeRemaining <= 0)
-        {
-            MoveInside(localcopy_indoorWindowTranform);
-        }
-    }
-
     /// <summary>
     /// saves local copy of the window's indoor transform and initiates timed process
     /// for entering building. update method will move the zombie inside when the 
@@ -76,12 +69,45 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
     }
 
+    private void AttemptMoveInside()
+    {
+        enterBuildingTimeRemaining -= Time.deltaTime;
+        if (enterBuildingTimeRemaining <= 0)
+        {
+            /* commented out until current view tracking is implemented
+           if (currentview == window)
+            {
+                zmbMoveInsideWindow();
+            }
+           else
+            {
+                SpawnZmbInside(localcopy_indoorWindowTranform);
+            }
+            */
+            SpawnZmbInside(localcopy_indoorWindowTranform);
+        }
+    }
+
+    /// <summary>
+    /// moves the zombie inside the window in window view
+    /// </summary>
+    private void zmbMoveInsideWindow()
+    {
+        //zombie will move inside window in window view and begin damaging the player.
+        //it will not spawn in the indoor view until the player exits the window.
+
+        GetComponentInChildren<EnterWindowHelper_Zombie>().EnterWindow();
+        Destroy(GetComponentInChildren<ZombieTracker_Overhead>().gameObject);
+        isReadyToSpawnInside = true;
+
+    }
+
     /// <summary>
     /// deletes all outside views of the zombie and spawns/configures it's indoor variant at the
     /// window's position inside. basically moves the zombie inside the building
     /// </summary>
     /// <param name="indoorWindowTransform"></param>
-    private void MoveInside(Transform indoorWindowTransform)
+    private void SpawnZmbInside(Transform indoorWindowTransform)
     {
         //delete all children (other views of the zombie)
         Transform[] outdoorViews = GetComponentsInChildren<Transform>();
