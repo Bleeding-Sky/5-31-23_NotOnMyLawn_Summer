@@ -11,6 +11,7 @@ TagManager:
   - Platform
   - Zombie
   - Overhead Window
+  - Indoor Window
   layers:
   - Default
   - TransparentFX

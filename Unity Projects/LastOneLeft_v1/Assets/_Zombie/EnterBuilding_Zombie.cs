@@ -27,6 +27,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
     public float enterBuildingTimeRemaining;
 
     public bool isReadyToSpawnInside = false;
+    public CameraManagement cameraManagerScript; //set w/ persistent scriptable object
     
 
     [SerializeField] SpriteController_Zombie spriteControllerScript;
@@ -69,22 +70,27 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// tries to move the zombie inside. if the player is at the window, it will climb inside in
+    /// the window view. if the player is not at the window, it will spawn inside in the indoor view
+    /// </summary>
     private void AttemptMoveInside()
     {
         enterBuildingTimeRemaining -= Time.deltaTime;
         if (enterBuildingTimeRemaining <= 0)
         {
-            /* commented out until current view tracking is implemented
-           if (currentview == window)
+            //climb inside in window view if player is at window
+           if (cameraManagerScript.currentEnum == CameraManagement.Cameras.Window &&
+                !isReadyToSpawnInside)
             {
                 zmbMoveInsideWindow();
             }
-           else
+           //spawn inside if player is not at window
+           else if (isReadyToSpawnInside &&
+                cameraManagerScript.currentEnum != CameraManagement.Cameras.Window)
             {
                 SpawnZmbInside(localcopy_indoorWindowTranform);
             }
-            */
-            SpawnZmbInside(localcopy_indoorWindowTranform);
         }
     }
 

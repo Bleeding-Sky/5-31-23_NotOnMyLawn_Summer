@@ -141,8 +141,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indoorZmbPrefab: {fileID: 3258556968829016637, guid: 319a4cad37092a64ba267e570677cc10, type: 3}
+  enterBuildingDuration: 3
   statusScript: {fileID: 3029257139352069340}
   healthScript: {fileID: 0}
+  localcopy_indoorWindowTranform: {fileID: 0}
+  isEnteringBuilding: 0
+  enterBuildingTimeRemaining: 0
+  isReadyToSpawnInside: 0
+  cameraManagerScript: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
   spriteControllerScript: {fileID: 0}
 --- !u!114 &7300352260598685500
 MonoBehaviour:
