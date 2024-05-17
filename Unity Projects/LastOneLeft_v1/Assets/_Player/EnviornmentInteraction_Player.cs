@@ -34,6 +34,10 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         {
             BoardPileInteraction(Enviornment, actionType);
         }
+        else if(enviornmentType.isBackgroundDoor && actionType == 0)
+        {
+            BackgroundDoorInteraction(Enviornment);
+        }
     }
 
     /// <summary>
@@ -106,6 +110,27 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         else if(actionType == 2)
         {
             windowRebuild.timer = 0;
+        }
+    }
+
+    /// <summary>
+    /// sorts which door the player will exit out of
+    /// </summary>
+    /// <param name="Environment"></param>
+    private void BackgroundDoorInteraction(GameObject Environment)
+    {
+        BackgroundDoor_Environment door = Environment.GetComponent<BackgroundDoor_Environment>();
+
+        //Depending on which door the player is at in the set it will teleport the player there
+        if(door.currentDoor == door.door1)
+        {
+            player.transform.position = door.door2.transform.position;
+            Debug.Log("door 1");
+        }
+        else if(door.currentDoor == door.door2)
+        {
+            player.transform.position = door.door1.transform.position;
+            Debug.Log("door 2");
         }
     }
 
