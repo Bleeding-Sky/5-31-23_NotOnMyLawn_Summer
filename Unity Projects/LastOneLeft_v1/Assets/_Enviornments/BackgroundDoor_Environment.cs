@@ -10,5 +10,4 @@ public class BackgroundDoor_Environment : MonoBehaviour
 
     //defines which door is currently being used
     public GameObject currentDoor;
-
 }
