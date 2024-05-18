@@ -45,6 +45,8 @@ public class Health_Zombie : MonoBehaviour
 
 
     //limb and overall damage
+    //  damages limbs with full incoming damage, then damages overall zombie health with
+    //  damage region multipliers
     #region damage methods
     public void Headshot(float dmgVal)
     {

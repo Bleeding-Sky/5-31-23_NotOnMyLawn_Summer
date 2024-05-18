@@ -13,7 +13,7 @@ public class SpriteController_Zombie : MonoBehaviour
 
     [Header("DEBUG")]
     [SerializeField] List<SpriteData_Zombie> sprites;
-    public List<SpriteChanger_Zombie> childrenSpriteChangers;
+    [SerializeField] List<SpriteChanger_Zombie> childrenSpriteChangers;
 
     //local tracking of recent sprite bools
     public bool local_isHeadless = false;

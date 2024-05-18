@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6470166366742787441}
   - component: {fileID: 3029257139352069340}
   - component: {fileID: 6260966416785929294}
-  - component: {fileID: -4016313578569193360}
   - component: {fileID: 7300352260598685500}
+  - component: {fileID: -4016313578569193360}
   m_Layer: 0
   m_Name: Test Zmb Master
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -113,6 +113,25 @@ MonoBehaviour:
   oneArmBroken: 0
   armless: 0
   legless: 0
+--- !u!114 &7300352260598685500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304906090293909137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daecea192bc4d4b41a0187326deea0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteListSO: {fileID: 11400000, guid: 6fd087b7c36ac09438bb81e164e2df2d, type: 2}
+  sprites: []
+  childrenSpriteChangers: []
+  local_isHeadless: 0
+  local_isOneArm: 0
+  local_isArmless: 0
+  local_isLegless: 0
 --- !u!114 &-4016313578569193360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,22 +154,3 @@ MonoBehaviour:
   isReadyToSpawnInside: 0
   cameraManagerScript: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
   spriteControllerScript: {fileID: 0}
---- !u!114 &7300352260598685500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8304906090293909137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daecea192bc4d4b41a0187326deea0d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteListSO: {fileID: 11400000, guid: 6fd087b7c36ac09438bb81e164e2df2d, type: 2}
-  sprites: []
-  childrenSpriteChangers: []
-  local_isHeadless: 0
-  local_isOneArm: 0
-  local_isArmless: 0
-  local_isLegless: 0

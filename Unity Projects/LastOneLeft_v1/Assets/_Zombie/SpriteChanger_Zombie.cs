@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(
+    typeof(SpriteRenderer),
+    typeof(HitboxChanger_Zombie)
+    )]
 
 /// <summary>
 /// placed on all views of a zombie. changes it's sprite
@@ -21,10 +24,7 @@ public class SpriteChanger_Zombie : MonoBehaviour
     {
         mySpriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (view != ViewEnum.Overhead)
-        {
-            hitboxChangerScript = GetComponent<HitboxChanger_Zombie>();
-        }
+        hitboxChangerScript = GetComponent<HitboxChanger_Zombie>();
     }
 
     private void Update()
@@ -50,6 +50,7 @@ public class SpriteChanger_Zombie : MonoBehaviour
             bool correctArmlessState = isArmless == spriteData.armless;
             bool correctLegState = isLegless == spriteData.legless;
 
+            //apply sprite if it fits the parameters
             if (correctHeadState && correctOneArmState &&
                 correctArmlessState && correctLegState)
             {
@@ -59,11 +60,8 @@ public class SpriteChanger_Zombie : MonoBehaviour
         //TODO: make it consider its view and choose the sprite that matches the bools AND is in its view
         //cant do this yet because we dont have view specifric sprites
 
-        if (view != ViewEnum.Overhead)
-        {
-            //change hitboxes to match sprite
-            hitboxChangerScript.ChangeHitbox(isHeadless, isLegless);
-        }
+        //change hitboxes to match sprite
+        hitboxChangerScript.ChangeHitbox(isHeadless, isLegless);
     }
 
 }
