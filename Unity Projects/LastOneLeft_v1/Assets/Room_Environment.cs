@@ -8,18 +8,61 @@ public class Room_Environment : MonoBehaviour
     public Transform RoomPointA;
     public Transform RoomPointB;
     public Vector2 RoomSize;
+    public List<GameObject> Doors;
+    public bool countDoors;
     // Start is called before the first frame update
     void Start()
     {
-        
+        countDoors = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerTracking();
+    }
+    /// <summary>
+    /// Tracks the player through the map and sets their location depending on if the plaer is in the room
+    /// </summary>
+    public void PlayerTracking()
+    {
+        Collider2D[] PlayersInRoom = Physics2D.OverlapAreaAll(RoomPointA.position, RoomPointB.position);
+
+        foreach (Collider2D player in PlayersInRoom)
+        {
+            if (player.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                RoomTracking_Environment tracking = gameObject.transform.parent.GetComponent<RoomTracking_Environment>();
+                tracking.CurrentRoom = gameObject;
+              
+            }
+            else if(player.gameObject.layer == LayerMask.NameToLayer("Interactable") && countDoors == true)
+            {
+                if(player.gameObject.tag == "Door")
+                {
+                    Doors.Add(player.gameObject);
+                    BackgroundDoor_Environment doorInfo = player.GetComponent<BackgroundDoor_Environment>();
+                    doorInfo.inRoom = gameObject;
+                }
+            }
+        }
+        countDoors = false;
     }
 
+    public void EnemyTracking(GameObject enemy)
+    {
+        Collider2D[] EnemiesInRoom = Physics2D.OverlapAreaAll(RoomPointA.position, RoomPointB.position);
+
+        foreach (Collider2D entity in EnemiesInRoom)
+        {
+            if(entity.gameObject == enemy)
+            {
+                Tracking_Test enemyTracker = enemy.GetComponent<Tracking_Test>();
+                enemyTracker.ZombieCurrentRoom = gameObject;
+            }
+        }
+
+    }
     /// <summary>
     /// Draws the room depending on where the corners of the room are
     /// </summary>

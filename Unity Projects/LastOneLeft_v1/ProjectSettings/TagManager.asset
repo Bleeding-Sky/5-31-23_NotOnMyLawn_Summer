@@ -12,6 +12,7 @@ TagManager:
   - Zombie
   - Overhead Window
   - Indoor Window
+  - Door
   layers:
   - Default
   - TransparentFX
