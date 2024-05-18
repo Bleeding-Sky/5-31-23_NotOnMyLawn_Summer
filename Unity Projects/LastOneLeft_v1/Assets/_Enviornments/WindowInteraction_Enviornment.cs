@@ -42,9 +42,7 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("InteractableField"))
-        {
-            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
+        Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+ 
     }
 }

@@ -38,6 +38,10 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         {
             BackgroundDoorInteraction(Enviornment);
         }
+        else if(enviornmentType.isSideDoor && actionType == 0)
+        {
+            SideDoorInteraction(Enviornment);
+        }
     }
 
     /// <summary>
@@ -133,6 +137,30 @@ public class EnviornmentInteraction_Player : MonoBehaviour
             Debug.Log("door 2");
         }
     }
+
+    /// <summary>
+    /// sorts which door the player will exit out of
+    /// </summary>
+    /// <param name="Environment"></param>
+    private void SideDoorInteraction(GameObject Environment)
+    {
+        BackgroundDoor_Environment door = Environment.GetComponent<BackgroundDoor_Environment>();
+
+        //Depending on which door the player is at in the set it will teleport the player there
+        if (door.currentDoor == door.door1)
+        {
+            player.transform.position = door.door2.transform.position - new Vector3(2,0,0);
+            Debug.Log(door.door2.transform.position);
+            Debug.Log(door.door2.transform.position + new Vector3(2, 0, 0));
+        }
+        else if (door.currentDoor == door.door2)
+        {
+            player.transform.position = door.door1.transform.position + new Vector3(2, 0, 0);
+            Debug.Log(door.door1.transform.position);
+            Debug.Log(door.door1.transform.position + new Vector3(2, 0, 0));
+        }
+    }
+
 
     /// <summary>
     /// Disables the players object and abilities 

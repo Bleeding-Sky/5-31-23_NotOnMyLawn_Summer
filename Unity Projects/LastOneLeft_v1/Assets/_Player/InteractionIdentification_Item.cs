@@ -15,7 +15,7 @@ public class InteractionIdentification_Item : MonoBehaviour
 
     [Header("Enviornment Type")]
     public bool isWindow;
-    public bool isDoor;
+    public bool isSideDoor;
     public bool isBackgroundDoor;
     public bool isBoardPile;
 
