@@ -12,15 +12,15 @@ public class Health_Zombie : MonoBehaviour
     [Header("CONFIG")]
 
     //health values
-    [SerializeField] float maxHealth = 30;
-    [SerializeField] float currentHealth = 6;
-    [SerializeField] float headHealth = 12;
-    [SerializeField] float bodyHealth = 3;
+    public float maxHealth = 30;
+    public float currentHealth;
+    [SerializeField] float headHealth = 6;
+    public float bodyHealth = 12;
     [SerializeField] float legHealth = 3;
 
 
     //incoming damage multipliers
-    [SerializeField] float headDmgMultiplier = 1.3f;
+    [SerializeField] float headDmgMultiplier = 1.5f;
     [SerializeField] float bodyDmgMultiplier = 1;
     [SerializeField] float legDmgMultiplier = 0.5f;
 
@@ -33,6 +33,7 @@ public class Health_Zombie : MonoBehaviour
     {
         statusScript = GetComponent<Status_Zombie>();
         limbLossScript = GetComponent <LimbLoss_Zombie>();
+        currentHealth = maxHealth;
     }
 
     private void Update()

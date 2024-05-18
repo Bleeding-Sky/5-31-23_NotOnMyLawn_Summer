@@ -21,6 +21,8 @@ public class Status_Zombie : MonoBehaviour
 
     [SerializeField] float enrageDuration = 2;
 
+    [SerializeField] bool printDebugMessages = false;
+
     [Header("DEBUG")]
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
@@ -148,16 +150,24 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// determines if a stumble occurs
     /// </summary>
-    void AttemptStumble()
+    public void AttemptStumble()
     {
-        if (RNGRolls_System.RollUnder(stumbleChance)) { DoStumble(); }
+        if (RNGRolls_System.RollUnder(stumbleChance))
+        {
+            DoStumble(); 
+            if (printDebugMessages) { Debug.Log("Stumble Sucess"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Stumble Failure"); }
+        }
     }
 
     /// <summary>
     /// determines if a stun occurs
     /// </summary>
     /// <param name="damagedRegion"></param>
-    void AttemptStun(DmgRegionEnum damagedRegion)
+    public void AttemptStun(DmgRegionEnum damagedRegion)
     {
         float successCutoff = 0;
 
@@ -172,22 +182,38 @@ public class Status_Zombie : MonoBehaviour
         else
         { Debug.Log("Error detected in AttemptStun damagedRegion argument"); }
 
-        if (RNGRolls_System.RollUnder(successCutoff)) { DoStun(); }
+        if (RNGRolls_System.RollUnder(successCutoff))
+        {
+            DoStun(); 
+            if (printDebugMessages) { Debug.Log("Stun Success"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Stun Failure"); }
+        }
     }
 
     /// <summary>
     /// determines if the zombie falls forward
     /// </summary>
-    void AttemptFallForward()
+    public void AttemptFallForward()
     {
-        if (RNGRolls_System.RollUnder(fallForwardChance)) { DoFallForward(); }
+        if (RNGRolls_System.RollUnder(fallForwardChance))
+        { 
+            DoFallForward();
+            if (printDebugMessages) { Debug.Log("Fall Forward Success"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Fall Forward Failure"); }
+        }
     }
 
     /// <summary>
     /// determines if the zombie falls backward
     /// </summary>
     /// <param name="damagedRegion"></param>
-    void AttemptFallBackward(DmgRegionEnum damagedRegion)
+    public void AttemptFallBackward(DmgRegionEnum damagedRegion)
     {
         float successCutoff = 0;
 
@@ -202,7 +228,15 @@ public class Status_Zombie : MonoBehaviour
         else
         { Debug.Log("Error detected in AttemptFallBackward damagedRegion argument"); }
 
-        if (RNGRolls_System.RollUnder(successCutoff)) { DoFallBackward(); }
+        if (RNGRolls_System.RollUnder(successCutoff)) 
+        {
+            DoFallBackward();
+            if (printDebugMessages) { Debug.Log("Fall Backward Success"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Fall Backward Failure"); }
+        }
     }
     #endregion
 
@@ -210,7 +244,7 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// applies the stumble status
     /// </summary>
-    void DoStumble()
+    public void DoStumble()
     {
         standingState = ZmbStandingStateEnum.Stumbling;
         stumbleTimeRemaining = stumbleDuration;
@@ -219,25 +253,25 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// applies the stun status
     /// </summary>
-    void DoStun()
+    public void DoStun()
     {
         standingState = ZmbStandingStateEnum.Stunned;
         stunTimeRemaining = stunDuration;
     }
 
-    void DoFallForward()
+    public void DoFallForward()
     {
         standingState = ZmbStandingStateEnum.FallenForward;
         fallenTimeRemaining = fallenDuration;
     }
 
-    void DoFallBackward()
+    public void DoFallBackward()
     {
         standingState = ZmbStandingStateEnum.FallenBackward;
         fallenTimeRemaining = fallenDuration;
     }
 
-    void DoEnrage()
+    public void DoEnrage()
     {
         standingState = ZmbStandingStateEnum.Enraged;
         enrageTimeRemaining = enrageDuration;
@@ -275,7 +309,7 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// removes the stumble status
     /// </summary>
-    void StopStumble()
+    public void StopStumble()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
         stumbleTimeRemaining = 0;
@@ -284,26 +318,26 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// removes the stun status
     /// </summary>
-    void StopStun()
+    public void StopStun()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
         stunTimeRemaining = 0;
     }
 
 
-    void StopFallForward()
+    public void StopFallForward()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
         fallenTimeRemaining = 0;
     }
 
-    void StopFallBackward()
+    public void StopFallBackward()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
         fallenTimeRemaining = 0;
     }
 
-    void StopEnrage()
+    public void StopEnrage()
     {
         standingState = ZmbStandingStateEnum.Stumbling;
         enrageTimeRemaining = 0;

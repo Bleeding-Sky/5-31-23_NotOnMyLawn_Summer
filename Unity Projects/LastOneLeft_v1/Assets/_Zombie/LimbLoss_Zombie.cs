@@ -18,6 +18,8 @@ public class LimbLoss_Zombie : MonoBehaviour
     [SerializeField] float highHealthHeadBreakEndureChance = 70;
     [SerializeField] float lowHealthHeadBreakEndureChance = 50;
 
+    [SerializeField] bool printDebugMessages = false;
+
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] Health_Zombie healthScript;
@@ -52,6 +54,12 @@ public class LimbLoss_Zombie : MonoBehaviour
         if (RNGRolls_System.RollUnder(headBreakChance))
         {
             BreakHead(maxHealth, currentHealth);
+
+            if (printDebugMessages) { Debug.Log("Head Break Success"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Head Break Failure"); }
         }
 
     }
@@ -75,6 +83,12 @@ public class LimbLoss_Zombie : MonoBehaviour
         if (RNGRolls_System.RollUnder(breakChance))
         {
             LoseArm();
+
+            if (printDebugMessages) { Debug.Log("Break Arm Success"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Break Arm Failure"); }
         }
     }
 
@@ -86,6 +100,12 @@ public class LimbLoss_Zombie : MonoBehaviour
         if (RNGRolls_System.RollUnder(legBreakChance))
         {
             BreakLegs();
+
+            if (printDebugMessages) { Debug.Log("Break Legs Success"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Break Legs Failure"); }
         }
     }
     #endregion
@@ -118,6 +138,12 @@ public class LimbLoss_Zombie : MonoBehaviour
         if (!RNGRolls_System.RollUnder(endureChance))
         {
             healthScript.KillZmb();
+
+            if (printDebugMessages) { Debug.Log("Endure Failure"); }
+        }
+        else
+        {
+            if (printDebugMessages) { Debug.Log("Endure Success"); }
         }
     }
 

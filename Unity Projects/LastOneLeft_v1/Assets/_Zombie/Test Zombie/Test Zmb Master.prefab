@@ -49,11 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  currentHealth: 6
-  headHealth: 12
-  bodyHealth: 3
+  currentHealth: 0
+  headHealth: 6
+  bodyHealth: 12
   legHealth: 3
-  headDmgMultiplier: 1.3
+  headDmgMultiplier: 1.5
   bodyDmgMultiplier: 1
   legDmgMultiplier: 0.5
   statusScript: {fileID: 0}
