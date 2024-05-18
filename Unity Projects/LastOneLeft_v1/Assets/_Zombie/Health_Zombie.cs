@@ -2,53 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(
+    typeof(Status_Zombie),
+    typeof(LimbLoss_Zombie)
+    )]
+
 public class Health_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
-    //data scriptable object
-    public Data_Zombie dataSO;
+
+    //health values
+    [SerializeField] float maxHealth = 30;
+    [SerializeField] float currentHealth = 6;
+    [SerializeField] float headHealth = 12;
+    [SerializeField] float bodyHealth = 3;
+    [SerializeField] float legHealth = 3;
+
+
+    //incoming damage multipliers
+    [SerializeField] float headDmgMultiplier = 1.3f;
+    [SerializeField] float bodyDmgMultiplier = 1;
+    [SerializeField] float legDmgMultiplier = 0.5f;
 
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] LimbLoss_Zombie limbLossScript;
 
-    //health trackers
-    public float maxHealth;
-    public float currentHealth;
-    public float headHealth;
-    public float bodyHealth;
-    public float legHealth;
-
-    //incoming damage multipliers
-    public float headDmgMultiplier;
-    public float bodyDmgMultiplier;
-    public float legDmgMultiplier;
 
     private void Awake()
     {
         statusScript = GetComponent<Status_Zombie>();
         limbLossScript = GetComponent <LimbLoss_Zombie>();
-        FetchHealthValues();
     }
 
-    /// <summary>
-    /// Fetches overall health value AND limb health values from a Data_Zombie scriptable object.
-    /// </summary>
-    private void FetchHealthValues()
+    private void Update()
     {
-        //fetch all health values
-        maxHealth = dataSO.zombieMaxHealth;
-        currentHealth = maxHealth;
-        headHealth = dataSO.headMaxHealth;
-        bodyHealth = dataSO.bodyMaxHealth;
-        legHealth = dataSO.legMaxHealth;
-
-        //fetch limb damage multiplier values
-        //hello everybody my name is multiplier
-        headDmgMultiplier = dataSO.headDmgMultiplier;
-        bodyDmgMultiplier = dataSO.bodyDmgMultiplier;
-        legDmgMultiplier = dataSO.legDmgMultiplier;
+        if (currentHealth <= 0)
+        {
+            KillZmb();
+        }
     }
+
 
     //limb and overall damage
     #region damage methods
@@ -107,5 +101,13 @@ public class Health_Zombie : MonoBehaviour
     }
 
     #endregion
+
+    /// <summary>
+    /// destroys master object, and therefore all it's children (different views of same zombie)
+    /// </summary>
+    public void KillZmb()
+    {
+        Destroy(gameObject);
+    }
 
 }

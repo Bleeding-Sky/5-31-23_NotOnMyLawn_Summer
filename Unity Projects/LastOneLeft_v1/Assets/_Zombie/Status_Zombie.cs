@@ -26,7 +26,7 @@ public class Status_Zombie : MonoBehaviour
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
     public ZmbStandingStateEnum standingState = ZmbStandingStateEnum.NoStatus;
 
-    public bool isCrawling = false;
+    [SerializeField] bool isCrawling = false;
     public bool isAttacking = false;
     public bool isChasing = false;
 
@@ -39,6 +39,7 @@ public class Status_Zombie : MonoBehaviour
     private void Update()
     {
         //checks if status is active, then decrements its timer and checks if it == 0 and should end
+        //doesnt update if zombie is crawling because crawling takes priority over all statuses
         if (!isCrawling) { UpdateStandingStatusTimers(); }
 
     }
@@ -277,6 +278,7 @@ public class Status_Zombie : MonoBehaviour
     void StopStumble()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
+        stumbleTimeRemaining = 0;
     }
 
     /// <summary>
@@ -285,21 +287,26 @@ public class Status_Zombie : MonoBehaviour
     void StopStun()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
+        stunTimeRemaining = 0;
     }
+
 
     void StopFallForward()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
+        fallenTimeRemaining = 0;
     }
 
     void StopFallBackward()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
+        fallenTimeRemaining = 0;
     }
 
     void StopEnrage()
     {
         standingState = ZmbStandingStateEnum.Stumbling;
+        enrageTimeRemaining = 0;
     }
 
     /// <summary>

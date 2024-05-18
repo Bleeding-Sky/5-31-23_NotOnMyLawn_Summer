@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8026647475817154558}
   - component: {fileID: 6470166366742787441}
-  - component: {fileID: 8881376049565037847}
   - component: {fileID: 3029257139352069340}
   - component: {fileID: 6260966416785929294}
   - component: {fileID: -4016313578569193360}
@@ -49,30 +48,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5362f6536f00a4444a4701e2e7de5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSO: {fileID: 11400000, guid: 0ac83539fedef6b4a83314759353d3ae, type: 2}
+  maxHealth: 30
+  currentHealth: 6
+  headHealth: 12
+  bodyHealth: 3
+  legHealth: 3
+  headDmgMultiplier: 1.3
+  bodyDmgMultiplier: 1
+  legDmgMultiplier: 0.5
   statusScript: {fileID: 0}
   limbLossScript: {fileID: 0}
-  maxHealth: 0
-  currentHealth: 0
-  headHealth: 0
-  bodyHealth: 0
-  legHealth: 0
-  headDmgMultiplier: 0
-  bodyDmgMultiplier: 0
-  legDmgMultiplier: 0
---- !u!114 &8881376049565037847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8304906090293909137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d874f9e28b0e5374eb3a41b8b3fec0a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthScript: {fileID: 6470166366742787441}
 --- !u!114 &3029257139352069340
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class LimbLoss_Zombie : MonoBehaviour
 {
 
     [Header("CONFIG")]
+    //chance out of 100 that the limb will break when it takes damage at 0 limb health
     [SerializeField] float armLossChance = 20;
     [SerializeField] float bothArmsLossChance = 50;
     [SerializeField] float legBreakChance = 60;
@@ -21,7 +22,7 @@ public class LimbLoss_Zombie : MonoBehaviour
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] Health_Zombie healthScript;
     [SerializeField] SpriteController_Zombie spriteController;
-    public bool headless = false;
+    [SerializeField] bool headless = false;
     public bool oneArmBroken = false;
     public bool armless = false;
     public bool legless = false;
@@ -116,7 +117,7 @@ public class LimbLoss_Zombie : MonoBehaviour
         //on failure, zombie dies
         if (!RNGRolls_System.RollUnder(endureChance))
         {
-            healthScript.currentHealth = 0;
+            healthScript.KillZmb();
         }
     }
 
@@ -142,7 +143,7 @@ public class LimbLoss_Zombie : MonoBehaviour
     public void BreakLegs()
     {
         legless = true;
-        statusScript.isCrawling = true;
+        statusScript.DoCrawl();
 
         ChangeSprite();
     }
