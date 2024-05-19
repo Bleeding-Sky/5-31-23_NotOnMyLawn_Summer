@@ -11,5 +11,9 @@ public class BackgroundDoor_Environment : MonoBehaviour
     //defines which door is currently being used
     public GameObject currentDoor;
 
+    //Defines which room that the door is in
     public GameObject inRoom;
+
+    //Holds the value that player will teleport to from side doors
+    public float doorOffset;
 }
