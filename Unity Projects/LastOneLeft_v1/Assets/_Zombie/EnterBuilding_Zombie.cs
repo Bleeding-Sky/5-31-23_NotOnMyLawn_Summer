@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Status_Zombie))]
-[RequireComponent(typeof(Health_Zombie))]
+[RequireComponent(typeof(Status_Zombie), typeof(Health_Zombie), typeof (SpriteController_Zombie))]
 
 /// <summary>
 /// placed on zombie master object. destroys outdoor views of the zombie when it reaches a window
