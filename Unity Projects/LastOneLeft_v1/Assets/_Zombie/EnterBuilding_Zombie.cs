@@ -64,7 +64,9 @@ public class EnterBuilding_Zombie : MonoBehaviour
         if (enterBuildingTimeRemaining <= 0)
         {
             //climb inside in window view if player is at window
-           if (cameraManagerScript.currentEnum == CameraManagement.Cameras.Window)
+           if (
+                cameraManagerScript.currentEnum == CameraManagement.Cameras.Window
+                )
             {
                 ZmbMoveInsideWindow();
             }
@@ -115,48 +117,10 @@ public class EnterBuilding_Zombie : MonoBehaviour
         GameObject newIndoorZombie = Instantiate(indoorZmbPrefab, this.transform);
 
         //set zmb pos to the pos of the window inside, like it crawled thru
-        newIndoorZombie.transform.position = indoorWindowTransform.position;
-        ConfigureIndoorComponents(newIndoorZombie);
+        newIndoorZombie.transform.position = new Vector3(indoorWindowTransform.position.x, 0, 0);
 
         isEnteringBuilding = false;
     }
 
-    /// <summary>
-    /// sets up all components necessary for indoor zombie functioning
-    /// </summary>
-    /// <param name="newIndoorZombie"></param>
-    private void ConfigureIndoorComponents(GameObject newIndoorZombie)
-    {
 
-        //NOTE: this has a fuck ton of getcomponents. if theres lag, this needs to be fixed
-
-        //configure indoor zombie components
-        newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = GetComponent<Status_Zombie>();
-        SetUpBehaviorStatusMonitoring(newIndoorZombie);
-
-        //save damage reporter script for dmg region config, and give it the health script
-        DmgReporter_Zombie indoorDmgReporterScript = newIndoorZombie.GetComponent<DmgReporter_Zombie>();
-        indoorDmgReporterScript.zmbHealthScript = GetComponent<Health_Zombie>();
-
-        //link damage regions to indoor damage reporter
-        DamageRegion_Zombie[] damageRegions = GetComponentsInChildren<DamageRegion_Zombie>();
-        foreach (DamageRegion_Zombie damageRegionScript in damageRegions)
-        {
-            damageRegionScript.damageReporterScript = indoorDmgReporterScript;
-        }
-
-        //refresh renderers when spawning indoors
-        GetComponent<SpriteController_Zombie>().Refresh();
-    }
-
-    /// <summary>
-    /// gives a ref (to the status script) to the behavior script so it can change move speed
-    /// based on the zombie's state
-    /// </summary>
-    /// <param name="newIndoorZombie"></param>
-    private void SetUpBehaviorStatusMonitoring(GameObject newIndoorZombie)
-    {
-        Behavior_Zombie indoorBhvrScript = newIndoorZombie.GetComponent<Behavior_Zombie>();
-        indoorBhvrScript.statusScript = GetComponent<Status_Zombie>();
-    }
 }

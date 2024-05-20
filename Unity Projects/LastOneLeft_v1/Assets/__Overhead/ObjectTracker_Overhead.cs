@@ -14,21 +14,18 @@ public class ObjectTracker_Overhead : MonoBehaviour
     
 
     [Header("DEBUG")]
-    public GameObject overheadAnchorObject;//CAN be set manually for testing purposes
-    public Transform overheadAnchorTransform;
+    public Transform overheadAnchorTransform; //can be set manually for debug purposes
     public float xDisplacementFromAnchor;
-    public float distanceFromAnchor;
+    public float yDisplacementFromAnchor;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (overheadAnchorObject == null)
+        //fetch overhead anchor transform
+        if (overheadAnchorTransform == null)
         {
-            overheadAnchorObject = GameObject.FindWithTag("Overhead Anchor");
+            overheadAnchorTransform = GameObject.FindWithTag("Overhead Anchor").transform;
         }
-
-        //fetch transform from anchor object for constant position tracking
-        overheadAnchorTransform = overheadAnchorObject.transform;
     }
 
     // Update is called once per frame
@@ -44,6 +41,6 @@ public class ObjectTracker_Overhead : MonoBehaviour
     {
         Vector3 myPos = transform.position;
         xDisplacementFromAnchor = myPos.x - overheadAnchorTransform.position.x;
-        distanceFromAnchor = myPos.y - overheadAnchorTransform.position.y;
+        yDisplacementFromAnchor = myPos.y - overheadAnchorTransform.position.y;
     }
 }

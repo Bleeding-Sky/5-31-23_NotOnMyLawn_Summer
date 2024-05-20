@@ -30,11 +30,10 @@ public class Behavior_Zombie : MonoBehaviour
 
     public float scaleFloat;
 
-    public Status_Zombie statusScript;
-
     private void Start()
     {
         scaleFloat = transform.localScale.x;
+        zombieStates = GetComponentInParent<Status_Zombie>();
     }
 
     // Update is called once per frame
@@ -178,7 +177,7 @@ public class Behavior_Zombie : MonoBehaviour
     private void ChangeSpeedBasedOnStatus()
     {
         float currentSpeed = 0;
-        switch (statusScript.standingState)
+        switch (zombieStates.standingState)
         {
             case ZmbStandingStateEnum.NoStatus:
                 currentSpeed = normalSpeed;

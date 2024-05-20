@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4513625182986771571}
   - component: {fileID: 6275653137760607717}
   - component: {fileID: 5420395452797046114}
+  - component: {fileID: 7604626001148646087}
   m_Layer: 0
   m_Name: Basic Zombie (Master)
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,21 @@ MonoBehaviour:
   local_isOneArm: 0
   local_isArmless: 0
   local_isLegless: 0
+--- !u!114 &7604626001148646087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a7727230e788a48b817e691c591907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indoorZmbPrefab: {fileID: 7634217409129547592, guid: 3cdf4fa61e208a2488031116c1ef321d, type: 3}
+  enterBuildingDuration: 3
+  localcopy_indoorWindowTranform: {fileID: 0}
+  isEnteringBuilding: 0
+  enterBuildingTimeRemaining: 0
+  cameraManagerScript: {fileID: 0}

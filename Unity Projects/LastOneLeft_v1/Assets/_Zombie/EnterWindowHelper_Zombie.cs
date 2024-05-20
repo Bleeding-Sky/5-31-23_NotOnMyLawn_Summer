@@ -4,17 +4,8 @@ using UnityEngine;
 
 public class EnterWindowHelper_Zombie : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("CONFIG")]
+    [SerializeField] float insideZValue = .7f;
 
     /// <summary>
     /// disables positionsync script on the zombie and moves it so it
@@ -26,7 +17,7 @@ public class EnterWindowHelper_Zombie : MonoBehaviour
         GetComponent<PositionSync_Window>().enabled = false;
 
         //move zombie inside in window view
-        transform.position += new Vector3(0, 0, -2);
+        transform.position = new Vector3(transform.position.x, transform.position.y, insideZValue);
 
     }
 

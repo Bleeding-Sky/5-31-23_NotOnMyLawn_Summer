@@ -8,20 +8,23 @@ using UnityEngine.AI;
 public class OverheadPathing_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
-    public Transform target;
     [SerializeField] float normalSpeed = 3;
     [SerializeField] float stunSpeed = 0;
     [SerializeField] float stumbleSpeed = 1.5f;
     [SerializeField] float fallenMoveSpeed = 0;
     [SerializeField] float enragedSpeed = 5;
+    //[SerializeField] float crawlMoveSpeed = 0.5f;
 
     [Header("DEBUG")]
     public NavMeshAgent myAgent;
-    public Status_Zombie statusScript; //passed in by spawner_zombie script
+    public Status_Zombie statusScript;
+    public Transform target;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        statusScript = GetComponentInParent<Status_Zombie>();
+
         //fetch and configure agent component
         myAgent = GetComponent<NavMeshAgent>();
         myAgent.updateRotation = false;
@@ -29,6 +32,13 @@ public class OverheadPathing_Zombie : MonoBehaviour
 
         //enable agent after configuration is complete to avoid errors
         myAgent.enabled = true;
+
+    }
+
+    private void Start()
+    {
+        target = FindClosestWindowTransform();
+
     }
 
     // Update is called once per frame
@@ -72,4 +82,37 @@ public class OverheadPathing_Zombie : MonoBehaviour
 
         myAgent.speed = currentSpeed;
     }
+
+    /// <summary>
+    /// returns the transform of the closest overhead window to the zombie
+    /// </summary>
+    /// <returns></returns>
+    Transform FindClosestWindowTransform()
+    {
+        GameObject[] OverheadWindowList = GameObject.FindGameObjectsWithTag("Overhead Window");
+
+        Transform closestWindowTransform = null;
+        float ?closestWindowDistance = null;
+
+        //find the closest window to the zombie
+        foreach (GameObject window in OverheadWindowList)
+        {
+            float currentWindowDistance = Vector3.Distance(window.transform.position, transform.position);
+
+            if (closestWindowDistance == null)
+            {
+                closestWindowDistance = currentWindowDistance;
+                closestWindowTransform = window.transform;
+            }
+            else if (currentWindowDistance < closestWindowDistance)
+            {
+                closestWindowDistance = currentWindowDistance;
+                closestWindowTransform = window.transform;
+            }
+        }
+
+        return closestWindowTransform;
+
+    }
+
 }

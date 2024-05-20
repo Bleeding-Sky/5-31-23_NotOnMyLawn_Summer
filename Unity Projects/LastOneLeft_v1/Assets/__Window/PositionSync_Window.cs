@@ -8,9 +8,6 @@ using UnityEngine;
 public class PositionSync_Window : MonoBehaviour
 {
 
-    [Header("CONFIG")]
-    public GameObject spriteChildObject;
-
     [Header("DEBUG")] //can be configured, but is typically set
                       //automatically on creation of window object
     public ObjectTracker_Overhead overheadTrackerScript;
@@ -40,7 +37,7 @@ public class PositionSync_Window : MonoBehaviour
     void MatchOverheadPos()
     {
         float overheadXDisplacement = overheadTrackerScript.xDisplacementFromAnchor;
-        float overheadDistanceFromAnchor = overheadTrackerScript.distanceFromAnchor;
+        float overheadDistanceFromAnchor = overheadTrackerScript.yDisplacementFromAnchor;
 
         float myXDisplacement = windowAnchorObject.transform.position.x + overheadXDisplacement;
         float myZDisplacement = windowAnchorObject.transform.position.z + overheadDistanceFromAnchor;

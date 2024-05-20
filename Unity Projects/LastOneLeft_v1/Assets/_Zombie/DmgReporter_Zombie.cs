@@ -10,8 +10,12 @@ public class DmgReporter_Zombie : MonoBehaviour
 {
 
     [Header("DEBUG")]
-    //initialized by EnterBuilding on master object when zombie moves inside
     public Health_Zombie zmbHealthScript;
+
+    private void Start()
+    {
+        zmbHealthScript = GetComponentInParent<Health_Zombie>();
+    }
 
 
     /// <summary>

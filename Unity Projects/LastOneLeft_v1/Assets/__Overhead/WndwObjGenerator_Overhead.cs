@@ -8,16 +8,16 @@ using UnityEngine;
 public class WndwObjGenerator_Overhead : MonoBehaviour
 {
     [Header("CONFIG")]
+
+    public GameObject windowEnvironmentParentObject;
     public GameObject windowAnchorObject;
-    public GameObject windowViewParentObject;
     public float floorYValue = 0;
 
     [Header("DEBUG")]
     public List<ObjectTracker_Overhead> overheadObjectsList = new List<ObjectTracker_Overhead>();
     
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //set collider to be a trigger if not already set
         BoxCollider2D myBoxCollider = GetComponent<BoxCollider2D>();
@@ -44,9 +44,9 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
                 createWindowviewObject(colObjectTracker);
 
                 //also register this anchor as the object's overhead anchor if not already registered
-                if (colObjectTracker.overheadAnchorObject != gameObject)
+                if (colObjectTracker.overheadAnchorTransform != transform)
                 {
-                    colObjectTracker.overheadAnchorObject = gameObject;
+                    colObjectTracker.overheadAnchorTransform = transform;
                 }
 
             }
@@ -76,53 +76,23 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
         //if its not a zombie, make it a child of the window view obj
         else
         {
-            parentObject = windowViewParentObject;
+            parentObject = windowEnvironmentParentObject;
         }
 
-        //instantiate new object in the window view and save its tracker script
+        //instantiate new object in the window view and set its tracker script
         GameObject wndwObject = Instantiate(overheadTrackerScript.windowViewPrefab, parentObject.transform);
-        PositionSync_Window wndwTrackerScript = wndwObject.GetComponent<PositionSync_Window>();
+        wndwObject.GetComponent<PositionSync_Window>().overheadTrackerScript = overheadTrackerScript;
 
         //align bottom edge with ground y level
-        wndwObject.transform.position = new Vector3(0, CalculateYSpawnOffset(wndwTrackerScript), 0);
+        wndwObject.transform.position = new Vector3(0, floorYValue, 0);
 
-        //configure the tracker script with the tacview object's info
-        wndwTrackerScript.overheadTrackerScript = overheadTrackerScript;
-
-        //set up zombie damage reporter
-        if (isZombie) { SetUpZombie(wndwObject, parentObject); }
-
-    }
-
-    /// <summary>
-    /// finds the correct y value to spawn a window object at so that its bottom edge is at floorYValue
-    /// </summary>
-    /// <param name="wndwObject"></param>
-    /// <param name="wndwTrackerScript"></param>
-    private float CalculateYSpawnOffset(PositionSync_Window wndwTrackerScript)
-    {
-        //find correct y value to spawn object at
-        Bounds spriteBounds = wndwTrackerScript.spriteChildObject.GetComponent<BoxCollider2D>().bounds;
-        float spawnY = spriteBounds.extents.y + floorYValue;
-        return spawnY;
-    }
-
-    /// <summary>
-    /// configures the window view zombie's damage reporter with refs from the zombie's master object.
-    /// also refreshes the zombie's sprite controller so it has correct sprites
-    /// </summary>
-    /// <param name="windowViewZombieObj"></param>
-    /// <param name="zombieMasterObject"></param>
-    private void SetUpZombie(GameObject windowViewZombieObj, GameObject zombieMasterObject)
-    {
-        //access the window zombie's damage reporter
-        DmgReporter_Zombie wndwDmgReporter = windowViewZombieObj.GetComponent<DmgReporter_Zombie>();
-
-        //give it the health script from the window zombie's parent object
-        wndwDmgReporter.zmbHealthScript = zombieMasterObject.GetComponent<Health_Zombie>();
-
-        zombieMasterObject.GetComponent<SpriteController_Zombie>().Refresh();
+        //refresh sprites so window zombie has correct sprites
+        if (isZombie) 
+        {
+            parentObject.GetComponent <SpriteController_Zombie>().Refresh();
+        }
 
     }
+
 
 }

@@ -42,25 +42,21 @@ public class Spawner_Zombie : MonoBehaviour
         //instantiate overhead zombie as child of its master parent object
         GameObject newOverheadZmb = Instantiate(testZmbOverheadPrefab, masterObject.transform);
 
-        //configure position and register master in overhead tracker script
+        //configure position
         newOverheadZmb.transform.position = spawnPosition;
-        ZombieTracker_Overhead zmbTrackerScript = newOverheadZmb.GetComponent<ZombieTracker_Overhead>();
-        zmbTrackerScript.ZmbMasterParentObj = masterObject;
 
         //add ref to health script in overhead damage script
         DmgReporter_Zombie overheadDmgScript = newOverheadZmb.GetComponent<DmgReporter_Zombie>();
-        overheadDmgScript.zmbHealthScript = masterObject.GetComponent<Health_Zombie>();
 
         //set target for pathfinding
+        /* NEEDS TO BE SET TO A WINDOW
         OverheadPathing_Zombie pathingScript = newOverheadZmb.GetComponent<OverheadPathing_Zombie>();
         pathingScript.target = overheadAnchorTransform;
+        */
 
         //grab the sprite renderers for spritecontroller
         masterObject.GetComponent<SpriteController_Zombie>().Refresh();
 
-        //give zombie states script ref to overhead movement script for state-specific movement changes
-        Status_Zombie statusScript = masterObject.GetComponent<Status_Zombie>();
-        newOverheadZmb.GetComponent<OverheadPathing_Zombie>().statusScript = statusScript;
 
     }
 

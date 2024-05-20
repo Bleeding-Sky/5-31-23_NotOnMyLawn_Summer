@@ -10,7 +10,8 @@ public class DamageRegion_Zombie : MonoBehaviour
 
     [Header("CONFIG")]
     public DmgRegionEnum Region;
-    //set by enterbuilding script
+
+    [Header("DEBUG")]
     public DmgReporter_Zombie damageReporterScript;
 
     private void Awake()
@@ -22,6 +23,11 @@ public class DamageRegion_Zombie : MonoBehaviour
         {
             myCollider.isTrigger = true;
         }
+    }
+
+    private void Start()
+    {
+        damageReporterScript = GetComponentInParent<DmgReporter_Zombie>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
