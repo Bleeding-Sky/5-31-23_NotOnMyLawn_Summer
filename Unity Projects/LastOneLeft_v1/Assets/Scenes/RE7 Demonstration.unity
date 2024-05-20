@@ -2100,6 +2100,7 @@ MonoBehaviour:
   door2: {fileID: 697112986}
   currentDoor: {fileID: 532160588}
   inRoom: {fileID: 0}
+  doorOffset: 0
 --- !u!212 &532160590
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2245,6 +2246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba879528b0630040a9cd8d25aeb0cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundPosition: {fileID: 0}
+  length: 0
+  height: 0
 --- !u!1 &552158778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,6 +2880,7 @@ MonoBehaviour:
   door2: {fileID: 697112986}
   currentDoor: {fileID: 697112986}
   inRoom: {fileID: 0}
+  doorOffset: 0
 --- !u!212 &697112989
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8122,7 +8127,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 3
+  m_GravityScale: 20
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
