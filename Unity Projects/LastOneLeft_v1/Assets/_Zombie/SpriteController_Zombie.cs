@@ -26,6 +26,10 @@ public class SpriteController_Zombie : MonoBehaviour
         sprites = spriteListSO.zombieSpriteList;
     }
 
+    private void Start()
+    {
+        Refresh();
+    }
 
     /// <summary>
     /// refreshes the sprite renderer list

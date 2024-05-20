@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
+
+
 public class DamageRegion_Zombie : MonoBehaviour
 {
-    
 
     [Header("CONFIG")]
     public DmgRegionEnum Region;
+    //set by enterbuilding script
     public DmgReporter_Zombie damageReporterScript;
 
-    private void Start()
+    private void Awake()
     {
         BoxCollider2D myCollider = GetComponent<BoxCollider2D>();
 

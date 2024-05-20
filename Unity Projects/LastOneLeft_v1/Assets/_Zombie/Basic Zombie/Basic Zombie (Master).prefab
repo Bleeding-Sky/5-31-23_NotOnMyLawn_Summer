@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7044362648136584179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7052477186205695649}
+  - component: {fileID: 7761295868456820334}
+  - component: {fileID: 4513625182986771571}
+  - component: {fileID: 6275653137760607717}
+  - component: {fileID: 5420395452797046114}
+  m_Layer: 0
+  m_Name: Basic Zombie (Master)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7052477186205695649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7761295868456820334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5362f6536f00a4444a4701e2e7de5648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  currentHealth: 0
+  headHealth: 6
+  bodyHealth: 12
+  legHealth: 3
+  headDmgMultiplier: 1.5
+  bodyDmgMultiplier: 1
+  legDmgMultiplier: 0.5
+  statusScript: {fileID: 0}
+  limbLossScript: {fileID: 0}
+--- !u!114 &4513625182986771571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e8782ba95c234479a03a5231eaec6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stumbleDuration: 1
+  stumbleChance: 30
+  stunDuration: 3
+  headshotStunChance: 40
+  bodyshotStunChance: 20
+  fallenDuration: 5
+  fallForwardChance: 50
+  headshotFallBackwardChance: 60
+  bodyshotFallBackwardChance: 30
+  enrageDuration: 2
+  printDebugMessages: 0
+  standingState: 0
+  isCrawling: 0
+  isAttacking: 0
+  isChasing: 0
+  stumbleTimeRemaining: 0
+  stunTimeRemaining: 0
+  fallenTimeRemaining: 0
+  enrageTimeRemaining: 0
+--- !u!114 &6275653137760607717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f002ecc480f35249ba816a22960c556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armLossChance: 20
+  bothArmsLossChance: 50
+  legBreakChance: 60
+  headBreakChance: 50
+  highHealthHeadBreakEndureChance: 70
+  lowHealthHeadBreakEndureChance: 50
+  printDebugMessages: 0
+  statusScript: {fileID: 0}
+  healthScript: {fileID: 0}
+  spriteController: {fileID: 0}
+  headless: 0
+  oneArmBroken: 0
+  armless: 0
+  legless: 0
+--- !u!114 &5420395452797046114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daecea192bc4d4b41a0187326deea0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteListSO: {fileID: 11400000, guid: 2e10fcc571fd0e24c8605360757f46c0, type: 2}
+  sprites: []
+  childrenSpriteChangers: []
+  local_isHeadless: 0
+  local_isOneArm: 0
+  local_isArmless: 0
+  local_isLegless: 0

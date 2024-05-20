@@ -8,7 +8,7 @@ using UnityEngine;
     )]
 
 /// <summary>
-/// placed on all views of a zombie. changes it's sprite
+/// placed on all views of a zombie. changes it's sprite and its hitboxes
 /// </summary>
 public class SpriteChanger_Zombie : MonoBehaviour
 {
@@ -25,11 +25,6 @@ public class SpriteChanger_Zombie : MonoBehaviour
         mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         hitboxChangerScript = GetComponent<HitboxChanger_Zombie>();
-    }
-
-    private void Update()
-    {
-        //Debug.Log($"renderer = {mySpriteRenderer}");
     }
 
     /// <summary>

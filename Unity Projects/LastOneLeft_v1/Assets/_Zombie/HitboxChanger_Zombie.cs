@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Activates/deactivates sets of hitboxes on the zombie. managed by spritechanger
+/// </summary>
 public class HitboxChanger_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]

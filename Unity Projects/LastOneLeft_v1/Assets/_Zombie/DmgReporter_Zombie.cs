@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Attached to an Overhead zombie. reports damage to the health script on the zombie's master object
+/// Attached to all child views of a zombie. reports damage to the health script on the
+/// zombie's master object
 /// </summary>
 public class DmgReporter_Zombie : MonoBehaviour
 {
 
     [Header("DEBUG")]
+    //initialized by EnterBuilding on master object when zombie moves inside
     public Health_Zombie zmbHealthScript;
 
-    private void Start()
-    {
-        
-    }
 
     /// <summary>
     /// calls damage region methods on the zombie's health script
