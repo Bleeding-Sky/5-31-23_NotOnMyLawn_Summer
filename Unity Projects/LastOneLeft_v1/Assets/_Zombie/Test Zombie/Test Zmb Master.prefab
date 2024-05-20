@@ -80,6 +80,7 @@ MonoBehaviour:
   headshotFallBackwardChance: 60
   bodyshotFallBackwardChance: 30
   enrageDuration: 2
+  printDebugMessages: 0
   standingState: 0
   isCrawling: 0
   isAttacking: 0
@@ -106,6 +107,7 @@ MonoBehaviour:
   headBreakChance: 50
   highHealthHeadBreakEndureChance: 70
   lowHealthHeadBreakEndureChance: 50
+  printDebugMessages: 0
   statusScript: {fileID: 0}
   healthScript: {fileID: 0}
   spriteController: {fileID: 0}

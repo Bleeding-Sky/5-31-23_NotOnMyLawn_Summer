@@ -19,30 +19,14 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
     [Header("DEBUG")]
     //passed to indoor zombie for behavior purposes
-    public Status_Zombie statusScript;
-    public Health_Zombie healthScript;
     //indoor window transform where zombie will spawn
     public Transform localcopy_indoorWindowTranform;
     public bool isEnteringBuilding = false;
     public float enterBuildingTimeRemaining;
 
-    public bool isReadyToSpawnInside = false;
     public CameraManagement cameraManagerScript; //set w/ persistent scriptable object
     
 
-    [SerializeField] SpriteController_Zombie spriteControllerScript;
-
-    private void Awake()
-    {
-        spriteControllerScript = GetComponent<SpriteController_Zombie>();
-    }
-
-    private void Start()
-    {
-        //fetch master scripts
-        statusScript = GetComponent<Status_Zombie>();
-        healthScript = GetComponent<Health_Zombie>();
-    }
 
     private void Update()
     {
@@ -71,8 +55,9 @@ public class EnterBuilding_Zombie : MonoBehaviour
     }
 
     /// <summary>
-    /// tries to move the zombie inside. if the player is at the window, it will climb inside in
-    /// the window view. if the player is not at the window, it will spawn inside in the indoor view
+    /// decrements the move inside timer and then tries to move the zombie inside. if the player is
+    /// at the window, it will climb inside in the window view. if the player is not at the window,
+    /// it will spawn inside in the indoor view
     /// </summary>
     private void AttemptMoveInside()
     {
@@ -80,14 +65,12 @@ public class EnterBuilding_Zombie : MonoBehaviour
         if (enterBuildingTimeRemaining <= 0)
         {
             //climb inside in window view if player is at window
-           if (cameraManagerScript.currentEnum == CameraManagement.Cameras.Window &&
-                !isReadyToSpawnInside)
+           if (cameraManagerScript.currentEnum == CameraManagement.Cameras.Window)
             {
-                zmbMoveInsideWindow();
+                ZmbMoveInsideWindow();
             }
            //spawn inside if player is not at window
-           else if (isReadyToSpawnInside &&
-                cameraManagerScript.currentEnum != CameraManagement.Cameras.Window)
+           else
             {
                 SpawnZmbInside(localcopy_indoorWindowTranform);
             }
@@ -97,19 +80,20 @@ public class EnterBuilding_Zombie : MonoBehaviour
     /// <summary>
     /// moves the zombie inside the window in window view
     /// </summary>
-    private void zmbMoveInsideWindow()
+    private void ZmbMoveInsideWindow()
     {
         //zombie will move inside window in window view and begin damaging the player.
         //it will not spawn in the indoor view until the player exits the window.
 
+        //disables position tracking on the window zombie and moves it inside
         GetComponentInChildren<EnterWindowHelper_Zombie>().EnterWindow();
+        //destroys the overhead view zombie
         Destroy(GetComponentInChildren<ZombieTracker_Overhead>().gameObject);
-        isReadyToSpawnInside = true;
 
     }
 
     /// <summary>
-    /// deletes all outside views of the zombie and spawns/configures it's indoor variant at the
+    /// deletes all outside views of the zombie and spawns + configures its indoor variant at the
     /// window's position inside. basically moves the zombie inside the building
     /// </summary>
     /// <param name="indoorWindowTransform"></param>
@@ -144,13 +128,16 @@ public class EnterBuilding_Zombie : MonoBehaviour
     /// <param name="newIndoorZombie"></param>
     private void ConfigureIndoorComponents(GameObject newIndoorZombie)
     {
+
+        //NOTE: this has a fuck ton of getcomponents. if theres lag, this needs to be fixed
+
         //configure indoor zombie components
-        newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = statusScript;
+        newIndoorZombie.GetComponent<Behavior_Zombie>().zombieStates = GetComponent<Status_Zombie>();
         SetUpBehaviorStatusMonitoring(newIndoorZombie);
 
         //save damage reporter script for dmg region config, and give it the health script
         DmgReporter_Zombie indoorDmgReporterScript = newIndoorZombie.GetComponent<DmgReporter_Zombie>();
-        indoorDmgReporterScript.zmbHealthScript = healthScript;
+        indoorDmgReporterScript.zmbHealthScript = GetComponent<Health_Zombie>();
 
         //link damage regions to indoor damage reporter
         DamageRegion_Zombie[] damageRegions = GetComponentsInChildren<DamageRegion_Zombie>();
@@ -160,7 +147,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
         }
 
         //refresh renderers when spawning indoors
-        spriteControllerScript.Refresh();
+        GetComponent<SpriteController_Zombie>().Refresh();
     }
 
     /// <summary>
