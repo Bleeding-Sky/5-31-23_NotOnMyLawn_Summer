@@ -8,11 +8,11 @@ using UnityEngine.AI;
 public class OverheadPathing_Zombie : MonoBehaviour
 {
     [Header("CONFIG")]
-    [SerializeField] float normalSpeed = 3;
+    [SerializeField] float normalSpeed = 1;
     [SerializeField] float stunSpeed = 0;
-    [SerializeField] float stumbleSpeed = 1.5f;
+    [SerializeField] float stumbleSpeed = .5f;
     [SerializeField] float fallenMoveSpeed = 0;
-    [SerializeField] float enragedSpeed = 5;
+    [SerializeField] float enragedSpeed = 2.5f;
     //[SerializeField] float crawlMoveSpeed = 0.5f;
 
     [Header("DEBUG")]
@@ -30,13 +30,13 @@ public class OverheadPathing_Zombie : MonoBehaviour
         myAgent.updateRotation = false;
         myAgent.updateUpAxis = false;
 
-        //enable agent after configuration is complete to avoid errors
-        myAgent.enabled = true;
-
     }
 
     private void Start()
     {
+        //enable agent only after configuration is complete to avoid errors
+        myAgent.enabled = true;
+
         target = FindClosestWindowTransform();
 
     }

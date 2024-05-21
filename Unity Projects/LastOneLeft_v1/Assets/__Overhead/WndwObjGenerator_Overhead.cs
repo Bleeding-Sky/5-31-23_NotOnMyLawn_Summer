@@ -41,7 +41,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
             {
                 //add to list and create corresponding window object
                 overheadObjectsList.Add(colObjectTracker);
-                createWindowviewObject(colObjectTracker);
+                CreateWindowviewObject(colObjectTracker);
 
                 //also register this anchor as the object's overhead anchor if not already registered
                 if (colObjectTracker.overheadAnchorTransform != transform)
@@ -59,7 +59,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     /// that is synced to the tacview object's movements
     /// </summary>
     /// <param name="overheadTrackerScript"></param>
-    public void createWindowviewObject(ObjectTracker_Overhead overheadTrackerScript)
+    public void CreateWindowviewObject(ObjectTracker_Overhead overheadTrackerScript)
     {
         bool isZombie = false;
 

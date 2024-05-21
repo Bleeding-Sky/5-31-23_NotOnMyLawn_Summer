@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// changes zombie sprite
+/// placed on zombie master object, changes zombie sprites in all children
 /// </summary>
 public class SpriteController_Zombie : MonoBehaviour
 {

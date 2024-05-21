@@ -185,7 +185,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406188645345146115}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.23
   m_Speed: 3.5
@@ -212,12 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726138fa93b8da846ab0d03470ea15d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  normalSpeed: 3
+  normalSpeed: 1
   stunSpeed: 0
-  stumbleSpeed: 1.5
+  stumbleSpeed: 0.5
   fallenMoveSpeed: 0
-  enragedSpeed: 5
+  enragedSpeed: 2.5
   myAgent: {fileID: 0}
   statusScript: {fileID: 0}
-  OverheadWindowList: []
+  target: {fileID: 0}
