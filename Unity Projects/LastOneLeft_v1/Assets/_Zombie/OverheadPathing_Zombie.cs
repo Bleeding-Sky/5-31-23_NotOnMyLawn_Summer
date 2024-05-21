@@ -13,7 +13,7 @@ public class OverheadPathing_Zombie : MonoBehaviour
     [SerializeField] float stumbleSpeed = .5f;
     [SerializeField] float fallenMoveSpeed = 0;
     [SerializeField] float enragedSpeed = 2.5f;
-    //[SerializeField] float crawlMoveSpeed = 0.5f;
+    [SerializeField] float crawlMoveSpeed = 0.5f;
 
     [Header("DEBUG")]
     public NavMeshAgent myAgent;
@@ -53,31 +53,41 @@ public class OverheadPathing_Zombie : MonoBehaviour
     private void UpdateAgentSpeedBasedOnStatus()
     {
         float currentSpeed = 0;
-        switch (statusScript.standingState)
+
+        //crawling overrides all other states
+        if (statusScript.isCrawling)
         {
-            case ZmbStandingStateEnum.NoStatus:
-                currentSpeed = normalSpeed;
-                break;
+            currentSpeed = crawlMoveSpeed;
+        }
+        else
+        {
+            //change move speed based on current state
+            switch (statusScript.standingState)
+            {
+                case ZmbStandingStateEnum.NoStatus:
+                    currentSpeed = normalSpeed;
+                    break;
 
-            case ZmbStandingStateEnum.Stunned:
-                currentSpeed = stunSpeed;
-                break;
+                case ZmbStandingStateEnum.Stunned:
+                    currentSpeed = stunSpeed;
+                    break;
 
-            case ZmbStandingStateEnum.Stumbling:
-                currentSpeed = stumbleSpeed;
-                break;
+                case ZmbStandingStateEnum.Stumbling:
+                    currentSpeed = stumbleSpeed;
+                    break;
 
-            case ZmbStandingStateEnum.FallenForward:
-                currentSpeed = fallenMoveSpeed;
-                break;
+                case ZmbStandingStateEnum.FallenForward:
+                    currentSpeed = fallenMoveSpeed;
+                    break;
 
-            case ZmbStandingStateEnum.FallenBackward:
-                currentSpeed = fallenMoveSpeed;
-                break;
+                case ZmbStandingStateEnum.FallenBackward:
+                    currentSpeed = fallenMoveSpeed;
+                    break;
 
-            case ZmbStandingStateEnum.Enraged:
-                currentSpeed = enragedSpeed;
-                break;
+                case ZmbStandingStateEnum.Enraged:
+                    currentSpeed = enragedSpeed;
+                    break;
+            }
         }
 
         myAgent.speed = currentSpeed;

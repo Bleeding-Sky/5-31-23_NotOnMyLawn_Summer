@@ -28,7 +28,7 @@ public class Status_Zombie : MonoBehaviour
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
     public ZmbStandingStateEnum standingState = ZmbStandingStateEnum.NoStatus;
 
-    [SerializeField] bool isCrawling = false;
+    public bool isCrawling = false;
     public bool isAttacking = false;
     public bool isChasing = false;
 

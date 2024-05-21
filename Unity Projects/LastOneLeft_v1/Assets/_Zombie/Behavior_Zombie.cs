@@ -18,10 +18,11 @@ public class Behavior_Zombie : MonoBehaviour
     [SerializeField] float stumbleSpeed = .5f;
     [SerializeField] float fallenMoveSpeed = 0;
     [SerializeField] float enragedSpeed = 2.5f;
+    [SerializeField] float crawlMoveSpeed = 0.5f;
 
     [Header("DEBUG")]
     public PositionTracker_Player playerPosition;
-    public Status_Zombie zombieStates;
+    public Status_Zombie statusScript;
     public Transform attackPoint;
     public Vector3 zombiePosition;
     public Collider2D[] players;
@@ -33,25 +34,25 @@ public class Behavior_Zombie : MonoBehaviour
     private void Start()
     {
         scaleFloat = transform.localScale.x;
-        zombieStates = GetComponentInParent<Status_Zombie>();
+        statusScript = GetComponentInParent<Status_Zombie>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //set speed before moving
-        ChangeSpeedBasedOnStatus();
+        UpdateSpeedBasedOnStatus();
 
         zombiePosition = transform.position;
         DetectPlayer();
         DetermineState();
 
-        if (zombieStates.isChasing && !recharging)
+        if (statusScript.isChasing && !recharging)
         {
             ChasingPlayer();
             FacingDirection();
         }
-        else if (zombieStates.isAttacking && !recharging)
+        else if (statusScript.isAttacking && !recharging)
         {
             InitiateAttack();
         }
@@ -78,7 +79,7 @@ public class Behavior_Zombie : MonoBehaviour
     /// </summary>
     private void ChasingPlayer()
     {
-        zombieStates.DoChase();
+        statusScript.DoChase();
         transform.position = Vector3.MoveTowards(transform.position, playerPosition.playerPosition, moveSpeed * Time.deltaTime);
     }
 
@@ -140,13 +141,13 @@ public class Behavior_Zombie : MonoBehaviour
         
         if (!playerInRange && !recharging)
         {
-            zombieStates.DoChase();
-            zombieStates.StopAttack();
+            statusScript.DoChase();
+            statusScript.StopAttack();
         }
         else if (playerInRange)
         {
-            zombieStates.DoAttack();
-            zombieStates.StopChase();
+            statusScript.DoAttack();
+            statusScript.StopChase();
         }
     }
 
@@ -174,36 +175,45 @@ public class Behavior_Zombie : MonoBehaviour
     /// <summary>
     /// reads the current state of the zombie and changes speed to appropriate variable
     /// </summary>
-    private void ChangeSpeedBasedOnStatus()
+    private void UpdateSpeedBasedOnStatus()
     {
         float currentSpeed = 0;
-        switch (zombieStates.standingState)
+
+        //crawling overrides all other states
+        if (statusScript.isCrawling)
         {
-            case ZmbStandingStateEnum.NoStatus:
-                currentSpeed = normalSpeed;
-                break;
-
-            case ZmbStandingStateEnum.Stunned:
-                currentSpeed = stunSpeed;
-                break;
-
-            case ZmbStandingStateEnum.Stumbling:
-                currentSpeed = stumbleSpeed;
-                break;
-
-            case ZmbStandingStateEnum.FallenForward:
-                currentSpeed = fallenMoveSpeed;
-                break;
-
-            case ZmbStandingStateEnum.FallenBackward:
-                currentSpeed = fallenMoveSpeed;
-                break;
-
-            case ZmbStandingStateEnum.Enraged:
-                currentSpeed = enragedSpeed;
-                break;
+            currentSpeed = crawlMoveSpeed;
         }
+        else
+        {
+            //change move speed based on current state
+            switch (statusScript.standingState)
+            {
+                case ZmbStandingStateEnum.NoStatus:
+                    currentSpeed = normalSpeed;
+                    break;
 
+                case ZmbStandingStateEnum.Stunned:
+                    currentSpeed = stunSpeed;
+                    break;
+
+                case ZmbStandingStateEnum.Stumbling:
+                    currentSpeed = stumbleSpeed;
+                    break;
+
+                case ZmbStandingStateEnum.FallenForward:
+                    currentSpeed = fallenMoveSpeed;
+                    break;
+
+                case ZmbStandingStateEnum.FallenBackward:
+                    currentSpeed = fallenMoveSpeed;
+                    break;
+
+                case ZmbStandingStateEnum.Enraged:
+                    currentSpeed = enragedSpeed;
+                    break;
+            }
+        }
         moveSpeed = currentSpeed;
     }
 
