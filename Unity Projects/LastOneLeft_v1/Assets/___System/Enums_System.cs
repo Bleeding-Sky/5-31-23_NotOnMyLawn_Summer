@@ -7,7 +7,7 @@ public enum DmgRegionEnum { Head, Body, Legs };
 
 public enum ViewEnum { Overhead, Window, Indoor };
 
-public enum ZmbStandingStateEnum { NoStatus, Stumbling, Stunned, FallenForward, FallenBackward, Enraged, Crawling };
+public enum ZmbStandingStateEnum { NoStatus, Stumbling, Stunned, FallenForward, FallenBackward, Enraged };
 
 public class Enums_System : MonoBehaviour
 {
