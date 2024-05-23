@@ -24,7 +24,6 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     public void switchToInside()
     {
         cameraManager.currentEnum = IndoorCamera;
-        Debug.Log("Indoor");
     }
 
     /// <summary>
@@ -33,7 +32,6 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     public void switchToOutside()
     {
         cameraManager.currentEnum = WindowView;
-        Debug.Log("out");
     }
 
     /// <summary>

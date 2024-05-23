@@ -128,13 +128,13 @@ public class Tracking_Test : MonoBehaviour
             {
                 //Passes the door information and the rooms checked to map out the route
                 BackgroundDoor_Environment door2Info = doorInfo.door2.GetComponent<BackgroundDoor_Environment>();
-                findShortestRoute(doorInfo.door2, RoomsChecked);
+                findAvailableRoutes(doorInfo.door2, RoomsChecked);
             }
             else if(door == doorInfo.door2)
             {
                 //Passes the door information and the rooms checked to map out the route
                 BackgroundDoor_Environment door1Info = doorInfo.door1.GetComponent<BackgroundDoor_Environment>();
-                findShortestRoute(doorInfo.door1, RoomsChecked);
+                findAvailableRoutes(doorInfo.door1, RoomsChecked);
             }
         }
         Debug.Log("Checked");
@@ -150,7 +150,7 @@ public class Tracking_Test : MonoBehaviour
     /// </summary>
     /// <param name="door"></param>
     /// <param name="RoomsChecked"></param>
-    private void findShortestRoute(GameObject door, List<GameObject> RoomsChecked)
+    private void findAvailableRoutes(GameObject door, List<GameObject> RoomsChecked)
     {
         //Gets the door information passed from the FindPlayer function
         BackgroundDoor_Environment doorInfo = door.GetComponent<BackgroundDoor_Environment>();
@@ -185,13 +185,13 @@ public class Tracking_Test : MonoBehaviour
                     {
                         BackgroundDoor_Environment checkDoor2Info = checkDoorInfo.door2.GetComponent<BackgroundDoor_Environment>();
                         //recursion to continue the search for the player
-                        findShortestRoute(checkDoorInfo.door2, RoomsChecked);
+                        findAvailableRoutes(checkDoorInfo.door2, RoomsChecked);
                     }
                     else if (checkDoor == checkDoorInfo.door2)
                     {
                         BackgroundDoor_Environment checkDoor1Info = checkDoorInfo.door1.GetComponent<BackgroundDoor_Environment>();
                         //recursion to continue the search for the player
-                        findShortestRoute(checkDoorInfo.door1, RoomsChecked);
+                        findAvailableRoutes(checkDoorInfo.door1, RoomsChecked);
                     }
                 }
             }
@@ -251,7 +251,7 @@ public class Tracking_Test : MonoBehaviour
         {
             BackgroundDoor_Environment doorInfo = door.GetComponent<BackgroundDoor_Environment>();
 
-
+            //Decides which door to follow once it has found a match to the associated room goal
             if (door == doorInfo.door1)
             {
                 BackgroundDoor_Environment door2Info = doorInfo.door2.GetComponent<BackgroundDoor_Environment>();
