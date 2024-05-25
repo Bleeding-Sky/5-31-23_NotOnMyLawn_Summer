@@ -11,6 +11,10 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     public CameraManagement cameraManager;
     public CameraManagement.Cameras IndoorCamera;
     public CameraManagement.Cameras WindowView;
+
+    public GameObject windowObject;
+    public GameObject windowBackground;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,8 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     public void switchToInside()
     {
         cameraManager.currentEnum = IndoorCamera;
+        windowObject.SetActive(false);
+        windowBackground.SetActive(false);
     }
 
     /// <summary>
@@ -32,6 +38,8 @@ public class WindowInteraction_Enviornment : MonoBehaviour
     public void switchToOutside()
     {
         cameraManager.currentEnum = WindowView;
+        windowObject.SetActive(true);
+        windowBackground.SetActive(true);
     }
 
     /// <summary>

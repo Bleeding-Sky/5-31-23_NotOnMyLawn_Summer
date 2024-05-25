@@ -28,7 +28,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         }
         else if(enviornmentType.isWindow && actionType != 0)
         {
-            WindowRebuildInteraction(Enviornment, actionType);
+            //WindowRebuildInteraction(Enviornment, actionType);
         }
         else if (enviornmentType.isBoardPile && actionType != 0)
         {
@@ -73,6 +73,10 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         WindowInteraction_Enviornment window = Enviornment.GetComponent<WindowInteraction_Enviornment>();
         WindowBarricade_Enviornment windowRebuild = Enviornment.GetComponent<WindowBarricade_Enviornment>();
         HandInventory_Player objectInHands = handInv.GetComponent<HandInventory_Player>();
+
+        Rigidbody2D playerVelocity = player.GetComponent<Rigidbody2D>();
+
+        playerVelocity.velocity = new Vector2(0, 0);
         /*
          * Two different interactions based on what key the 
          * player presses. Either the player looks through the window 

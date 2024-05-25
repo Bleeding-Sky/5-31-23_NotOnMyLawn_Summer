@@ -27,7 +27,10 @@ public class RoomCameraConfiner_Environment : MonoBehaviour
         }
         currentRoom = roomTracker.CurrentRoom;
 
-        DefineRoomPosition();
+        if(currentRoom != null)
+        { 
+            DefineRoomPosition();
+        }
     }
 
     public void DefineRoomPosition()

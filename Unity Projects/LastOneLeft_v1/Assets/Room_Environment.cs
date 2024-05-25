@@ -5,9 +5,17 @@ using UnityEngine;
 public class Room_Environment : MonoBehaviour
 {
     public Transform RoomPoint;
+
+    //Upper left bound of room
     public Transform RoomPointA;
+
+    //Lower right bound of room
     public Transform RoomPointB;
+
+    //Room width and length
     public Vector2 RoomSize;
+
+    //Door list
     public List<GameObject> Doors;
     public bool countDoors;
     // Start is called before the first frame update
@@ -30,12 +38,14 @@ public class Room_Environment : MonoBehaviour
 
         foreach (Collider2D player in PlayersInRoom)
         {
+            //Seaches the player layer and if it is in the room then it updates the current room
             if (player.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 RoomTracking_Environment tracking = gameObject.transform.parent.GetComponent<RoomTracking_Environment>();
-                tracking.CurrentRoom = gameObject;
-              
+                tracking.CurrentRoom = gameObject;     
             }
+            //Finds the number of doors in each room and adds it to a list of doors in the room
+            //**Only runs once at the start of the game since rooms and doors dont change**
             else if(player.gameObject.layer == LayerMask.NameToLayer("Interactable") && countDoors == true)
             {
                 if(player.gameObject.tag == "Door")
@@ -46,13 +56,19 @@ public class Room_Environment : MonoBehaviour
                 }
             }
         }
+
         countDoors = false;
     }
 
+    /// <summary>
+    /// Called on the enemy Room tracking script when it enters a new room to give xombies their current room location
+    /// </summary>
+    /// <param name="enemy"></param>
     public void EnemyTracking(GameObject enemy)
     {
         Collider2D[] EnemiesInRoom = Physics2D.OverlapAreaAll(RoomPointA.position, RoomPointB.position);
 
+        //Finds the enemy in the layer and sets the current room as the one it is in
         foreach (Collider2D entity in EnemiesInRoom)
         {
             if(entity.gameObject == enemy)

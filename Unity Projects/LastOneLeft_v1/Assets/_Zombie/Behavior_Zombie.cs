@@ -83,7 +83,10 @@ public class Behavior_Zombie : MonoBehaviour
     private void TrackingPlayer()
     {
         statusScript.DoTrack();
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(roomTrackingScript.doorGoal.transform.position.x, 0, 0) , moveSpeed * Time.deltaTime);
+        if (roomTrackingScript.doorGoal != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(roomTrackingScript.doorGoal.transform.position.x, 0, 0), moveSpeed * Time.deltaTime);
+        }
     }
 
     /// <summary>

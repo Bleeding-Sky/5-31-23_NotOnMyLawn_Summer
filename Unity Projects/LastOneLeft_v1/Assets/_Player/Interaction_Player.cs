@@ -137,7 +137,6 @@ public class Interaction_Player : MonoBehaviour
             interacting = false;
             
         }
-
         //if the interaction is an envionrmental object it interacts with it
         else if (!Interactable.isItem && Interactable.isEnviormentObject && interacting)
         {
