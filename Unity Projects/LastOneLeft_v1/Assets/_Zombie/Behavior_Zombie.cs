@@ -23,11 +23,13 @@ public class Behavior_Zombie : MonoBehaviour
     [Header("DEBUG")]
     public PositionTracker_Player playerPosition;
     public Status_Zombie statusScript;
+    public RoomTracking_Zombie roomTrackingScript;
     public Transform attackPoint;
     public Vector3 zombiePosition;
     public Collider2D[] players;
     public bool recharging;
     public bool playerInRange;
+    public bool playerInRoom;
 
     public float scaleFloat;
 
@@ -35,6 +37,7 @@ public class Behavior_Zombie : MonoBehaviour
     {
         scaleFloat = transform.localScale.x;
         statusScript = GetComponentInParent<Status_Zombie>();
+        roomTrackingScript = GetComponent<RoomTracking_Zombie>();
     }
 
     // Update is called once per frame
@@ -47,15 +50,9 @@ public class Behavior_Zombie : MonoBehaviour
         DetectPlayer();
         DetermineState();
 
-        if (statusScript.isChasing && !recharging)
-        {
-            ChasingPlayer();
-            FacingDirection();
-        }
-        else if (statusScript.isAttacking && !recharging)
-        {
-            InitiateAttack();
-        }
+        playerInRoom = !roomTrackingScript.findPlayer;
+        DetermineAction();
+        
     }
 
     /// <summary>
@@ -80,7 +77,13 @@ public class Behavior_Zombie : MonoBehaviour
     private void ChasingPlayer()
     {
         statusScript.DoChase();
-        transform.position = Vector3.MoveTowards(transform.position, playerPosition.playerPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x,0,0), moveSpeed * Time.deltaTime);
+    }
+
+    private void TrackingPlayer()
+    {
+        statusScript.DoTrack();
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(roomTrackingScript.doorGoal.transform.position.x, 0, 0) , moveSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -133,21 +136,46 @@ public class Behavior_Zombie : MonoBehaviour
         StartCoroutine(Attack(player));
     }
 
+    public void DetermineAction()
+    {
+        if (statusScript.isChasing && !recharging)
+        {
+            ChasingPlayer();
+            FacingDirection();
+        }
+        else if (statusScript.isAttacking && !recharging)
+        {
+            InitiateAttack();
+        }
+        else if(statusScript.isTracking && !recharging)
+        {
+            TrackingPlayer();
+        }
+    }
+
     /// <summary>
     /// Determines what the zombie is currently doing
     /// </summary>
     public void DetermineState()
     {
         
-        if (!playerInRange && !recharging)
+        if (!playerInRange && !recharging && playerInRoom)
         {
             statusScript.DoChase();
             statusScript.StopAttack();
+            statusScript.StopTrack();
         }
-        else if (playerInRange)
+        else if(!playerInRange && !recharging && !playerInRoom)
+        {
+            statusScript.StopChase();
+            statusScript.StopAttack();
+            statusScript.DoTrack();
+        }
+        else if (playerInRange && playerInRoom)
         {
             statusScript.DoAttack();
             statusScript.StopChase();
+            statusScript.StopTrack();
         }
     }
 

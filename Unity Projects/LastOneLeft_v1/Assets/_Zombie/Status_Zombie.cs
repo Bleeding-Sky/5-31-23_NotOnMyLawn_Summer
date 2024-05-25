@@ -31,6 +31,7 @@ public class Status_Zombie : MonoBehaviour
     public bool isCrawling = false;
     public bool isAttacking = false;
     public bool isChasing = false;
+    public bool isTracking = false;
 
     [SerializeField] float stumbleTimeRemaining;
     [SerializeField] float stunTimeRemaining;
@@ -302,6 +303,14 @@ public class Status_Zombie : MonoBehaviour
         isChasing = true;
     }
 
+    /// <summary>
+    /// applies the tracking status
+    /// </summary>
+    public void DoTrack()
+    {
+        isTracking = true;
+    }
+
     #endregion
 
     #region "stop status" methods
@@ -365,6 +374,14 @@ public class Status_Zombie : MonoBehaviour
     public void StopChase()
     {
         isChasing = false;
+    }
+
+    /// <summary>
+    /// removes the track status
+    /// </summary>
+    public void StopTrack()
+    {
+        isTracking = false;
     }
 
     #endregion

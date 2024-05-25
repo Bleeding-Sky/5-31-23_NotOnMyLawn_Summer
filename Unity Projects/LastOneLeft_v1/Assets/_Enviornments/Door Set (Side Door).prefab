@@ -198,7 +198,7 @@ MonoBehaviour:
   isEnviormentObject: 1
   isWindow: 0
   isSideDoor: 1
-  isBackgroundDoor: 1
+  isBackgroundDoor: 0
   isBoardPile: 0
   isGun: 0
   isBandage: 0

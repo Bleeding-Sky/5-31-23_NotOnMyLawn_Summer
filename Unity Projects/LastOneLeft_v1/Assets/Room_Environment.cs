@@ -57,7 +57,7 @@ public class Room_Environment : MonoBehaviour
         {
             if(entity.gameObject == enemy)
             {
-                Tracking_Test enemyTracker = enemy.GetComponent<Tracking_Test>();
+                RoomTracking_Zombie enemyTracker = enemy.GetComponent<RoomTracking_Zombie>();
                 enemyTracker.ZombieCurrentRoom = gameObject;
             }
         }

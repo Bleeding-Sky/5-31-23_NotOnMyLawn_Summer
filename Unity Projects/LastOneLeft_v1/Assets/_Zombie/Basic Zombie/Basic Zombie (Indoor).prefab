@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3586186555328090939}
   - component: {fileID: 6686265168932324859}
   - component: {fileID: 8690531322156415250}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 2212604887901288062}
   - component: {fileID: 2876139764564646222}
   - component: {fileID: 2832585401113807419}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,9 +193,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5986176186435314654}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Standing Hitboxes
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 4220196528983416125}
   - component: {fileID: 1089670044624826283}
   - component: {fileID: 8047546025628878277}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Head (Standing)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 6732573702493249213}
   - component: {fileID: 8856323904562570513}
   - component: {fileID: 3550103613272472078}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Head (Crawling)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1325373082806579950}
   - component: {fileID: 8363764005741933858}
   - component: {fileID: 7241760113620444055}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,6 +494,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 2
   damageReporterScript: {fileID: 0}
+--- !u!1 &6336284231423701287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465280503353298584}
+  m_Layer: 9
+  m_Name: Attack Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1465280503353298584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6336284231423701287}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.008, y: 1.119, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3556026943585166876}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7014842333839966370
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +536,7 @@ GameObject:
   - component: {fileID: 1734867854529091174}
   - component: {fileID: 1533764183657981501}
   - component: {fileID: 1972255180904558280}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2688148886426896484}
-  m_Layer: 29
+  m_Layer: 9
   m_Name: Crawling Hitboxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +666,9 @@ GameObject:
   - component: {fileID: 2599506621570360231}
   - component: {fileID: 2036366367542509894}
   - component: {fileID: 1636273120705147034}
-  m_Layer: 29
+  - component: {fileID: 7144671835406309031}
+  - component: {fileID: -6568796654622105249}
+  m_Layer: 9
   m_Name: Basic Zombie (Indoor)
   m_TagString: Zombie
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -657,6 +690,7 @@ Transform:
   m_Children:
   - {fileID: 5986176186435314654}
   - {fileID: 2688148886426896484}
+  - {fileID: 1465280503353298584}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6346884890917247267
@@ -827,3 +861,60 @@ MonoBehaviour:
   standingHeadHitboxObject: {fileID: 4211048747927633149}
   crawlingHitboxObject: {fileID: 7321205512440143967}
   crawlingHeadHitboxObject: {fileID: 4779495667204431729}
+--- !u!114 &7144671835406309031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634217409129547592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c0087f517e80344bb19da3504fdac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 1
+  coolDown: 1
+  windUp: 0.25
+  moveSpeed: 1
+  attackArea: -0.19
+  Player:
+    serializedVersion: 2
+    m_Bits: 64
+  normalSpeed: 1
+  stunSpeed: 0
+  stumbleSpeed: 0.5
+  fallenMoveSpeed: 0
+  enragedSpeed: 2.5
+  crawlMoveSpeed: 0.5
+  playerPosition: {fileID: 11400000, guid: 7d509ac04ffcf3a4c9682f0dc1339a34, type: 2}
+  statusScript: {fileID: 0}
+  roomTrackingScript: {fileID: 0}
+  attackPoint: {fileID: 1465280503353298584}
+  zombiePosition: {x: 0, y: 0, z: 0}
+  players: []
+  recharging: 0
+  playerInRange: 0
+  playerInRoom: 0
+  scaleFloat: 0
+--- !u!114 &-6568796654622105249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634217409129547592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d11eb393960384a82e1c6a67d65ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 11400000, guid: 97008a3bc47014244a2b37f8d4e734f3, type: 2}
+  playerPos: {fileID: 11400000, guid: 7d509ac04ffcf3a4c9682f0dc1339a34, type: 2}
+  ZombieCurrentRoom: {fileID: 0}
+  doorGoal: {fileID: 0}
+  findPlayer: 0
+  moveSpeed: 0
+  enteredNewRoom: 0
+  searchForPlayer: 0
+  quickestRoute: []
