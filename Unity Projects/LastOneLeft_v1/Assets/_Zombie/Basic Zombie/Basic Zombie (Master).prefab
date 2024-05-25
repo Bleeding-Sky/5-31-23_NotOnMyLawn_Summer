@@ -151,4 +151,4 @@ MonoBehaviour:
   localcopy_indoorWindowTranform: {fileID: 0}
   isEnteringBuilding: 0
   enterBuildingTimeRemaining: 0
-  cameraManagerScript: {fileID: 0}
+  cameraManagerScript: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
