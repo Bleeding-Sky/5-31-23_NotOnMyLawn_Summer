@@ -50,6 +50,7 @@ public class Inventory_Player : MonoBehaviour
     /// <param name="InteractedItem"></param>
     public void StoreItems(GameObject InteractedItem)
     {
+        
         //Goes through each item in the list and looks for the nearest empty slot
         for (int i = 0; i < maxInventorySize; i++)
         {
@@ -63,6 +64,7 @@ public class Inventory_Player : MonoBehaviour
                 InteractedItem.transform.parent = gameObject.transform;
                 InteractedItem.SetActive(false);
                 maxInventorySize = 0;
+                
             }
 
         }

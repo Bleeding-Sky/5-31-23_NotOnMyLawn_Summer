@@ -64,9 +64,7 @@ public class EnterBuilding_Zombie : MonoBehaviour
         if (enterBuildingTimeRemaining <= 0)
         {
             //climb inside in window view if player is at window
-           if (
-                cameraManagerScript.currentEnum == CameraManagement.Cameras.Window
-                )
+           if (cameraManagerScript.currentEnum == CameraManagement.Cameras.Window)
             {
                 ZmbMoveInsideWindow();
             }

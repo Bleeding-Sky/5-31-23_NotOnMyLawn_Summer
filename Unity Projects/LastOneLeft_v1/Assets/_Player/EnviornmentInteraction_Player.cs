@@ -128,13 +128,11 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         //Depending on which door the player is at in the set it will teleport the player there
         if(door.currentDoor == door.door1)
         {
-            player.transform.position = door.door2.transform.position;
-            Debug.Log("door 1");
+            player.transform.position = new Vector3(door.door2.transform.position.x, 0, 0);
         }
         else if(door.currentDoor == door.door2)
         {
-            player.transform.position = door.door1.transform.position;
-            Debug.Log("door 2");
+            player.transform.position = new Vector3(door.door1.transform.position.x, 0, 0);
         }
     }
 
@@ -149,15 +147,11 @@ public class EnviornmentInteraction_Player : MonoBehaviour
         //Depending on which door the player is at in the set it will teleport the player there
         if (door.currentDoor == door.door1)
         {
-            player.transform.position = door.door2.transform.position - new Vector3(2,0,0);
-            Debug.Log(door.door2.transform.position);
-            Debug.Log(door.door2.transform.position + new Vector3(2, 0, 0));
+            player.transform.position = new Vector3(door.door2.transform.position.x - 2,0,0);
         }
         else if (door.currentDoor == door.door2)
         {
-            player.transform.position = door.door1.transform.position + new Vector3(2, 0, 0);
-            Debug.Log(door.door1.transform.position);
-            Debug.Log(door.door1.transform.position + new Vector3(2, 0, 0));
+            player.transform.position =  new Vector3(door.door1.transform.position.x + 2, 0, 0);
         }
     }
 

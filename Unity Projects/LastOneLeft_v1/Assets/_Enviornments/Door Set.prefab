@@ -16,7 +16,7 @@ GameObject:
   m_Layer: 8
   m_Name: Door 2
   m_TagString: Door
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4515781889705220475}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.32, y: -13.38, z: -0.129498}
-  m_LocalScale: {x: 2.877, y: 4.6113462, z: 1}
+  m_LocalPosition: {x: -3.5, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8923483427632015613}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.53333336, g: 0.2901961, b: 0.5647059, a: 1}
   m_FlipX: 0
@@ -102,6 +102,8 @@ MonoBehaviour:
   door1: {fileID: 8414366673611248730}
   door2: {fileID: 4515781889705220475}
   currentDoor: {fileID: 4515781889705220475}
+  inRoom: {fileID: 0}
+  doorOffset: 0
 --- !u!114 &407308963313335891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ MonoBehaviour:
   isItem: 0
   isEnviormentObject: 1
   isWindow: 0
-  isDoor: 0
+  isSideDoor: 0
   isBackgroundDoor: 1
   isBoardPile: 0
   isGun: 0
@@ -217,7 +219,7 @@ GameObject:
   m_Layer: 8
   m_Name: Door 1
   m_TagString: Door
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -230,8 +232,8 @@ Transform:
   m_GameObject: {fileID: 8414366673611248730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.98, y: -13.4, z: -0.129498}
-  m_LocalScale: {x: 2.877, y: 4.6113462, z: 1}
+  m_LocalPosition: {x: 6, y: 1, z: -0.129498}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8923483427632015613}
@@ -276,7 +278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.5339409, g: 0.29102886, b: 0.5660378, a: 1}
   m_FlipX: 0
@@ -303,6 +305,8 @@ MonoBehaviour:
   door1: {fileID: 8414366673611248730}
   door2: {fileID: 4515781889705220475}
   currentDoor: {fileID: 8414366673611248730}
+  inRoom: {fileID: 0}
+  doorOffset: 0
 --- !u!114 &6039756988735212207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +322,7 @@ MonoBehaviour:
   isItem: 0
   isEnviormentObject: 1
   isWindow: 0
-  isDoor: 0
+  isSideDoor: 0
   isBackgroundDoor: 1
   isBoardPile: 0
   isGun: 0

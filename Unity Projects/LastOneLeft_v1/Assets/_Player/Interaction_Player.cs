@@ -135,6 +135,7 @@ public class Interaction_Player : MonoBehaviour
             inventoryStorage.ItemInteractionScript = ItemInteraction;
             inventoryStorage.StoreItems(closetItem);
             interacting = false;
+            
         }
 
         //if the interaction is an envionrmental object it interacts with it
@@ -159,6 +160,7 @@ public class Interaction_Player : MonoBehaviour
         {
             interactionType = 0;
             interacting = true;
+            
         }
     }
 
