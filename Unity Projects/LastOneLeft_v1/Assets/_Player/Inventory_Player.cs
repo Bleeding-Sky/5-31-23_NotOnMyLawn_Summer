@@ -7,6 +7,10 @@ public class Inventory_Player : MonoBehaviour
     [Header("Inventory")]
     public List<GameObject> item;
 
+    public int largeAmmo;
+    public int mediumAmmo;
+    public int smallAmmo;
+
     [Header("CONFIG")]
     public int maxInventorySize;
     private int currentMaxInventorySize;
@@ -30,6 +34,10 @@ public class Inventory_Player : MonoBehaviour
     {
         //Sets what the current MaxInventory size is so that it can be changed later with upgrades
         currentMaxInventorySize = maxInventorySize;
+
+        largeAmmo = 0;
+        mediumAmmo = 0;
+        smallAmmo = 0;
     }
 
     // Update is called once per frame
@@ -50,12 +58,13 @@ public class Inventory_Player : MonoBehaviour
     /// <param name="InteractedItem"></param>
     public void StoreItems(GameObject InteractedItem)
     {
+        InteractionIdentification_Item itemType = InteractedItem.GetComponent<InteractionIdentification_Item>();
         
         //Goes through each item in the list and looks for the nearest empty slot
         for (int i = 0; i < maxInventorySize; i++)
         {
             //if a slot if empty it fills it with the interacted item
-            if (item[i] == null)
+            if (item[i] == null && !itemType.isBullet)
             {
                 //Sets the item in the list and determines what type of item it is giving it all the necessary information and setting the object in as the child of the inventory game object to visualize it better
                 //TLDR sets it in the inventory and inherits information from the player
@@ -63,8 +72,27 @@ public class Inventory_Player : MonoBehaviour
                 itemAssignment.DetermineItemType(InteractedItem);
                 InteractedItem.transform.parent = gameObject.transform;
                 InteractedItem.SetActive(false);
-                maxInventorySize = 0;
+                maxInventorySize = 0;   
+            }
+            else if(itemType.isBullet)
+            {
+                AmmoDrop_Item ammoType = InteractedItem.GetComponent<AmmoDrop_Item>();
                 
+                if(ammoType.BulletType == AmmoDrop_Item.BulletTypes.Large)
+                {
+                    largeAmmo += ammoType.bulletCount;
+                }
+                else if(ammoType.BulletType == AmmoDrop_Item.BulletTypes.Medium)
+                {
+                    mediumAmmo += ammoType.bulletCount;
+                }
+                else if(ammoType.BulletType == AmmoDrop_Item.BulletTypes.Small)
+                {
+                    smallAmmo += ammoType.bulletCount;
+                }
+
+                ammoType.DestroyPack();
+                break;
             }
 
         }

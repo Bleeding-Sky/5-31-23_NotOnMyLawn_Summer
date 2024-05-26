@@ -166,8 +166,8 @@ MonoBehaviour:
   firingPos: {x: 0, y: 0, z: 0}
   bulletStartPosition: {x: 0, y: 0, z: 0}
   bulletDirectionPosition: {x: 0, y: 0, z: 0}
-  xDirection: -0.9998477
-  yDirection: -0.017452406
+  xDirection: -0.9702957
+  yDirection: -0.2419219
   bulletSpeed: 180
 --- !u!114 &6975846595836323195
 MonoBehaviour:

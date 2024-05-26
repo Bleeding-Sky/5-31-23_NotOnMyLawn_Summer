@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7197336143943688359}
   - component: {fileID: 3191106731066870133}
   - component: {fileID: 6525880731388974302}
+  - component: {fileID: -5890646085246894623}
   m_Layer: 7
   m_Name: Window Shotgun Bullet
   m_TagString: Bullet
@@ -147,7 +148,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 3191106731066870133}
-  bulletDirection: {x: 0.09891358, y: 0.019044697, z: 0.99491554}
+  bulletDirection: {x: 0.069423325, y: -0.15593523, z: 0.9853841}
   startingPosition: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
-  speed: 107.4
+  speed: 8.5
+--- !u!114 &-5890646085246894623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184650886467805441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bfe95a698031c49bd0f4a3a79eb80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDataSO: {fileID: 11400000, guid: ca4d52dd6a5e3b64c8a99d77c513946b, type: 2}
+  damage: 0
