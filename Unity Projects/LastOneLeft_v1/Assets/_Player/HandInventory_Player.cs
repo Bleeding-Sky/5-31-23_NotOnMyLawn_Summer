@@ -10,6 +10,8 @@ public class HandInventory_Player : MonoBehaviour
 
     public GameObject AimingArea;
 
+    public Animator gunAnimations;
+
 
     /*
      * This Script is heavily relied upon by the Inventory Script
@@ -25,12 +27,34 @@ public class HandInventory_Player : MonoBehaviour
         {
             DropItemInHand();
         }
+
+        AimingAnimationHandler();
     }
 
+
+    public void AimingAnimationHandler()
+    {
+        if(itemInHand)
+        {
+            InteractionIdentification_Item objectInfo = objectInHand.GetComponent<InteractionIdentification_Item>();
+
+            if(objectInfo.isGun)
+            {
+                gunAnimations.SetBool("isAiming", true);
+            }
+            else
+            {
+                gunAnimations.SetBool("isAiming", false);
+            }
+        }
+        else
+        {
+            gunAnimations.SetBool("isAiming", false);
+        }
+    }
     /// <summary>
     /// Drops the item currently in the player's hand
     /// </summary>
-
     public void DropItemInHand()
     {
 

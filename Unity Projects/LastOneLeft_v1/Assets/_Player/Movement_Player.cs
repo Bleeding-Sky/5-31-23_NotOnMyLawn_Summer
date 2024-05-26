@@ -16,6 +16,8 @@ public class Movement_Player : MonoBehaviour
     public Rigidbody2D myRigidbody2D;
     public States_Player playerStates;
     public PositionTracker_Player playerPosition;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,10 @@ public class Movement_Player : MonoBehaviour
 
         //sends player's position to scriptable object
         playerPosition.playerPosition = transform.position;
+
     }
+
+    
 
     public void OnMoveAction(InputAction.CallbackContext actionContext)
     {
@@ -47,6 +52,8 @@ public class Movement_Player : MonoBehaviour
         {
             inputDirection = 0;
         }
+
+        playerStates.inputDirection = inputDirection;
     }
 
     /// <summary>
