@@ -48,7 +48,7 @@ public class Health_Zombie : MonoBehaviour
     #region damage methods
     public void DamageCrit(float damage, float critDamageMultiplier, float statusMultiplier)
     {
-        critRegionHealth -= damage;
+        critRegionHealth -= (damage * critDamageMultiplier);
 
         //attempt to stun
         statusScript.ProcessCritHit(statusMultiplier);
@@ -66,7 +66,7 @@ public class Health_Zombie : MonoBehaviour
 
     public void DamageArmored(float damage, float armoredDamageMultiplier, float statusMultiplier)
     {
-        armoredRegionCurrentHealth -= damage;
+        armoredRegionCurrentHealth -= (damage * armoredDamageMultiplier);
         statusScript.ProcessArmoredHit(statusMultiplier);
         limbLossScript.AttemptArmLoss(armoredRegionMaxHealth, armoredRegionCurrentHealth);
 
@@ -82,7 +82,7 @@ public class Health_Zombie : MonoBehaviour
 
     public void DamageWeak(float damage, float weakDamageMultiplier, float statusMultiplier)
     {
-        weakRegionHealth -= damage;
+        weakRegionHealth -= (damage * weakDamageMultiplier);
 
         //attempt stumble
         statusScript.ProcessWeakHit(statusMultiplier);
@@ -101,7 +101,7 @@ public class Health_Zombie : MonoBehaviour
     /// </summary>
     public void DamageHealth(float dmgVal)
     {
-        Debug.Log($"Health damaged for {dmgVal} damage");
+        //Debug.Log($"Health damaged for {dmgVal} damage");
         currentHealth -= dmgVal;
     }
 
