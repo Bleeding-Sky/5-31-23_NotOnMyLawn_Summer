@@ -11,7 +11,7 @@ public class DamageRegion_Parent : MonoBehaviour
     [Header("DEBUG")]
     public Health_Zombie healthScript;
 
-
+    //keep this in start, since the subclasses override awake
     private void Start()
     {
         healthScript = GetComponentInParent<Health_Zombie>();
