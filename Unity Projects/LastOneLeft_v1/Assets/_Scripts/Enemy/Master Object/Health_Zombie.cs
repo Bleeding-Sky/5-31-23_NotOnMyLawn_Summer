@@ -18,14 +18,6 @@ public class Health_Zombie : MonoBehaviour
     public float armoredRegionHealth = 12;
     [SerializeField] float weakRegionHealth = 3;
 
-
-    //incoming damage multipliers
-    /*
-    [SerializeField] float critDamageMultiplier = 1.5f;
-    [SerializeField] float armoredDamageMultiplier = 1;
-    [SerializeField] float weakDamageMultiplier = 0.5f;
-    */
-
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] LimbLoss_Zombie limbLossScript;
@@ -59,7 +51,7 @@ public class Health_Zombie : MonoBehaviour
         //attempt to break head if its health is 0
         if (critRegionHealth > 0)
         {
-            statusScript.ProcessCritHit();
+            statusScript.ProcessCritHit(statusMultiplier);
         }
         else
         {
@@ -73,7 +65,7 @@ public class Health_Zombie : MonoBehaviour
     {
         //attempt stun and arm loss regardless of body health
         armoredRegionHealth -= damage;
-        statusScript.ProcessArmoredHit();
+        statusScript.ProcessArmoredHit(statusMultiplier);
         limbLossScript.AttemptArmLoss(armoredRegionHealth);
         DamageHealth(damage * armoredDamageMultiplier);
 
@@ -87,7 +79,7 @@ public class Health_Zombie : MonoBehaviour
         //attempt to break legs if legs have no health
         if(weakRegionHealth > 0)
         {
-            statusScript.ProcessWeakStatus();
+            statusScript.ProcessWeakStatus(statusMultiplier);
         }
         else
         {

@@ -94,35 +94,35 @@ public class Status_Zombie : MonoBehaviour
     //attempts to apply appropriate statuses based on current zombie state and incoming damage region
     #region Incoming Damage Processors
 
-    public void ProcessCritHit()
+    public void ProcessCritHit(float statusModifier)
     {
         //ensure prerequisite state is active, then attempt state change
         if (standingState == ZmbStandingStateEnum.NoStatus)
         {
-            AttemptStun(DmgRegionEnum.Crit);
+            AttemptStun(DmgRegionEnum.Crit, statusModifier);
         }
         else if (standingState == ZmbStandingStateEnum.Stunned)
         {
-            AttemptFallBackward(DmgRegionEnum.Crit);
+            AttemptFallBackward(DmgRegionEnum.Crit, statusModifier);
         }
     }
 
-    public void ProcessArmoredHit()
+    public void ProcessArmoredHit(float statusModifier)
     {
         //ensure prerequisite state is active
         if (standingState == ZmbStandingStateEnum.NoStatus)
         {
             //attempt proper state change
-            AttemptStun(DmgRegionEnum.Armored);
+            AttemptStun(DmgRegionEnum.Armored, statusModifier);
 
         }
         else if (standingState == ZmbStandingStateEnum.Stunned)
         {
-            AttemptFallBackward(DmgRegionEnum.Armored);
+            AttemptFallBackward(DmgRegionEnum.Armored, statusModifier);
         }
     }
 
-    public void ProcessWeakStatus()
+    public void ProcessWeakStatus(float statusModifier)
     {
         //if zombie has no status, attempt a stumble
         //if zombie is stumbling, attempt a fall forward
@@ -132,15 +132,15 @@ public class Status_Zombie : MonoBehaviour
         if (standingState == ZmbStandingStateEnum.NoStatus)
         {
             //attempt proper state change
-            AttemptStumble();
+            AttemptStumble(statusModifier);
         }
         else if (standingState == ZmbStandingStateEnum.Stumbling)
         {
-            AttemptFallForward();
+            AttemptFallForward(statusModifier);
         }
         else if (standingState == ZmbStandingStateEnum.Stunned)
         {
-            AttemptStumble();
+            AttemptStumble(statusModifier);
         }
     }
 
@@ -151,9 +151,9 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// determines if a stumble occurs
     /// </summary>
-    public void AttemptStumble()
+    public void AttemptStumble(float statusModifier)
     {
-        if (RNGRolls_System.RollUnder(stumbleChance))
+        if (RNGRolls_System.RollUnder(stumbleChance * statusModifier))
         {
             DoStumble(); 
             if (printDebugMessages) { Debug.Log("Stumble Sucess"); }
@@ -168,7 +168,7 @@ public class Status_Zombie : MonoBehaviour
     /// determines if a stun occurs
     /// </summary>
     /// <param name="damagedRegion"></param>
-    public void AttemptStun(DmgRegionEnum damagedRegion)
+    public void AttemptStun(DmgRegionEnum damagedRegion, float statusModifier)
     {
         float successCutoff = 0;
 
@@ -183,7 +183,7 @@ public class Status_Zombie : MonoBehaviour
         else
         { Debug.Log("Error detected in AttemptStun damagedRegion argument"); }
 
-        if (RNGRolls_System.RollUnder(successCutoff))
+        if (RNGRolls_System.RollUnder(successCutoff * statusModifier))
         {
             DoStun(); 
             if (printDebugMessages) { Debug.Log("Stun Success"); }
@@ -197,9 +197,9 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// determines if the zombie falls forward
     /// </summary>
-    public void AttemptFallForward()
+    public void AttemptFallForward(float statusModifier)
     {
-        if (RNGRolls_System.RollUnder(fallForwardChance))
+        if (RNGRolls_System.RollUnder(fallForwardChance * statusModifier))
         { 
             DoFallForward();
             if (printDebugMessages) { Debug.Log("Fall Forward Success"); }
@@ -214,7 +214,7 @@ public class Status_Zombie : MonoBehaviour
     /// determines if the zombie falls backward
     /// </summary>
     /// <param name="damagedRegion"></param>
-    public void AttemptFallBackward(DmgRegionEnum damagedRegion)
+    public void AttemptFallBackward(DmgRegionEnum damagedRegion, float statusModifier)
     {
         float successCutoff = 0;
 
@@ -229,7 +229,7 @@ public class Status_Zombie : MonoBehaviour
         else
         { Debug.Log("Error detected in AttemptFallBackward damagedRegion argument"); }
 
-        if (RNGRolls_System.RollUnder(successCutoff)) 
+        if (RNGRolls_System.RollUnder(successCutoff * statusModifier)) 
         {
             DoFallBackward();
             if (printDebugMessages) { Debug.Log("Fall Backward Success"); }

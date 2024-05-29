@@ -14,10 +14,10 @@ public class Debugger_Zombie : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] float bulletDamage;
     [SerializeField] float bulletPenetration;
-    [SerializeField] float bulletStatusMultiplier;
-    [SerializeField] float bulletCritDamageMultiplier;
-    [SerializeField] float bulletArmoredDamageMultiplier;
-    [SerializeField] float bulletWeakDamageMultiplier;
+    [SerializeField] float bulletStatusMultiplier = 1;
+    [SerializeField] float bulletCritDamageMultiplier = 2;
+    [SerializeField] float bulletArmoredDamageMultiplier = 1;
+    [SerializeField] float bulletWeakDamageMultiplier = 0.5f;
 
     #region Damage
     [ContextMenu("True Damage")]
@@ -55,7 +55,7 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Stumble")]
     void AttemptStumble()
     {
-        status.AttemptStumble();
+        status.AttemptStumble(bulletStatusMultiplier);
     }
 
     [ContextMenu("Do Stumble")]
@@ -73,13 +73,13 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Stun (Head Damage)")]
     void AttemptStunHead()
     {
-        status.AttemptStun(DmgRegionEnum.Crit);
+        status.AttemptStun(DmgRegionEnum.Crit, bulletStatusMultiplier);
     }
 
     [ContextMenu("Attempt Stun (Body Damage)")]
     void AttemptStunBody()
     {
-        status.AttemptStun(DmgRegionEnum.Armored);
+        status.AttemptStun(DmgRegionEnum.Armored, bulletStatusMultiplier);
     }
 
     [ContextMenu("Do Stun")]
@@ -97,7 +97,7 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Fall Forward")]
     void AttemptFallForward()
     {
-        status.AttemptFallForward();
+        status.AttemptFallForward(bulletStatusMultiplier);
     }
 
     [ContextMenu("Do Fall Forward")]
@@ -115,13 +115,13 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Fall Backward (Head Damage)")]
     void AttemptFallBackwardHead()
     {
-        status.AttemptFallBackward(DmgRegionEnum.Crit);
+        status.AttemptFallBackward(DmgRegionEnum.Crit, bulletStatusMultiplier);
     }
 
     [ContextMenu("Attempt Fall Backward (Body Damage)")]
     void AttemptFallBackwardBody()
     {
-        status.AttemptFallBackward(DmgRegionEnum.Armored);
+        status.AttemptFallBackward(DmgRegionEnum.Armored, bulletStatusMultiplier);
     }
 
     [ContextMenu("Do Fall Backward")]
