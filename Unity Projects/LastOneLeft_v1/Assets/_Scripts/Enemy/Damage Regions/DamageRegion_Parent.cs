@@ -9,12 +9,12 @@ public class DamageRegion_Parent : MonoBehaviour
     public DmgRegionEnum Region;
 
     [Header("DEBUG")]
-    public DmgReporter_Zombie damageReporterScript;
+    public Health_Zombie healthScript;
 
 
     private void Start()
     {
-        damageReporterScript = GetComponentInParent<DmgReporter_Zombie>();
+        healthScript = GetComponentInParent<Health_Zombie>();
     }
 
     /// <summary>
@@ -27,24 +27,21 @@ public class DamageRegion_Parent : MonoBehaviour
     public void TakeDamage(float damage, float critDamageMultiplier, float armoredDamageMultiplier,
                             float weakDamageMultiplier, float statusMultiplier)
     {
-        //determine which damage multiplier to use
-        float correctDamageMultiplier = 0;
         switch (Region)
         {
             case DmgRegionEnum.Crit:
-                correctDamageMultiplier = critDamageMultiplier;
+                healthScript.DamageCrit(damage, critDamageMultiplier, statusMultiplier);
                 break;
 
             case DmgRegionEnum.Armored:
-                correctDamageMultiplier = armoredDamageMultiplier;
+                healthScript.DamageArmored(damage, armoredDamageMultiplier, statusMultiplier);
                 break;
 
             case DmgRegionEnum.Weak:
-                correctDamageMultiplier = weakDamageMultiplier;
+                healthScript.DamageWeak(damage, weakDamageMultiplier, statusMultiplier);
                 break;
         }
 
-        damageReporterScript.TakeDamage(damage, Region, correctDamageMultiplier, statusMultiplier);
     }
 
 }

@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &1553787067583327893
 GameObject:
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &2199152488638370646
 GameObject:
@@ -309,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &4779495667204431729
 GameObject:
@@ -401,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &5947762423273163615
 GameObject:
@@ -493,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &6336284231423701287
 GameObject:
@@ -616,6 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &7321205512440143967
 GameObject:
@@ -663,7 +669,6 @@ GameObject:
   - component: {fileID: 6346884890917247267}
   - component: {fileID: 3796725863384675104}
   - component: {fileID: 3398615393604839400}
-  - component: {fileID: 2599506621570360231}
   - component: {fileID: 2036366367542509894}
   - component: {fileID: 1636273120705147034}
   - component: {fileID: 7144671835406309031}
@@ -817,19 +822,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2599506621570360231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7634217409129547592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2122d4e52b0ae40812d47320528383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zmbHealthScript: {fileID: 0}
 --- !u!114 &2036366367542509894
 MonoBehaviour:
   m_ObjectHideFlags: 0

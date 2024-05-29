@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &3860684011414442967
 GameObject:
@@ -112,7 +113,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4757198274851521871}
   - component: {fileID: 6914418699065239706}
-  - component: {fileID: 6327110589522170884}
   - component: {fileID: 9187671277026710475}
   - component: {fileID: 4078576615591724081}
   - component: {fileID: 8046356640144818766}
@@ -193,19 +193,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6327110589522170884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3960763945083177755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2122d4e52b0ae40812d47320528383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zmbHealthScript: {fileID: 0}
 --- !u!114 &9187671277026710475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &4872917538852637415
 GameObject:
@@ -399,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &6844753456396238250
 GameObject:
@@ -467,6 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &7572891728861824934
 GameObject:
@@ -569,6 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
 --- !u!1 &8378307623030616623
 GameObject:
@@ -637,4 +628,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
+  healthScript: {fileID: 0}
   damageReporterScript: {fileID: 0}
