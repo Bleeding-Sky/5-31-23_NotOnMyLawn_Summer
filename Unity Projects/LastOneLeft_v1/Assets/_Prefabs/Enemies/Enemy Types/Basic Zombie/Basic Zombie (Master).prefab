@@ -48,14 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5362f6536f00a4444a4701e2e7de5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 50
   currentHealth: 0
-  headHealth: 6
-  bodyHealth: 12
-  legHealth: 3
-  headDmgMultiplier: 1.5
-  bodyDmgMultiplier: 1
-  legDmgMultiplier: 0.5
+  critRegionHealth: 20
+  armoredRegionMaxHealth: 40
+  armoredRegionCurrentHealth: 0
+  weakRegionHealth: 30
   statusScript: {fileID: 0}
   limbLossScript: {fileID: 0}
 --- !u!114 &4513625182986771571
@@ -85,6 +83,7 @@ MonoBehaviour:
   isCrawling: 0
   isAttacking: 0
   isChasing: 0
+  isTracking: 0
   stumbleTimeRemaining: 0
   stunTimeRemaining: 0
   fallenTimeRemaining: 0
@@ -101,10 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f002ecc480f35249ba816a22960c556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armLossChance: 20
-  bothArmsLossChance: 50
-  legBreakChance: 60
-  headBreakChance: 50
   highHealthHeadBreakEndureChance: 70
   lowHealthHeadBreakEndureChance: 50
   printDebugMessages: 0
@@ -152,3 +147,4 @@ MonoBehaviour:
   isEnteringBuilding: 0
   enterBuildingTimeRemaining: 0
   cameraManagerScript: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
+  spriteControllerScript: {fileID: 0}

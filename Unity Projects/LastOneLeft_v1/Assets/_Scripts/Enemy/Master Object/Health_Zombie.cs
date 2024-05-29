@@ -13,15 +13,16 @@ public class Health_Zombie : MonoBehaviour
 
     //health values
     public float maxHealth = 30;
-    public float currentHealth;
     [SerializeField] float critRegionHealth = 6;
     public float armoredRegionMaxHealth = 12;
-    public float armoredRegionCurrentHealth = 0;
     [SerializeField] float weakRegionHealth = 3;
 
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] LimbLoss_Zombie limbLossScript;
+
+    public float currentHealth;
+    public float armoredRegionCurrentHealth;
 
 
     private void Awake()
