@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3586186555328090939}
   - component: {fileID: 6686265168932324859}
-  - component: {fileID: 8690531322156415250}
+  - component: {fileID: 1116897454105170463}
   m_Layer: 9
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.40383092, y: 0.6332849}
   m_EdgeRadius: 0
---- !u!114 &8690531322156415250
+--- !u!114 &1116897454105170463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1050550113735506381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5215dd617f73e043949eee15a61504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4c77d4314198d4eb587ea1cc97863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
@@ -102,10 +102,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2212604887901288062}
   - component: {fileID: 2876139764564646222}
-  - component: {fileID: 2832585401113807419}
+  - component: {fileID: 4041321617302557012}
   m_Layer: 9
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,7 +170,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.61116683, y: 0.36210492}
   m_EdgeRadius: 0
---- !u!114 &2832585401113807419
+--- !u!114 &4041321617302557012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1553787067583327893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5215dd617f73e043949eee15a61504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4c77d4314198d4eb587ea1cc97863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 1
@@ -228,10 +228,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4220196528983416125}
   - component: {fileID: 1089670044624826283}
-  - component: {fileID: 8047546025628878277}
+  - component: {fileID: 2486923730015401828}
   m_Layer: 9
   m_Name: Head (Standing)
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34485963, y: 0.41447544}
   m_EdgeRadius: 0
---- !u!114 &8047546025628878277
+--- !u!114 &2486923730015401828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4211048747927633149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5215dd617f73e043949eee15a61504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4c77d4314198d4eb587ea1cc97863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
@@ -320,10 +320,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6732573702493249213}
   - component: {fileID: 8856323904562570513}
-  - component: {fileID: 3550103613272472078}
+  - component: {fileID: 2843147102310950690}
   m_Layer: 9
   m_Name: Head (Crawling)
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +388,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29003108, y: 0.41075468}
   m_EdgeRadius: 0
---- !u!114 &3550103613272472078
+--- !u!114 &2843147102310950690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4779495667204431729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5215dd617f73e043949eee15a61504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4c77d4314198d4eb587ea1cc97863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 0
@@ -412,10 +412,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1325373082806579950}
   - component: {fileID: 8363764005741933858}
-  - component: {fileID: 7241760113620444055}
+  - component: {fileID: 6809544390473147790}
   m_Layer: 9
   m_Name: Legs
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -480,7 +480,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9720598, y: 0.23798192}
   m_EdgeRadius: 0
---- !u!114 &7241760113620444055
+--- !u!114 &6809544390473147790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5947762423273163615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5215dd617f73e043949eee15a61504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4c77d4314198d4eb587ea1cc97863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 1465280503353298584}
   m_Layer: 9
   m_Name: Attack Point
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,10 +535,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1734867854529091174}
   - component: {fileID: 1533764183657981501}
-  - component: {fileID: 1972255180904558280}
+  - component: {fileID: 1936259042558724351}
   m_Layer: 9
   m_Name: Legs
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -603,7 +603,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46315217, y: 0.86771923}
   m_EdgeRadius: 0
---- !u!114 &1972255180904558280
+--- !u!114 &1936259042558724351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7014842333839966370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5215dd617f73e043949eee15a61504e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4c77d4314198d4eb587ea1cc97863b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Region: 2
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 2688148886426896484}
   m_Layer: 9
   m_Name: Crawling Hitboxes
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

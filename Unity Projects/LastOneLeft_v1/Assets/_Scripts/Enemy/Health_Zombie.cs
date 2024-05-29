@@ -14,15 +14,17 @@ public class Health_Zombie : MonoBehaviour
     //health values
     public float maxHealth = 30;
     public float currentHealth;
-    [SerializeField] float headHealth = 6;
-    public float bodyHealth = 12;
-    [SerializeField] float legHealth = 3;
+    [SerializeField] float critRegionHealth = 6;
+    public float armoredRegionHealth = 12;
+    [SerializeField] float weakRegionHealth = 3;
 
 
     //incoming damage multipliers
-    [SerializeField] float headDmgMultiplier = 1.5f;
-    [SerializeField] float bodyDmgMultiplier = 1;
-    [SerializeField] float legDmgMultiplier = 0.5f;
+    /*
+    [SerializeField] float critDamageMultiplier = 1.5f;
+    [SerializeField] float armoredDamageMultiplier = 1;
+    [SerializeField] float weakDamageMultiplier = 0.5f;
+    */
 
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
@@ -40,7 +42,7 @@ public class Health_Zombie : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            KillZmb();
+            Die();
         }
     }
 
@@ -49,50 +51,50 @@ public class Health_Zombie : MonoBehaviour
     //  damages limbs with full incoming damage, then damages overall zombie health with
     //  damage region multipliers
     #region damage methods
-    public void Headshot(float dmgVal)
+    public void DamageCrit(float damage, float critDamageMultiplier, float statusMultiplier)
     {
-        headHealth -= dmgVal;
+        critRegionHealth -= damage;
 
         //attempt to stun if head has health
         //attempt to break head if its health is 0
-        if (headHealth > 0)
+        if (critRegionHealth > 0)
         {
-            statusScript.ProcessHeadshotStatus();
+            statusScript.ProcessCritHit();
         }
         else
         {
             limbLossScript.AttemptHeadBreak(maxHealth, currentHealth);
         }
 
-        DamageHealth(dmgVal * headDmgMultiplier);
+        DamageHealth(damage * critDamageMultiplier);
     }
 
-    public void Bodyshot(float dmgVal)
+    public void DamageArmored(float damage, float armoredDamageMultiplier, float statusMultiplier)
     {
         //attempt stun and arm loss regardless of body health
-        bodyHealth -= dmgVal;
-        statusScript.ProcessBodyshotStatus();
-        limbLossScript.AttemptArmLoss(bodyHealth);
-        DamageHealth(dmgVal * bodyDmgMultiplier);
+        armoredRegionHealth -= damage;
+        statusScript.ProcessArmoredHit();
+        limbLossScript.AttemptArmLoss(armoredRegionHealth);
+        DamageHealth(damage * armoredDamageMultiplier);
 
     }
 
-    public void Legshot(float dmgVal)
+    public void DamageWeak(float damage, float weakDamageMultiplier, float statusMultiplier)
     {
-        legHealth -= dmgVal;
+        weakRegionHealth -= damage;
 
         //attempt stumble if legs have health remaining
         //attempt to break legs if legs have no health
-        if(legHealth > 0)
+        if(weakRegionHealth > 0)
         {
-            statusScript.ProcessLegshotStatus();
+            statusScript.ProcessWeakStatus();
         }
         else
         {
             limbLossScript.AttemptLegBreak();
         }
 
-        DamageHealth(dmgVal * legDmgMultiplier);
+        DamageHealth(damage * weakDamageMultiplier);
     }
 
     /// <summary>
@@ -100,6 +102,7 @@ public class Health_Zombie : MonoBehaviour
     /// </summary>
     public void DamageHealth(float dmgVal)
     {
+        Debug.Log($"Health damaged for {dmgVal} damage");
         currentHealth -= dmgVal;
     }
 
@@ -108,7 +111,7 @@ public class Health_Zombie : MonoBehaviour
     /// <summary>
     /// destroys master object, and therefore all it's children (different views of same zombie)
     /// </summary>
-    public void KillZmb()
+    public void Die()
     {
         Destroy(gameObject);
     }

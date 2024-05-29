@@ -137,7 +137,7 @@ public class LimbLoss_Zombie : MonoBehaviour
         //on failure, zombie dies
         if (!RNGRolls_System.RollUnder(endureChance))
         {
-            healthScript.KillZmb();
+            healthScript.Die();
 
             if (printDebugMessages) { Debug.Log("Endure Failure"); }
         }

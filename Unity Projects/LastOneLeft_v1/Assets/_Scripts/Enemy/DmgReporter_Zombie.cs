@@ -23,16 +23,17 @@ public class DmgReporter_Zombie : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="damageRegion"></param>
-    public void TakeDamage(float damage, DmgRegionEnum damageRegion)
+    public void TakeDamage( float damage, DmgRegionEnum damageRegion, 
+                            float regionDamageMultiplier, float statusMultiplier)
     {
         switch (damageRegion)
         {
-            case DmgRegionEnum.Head:
-                zmbHealthScript.Headshot(damage); break;
-            case DmgRegionEnum.Body:
-                zmbHealthScript.Bodyshot(damage); break;
-            case DmgRegionEnum.Legs:
-                zmbHealthScript.Legshot(damage); break;
+            case DmgRegionEnum.Crit:
+                zmbHealthScript.DamageCrit(damage, regionDamageMultiplier, statusMultiplier); break;
+            case DmgRegionEnum.Armored:
+                zmbHealthScript.DamageArmored(damage, regionDamageMultiplier, statusMultiplier); break;
+            case DmgRegionEnum.Weak:
+                zmbHealthScript.DamageWeak(damage, regionDamageMultiplier, statusMultiplier); break;
 
         }
     }

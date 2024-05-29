@@ -94,35 +94,35 @@ public class Status_Zombie : MonoBehaviour
     //attempts to apply appropriate statuses based on current zombie state and incoming damage region
     #region Incoming Damage Processors
 
-    public void ProcessHeadshotStatus()
+    public void ProcessCritHit()
     {
         //ensure prerequisite state is active, then attempt state change
         if (standingState == ZmbStandingStateEnum.NoStatus)
         {
-            AttemptStun(DmgRegionEnum.Head);
+            AttemptStun(DmgRegionEnum.Crit);
         }
         else if (standingState == ZmbStandingStateEnum.Stunned)
         {
-            AttemptFallBackward(DmgRegionEnum.Head);
+            AttemptFallBackward(DmgRegionEnum.Crit);
         }
     }
 
-    public void ProcessBodyshotStatus()
+    public void ProcessArmoredHit()
     {
         //ensure prerequisite state is active
         if (standingState == ZmbStandingStateEnum.NoStatus)
         {
             //attempt proper state change
-            AttemptStun(DmgRegionEnum.Body);
+            AttemptStun(DmgRegionEnum.Armored);
 
         }
         else if (standingState == ZmbStandingStateEnum.Stunned)
         {
-            AttemptFallBackward(DmgRegionEnum.Body);
+            AttemptFallBackward(DmgRegionEnum.Armored);
         }
     }
 
-    public void ProcessLegshotStatus()
+    public void ProcessWeakStatus()
     {
         //if zombie has no status, attempt a stumble
         //if zombie is stumbling, attempt a fall forward
@@ -172,11 +172,11 @@ public class Status_Zombie : MonoBehaviour
     {
         float successCutoff = 0;
 
-        if (damagedRegion == DmgRegionEnum.Head)
+        if (damagedRegion == DmgRegionEnum.Crit)
         {
             successCutoff = headshotStunChance;
         }
-        else if (damagedRegion == DmgRegionEnum.Body)
+        else if (damagedRegion == DmgRegionEnum.Armored)
         {
             successCutoff = bodyshotStunChance;
         }
@@ -218,11 +218,11 @@ public class Status_Zombie : MonoBehaviour
     {
         float successCutoff = 0;
 
-        if (damagedRegion == DmgRegionEnum.Head)
+        if (damagedRegion == DmgRegionEnum.Crit)
         {
             successCutoff = headshotFallBackwardChance;
         }
-        else if (damagedRegion == DmgRegionEnum.Body)
+        else if (damagedRegion == DmgRegionEnum.Armored)
         {
             successCutoff = bodyshotFallBackwardChance;
         }

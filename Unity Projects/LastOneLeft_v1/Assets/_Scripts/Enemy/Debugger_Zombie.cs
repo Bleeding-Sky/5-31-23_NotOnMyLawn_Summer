@@ -12,6 +12,12 @@ public class Debugger_Zombie : MonoBehaviour
     
 
     [SerializeField] float damage;
+    [SerializeField] float bulletDamage;
+    [SerializeField] float bulletPenetration;
+    [SerializeField] float bulletStatusMultiplier;
+    [SerializeField] float bulletCritDamageMultiplier;
+    [SerializeField] float bulletArmoredDamageMultiplier;
+    [SerializeField] float bulletWeakDamageMultiplier;
 
     #region Damage
     [ContextMenu("True Damage")]
@@ -20,28 +26,28 @@ public class Debugger_Zombie : MonoBehaviour
         health.DamageHealth(damage);
     }
 
-    [ContextMenu("Headshot")]
-    void Headshot()
+    [ContextMenu("Bullet Damage (Crit)")]
+    void CritDamage()
     {
-        health.Headshot(damage);
+        health.DamageCrit(bulletDamage, bulletCritDamageMultiplier, bulletStatusMultiplier);
     }
 
-    [ContextMenu("Bodyshot")]
-    void Bodyshot()
+    [ContextMenu("Bullet Damage (Armored)")]
+    void ArmoredDamage()
     {
-        health.Bodyshot(damage);
+        health.DamageArmored(damage, bulletArmoredDamageMultiplier, bulletStatusMultiplier);
     }
 
-    [ContextMenu("Legshot")]
-    void Legshot()
+    [ContextMenu("Bullet Damage (Weak)")]
+    void WeakDamage()
     {
-        health.Legshot(damage);
+        health.DamageWeak(damage, bulletWeakDamageMultiplier, bulletStatusMultiplier);
     }
 
     [ContextMenu("Die")]
     void Die()
     {
-        health.KillZmb();
+        health.Die();
     }
     #endregion
 
@@ -67,13 +73,13 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Stun (Head Damage)")]
     void AttemptStunHead()
     {
-        status.AttemptStun(DmgRegionEnum.Head);
+        status.AttemptStun(DmgRegionEnum.Crit);
     }
 
     [ContextMenu("Attempt Stun (Body Damage)")]
     void AttemptStunBody()
     {
-        status.AttemptStun(DmgRegionEnum.Body);
+        status.AttemptStun(DmgRegionEnum.Armored);
     }
 
     [ContextMenu("Do Stun")]
@@ -109,13 +115,13 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Fall Backward (Head Damage)")]
     void AttemptFallBackwardHead()
     {
-        status.AttemptFallBackward(DmgRegionEnum.Head);
+        status.AttemptFallBackward(DmgRegionEnum.Crit);
     }
 
     [ContextMenu("Attempt Fall Backward (Body Damage)")]
     void AttemptFallBackwardBody()
     {
-        status.AttemptFallBackward(DmgRegionEnum.Body);
+        status.AttemptFallBackward(DmgRegionEnum.Armored);
     }
 
     [ContextMenu("Do Fall Backward")]
@@ -167,7 +173,7 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Attempt Arm Break")]
     void AttemptArmBreak()
     {
-        limbloss.AttemptArmLoss(health.bodyHealth);
+        limbloss.AttemptArmLoss(health.armoredRegionHealth);
     }
 
     [ContextMenu("Attempt Leg Break")]

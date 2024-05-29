@@ -24,7 +24,15 @@ public class EnterBuilding_Zombie : MonoBehaviour
     public float enterBuildingTimeRemaining;
 
     public CameraManagement cameraManagerScript; //set w/ persistent scriptable object
-    
+
+    //sprite controller reference needed so that the sprites on the new indoor zombie can be synced
+    [SerializeField] SpriteController_Zombie spriteControllerScript;
+
+    private void Awake()
+    {
+        spriteControllerScript = GetComponent<SpriteController_Zombie>();
+    }
+
 
 
     private void Update()
@@ -116,6 +124,9 @@ public class EnterBuilding_Zombie : MonoBehaviour
 
         //set zmb pos to the pos of the window inside, like it crawled thru
         newIndoorZombie.transform.position = new Vector3(indoorWindowTransform.position.x, 0, 0);
+
+        //refreshes the sprite controller so the indoor zombie can have correct sprites
+        spriteControllerScript.Refresh();
 
         isEnteringBuilding = false;
     }

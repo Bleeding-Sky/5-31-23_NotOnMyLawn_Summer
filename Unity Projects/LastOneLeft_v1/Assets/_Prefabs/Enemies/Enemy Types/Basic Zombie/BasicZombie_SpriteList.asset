@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9f51155c3f3744681e97e515752d4a, type: 3}
+  m_Name: BasicZombie_SpriteList
+  m_EditorClassIdentifier: 
+  zombieSpriteList:
+  - {fileID: 11400000, guid: 6e191f7a8831c88489b47a7aa03b4f3d, type: 2}
+  - {fileID: 11400000, guid: 8b05af9210697284082cf9a2a66b5ad3, type: 2}
+  - {fileID: 11400000, guid: bef8e678b12d2894985e83b6d3902e47, type: 2}
+  - {fileID: 11400000, guid: dab14be4a633f2f45893d80430fc555d, type: 2}
+  - {fileID: 11400000, guid: 81dff4007a220af409d7009327947d17, type: 2}
+  - {fileID: 11400000, guid: 3d8e441c8f1f2204dac59c48aafbbb57, type: 2}
+  - {fileID: 11400000, guid: 10fe7c73ef8990d4da58ddd9903477b6, type: 2}
+  - {fileID: 11400000, guid: b5c51df2024861440a4ac4099b5d0c7f, type: 2}
+  - {fileID: 11400000, guid: 8b82d232558e19c449b98eae03fca552, type: 2}
+  - {fileID: 11400000, guid: a7021485bcc796e4092112af0f852af5, type: 2}
+  - {fileID: 11400000, guid: 9815e965b45760e42a818cc4df71a0eb, type: 2}
