@@ -164,10 +164,11 @@ public class Debugger_Zombie : MonoBehaviour
 
     #region Limb Breaks
 
+    /* NOT NECESSARY ANYMORE BECAUSE LIMBS BREAK WHEN AT 0 HEALTH
     [ContextMenu("Attempt Head Break")]
     void AttemptHeadBreak()
     {
-        limbloss.AttemptHeadBreak(health.maxHealth, health.currentHealth);
+        limbloss.AttemptCritBreak(health.maxHealth, health.currentHealth);
     }
 
     [ContextMenu("Attempt Arm Break")]
@@ -181,11 +182,12 @@ public class Debugger_Zombie : MonoBehaviour
     {
         limbloss.AttemptLegBreak();
     }
+    */
 
     [ContextMenu("Break Head")]
     void BreakHead()
     {
-        limbloss.BreakHead(health.maxHealth, health.currentHealth);
+        limbloss.BreakCritRegion(health.maxHealth, health.currentHealth);
     }
 
     [ContextMenu("Break Arm")]

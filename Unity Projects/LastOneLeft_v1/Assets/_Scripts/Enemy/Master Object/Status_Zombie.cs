@@ -122,7 +122,7 @@ public class Status_Zombie : MonoBehaviour
         }
     }
 
-    public void ProcessWeakStatus(float statusModifier)
+    public void ProcessWeakHit(float statusModifier)
     {
         //if zombie has no status, attempt a stumble
         //if zombie is stumbling, attempt a fall forward

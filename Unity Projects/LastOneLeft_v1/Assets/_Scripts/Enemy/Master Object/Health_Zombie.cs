@@ -15,7 +15,8 @@ public class Health_Zombie : MonoBehaviour
     public float maxHealth = 30;
     public float currentHealth;
     [SerializeField] float critRegionHealth = 6;
-    public float armoredRegionHealth = 12;
+    public float armoredRegionMaxHealth = 12;
+    public float armoredRegionCurrentHealth = 0;
     [SerializeField] float weakRegionHealth = 3;
 
     [Header("DEBUG")]
@@ -28,6 +29,7 @@ public class Health_Zombie : MonoBehaviour
         statusScript = GetComponent<Status_Zombie>();
         limbLossScript = GetComponent <LimbLoss_Zombie>();
         currentHealth = maxHealth;
+        armoredRegionCurrentHealth = armoredRegionMaxHealth;
     }
 
     private void Update()
@@ -47,15 +49,15 @@ public class Health_Zombie : MonoBehaviour
     {
         critRegionHealth -= damage;
 
-        //attempt to stun if head has health
-        //attempt to break head if its health is 0
-        if (critRegionHealth > 0)
+        //attempt to stun
+        statusScript.ProcessCritHit(statusMultiplier);
+
+        //break head if its health is 0
+        //also attempt to stun again as a bonus for limb breaking
+        if (critRegionHealth <= 0)
         {
+            limbLossScript.BreakCritRegion(maxHealth, currentHealth);
             statusScript.ProcessCritHit(statusMultiplier);
-        }
-        else
-        {
-            limbLossScript.AttemptHeadBreak(maxHealth, currentHealth);
         }
 
         DamageHealth(damage * critDamageMultiplier);
@@ -63,10 +65,16 @@ public class Health_Zombie : MonoBehaviour
 
     public void DamageArmored(float damage, float armoredDamageMultiplier, float statusMultiplier)
     {
-        //attempt stun and arm loss regardless of body health
-        armoredRegionHealth -= damage;
+        armoredRegionCurrentHealth -= damage;
         statusScript.ProcessArmoredHit(statusMultiplier);
-        limbLossScript.AttemptArmLoss(armoredRegionHealth);
+        limbLossScript.AttemptArmLoss(armoredRegionMaxHealth, armoredRegionCurrentHealth);
+
+        //bonus stun chance if body is broken
+        if (armoredRegionCurrentHealth <= 0)
+        {
+            statusScript.ProcessArmoredHit(statusMultiplier);
+        }
+
         DamageHealth(damage * armoredDamageMultiplier);
 
     }
@@ -75,15 +83,13 @@ public class Health_Zombie : MonoBehaviour
     {
         weakRegionHealth -= damage;
 
-        //attempt stumble if legs have health remaining
-        //attempt to break legs if legs have no health
-        if(weakRegionHealth > 0)
+        //attempt stumble
+        statusScript.ProcessWeakHit(statusMultiplier);
+
+        //break legs if legs have no health
+        if (weakRegionHealth <= 0)
         {
-            statusScript.ProcessWeakStatus(statusMultiplier);
-        }
-        else
-        {
-            limbLossScript.AttemptLegBreak();
+            limbLossScript.BreakLegs();
         }
 
         DamageHealth(damage * weakDamageMultiplier);
