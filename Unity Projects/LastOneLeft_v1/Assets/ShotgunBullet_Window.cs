@@ -9,6 +9,7 @@ public class ShotgunBullet_Window : MonoBehaviour
     public Transform startingPosition;
     public Vector3 mousePos;
     public float speed;
+
     // Start is called before the first frame update
     void Start()
     {

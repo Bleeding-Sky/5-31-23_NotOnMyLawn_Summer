@@ -1,59 +1,47 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Shotgun_Item : MonoBehaviour
+public class Gun_Item : MonoBehaviour
 {
     public System.Random rand;
     public float rotZ;
-    public float shotRadius;
     public float coneDirection;
     public double xDirection;
     public double yDirection;
 
     [Header("CONFIG")]
     public Transform firingPoint;
+    GunInformation_Item gunInfo;
     public GameObject bullet;
-    public Transform GunRotation;
-    public Transform handPosition;
-    public GameObject player;
-    public GameObject aimingPoint;
 
     [Header("DEBUG")]
-    public int bulletAmount;
-    private float firingRate;
-    private float recoil;
     public bool canFire;
     public Vector3 armPosition;
-    public bool pickedUp;
-    [Range(0, 360)]
-    public float shotSpread;
-    GunInformation_Item gunSpecs;
+    
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        gunSpecs = GetComponent<GunInformation_Item>();
-        gunSpecs.isPickedUp = false;
-        bulletAmount = gunSpecs.bulletCount;
-        firingRate = gunSpecs.fireRate;
+        gunInfo = GetComponent<GunInformation_Item>();
+        gunInfo.isPickedUp = false;
+        bullet = gunInfo.bulletType;
         canFire = true;
-        pickedUp = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetGunObjects();
-        if (pickedUp)
+        if(gunInfo.isPickedUp)
         {
-            gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
-            gunSpecs.currentCamera = gunSpecs.cameraManager.currentCamera;
+            gunInfo.windowMode = gunInfo.playerStates.lookingThroughWindow;
+            gunInfo.currentCamera = gunInfo.cameraManager.currentCamera;
             CalculateDirection();
             CalculateAngles();
             CheckIfFireable();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && !gunSpecs.windowMode)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && !gunInfo.windowMode)
             {
                 Shoot();
                 StartCoroutine(DetermineFireRate());
@@ -77,24 +65,24 @@ public class Shotgun_Item : MonoBehaviour
     {
         canFire = false;
         rand = new System.Random();
-        float angleDifference = shotSpread / 2;
+        float angleDifference = gunInfo.shotSpread / 2;
         float angle1 = rotZ - angleDifference;
         float angle2 = rotZ + angleDifference;
         float decidedAngle;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < gunInfo.bulletsPerShot; i++)
         {
             decidedAngle = rand.Next((int)angle1, (int)angle2);
             xDirection = Math.Cos((Math.PI / 180) * decidedAngle);
             yDirection = Math.Sin((Math.PI / 180) * decidedAngle);
-            ShotgunBullet_Item bulletDirection = bullet.GetComponent<ShotgunBullet_Item>();
+            Bullet_Item bulletDirection = bullet.GetComponent<Bullet_Item>();
 
             bulletDirection.xDirection = (float)xDirection;
             bulletDirection.yDirection = (float)yDirection;
 
             //Creates bullet and updates the amount
             Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-            bulletAmount -= 1;
+            gunInfo.bulletCount -= 1;
         }
 
     }
@@ -104,7 +92,7 @@ public class Shotgun_Item : MonoBehaviour
     /// </summary>
     public void FaceMouse()
     {
-        ArmRotation_Player zRotation = GunRotation.GetComponent<ArmRotation_Player>();
+        ArmRotation_Player zRotation = gunInfo.rotationAndAimingPoint.GetComponent<ArmRotation_Player>();
         float rotZ = zRotation.itemRotation;
         transform.localRotation = Quaternion.Euler(0, 0, rotZ - 90);
     }
@@ -114,22 +102,12 @@ public class Shotgun_Item : MonoBehaviour
     /// </summary>
     public void CalculateDirection()
     {
-        transform.position = handPosition.position;
-        armPosition = GunRotation.transform.position;
+        transform.position = gunInfo.handPos.position;
+        armPosition = gunInfo.rotationAndAimingPoint.transform.position;
         FaceMouse();
     }
 
-    /// <summary>
-    /// Updates the gun objects with it's gun information objects
-    /// so that the gun is always oriented correctly
-    /// </summary>
-    public void SetGunObjects()
-    {
-        GunRotation = gunSpecs.rotationAndAimingPoint;
-        handPosition = gunSpecs.handPos;
-        player = gunSpecs.player;
-        pickedUp = gunSpecs.isPickedUp;
-    }
+
 
     /// <summary>
     /// Sets the Fire rate of the object
@@ -137,18 +115,18 @@ public class Shotgun_Item : MonoBehaviour
     /// <returns></returns>
     IEnumerator DetermineFireRate()
     {
-        gunSpecs.coolingDown = true;
-        yield return new WaitForSeconds(firingRate);
-        gunSpecs.coolingDown = false;
+        gunInfo.coolingDown = true;
+        yield return new WaitForSeconds(gunInfo.fireRate);
+        gunInfo.coolingDown = false;
         canFire = true;
     }
 
     /// <summary>
-    /// Checks if the gun is able to fire based on various conditions
+    /// Checks if the gun can be fired through the cooldown and the bullet amount
     /// </summary>
     public void CheckIfFireable()
     {
-        if (gunSpecs.coolingDown != true && bulletAmount > 0)
+        if (gunInfo.coolingDown != true && gunInfo.bulletCount > 0)
         {
             canFire = true;
         }
@@ -169,5 +147,4 @@ public class Shotgun_Item : MonoBehaviour
 
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
     }
-    
 }

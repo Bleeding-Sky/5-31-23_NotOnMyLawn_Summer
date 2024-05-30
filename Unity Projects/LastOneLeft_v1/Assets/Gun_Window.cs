@@ -1,34 +1,33 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Shotgun_Window : MonoBehaviour
+public class Gun_Window : MonoBehaviour
 {
-    public GunInformation_Item gunSpecs;
+    public GunInformation_Item gunInfo;
     public Vector3 worldPos;
     public Vector3 startingPosition;
     public float anglePhi;
     public float angleTheta;
-    public float spread;
     public GameObject bullet;
     public bool canFire;
     // Start is called before the first frame update
     void Start()
     {
-        gunSpecs = GetComponent<GunInformation_Item>();
+        gunInfo = GetComponent<GunInformation_Item>();
         canFire = true;
-        bullet = gunSpecs.windowBullet;
+        bullet = gunInfo.windowBullet;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gunSpecs.isPickedUp)
+        if (gunInfo.isPickedUp)
         {
-            gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
-            gunSpecs.currentCamera = gunSpecs.cameraManager.currentCamera;
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && gunSpecs.windowMode)
+            gunInfo.windowMode = gunInfo.playerStates.lookingThroughWindow;
+            gunInfo.currentCamera = gunInfo.cameraManager.currentCamera;
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && gunInfo.windowMode)
             {
                 CalculateShootingAngle();
                 Shoot();
@@ -40,28 +39,28 @@ public class Shotgun_Window : MonoBehaviour
     public void Shoot()
     {
         canFire = false;
-        float phiAngleDifference = spread / 2;
+        float phiAngleDifference = gunInfo.shotSpread / 2;
         float phiAngle1 = anglePhi - phiAngleDifference;
         float phiAngle2 = anglePhi + phiAngleDifference;
         float phiDecidedAngle;
 
-        float thetaAngleDifference = spread / 2;
+        float thetaAngleDifference = gunInfo.shotSpread / 2;
         float thetaAngle1 = angleTheta - thetaAngleDifference;
         float thetaAngle2 = angleTheta + thetaAngleDifference;
         float thetaDecidedAngle;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < gunInfo.bulletsPerShot; i++)
         {
             phiDecidedAngle = UnityEngine.Random.Range(phiAngle1, phiAngle2);
             thetaDecidedAngle = UnityEngine.Random.Range(thetaAngle1, thetaAngle2);
 
             Debug.Log($"Phi: {phiDecidedAngle} \n Theta: {thetaDecidedAngle}");
-            double zDirection = Math.Cos((Math.PI / 180) * phiDecidedAngle) * 
-                Math.Sin((Math.PI / 180) * thetaDecidedAngle);
+            double zDirection = Math.Cos((Math.PI / 180) * phiDecidedAngle) *
+                                Math.Sin((Math.PI / 180) * thetaDecidedAngle);
             double yDirection = Math.Sin((Math.PI / 180) * phiDecidedAngle);
             double xDirection = Math.Cos((Math.PI / 180) * thetaDecidedAngle);
 
             Bullet_Window bulletDirection = bullet.GetComponent<Bullet_Window>();
-            bulletDirection.startingPosition = gunSpecs.currentCamera.transform;
+            bulletDirection.startingPosition = gunInfo.currentCamera.transform;
 
             bulletDirection.bulletDirection = new Vector3((float)xDirection, (float)yDirection, (float)zDirection);
 
@@ -82,7 +81,7 @@ public class Shotgun_Window : MonoBehaviour
     public void CalculateShootingAngle()
     {
         MousePosition();
-        startingPosition = gunSpecs.currentCamera.transform.position;
+        startingPosition = gunInfo.currentCamera.transform.position;
         Vector3 direction = worldPos - startingPosition;
 
         Debug.Log(direction.normalized);

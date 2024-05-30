@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6534684069453831091}
   - component: {fileID: 7285229500812259279}
   - component: {fileID: 8319180066746718575}
-  - component: {fileID: 6975846595836323195}
+  - component: {fileID: 4971860569369032635}
+  - component: {fileID: 3648821319592330741}
+  - component: {fileID: 8617575490325236044}
   m_Layer: 7
   m_Name: Shotgun Bullet
   m_TagString: Bullet
@@ -169,7 +171,7 @@ MonoBehaviour:
   xDirection: -0.9702957
   yDirection: -0.2419219
   bulletSpeed: 180
---- !u!114 &6975846595836323195
+--- !u!114 &4971860569369032635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,8 +180,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 5996389672159248934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4bfe95a698031c49bd0f4a3a79eb80d, type: 3}
+  m_Script: {fileID: 11500000, guid: 795464900f4ba6e4986cdeade6a7e2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDataSO: {fileID: 11400000, guid: ca4d52dd6a5e3b64c8a99d77c513946b, type: 2}
+  critPenetrationPenalty: 1
+  armoredPenetrationPenalty: 4
+  weakPenetrationPenalty: 2
+  myBulletInfo: {fileID: 0}
+--- !u!114 &3648821319592330741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996389672159248934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03cbe7ad6fd64c244bd9593c60f484bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 0
+  bulletPenetration: 0
+  statusMultiplier: 0
+  critDamageMultiplier: 0
+  armoredDamageMultiplier: 0
+  weakDamageMultiplier: 0
+--- !u!114 &8617575490325236044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996389672159248934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c486ba033d57d48ac0313a30483532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBulletInfo: {fileID: 0}

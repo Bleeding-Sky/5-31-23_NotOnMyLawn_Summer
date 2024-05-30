@@ -13,9 +13,7 @@ public class Bullet_Window : MonoBehaviour
     void Start()
     {
         transform.position = startingPosition.position;
-        bulletDirection = mousePos - startingPosition.position;
-        Debug.Log(bulletDirection.normalized);
-        bulletRB.velocity = bulletDirection.normalized * speed;
+        bulletRB.velocity = bulletDirection * speed;
     }
 
     /// <summary>

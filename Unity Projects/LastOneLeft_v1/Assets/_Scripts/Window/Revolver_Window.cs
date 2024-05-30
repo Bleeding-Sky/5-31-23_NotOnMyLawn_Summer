@@ -8,6 +8,7 @@ public class Revolver_Window : MonoBehaviour
     [Header("CONFIG")]
     public GunInformation_Item gunSpecs;
     public GameObject bullet;
+
     [Header("DEBUG")]
     public bool canFire;
     public bool pickedUp;
@@ -56,6 +57,8 @@ public class Revolver_Window : MonoBehaviour
 
         //Sets the bullets trajectory with the direction  
         bulletDirection.mousePos = worldPos;
+
+        bulletDirection.bulletDirection = (bulletDirection.mousePos - bulletDirection.startingPosition.position).normalized;
         //Creates bullet and updates the amount
         Instantiate(bullet, worldPos, Quaternion.identity);
         gunSpecs.bulletCount -= 1;

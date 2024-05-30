@@ -7,44 +7,33 @@ public class Revolver_Item : MonoBehaviour
     [Header("CONFIG")]
     public Transform firingPoint;
     public GameObject bullet;
-    public Transform GunRotation;
-    public Transform handPosition;
-    public GameObject player;
+    
     public GameObject aimingPoint;
+    GunInformation_Item gunInfo;
 
     [Header("DEBUG")]
-    public int bulletAmount;
-    private float firingRate;
-    private float recoil;
     public bool canFire;
     public Vector3 armPosition;
-    public bool pickedUp;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        gunSpecs.isPickedUp = false;
-        bulletAmount = gunSpecs.bulletCount;
-        firingRate = gunSpecs.fireRate;
-        recoil = gunSpecs.recoil;
+        gunInfo = GetComponent<GunInformation_Item>();
+        gunInfo.isPickedUp = false;
         canFire = true;
-        pickedUp = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        
-        SetGunObjects();
-        if (pickedUp)
+        if (gunInfo.isPickedUp)
         {
-            gunSpecs.windowMode = gunSpecs.playerStates.lookingThroughWindow;
+            gunInfo.windowMode = gunInfo.playerStates.lookingThroughWindow;
             CalculateDirection();
             CheckIfFireable();
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && !gunSpecs.windowMode)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && !gunInfo.windowMode)
             {
                 Shoot();
                 StartCoroutine(DetermineFireRate());
@@ -67,12 +56,14 @@ public class Revolver_Item : MonoBehaviour
         circlePos.z = 0;
 
         //Sets the bullets trajectory with the direction  
-        bulletDirection.firingPos = circlePos;
-        bulletDirection.bulletDirectionPosition = armPosition;
+
+        Vector2 bulletDir = (circlePos - armPosition).normalized;
+        bulletDirection.xDirection = bulletDir.x;
+        bulletDirection.yDirection = bulletDir.y;
         Debug.Log(armPosition);
         //Creates bullet and updates the amount
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-        bulletAmount -= 1;
+        gunInfo.bulletCount -= 1;
     }
 
     /// <summary>
@@ -80,7 +71,7 @@ public class Revolver_Item : MonoBehaviour
     /// </summary>
     public void FaceMouse()
     {
-        ArmRotation_Player zRotation = GunRotation.GetComponent<ArmRotation_Player>();
+        ArmRotation_Player zRotation = gunInfo.rotationAndAimingPoint.GetComponent<ArmRotation_Player>();
         float rotZ = zRotation.itemRotation;
         transform.localRotation = Quaternion.Euler(0, 0, rotZ - 90);
     }
@@ -90,8 +81,8 @@ public class Revolver_Item : MonoBehaviour
     /// </summary>
     public void CalculateDirection()
     {
-        transform.position = handPosition.position;
-        armPosition = GunRotation.transform.position;
+        transform.position = gunInfo.handPos.position;
+        armPosition = gunInfo.rotationAndAimingPoint.transform.position;
         FaceMouse();
     }
 
@@ -101,10 +92,9 @@ public class Revolver_Item : MonoBehaviour
     /// <returns></returns>
     IEnumerator DetermineFireRate()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        gunSpecs.coolingDown = true;
-        yield return new WaitForSeconds(firingRate);
-        gunSpecs.coolingDown = false;
+        gunInfo.coolingDown = true;
+        yield return new WaitForSeconds(gunInfo.fireRate);
+        gunInfo.coolingDown = false;
         canFire = true;
     }
 
@@ -113,31 +103,17 @@ public class Revolver_Item : MonoBehaviour
     /// </summary>
     public void Recoil()
     {
-        Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
-        playerRB.AddForce(transform.right * recoil);
+        Rigidbody2D playerRB = gunInfo.player.GetComponent<Rigidbody2D>();
+        //playerRB.AddForce(transform.right * gunInfo.recoil);
     }
 
-    /// <summary>
-    /// Updates the gun objects with it's gun information objects
-    /// so that the gun is always oriented correctly
-    /// </summary>
-    public void SetGunObjects()
-    {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        GunRotation = gunSpecs.rotationAndAimingPoint;
-        handPosition = gunSpecs.handPos;
-        player = gunSpecs.player;
-        pickedUp = gunSpecs.isPickedUp;
-
-    }
-
+    
     /// <summary>
     /// Checks if the gun can be fired through the cooldown and the bullet amount
     /// </summary>
     public void CheckIfFireable()
     {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        if (gunSpecs.coolingDown != true && bulletAmount > 0)
+        if (gunInfo.coolingDown != true && gunInfo.bulletCount > 0)
         {
             canFire = true;
         }

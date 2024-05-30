@@ -6,9 +6,7 @@ public class ShotgunBullet_Item : MonoBehaviour
 {
     public Rigidbody2D bulletRB;
 
-    public Vector3 firingPos;
     public Vector3 bulletStartPosition;
-    public Vector3 bulletDirectionPosition;
     public float xDirection;
     public float yDirection;
 
@@ -18,7 +16,6 @@ public class ShotgunBullet_Item : MonoBehaviour
     {
         //Initiates the bullet direction and speed
         bulletStartPosition = transform.position;
-        Vector3 direction = firingPos - bulletDirectionPosition;
         bulletRB.velocity = new Vector3(xDirection, yDirection, 0).normalized * bulletSpeed;
 
     }

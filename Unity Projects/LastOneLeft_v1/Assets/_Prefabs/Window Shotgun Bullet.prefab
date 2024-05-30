@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 7197336143943688359}
   - component: {fileID: 3191106731066870133}
   - component: {fileID: 6525880731388974302}
-  - component: {fileID: -5890646085246894623}
+  - component: {fileID: -1837348940270329079}
+  - component: {fileID: -7733911636212994876}
+  - component: {fileID: 2613635277520941365}
   m_Layer: 7
   m_Name: Window Shotgun Bullet
   m_TagString: Bullet
@@ -148,11 +150,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 3191106731066870133}
-  bulletDirection: {x: 0.069423325, y: -0.15593523, z: 0.9853841}
+  bulletDirection: {x: 0.04877029, y: -0.049839064, z: 0.9975688}
   startingPosition: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
   speed: 8.5
---- !u!114 &-5890646085246894623
+--- !u!114 &-1837348940270329079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,8 +163,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 4184650886467805441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4bfe95a698031c49bd0f4a3a79eb80d, type: 3}
+  m_Script: {fileID: 11500000, guid: 03cbe7ad6fd64c244bd9593c60f484bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDataSO: {fileID: 11400000, guid: ca4d52dd6a5e3b64c8a99d77c513946b, type: 2}
-  damage: 0
+  damage: 10
+  bulletPenetration: 0
+  statusMultiplier: 0
+  critDamageMultiplier: 0
+  armoredDamageMultiplier: 0
+  weakDamageMultiplier: 0
+--- !u!114 &-7733911636212994876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184650886467805441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14d384c7e37c11429c242606d1147b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBulletInfo: {fileID: 0}
+--- !u!114 &2613635277520941365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184650886467805441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583e5b5ac65b83644abfd184c03e981e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  critPenetrationPenalty: 1
+  armoredPenetrationPenalty: 4
+  weakPenetrationPenalty: 2
+  myBulletInfo: {fileID: 0}

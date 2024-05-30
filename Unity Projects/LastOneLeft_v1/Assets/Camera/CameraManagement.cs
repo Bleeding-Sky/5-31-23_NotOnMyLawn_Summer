@@ -12,6 +12,4 @@ public class CameraManagement : ScriptableObject
     public Cameras currentEnum;
     public bool changingCameras;
     public GameObject currentCamera;
-
-    
 }

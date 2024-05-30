@@ -6,9 +6,9 @@ public class Bullet_Item : MonoBehaviour
 {
     public Rigidbody2D bulletRB;
 
-    public Vector3 firingPos;
     public Vector3 bulletStartPosition;
-    public Vector3 bulletDirectionPosition;
+    public float xDirection;
+    public float yDirection;
 
     public float bulletSpeed;
     // Start is called before the first frame update
@@ -16,9 +16,7 @@ public class Bullet_Item : MonoBehaviour
     {
         //Initiates the bullet direction and speed
         bulletStartPosition = transform.position;
-        Vector3 direction = firingPos - bulletDirectionPosition;
-        Debug.Log(new Vector3(direction.x, direction.y, 0).normalized);
-        bulletRB.velocity = new Vector3(direction.x, direction.y, 0).normalized * bulletSpeed;
+        bulletRB.velocity = new Vector3(xDirection, yDirection, 0).normalized * bulletSpeed;
 
     }
 
