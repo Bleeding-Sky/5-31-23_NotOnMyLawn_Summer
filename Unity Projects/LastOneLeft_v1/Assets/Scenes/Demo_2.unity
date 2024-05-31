@@ -1344,9 +1344,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  largeAmmo: 0
-  mediumAmmo: 0
-  smallAmmo: 0
+  largeAmmo: 100
+  mediumAmmo: 100
+  smallAmmo: 100
   maxInventorySize: 9
   ItemInteractionScript: {fileID: 1632706289}
   itemAssignment: {fileID: 1632706288}
@@ -2134,6 +2134,7 @@ GameObject:
   - component: {fileID: 1095390165}
   - component: {fileID: 1095390167}
   - component: {fileID: 1095390164}
+  - component: {fileID: 1095390171}
   m_Layer: 8
   m_Name: Gun
   m_TagString: Gun
@@ -2160,6 +2161,8 @@ MonoBehaviour:
   angleTheta: 0
   bullet: {fileID: 0}
   canFire: 0
+  canReload: 0
+  shooting: 0
 --- !u!114 &1095390165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,24 +2197,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fc1ac81fe5f8a4f8fce621c0aec69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automatic: 0
+  semiAutomatic: 1
+  bulletType: 2
   bulletsPerShot: 1
-  bulletCount: 100
-  magSize: 0
-  fireRate: 0.25
-  reload: 0
-  bulletType: {fileID: 3092487318744206373, guid: a4a59a7a05a8bbb4d8c9a6bb44e1703a, type: 3}
+  magSize: 8
+  fireRate: 0.1
+  reload: 1.5
+  mobility: 1
+  indoorbullet: {fileID: 3092487318744206373, guid: a4a59a7a05a8bbb4d8c9a6bb44e1703a, type: 3}
   windowBullet: {fileID: 4539929668432797422, guid: 21cc353d2ac26574ab64e599cca9cd88, type: 3}
   shotSpread: 0
+  damage: 5
+  bulletPenetration: 3
+  statusMultiplier: 0.4
+  critDamageMultiplier: 1.5
+  armoredDamageMultiplier: 0.5
+  weakDamageMultiplier: 1
   rotationAndAimingPoint: {fileID: 0}
   handPos: {fileID: 0}
   player: {fileID: 0}
   currentCamera: {fileID: 0}
   playerStates: {fileID: 0}
   cameraManager: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
+  inventory: {fileID: 0}
   isPickedUp: 0
   windowMode: 0
   coolingDown: 0
-  currentMagSize: 0
+  currentMagAmount: 0
 --- !u!114 &1095390167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2231,7 +2244,9 @@ MonoBehaviour:
   firingPoint: {fileID: 586161643}
   bullet: {fileID: 0}
   canFire: 0
+  canReload: 0
   armPosition: {x: 0, y: 0, z: 0}
+  shooting: 0
 --- !u!50 &1095390168
 Rigidbody2D:
   serializedVersion: 4
@@ -2322,6 +2337,108 @@ Transform:
   - {fileID: 1612171641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1095390171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095390163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: fecf6cbe961061d489f7f046421ff95a, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e212dc9e-bee5-45f3-a1a0-f9d37d3b63f5
+    m_ActionName: Indoor/HMove[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4fded2ad-b987-4085-85f6-5125c45f4a77
+    m_ActionName: Indoor/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 07845674-d881-41fc-8d32-63fde041731d
+    m_ActionName: Indoor/Secondary Interaction[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f4f44d66-4fe6-46d2-9390-cfad7b8e41b8
+    m_ActionName: Indoor/Holster/Draw[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1095390167}
+        m_TargetAssemblyTypeName: Gun_Item, Assembly-CSharp
+        m_MethodName: ShootingAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1095390164}
+        m_TargetAssemblyTypeName: Gun_Window, Assembly-CSharp
+        m_MethodName: ShootingAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e5f5c8b5-db95-49e6-98a3-7b78ee85fde2
+    m_ActionName: Indoor/Shooting[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1095390167}
+        m_TargetAssemblyTypeName: Gun_Item, Assembly-CSharp
+        m_MethodName: ReloadAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1095390164}
+        m_TargetAssemblyTypeName: Gun_Window, Assembly-CSharp
+        m_MethodName: ReloadAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
+    m_ActionName: Indoor/Reload[/Keyboard/r]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Indoor
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1116850180
 GameObject:
   m_ObjectHideFlags: 0
@@ -34034,6 +34151,7 @@ MonoBehaviour:
   handPos: {fileID: 959322626}
   AimingArea: {fileID: 0}
   playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
+  interaction: {fileID: 1632706289}
 --- !u!114 &1632706289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35635,6 +35753,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f4f44d66-4fe6-46d2-9390-cfad7b8e41b8
     m_ActionName: Indoor/Holster/Draw[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e5f5c8b5-db95-49e6-98a3-7b78ee85fde2
+    m_ActionName: Indoor/Shooting[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
+    m_ActionName: Indoor/Reload[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor

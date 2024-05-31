@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System;
 
 public class Gun_Window : MonoBehaviour
@@ -12,6 +13,8 @@ public class Gun_Window : MonoBehaviour
     public float angleTheta;
     public GameObject bullet;
     public bool canFire;
+    public bool canReload;
+    public bool shooting;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +30,18 @@ public class Gun_Window : MonoBehaviour
         {
             gunInfo.windowMode = gunInfo.playerStates.lookingThroughWindow;
             gunInfo.currentCamera = gunInfo.cameraManager.currentCamera;
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canFire && gunInfo.windowMode)
+            CheckIfFireable();
+
+            if (shooting && canFire && gunInfo.windowMode)
             {
                 CalculateShootingAngle();
                 Shoot();
                 StartCoroutine(DetermineFireRate());
+
+                if(gunInfo.semiAutomatic)
+                {
+                    shooting = false;
+                }
             }
         }
     }
@@ -67,17 +77,69 @@ public class Gun_Window : MonoBehaviour
             //Creates bullet and updates the amount
             Instantiate(bullet, worldPos, Quaternion.identity);
         }
+
+        gunInfo.currentMagAmount -= 1;
     }
 
 
     IEnumerator DetermineFireRate()
-    {
-        GunInformation_Item gunSpecs = GetComponent<GunInformation_Item>();
-        gunSpecs.coolingDown = true;
-        yield return new WaitForSeconds(gunSpecs.fireRate);
-        gunSpecs.coolingDown = false;
+    {   
+        gunInfo.coolingDown = true;
+        canReload = false;
+        yield return new WaitForSeconds(gunInfo.fireRate);
+        gunInfo.coolingDown = false;
         canFire = true;
+        canReload = true;
     }
+
+    public IEnumerator Reload()
+    {
+        canFire = false;
+        canReload = false;
+        yield return new WaitForSeconds(gunInfo.reload);
+        gunInfo.currentMagAmount = gunInfo.magSize;
+        subtractInventoryAmmo();
+        canFire = true;
+        canReload = true;
+    }
+
+    /// <summary>
+    /// Checks if the gun can be fired through the cooldown and the bullet amount
+    /// </summary>
+    public void CheckIfFireable()
+    {
+        if (gunInfo.coolingDown != true && gunInfo.currentMagAmount > 0)
+        {
+            canFire = true;
+        }
+        else if (gunInfo.currentMagAmount <= 0)
+        {
+            canFire = false;
+        }
+
+        if (gunInfo.currentMagAmount == gunInfo.magSize)
+        {
+            canReload = false;
+        }
+
+    }
+
+    public void subtractInventoryAmmo()
+    {
+        switch (gunInfo.bulletType)
+        {
+            case AmmoDrop_Item.BulletTypes.Large:
+                gunInfo.inventory.largeAmmo -= gunInfo.magSize;
+                break;
+            case AmmoDrop_Item.BulletTypes.Medium:
+                gunInfo.inventory.mediumAmmo -= gunInfo.magSize;
+                break;
+            case AmmoDrop_Item.BulletTypes.Small:
+                gunInfo.inventory.smallAmmo -= gunInfo.magSize;
+                break;
+        }
+    }
+
     public void CalculateShootingAngle()
     {
         MousePosition();
@@ -95,6 +157,38 @@ public class Gun_Window : MonoBehaviour
         if (Physics.Raycast(ray, out hitLocation, 1000))
         {
             worldPos = hitLocation.point;
+        }
+    }
+
+    public void ShootingAction(InputAction.CallbackContext actionContext)
+    {
+        if (gunInfo.semiAutomatic && gunInfo.windowMode && canFire)
+        {
+            if (actionContext.started)
+            {
+                shooting = true;
+            }
+        }
+        else if (gunInfo.automatic && gunInfo.windowMode && canFire)
+        {
+            if (actionContext.performed)
+            {
+                shooting = true;
+                Debug.Log("shooting");
+            }
+            else if (actionContext.canceled)
+            {
+                shooting = false;
+            }
+        }
+    }
+
+    public void ReloadAction(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.started && gunInfo.windowMode && canReload)
+        {
+            StartCoroutine(Reload());
+            Reload();
         }
     }
 }

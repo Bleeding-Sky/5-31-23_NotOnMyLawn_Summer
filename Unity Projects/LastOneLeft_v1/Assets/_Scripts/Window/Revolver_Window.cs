@@ -61,7 +61,7 @@ public class Revolver_Window : MonoBehaviour
         bulletDirection.bulletDirection = (bulletDirection.mousePos - bulletDirection.startingPosition.position).normalized;
         //Creates bullet and updates the amount
         Instantiate(bullet, worldPos, Quaternion.identity);
-        gunSpecs.bulletCount -= 1;
+        gunSpecs.currentMagAmount -= 1;
     }
 
     IEnumerator DetermineFireRate()

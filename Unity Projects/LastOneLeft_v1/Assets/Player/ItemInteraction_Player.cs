@@ -10,6 +10,7 @@ public class ItemInteraction_Player : MonoBehaviour
     public Transform handPos;
     public GameObject AimingArea;
     public States_Player playerStates;
+    public Interaction_Player interaction;
 
     /// <summary>
     /// Determines what type of item it is and initializes all of the necessary components for it to properly function
@@ -44,6 +45,7 @@ public class ItemInteraction_Player : MonoBehaviour
         GunInfo.gameObject.transform.parent = hand.transform;
         GunInfo.rotationAndAimingPoint = armRotationPos;
         GunInfo.handPos = handPos;
+        GunInfo.inventory = interaction.Inventory.GetComponent<Inventory_Player>();
         gunCollider.enabled = false;
     }
 

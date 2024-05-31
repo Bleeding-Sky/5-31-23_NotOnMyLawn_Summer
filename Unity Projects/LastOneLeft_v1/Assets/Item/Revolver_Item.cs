@@ -63,7 +63,6 @@ public class Revolver_Item : MonoBehaviour
         Debug.Log(armPosition);
         //Creates bullet and updates the amount
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-        gunInfo.bulletCount -= 1;
     }
 
     /// <summary>
@@ -113,7 +112,7 @@ public class Revolver_Item : MonoBehaviour
     /// </summary>
     public void CheckIfFireable()
     {
-        if (gunInfo.coolingDown != true && gunInfo.bulletCount > 0)
+        if (gunInfo.coolingDown != true && gunInfo.currentMagAmount > 0)
         {
             canFire = true;
         }

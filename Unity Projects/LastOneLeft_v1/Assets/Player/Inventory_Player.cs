@@ -34,10 +34,6 @@ public class Inventory_Player : MonoBehaviour
     {
         //Sets what the current MaxInventory size is so that it can be changed later with upgrades
         currentMaxInventorySize = maxInventorySize;
-
-        largeAmmo = 0;
-        mediumAmmo = 0;
-        smallAmmo = 0;
     }
 
     // Update is called once per frame

@@ -21,7 +21,6 @@ public class Shotgun_Item : MonoBehaviour
     public GameObject aimingPoint;
 
     [Header("DEBUG")]
-    public int bulletAmount;
     private float firingRate;
     private float recoil;
     public bool canFire;
@@ -36,7 +35,6 @@ public class Shotgun_Item : MonoBehaviour
     {
         gunSpecs = GetComponent<GunInformation_Item>();
         gunSpecs.isPickedUp = false;
-        bulletAmount = gunSpecs.bulletCount;
         firingRate = gunSpecs.fireRate;
         canFire = true;
         pickedUp = false;
@@ -94,7 +92,6 @@ public class Shotgun_Item : MonoBehaviour
 
             //Creates bullet and updates the amount
             Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-            bulletAmount -= 1;
         }
 
     }
@@ -148,7 +145,7 @@ public class Shotgun_Item : MonoBehaviour
     /// </summary>
     public void CheckIfFireable()
     {
-        if (gunSpecs.coolingDown != true && bulletAmount > 0)
+        if (gunSpecs.coolingDown != true && gunSpecs.currentMagAmount > 0)
         {
             canFire = true;
         }

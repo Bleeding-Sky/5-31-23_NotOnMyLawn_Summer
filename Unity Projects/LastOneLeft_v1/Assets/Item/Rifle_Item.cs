@@ -22,7 +22,6 @@ public class Rifle_Item : MonoBehaviour
     GunInformation_Item gunSpecs;
 
     [Header("DEBUG")]
-    public int bulletAmount;
     private float firingRate;
     public bool canFire;
     public Vector3 armPosition;
@@ -36,7 +35,6 @@ public class Rifle_Item : MonoBehaviour
     {
         gunSpecs = GetComponent<GunInformation_Item>();
         gunSpecs.isPickedUp = false;
-        bulletAmount = gunSpecs.bulletCount;
         firingRate = gunSpecs.fireRate;
         canFire = true;
         pickedUp = false;
@@ -92,7 +90,6 @@ public class Rifle_Item : MonoBehaviour
 
         //Creates bullet and updates the amount
         Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-        bulletAmount -= 1;
 
     }
 
@@ -142,7 +139,7 @@ public class Rifle_Item : MonoBehaviour
 
     public void CheckIfFireable()
     {
-        if (gunSpecs.coolingDown != true && bulletAmount > 0)
+        if (gunSpecs.coolingDown != true && gunSpecs.currentMagAmount > 0)
         {
             canFire = true;
         }
