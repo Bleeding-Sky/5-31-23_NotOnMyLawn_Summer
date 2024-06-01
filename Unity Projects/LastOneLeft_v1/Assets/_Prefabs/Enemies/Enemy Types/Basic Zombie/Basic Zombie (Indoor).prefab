@@ -92,7 +92,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 1
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &1553787067583327893
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 1
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &2199152488638370646
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +310,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 0
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &4779495667204431729
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +402,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 0
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &5947762423273163615
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 2
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &6336284231423701287
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 2
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &7321205512440143967
 GameObject:
   m_ObjectHideFlags: 0

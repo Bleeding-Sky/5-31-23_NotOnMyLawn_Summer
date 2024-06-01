@@ -166,9 +166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 8936502522062321887}
   bulletStartPosition: {x: 0, y: 0, z: 0}
-  xDirection: 0.9998477
-  yDirection: -0.017452406
-  bulletSpeed: 100
+  xDirection: -0.99939084
+  yDirection: -0.034899496
+  bulletSpeed: 40
 --- !u!114 &-4334091110431089390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,12 +181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cbe7ad6fd64c244bd9593c60f484bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  bulletPenetration: 1
-  statusMultiplier: 2
-  critDamageMultiplier: 3
-  armoredDamageMultiplier: 4
-  weakDamageMultiplier: 5
+  damage: 5
+  bulletPenetration: 3
+  statusMultiplier: 0.4
+  critDamageMultiplier: 1.5
+  armoredDamageMultiplier: 0.5
+  weakDamageMultiplier: 1
 --- !u!114 &-1884367203745079138
 MonoBehaviour:
   m_ObjectHideFlags: 0

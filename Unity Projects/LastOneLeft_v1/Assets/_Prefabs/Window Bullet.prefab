@@ -108,7 +108,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.55
+  m_Radius: 0.79
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7472288121607030576
 Rigidbody:
@@ -136,7 +136,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!114 &1902603107190100156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 7472288121607030576}
-  bulletDirection: {x: 0.07462793, y: -0.01172728, z: 0.99714243}
+  bulletDirection: {x: -0.6248464, y: 0.47922236, z: 0.6852572}
   startingPosition: {fileID: 0}
   mousePos: {x: 2.266042, y: 1.3796216, z: 10.235484}
-  speed: 74.1
+  speed: 100
 --- !u!114 &1070593198069953242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,12 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cbe7ad6fd64c244bd9593c60f484bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  bulletPenetration: 0
-  statusMultiplier: 0
-  critDamageMultiplier: 0
-  armoredDamageMultiplier: 0
-  weakDamageMultiplier: 0
+  damage: 2
+  bulletPenetration: 4
+  statusMultiplier: 1.5
+  critDamageMultiplier: 1.5
+  armoredDamageMultiplier: 1
+  weakDamageMultiplier: 2
 --- !u!114 &4691303305364588762
 MonoBehaviour:
   m_ObjectHideFlags: 0

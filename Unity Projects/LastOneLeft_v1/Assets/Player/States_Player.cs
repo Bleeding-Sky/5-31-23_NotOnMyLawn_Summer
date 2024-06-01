@@ -19,5 +19,6 @@ public class States_Player : ScriptableObject
     public bool gunIsDrawn;
     public int boardsOnPlayer;
 
+    public float playerMobility;
    
 }

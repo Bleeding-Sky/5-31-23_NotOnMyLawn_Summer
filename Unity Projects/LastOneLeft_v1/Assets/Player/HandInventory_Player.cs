@@ -8,6 +8,8 @@ public class HandInventory_Player : MonoBehaviour
     public GameObject Inventory;
     public bool itemInHand;
 
+    public States_Player playerState;
+
     public GameObject AimingArea;
 
     public Animator gunAnimations;
@@ -29,6 +31,11 @@ public class HandInventory_Player : MonoBehaviour
         }
 
         AimingAnimationHandler();
+
+        if (!itemInHand)
+        {
+            playerState.playerMobility = 1;
+        }
     }
 
 
@@ -144,6 +151,7 @@ public class HandInventory_Player : MonoBehaviour
 
                 GunInformation_Item gunInfo = objectInHand.GetComponent<GunInformation_Item>();
                 gunInfo.coolingDown = false;
+                playerState.playerMobility = gunInfo.mobility;
                 //AimingArea.SetActive(true);
             }
             else if (!equippedItem.isGun)
@@ -153,7 +161,7 @@ public class HandInventory_Player : MonoBehaviour
         }
         else if (!itemInHand)
         {
-            //AimingArea.SetActive(false);
+            playerState.playerMobility = 1;
         }
     }
 }

@@ -14,7 +14,6 @@ public class CameraInitilaizer : MonoBehaviour
     {
         cameraManager.currentEnum = CameraManagement.Cameras.Indoor;
         SwitchToCamera(CameraEnum);
-        Debug.Log("switchFirst");
     }
     // Update is called once per frame
     void Update()

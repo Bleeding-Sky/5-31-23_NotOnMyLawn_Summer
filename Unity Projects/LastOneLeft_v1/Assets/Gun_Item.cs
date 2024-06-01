@@ -93,8 +93,10 @@ public class Gun_Item : MonoBehaviour
 
             //Creates bullet and updates the amount
             Instantiate(bullet, firingPoint.transform.position, Quaternion.identity);
-            gunInfo.currentMagAmount -= 1;
+            
         }
+
+        gunInfo.currentMagAmount -= 1;
 
     }
 
@@ -249,16 +251,16 @@ public class Gun_Item : MonoBehaviour
 
     public void ShootingAction(InputAction.CallbackContext actionContext)
     {
-        if (gunInfo.semiAutomatic && !gunInfo.windowMode && canFire)
+        if (gunInfo.semiAutomatic && !gunInfo.windowMode && gunInfo.isPickedUp)
         {
-            if (actionContext.started)
+            if (actionContext.started && canFire)
             {
                 shooting = true;
             }
         }
-        else if (gunInfo.automatic && !gunInfo.windowMode && canFire)
+        else if (gunInfo.automatic && !gunInfo.windowMode && gunInfo.isPickedUp)
         {
-            if (actionContext.performed)
+            if (actionContext.performed && canFire)
             {
                 shooting = true;
                 Debug.Log("shooting");
@@ -266,15 +268,17 @@ public class Gun_Item : MonoBehaviour
             else if(actionContext.canceled)
             {
                 shooting = false;
+                Debug.Log("stopped shooting");
             }
         }
     }
 
     public void ReloadAction(InputAction.CallbackContext actionContext)
     {
-        if (actionContext.started && !gunInfo.windowMode && canReload)
+        if (actionContext.started && !gunInfo.windowMode && canReload && gunInfo.isPickedUp)
         {
             StartCoroutine(Reload());
+
             Debug.Log("Reload");
         }
     }

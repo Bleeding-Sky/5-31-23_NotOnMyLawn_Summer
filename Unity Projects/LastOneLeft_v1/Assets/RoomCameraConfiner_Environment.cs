@@ -38,7 +38,7 @@ public class RoomCameraConfiner_Environment : MonoBehaviour
         Room_Environment currentRoomInfo = currentRoom.GetComponent<Room_Environment>();
         float height = currentRoomInfo.RoomPointA.position.y - currentRoomInfo.RoomPointB.position.y;
         float length = currentRoomInfo.RoomPointB.position.x - currentRoomInfo.RoomPointA.position.x;
-        Debug.Log(new Vector2(height,length));
+        
         Vector2 roomPos = currentRoomInfo.RoomPointA.position - new Vector3(-(length / 2), height / 2, 0);
         roomConfiner.transform.position = roomPos; 
 

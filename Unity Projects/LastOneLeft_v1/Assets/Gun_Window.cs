@@ -63,13 +63,13 @@ public class Gun_Window : MonoBehaviour
             phiDecidedAngle = UnityEngine.Random.Range(phiAngle1, phiAngle2);
             thetaDecidedAngle = UnityEngine.Random.Range(thetaAngle1, thetaAngle2);
 
-            Debug.Log($"Phi: {phiDecidedAngle} \n Theta: {thetaDecidedAngle}");
             double zDirection = Math.Cos((Math.PI / 180) * phiDecidedAngle) *
                                 Math.Sin((Math.PI / 180) * thetaDecidedAngle);
             double yDirection = Math.Sin((Math.PI / 180) * phiDecidedAngle);
             double xDirection = Math.Cos((Math.PI / 180) * thetaDecidedAngle);
 
             Bullet_Window bulletDirection = bullet.GetComponent<Bullet_Window>();
+            BulletData(bullet);
             bulletDirection.startingPosition = gunInfo.currentCamera.transform;
 
             bulletDirection.bulletDirection = new Vector3((float)xDirection, (float)yDirection, (float)zDirection);
@@ -79,6 +79,18 @@ public class Gun_Window : MonoBehaviour
         }
 
         gunInfo.currentMagAmount -= 1;
+    }
+
+    private void BulletData(GameObject bullet)
+    {
+        BulletInfo bulletData = bullet.GetComponent<BulletInfo>();
+
+        bulletData.damage = gunInfo.damage;
+        bulletData.bulletPenetration = gunInfo.bulletPenetration;
+        bulletData.statusMultiplier = gunInfo.statusMultiplier;
+        bulletData.critDamageMultiplier = gunInfo.critDamageMultiplier;
+        bulletData.armoredDamageMultiplier = gunInfo.armoredDamageMultiplier;
+        bulletData.weakDamageMultiplier = gunInfo.weakDamageMultiplier;
     }
 
 
@@ -97,10 +109,63 @@ public class Gun_Window : MonoBehaviour
         canFire = false;
         canReload = false;
         yield return new WaitForSeconds(gunInfo.reload);
-        gunInfo.currentMagAmount = gunInfo.magSize;
         subtractInventoryAmmo();
         canFire = true;
         canReload = true;
+    }
+
+    public void subtractInventoryAmmo()
+    {
+
+        int reloadAmount = gunInfo.magSize - gunInfo.currentMagAmount;
+        int totalBullets = 0;
+        switch (gunInfo.bulletType)
+        {
+            case AmmoDrop_Item.BulletTypes.Large:
+                totalBullets = gunInfo.inventory.largeAmmo;
+                break;
+            case AmmoDrop_Item.BulletTypes.Medium:
+                totalBullets = gunInfo.inventory.mediumAmmo;
+                break;
+            case AmmoDrop_Item.BulletTypes.Small:
+                totalBullets = gunInfo.inventory.smallAmmo;
+                break;
+        }
+
+        Debug.Log(reloadAmount);
+        if (totalBullets > gunInfo.magSize)
+        {
+            switch (gunInfo.bulletType)
+            {
+                case AmmoDrop_Item.BulletTypes.Large:
+                    gunInfo.inventory.largeAmmo -= reloadAmount;
+                    break;
+                case AmmoDrop_Item.BulletTypes.Medium:
+                    gunInfo.inventory.mediumAmmo -= reloadAmount;
+                    break;
+                case AmmoDrop_Item.BulletTypes.Small:
+                    gunInfo.inventory.smallAmmo -= reloadAmount;
+                    break;
+            }
+            gunInfo.currentMagAmount = gunInfo.magSize;
+        }
+        else if (totalBullets <= gunInfo.magSize && totalBullets > 0)
+        {
+            switch (gunInfo.bulletType)
+            {
+                case AmmoDrop_Item.BulletTypes.Large:
+                    gunInfo.inventory.largeAmmo -= totalBullets;
+                    break;
+                case AmmoDrop_Item.BulletTypes.Medium:
+                    gunInfo.inventory.mediumAmmo -= totalBullets;
+                    break;
+                case AmmoDrop_Item.BulletTypes.Small:
+                    gunInfo.inventory.smallAmmo -= totalBullets;
+                    break;
+            }
+            gunInfo.currentMagAmount = totalBullets;
+        }
+
     }
 
     /// <summary>
@@ -124,21 +189,7 @@ public class Gun_Window : MonoBehaviour
 
     }
 
-    public void subtractInventoryAmmo()
-    {
-        switch (gunInfo.bulletType)
-        {
-            case AmmoDrop_Item.BulletTypes.Large:
-                gunInfo.inventory.largeAmmo -= gunInfo.magSize;
-                break;
-            case AmmoDrop_Item.BulletTypes.Medium:
-                gunInfo.inventory.mediumAmmo -= gunInfo.magSize;
-                break;
-            case AmmoDrop_Item.BulletTypes.Small:
-                gunInfo.inventory.smallAmmo -= gunInfo.magSize;
-                break;
-        }
-    }
+
 
     public void CalculateShootingAngle()
     {
@@ -146,7 +197,6 @@ public class Gun_Window : MonoBehaviour
         startingPosition = gunInfo.currentCamera.transform.position;
         Vector3 direction = worldPos - startingPosition;
 
-        Debug.Log(direction.normalized);
         anglePhi = Mathf.Atan2(direction.y, direction.z) * Mathf.Rad2Deg;
         angleTheta = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
     }
@@ -162,33 +212,34 @@ public class Gun_Window : MonoBehaviour
 
     public void ShootingAction(InputAction.CallbackContext actionContext)
     {
-        if (gunInfo.semiAutomatic && gunInfo.windowMode && canFire)
+        if (gunInfo.semiAutomatic && gunInfo.windowMode && gunInfo.isPickedUp)
         {
-            if (actionContext.started)
+            if (actionContext.started && canFire)
             {
                 shooting = true;
             }
         }
-        else if (gunInfo.automatic && gunInfo.windowMode && canFire)
+        else if (gunInfo.automatic && gunInfo.windowMode && gunInfo.isPickedUp)
         {
-            if (actionContext.performed)
+            if (actionContext.performed && canFire)
             {
                 shooting = true;
-                Debug.Log("shooting");
             }
             else if (actionContext.canceled)
             {
                 shooting = false;
+                Debug.Log("stopped shooting");
             }
         }
     }
 
     public void ReloadAction(InputAction.CallbackContext actionContext)
     {
-        if (actionContext.started && gunInfo.windowMode && canReload)
+        if (actionContext.started && gunInfo.windowMode && canReload && gunInfo.isPickedUp)
         {
             StartCoroutine(Reload());
-            Reload();
+
+            Debug.Log("Reload");
         }
     }
 }

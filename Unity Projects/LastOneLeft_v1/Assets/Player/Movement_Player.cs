@@ -29,7 +29,8 @@ public class Movement_Player : MonoBehaviour
     {
         ProcessGunStatus();
 
-        float newVelocity = inputDirection * currentMoveSpeed;
+        float newVelocity = inputDirection * currentMoveSpeed * playerStates.playerMobility;
+
         UpdatePlayerStates(newVelocity);
 
         //apply movement to rigidbody

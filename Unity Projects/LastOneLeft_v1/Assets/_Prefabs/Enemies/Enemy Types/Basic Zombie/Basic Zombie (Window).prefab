@@ -68,7 +68,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 1
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &3860684011414442967
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +116,7 @@ GameObject:
   - component: {fileID: 4078576615591724081}
   - component: {fileID: 8046356640144818766}
   - component: {fileID: 9195233273483193087}
+  - component: {fileID: 6359669365372450095}
   m_Layer: 30
   m_Name: Basic Zombie (Window)
   m_TagString: Zombie
@@ -251,6 +251,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   insideZValue: 0.7
+--- !u!54 &6359669365372450095
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3960763945083177755}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!1 &4012389306562715444
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +346,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 0
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
 --- !u!1 &4872917538852637415
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +357,7 @@ GameObject:
   - component: {fileID: 7160873674085042117}
   - component: {fileID: 4510518101065265268}
   - component: {fileID: 687465727900321524}
+  - component: {fileID: 512768155158228519}
   m_Layer: 30
   m_Name: Head (Standing)
   m_TagString: Zombie
@@ -372,7 +399,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3448596, y: 0.4144754, z: 0.1}
+  m_Size: {x: 0.3448596, y: 0.4144754, z: 1}
   m_Center: {x: 0.1424613, y: 1.484798, z: 0}
 --- !u!114 &687465727900321524
 MonoBehaviour:
@@ -388,7 +415,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 0
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
+--- !u!54 &512768155158228519
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4872917538852637415}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &6844753456396238250
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +453,7 @@ GameObject:
   - component: {fileID: 3345498253494005390}
   - component: {fileID: 9042525178186623297}
   - component: {fileID: 2229673760352185593}
+  - component: {fileID: 516534559259208440}
   m_Layer: 30
   m_Name: Body
   m_TagString: Zombie
@@ -441,7 +495,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4038309, y: 0.6332849, z: 0.1}
+  m_Size: {x: 0.4038309, y: 0.6332849, z: 1}
   m_Center: {x: -0.08903824, y: 1.13826, z: 0}
 --- !u!114 &2229673760352185593
 MonoBehaviour:
@@ -457,7 +511,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 1
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
+--- !u!54 &516534559259208440
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844753456396238250}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &7572891728861824934
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1120439307368803036
 Transform:
   m_ObjectHideFlags: 0
@@ -503,6 +583,7 @@ GameObject:
   - component: {fileID: 7935993814111758959}
   - component: {fileID: 8731138716957681852}
   - component: {fileID: 577396674678796379}
+  - component: {fileID: 2671047966995708964}
   m_Layer: 30
   m_Name: Legs
   m_TagString: Zombie
@@ -544,7 +625,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4631522, y: 0.8677192, z: 0.1}
+  m_Size: {x: 0.4631522, y: 0.8677192, z: 1}
   m_Center: {x: -0.1607457, y: 0.3936622, z: 0}
 --- !u!114 &577396674678796379
 MonoBehaviour:
@@ -560,7 +641,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 2
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
+--- !u!54 &2671047966995708964
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927252949856038271}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &8378307623030616623
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,4 +736,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Region: 2
   healthScript: {fileID: 0}
-  damageReporterScript: {fileID: 0}
