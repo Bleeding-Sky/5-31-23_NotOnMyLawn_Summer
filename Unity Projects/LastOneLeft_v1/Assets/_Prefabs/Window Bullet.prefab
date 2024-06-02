@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 7472288121607030576}
-  bulletDirection: {x: -0.6248464, y: 0.47922236, z: 0.6852572}
+  bulletDirection: {x: 0.004376359, y: 0.036977064, z: 0.99930656}
   startingPosition: {fileID: 0}
   mousePos: {x: 2.266042, y: 1.3796216, z: 10.235484}
-  speed: 100
+  speed: 10
 --- !u!114 &1070593198069953242
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,6 +33,10 @@ public class Interaction_Player : MonoBehaviour
             FindClosestItem();
             InteractableIdentification();
         }
+        else
+        {
+            interacting = false;
+        }
     }
 
     /// <summary>
@@ -150,6 +154,7 @@ public class Interaction_Player : MonoBehaviour
                 interacting = true;
             }
         }
+
     }
 
     public void InteractionAction(InputAction.CallbackContext actionContext)
@@ -158,8 +163,8 @@ public class Interaction_Player : MonoBehaviour
         {
             interactionType = 0;
             interacting = true;
-            
         }
+
     }
 
     public void SecondaryInteractionAction(InputAction.CallbackContext actionContext)

@@ -10,14 +10,49 @@ public class ZmbAtWindow_Overhead : MonoBehaviour
 {
     [Header("CONFIG")]
     public Transform indoorWindowTransform;
+    public WindowHealth_Environment windowHealth;
+
+    private void Start()
+    {
+        windowHealth = GetComponent<WindowHealth_Environment>();
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Zombie"))
         {
+            windowHealth.ZombiesInRange.Add(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Zombie"))
+        {
+            
             //call EnterBuilding on master script to spawn zombie indoors
-            collision.gameObject.GetComponentInParent<EnterBuilding_Zombie>().StartEnterBuilding(indoorWindowTransform);
+            if (windowHealth.windowHealth > 0)
+            {
+                windowHealth.SubtractHealth();
+            }
+            else
+            {
+                EnterBuilding_Zombie entering = collision.gameObject.GetComponentInParent<EnterBuilding_Zombie>();
+                if (!entering.isEnteringBuilding)
+                {
+                    entering.StartEnterBuilding(indoorWindowTransform);
+                    for (int i = 0; i < windowHealth.ZombiesInRange.Count; i++)
+                    {
+                        if (collision.gameObject == windowHealth.ZombiesInRange[i])
+                        {
+                            windowHealth.ZombiesInRange.Remove(collision.gameObject);
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 }

@@ -38,6 +38,10 @@ public class CameraInitilaizer : MonoBehaviour
                 currentCamera = cameras[2];
                 cameraManager.currentCamera = currentCamera.gameObject;
                 break;
+            case CameraManagement.Cameras.KitchenWindow:
+                currentCamera = cameras[3];
+                cameraManager.currentCamera = currentCamera.gameObject;
+                break;
         }
         EstablishCamera();
     }
