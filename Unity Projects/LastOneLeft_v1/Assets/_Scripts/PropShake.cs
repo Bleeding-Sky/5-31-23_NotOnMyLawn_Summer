@@ -13,8 +13,9 @@ public class PropShake : MonoBehaviour
 
     [Header("DEBUG")]
     [SerializeField] Collider2D shakeTrigger;
+    [SerializeField] Animator animator;
     [SerializeField] bool isShaking = false;
-    [SerializeField] ShakeStrengthEnum shakeStrength;
+    [SerializeField] int shakeStrength = 0;
     [SerializeField] int propShakerLayer;
     [SerializeField] float shakeTimeRemaining;
 
@@ -25,6 +26,7 @@ public class PropShake : MonoBehaviour
     {
         shakeTrigger = GetComponent<Collider2D>();
         shakeTrigger.isTrigger = true;
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -39,6 +41,9 @@ public class PropShake : MonoBehaviour
             shakeTimeRemaining -= Time.deltaTime;
             if (shakeTimeRemaining <= 0) { isShaking = false; }
         }
+
+        animator.SetInteger("Shake Strength", shakeStrength);
+        animator.SetBool("IsShaking", isShaking);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,20 +60,20 @@ public class PropShake : MonoBehaviour
                 //shake softly
                 if (collisionVelocity < hardShakeSpeedRequirement)
                 {
-                    shakeStrength = ShakeStrengthEnum.Soft;
+                    shakeStrength = 1;
                     shakeTimeRemaining = softShakeTime;
                 }
                 //shake hard
                 else
                 {
-                    shakeStrength = ShakeStrengthEnum.Hard;
+                    shakeStrength = 2;
                     shakeTimeRemaining = hardShakeTime;
                 }
             }
             //if prop is shaking softly, escalate to a hard shake
-            else if (isShaking && shakeStrength == ShakeStrengthEnum.Hard)
+            else if (isShaking && shakeStrength == 2)
             {
-                shakeStrength = ShakeStrengthEnum.Hard;
+                shakeStrength = 2;
                 shakeTimeRemaining = hardShakeTime;
             }
         }
