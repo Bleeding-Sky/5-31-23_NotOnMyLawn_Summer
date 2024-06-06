@@ -9,9 +9,13 @@ public class CameraInitilaizer : MonoBehaviour
     public CameraManagement.Cameras CameraEnum;
     public CinemachineVirtualCamera[] cameras;
     public CinemachineVirtualCamera currentCamera;
+    //set this manually in the inspector pls
+    [SerializeField] Camera mainCam;
 
     void Start()
     {
+        //used to identify the culling masks needed for the window/indoor shit
+        //Debug.Log("Culling mask = " + GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().cullingMask);
         cameraManager.currentEnum = CameraManagement.Cameras.Indoor;
         SwitchToCamera(CameraEnum);
     }
@@ -29,6 +33,7 @@ public class CameraInitilaizer : MonoBehaviour
             case CameraManagement.Cameras.Indoor:
                 currentCamera = cameras[0];
                 cameraManager.currentCamera = currentCamera.gameObject;
+                mainCam.cullingMask = 536874999;
                 break;
             case CameraManagement.Cameras.Overhead:
                 currentCamera = cameras[1];
@@ -37,10 +42,12 @@ public class CameraInitilaizer : MonoBehaviour
             case CameraManagement.Cameras.Window:
                 currentCamera = cameras[2];
                 cameraManager.currentCamera = currentCamera.gameObject;
+                mainCam.cullingMask = -1;
                 break;
             case CameraManagement.Cameras.KitchenWindow:
                 currentCamera = cameras[3];
                 cameraManager.currentCamera = currentCamera.gameObject;
+                mainCam.cullingMask = -1;
                 break;
         }
         EstablishCamera();

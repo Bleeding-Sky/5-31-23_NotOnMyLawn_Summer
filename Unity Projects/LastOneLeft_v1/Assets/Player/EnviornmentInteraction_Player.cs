@@ -14,6 +14,7 @@ public class EnviornmentInteraction_Player : MonoBehaviour
     private void Start()
     {
         playerStates.lookingThroughWindow = false;
+        
     }
     /// <summary>
     /// Interacts with the enviornment depending on which enviornmental item it is
