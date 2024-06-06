@@ -17,6 +17,8 @@ public class Interaction_Player : MonoBehaviour
     public bool interacting;
     public int interactionType;
 
+    public int maxInventorySize;
+
     //establishes that there is no item to begin with
     void Start()
     {
