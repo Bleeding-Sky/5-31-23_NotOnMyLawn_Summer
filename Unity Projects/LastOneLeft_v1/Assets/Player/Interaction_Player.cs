@@ -17,7 +17,7 @@ public class Interaction_Player : MonoBehaviour
     public bool interacting;
     public int interactionType;
 
-    public int maxInventorySize;
+    public bool maxxedInventory;
 
     //establishes that there is no item to begin with
     void Start()
@@ -129,17 +129,25 @@ public class Interaction_Player : MonoBehaviour
     public void InteractableIdentification()
     {
         InteractionIdentification_Item Interactable = closetItem.GetComponent<InteractionIdentification_Item>();
+        Inventory_Player inventoryStorage = Inventory.GetComponent<Inventory_Player>();
         //if the interaction is an item it puts it in the inventory
         if (Interactable.isItem && !Interactable.isEnviormentObject && interacting)
         {
             ItemInteraction_Player itemAssignment = GetComponent<ItemInteraction_Player>();
             Interaction_Player ItemInteraction = GetComponent<Interaction_Player>();
-            Inventory_Player inventoryStorage = Inventory.GetComponent<Inventory_Player>();
 
-            inventoryStorage.itemAssignment = itemAssignment;
-            inventoryStorage.ItemInteractionScript = ItemInteraction;
-            inventoryStorage.StoreItems(closetItem);
-            interacting = false;
+            if (Interactable.isGun || Interactable.isMeleeWeapon)
+            {
+                inventoryStorage.itemAssignment = itemAssignment;
+                inventoryStorage.ItemInteractionScript = ItemInteraction;
+                inventoryStorage.StoreItems(closetItem);
+                interacting = false;
+            }
+            else
+            {
+                inventoryStorage.Backpack.AddItem(closetItem);
+                interacting = false;
+            }
             
         }
         //if the interaction is an envionrmental object it interacts with it

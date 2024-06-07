@@ -19,6 +19,7 @@ public class Inventory_Player : MonoBehaviour
     public Interaction_Player ItemInteractionScript;
     public ItemInteraction_Player itemAssignment;
     public GameObject handInv;
+    public Backpack_UI Backpack; 
     public int numberPressed;
     public int lastInventorySlotChosen;
 
@@ -93,6 +94,7 @@ public class Inventory_Player : MonoBehaviour
 
         }
         maxInventorySize = currentMaxInventorySize;
+        Backpack.gunInventory = item;
     }
 
     /// <summary>
