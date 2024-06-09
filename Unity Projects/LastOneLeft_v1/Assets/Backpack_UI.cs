@@ -86,7 +86,7 @@ public class Backpack_UI : MonoBehaviour
         foreach(Transform child in radialSlots.transform)
         {
             ItemSlot_UI childInfo = child.GetComponent<ItemSlot_UI>();
-            childInfo.isEmpty = true;
+            childInfo.isRadialSlot = false;
             slots.Add(childInfo);
         }
 
