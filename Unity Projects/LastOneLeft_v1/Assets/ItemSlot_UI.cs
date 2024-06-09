@@ -92,6 +92,10 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         }
     }
 
+    /// <summary>
+    /// Clears the slot so that it can be used by another item when the
+    /// item is used or dropped
+    /// </summary>
     public void clearSlot()
     {
         itemName = null;
@@ -101,11 +105,21 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         currentAmount = 0;
     }
 
+
+    /// <summary>
+    /// Function that uses the item in the slot 
+    /// It will probably connect to an external script/scripts
+    /// that hold all the information that allows the player to use the item
+    /// </summary>
     public void UseItem()
     {
-        Debug.Log("Use Item");
+        Debug.Log("Use " + itemName);
     }
 
+    /// <summary>
+    /// Used to set the profile icon for the slot
+    /// </summary>
+    /// <param name="spr"></param>
     public void SetIcon(Sprite spr)
     {
         Image image = GetComponent<Image>();
@@ -115,10 +129,19 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         }
     }
 
+    #region Slot Interaction Events
+    
+    /// <summary>
+    /// Tracks if the mouse is over a slot and it is not already holding a slot
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //Only works with non radial menu slots
         if (!isRadialSlot)
         {
+            //When the player is not dragging the same slot then it will
+            //change the over slot item slot in the backpack to the one you are hovering over
             if (Backpack.draggedSlot != gameObject)
             {
                 Backpack.overSlot = gameObject;
@@ -126,10 +149,18 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         }
     }
 
+    /// <summary>
+    /// When the player clicks down on the menu slot and doesnt let go
+    /// then it will "drag" the item slot around
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
+        //Only works with non radial menu slots
         if (!isRadialSlot)
         {
+            //If the player is clicks on it while the object is already in the overslot
+            //then it wil convert the oveer slot to a null to be used by a different slot
             if (Backpack.overSlot == gameObject)
             {
                 Backpack.overSlot = null;
@@ -162,4 +193,5 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
             Backpack.draggedSlot = null;
         }
     }
+    #endregion
 }

@@ -20,7 +20,8 @@ public class Inventory_Player : MonoBehaviour
     public Interaction_Player ItemInteractionScript;
     public ItemInteraction_Player itemAssignment;
     public GameObject handInv;
-    public GameObject Backpack; 
+    public GameObject Backpack;
+    public GameObject RadialMenu;
     public int numberPressed;
     public int lastInventorySlotChosen;
     public bool invActive;
@@ -153,15 +154,27 @@ public class Inventory_Player : MonoBehaviour
 
     public void ToggleInventory(InputAction.CallbackContext actionContext)
     {
-        if (!invActive)
+        if(RadialMenu.activeInHierarchy == true)
         {
-            Backpack.SetActive(true);
             invActive = true;
         }
         else
         {
+            invActive = false;
+        }
+
+        if (!invActive)
+        {
+            RadialMenu.SetActive(true);
+            Backpack.SetActive(false);
+            invActive = true;
+        }
+        else
+        {
+            RadialMenu.SetActive(false);
             Backpack.SetActive(false);
             invActive = false;
         }
+        
     }
 }
