@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Inventory_Player : MonoBehaviour
 {
@@ -19,10 +20,10 @@ public class Inventory_Player : MonoBehaviour
     public Interaction_Player ItemInteractionScript;
     public ItemInteraction_Player itemAssignment;
     public GameObject handInv;
-    public Backpack_UI Backpack; 
+    public GameObject Backpack; 
     public int numberPressed;
     public int lastInventorySlotChosen;
-
+    public bool invActive;
     /*
     * The item list essentially acts as the abstract version of 
     * the inventory. The order and way that the inventory looks in 
@@ -94,7 +95,9 @@ public class Inventory_Player : MonoBehaviour
 
         }
         maxInventorySize = currentMaxInventorySize;
-        Backpack.gunInventory = item;
+
+        Backpack_UI backpackInfo = Backpack.GetComponent<Backpack_UI>();
+        backpackInfo.gunInventory = item;
     }
 
     /// <summary>
@@ -146,5 +149,19 @@ public class Inventory_Player : MonoBehaviour
                 return number;
         }
         return -1;
+    }
+
+    public void ToggleInventory(InputAction.CallbackContext actionContext)
+    {
+        if (!invActive)
+        {
+            Backpack.SetActive(true);
+            invActive = true;
+        }
+        else
+        {
+            Backpack.SetActive(false);
+            invActive = false;
+        }
     }
 }

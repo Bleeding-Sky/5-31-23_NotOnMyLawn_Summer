@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ItemSlot_UI : MonoBehaviour
+public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandler,IPointerExitHandler,IPointerUpHandler
 {
+    public Backpack_UI Backpack;
     public bool isEmpty;
     public bool isFull;
 
@@ -13,9 +15,9 @@ public class ItemSlot_UI : MonoBehaviour
 
     public int slotID;
 
-    [SerializeField] private string itemName;
-    [SerializeField] private int maxUses;
-    [SerializeField] private Sprite iconSprite;
+    public string itemName;
+    [SerializeField] public int maxUses;
+    [SerializeField] public Sprite iconSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +33,13 @@ public class ItemSlot_UI : MonoBehaviour
         {
             Data_Item itemData = item.GetComponent<Data_Item>();
             itemName = itemData.itemName;
+
             maxUses = itemData.maxUses;
             iconSprite = itemData.iconSprite;
             maxAmount = itemData.maxStackable;
-
-            Image image = GetComponent<Image>();
-            image.sprite = iconSprite;
+            SetIcon(iconSprite);
             currentAmount += 1;
+            isEmpty = false;
             checkFull();
             return true;
         }
@@ -85,5 +87,52 @@ public class ItemSlot_UI : MonoBehaviour
     public void UseItem()
     {
 
+    }
+
+    public void SetIcon(Sprite spr)
+    {
+        Image image = GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = spr;
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (Backpack.draggedSlot != gameObject)
+        {
+            Backpack.overSlot = gameObject;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (Backpack.overSlot == gameObject)
+        {
+            Backpack.overSlot = null;
+        }
+        Backpack.draggedSlot = gameObject;
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(Backpack.overSlot == gameObject)
+        {
+            Backpack.overSlot = null;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+
+        if(Backpack.overSlot != null && Backpack.draggedSlot != null)
+        {
+            ItemSlot_UI overSlotInfo = Backpack.overSlot.GetComponent<ItemSlot_UI>();
+            ItemSlot_UI draggedSlotInfo = Backpack.draggedSlot.GetComponent<ItemSlot_UI>();
+            Backpack.SwapSlots(overSlotInfo, draggedSlotInfo);
+        }
+        Backpack.draggedSlot = null;
     }
 }

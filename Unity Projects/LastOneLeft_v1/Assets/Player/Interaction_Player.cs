@@ -145,7 +145,8 @@ public class Interaction_Player : MonoBehaviour
             }
             else
             {
-                inventoryStorage.Backpack.AddItem(closetItem);
+                Backpack_UI backpackInfo = inventoryStorage.Backpack.GetComponent<Backpack_UI>();
+                backpackInfo.AddItem(closetItem);
                 interacting = false;
             }
             
