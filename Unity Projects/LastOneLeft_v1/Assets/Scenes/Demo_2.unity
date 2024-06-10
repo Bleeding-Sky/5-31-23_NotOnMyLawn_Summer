@@ -2772,7 +2772,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1610616823
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3126,6 +3126,7 @@ MonoBehaviour:
   itemAssignment: {fileID: 1632706288}
   handInv: {fileID: 1857353533}
   Backpack: {fileID: 1445533738}
+  RadialMenu: {fileID: 0}
   numberPressed: 0
   lastInventorySlotChosen: 0
   invActive: 0

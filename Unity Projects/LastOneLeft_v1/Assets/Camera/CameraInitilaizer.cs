@@ -12,11 +12,18 @@ public class CameraInitilaizer : MonoBehaviour
     //set this manually in the inspector pls
     [SerializeField] Camera mainCam;
 
+    int indoorCullingMask = 536879095;
+    int windowCullingMask = 1610616823;
+
     void Start()
     {
         //used to identify the culling masks needed for the window/indoor shit
         //Debug.Log("Culling mask = " + GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().cullingMask);
         cameraManager.currentEnum = CameraManagement.Cameras.Indoor;
+
+        //BEGIN ON INDOOR VIEW
+        mainCam.cullingMask = indoorCullingMask;
+
         SwitchToCamera(CameraEnum);
     }
     // Update is called once per frame
@@ -33,7 +40,7 @@ public class CameraInitilaizer : MonoBehaviour
             case CameraManagement.Cameras.Indoor:
                 currentCamera = cameras[0];
                 cameraManager.currentCamera = currentCamera.gameObject;
-                mainCam.cullingMask = 536874999;
+                mainCam.cullingMask = indoorCullingMask;
                 break;
             case CameraManagement.Cameras.Overhead:
                 currentCamera = cameras[1];
@@ -42,12 +49,12 @@ public class CameraInitilaizer : MonoBehaviour
             case CameraManagement.Cameras.Window:
                 currentCamera = cameras[2];
                 cameraManager.currentCamera = currentCamera.gameObject;
-                mainCam.cullingMask = -1;
+                mainCam.cullingMask = windowCullingMask;
                 break;
             case CameraManagement.Cameras.KitchenWindow:
                 currentCamera = cameras[3];
                 cameraManager.currentCamera = currentCamera.gameObject;
-                mainCam.cullingMask = -1;
+                mainCam.cullingMask = windowCullingMask;
                 break;
         }
         EstablishCamera();
