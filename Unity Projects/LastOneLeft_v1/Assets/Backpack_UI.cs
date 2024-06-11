@@ -42,7 +42,7 @@ public class Backpack_UI : MonoBehaviour
         background.SetActive(false);
     }
 
-
+    #region Slot Interaction
     public void AddItem(GameObject item)
     {
         bool spotFound = false;
@@ -75,7 +75,8 @@ public class Backpack_UI : MonoBehaviour
         backpackQuickMenu.CopyRadialSlotInfo();
 
     }
-
+    #endregion
+    #region Slot Management
     /// <summary>
     /// Populates the slots List with the radial and the inventory slots
     /// Only runs once at the beggining of the game
@@ -139,5 +140,6 @@ public class Backpack_UI : MonoBehaviour
 
         backpackQuickMenu.CopyRadialSlotInfo();
     }
+    #endregion
 
 }

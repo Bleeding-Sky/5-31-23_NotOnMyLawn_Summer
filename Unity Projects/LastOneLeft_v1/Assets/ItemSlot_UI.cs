@@ -28,6 +28,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         currentAmount = 0;
     }
 
+    #region Item Slot Actions
     /// <summary>
     /// Add the item to the slot
     /// </summary>
@@ -75,6 +76,18 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     }
 
     /// <summary>
+    /// Function that uses the item in the slot 
+    /// It will probably connect to an external script/scripts
+    /// that hold all the information that allows the player to use the item
+    /// </summary>
+    public void UseItem()
+    {
+        Debug.Log("Use " + itemName);
+    }
+
+#endregion
+    #region Slot Maintanance
+    /// <summary>
     /// A function that checks whether the slot is full or not
     /// typically only used when adding items to the slot
     /// </summary>
@@ -105,17 +118,6 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         currentAmount = 0;
     }
 
-
-    /// <summary>
-    /// Function that uses the item in the slot 
-    /// It will probably connect to an external script/scripts
-    /// that hold all the information that allows the player to use the item
-    /// </summary>
-    public void UseItem()
-    {
-        Debug.Log("Use " + itemName);
-    }
-
     /// <summary>
     /// Used to set the profile icon for the slot
     /// </summary>
@@ -128,7 +130,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
             image.sprite = spr;
         }
     }
-
+    #endregion
     #region Slot Interaction Events
     
     /// <summary>
@@ -169,6 +171,11 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         }
     }
 
+    /// <summary>
+    /// When the player exits the area of the item slot
+    /// it will update the overslot to null
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
         if (!isRadialSlot)
@@ -180,12 +187,19 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         }
     }
 
+    /// <summary>
+    /// When the player lets go of the slot if the pointer is over
+    /// a different slot then they will exchange data between the
+    /// the two item slots
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!isRadialSlot)
         {
             if (Backpack.overSlot != null && Backpack.draggedSlot != null)
             {
+                //The overslot and the dragged info slots swap information
                 ItemSlot_UI overSlotInfo = Backpack.overSlot.GetComponent<ItemSlot_UI>();
                 ItemSlot_UI draggedSlotInfo = Backpack.draggedSlot.GetComponent<ItemSlot_UI>();
                 Backpack.SwapSlots(overSlotInfo, draggedSlotInfo);

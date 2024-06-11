@@ -3126,7 +3126,7 @@ MonoBehaviour:
   itemAssignment: {fileID: 1632706288}
   handInv: {fileID: 1857353533}
   Backpack: {fileID: 1445533738}
-  RadialMenu: {fileID: 0}
+  RadialMenu: {fileID: 1059218160}
   numberPressed: 0
   lastInventorySlotChosen: 0
   invActive: 0
@@ -42432,6 +42432,7 @@ GameObject:
   - component: {fileID: 1918206995}
   - component: {fileID: 1918206997}
   - component: {fileID: 1918206996}
+  - component: {fileID: 1918206998}
   m_Layer: 5
   m_Name: Center Point
   m_TagString: Untagged
@@ -42496,6 +42497,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918206994}
   m_CullTransparentMesh: 1
+--- !u!114 &1918206998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918206994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9741a3c534512574f9d91aaaecd137eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backpack: {fileID: 1445533738}
+  radialMenu: {fileID: 1059218160}
+  active: 0
 --- !u!1 &1918262511
 GameObject:
   m_ObjectHideFlags: 0

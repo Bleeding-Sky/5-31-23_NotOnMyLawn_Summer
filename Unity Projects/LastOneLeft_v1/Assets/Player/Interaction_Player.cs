@@ -136,6 +136,7 @@ public class Interaction_Player : MonoBehaviour
             ItemInteraction_Player itemAssignment = GetComponent<ItemInteraction_Player>();
             Interaction_Player ItemInteraction = GetComponent<Interaction_Player>();
 
+            //Changes the interaction pathway if the item is a weapon
             if (Interactable.isGun || Interactable.isMeleeWeapon)
             {
                 inventoryStorage.itemAssignment = itemAssignment;
@@ -145,6 +146,7 @@ public class Interaction_Player : MonoBehaviour
             }
             else
             {
+                //Sends any materials or items to the backpack
                 Backpack_UI backpackInfo = inventoryStorage.Backpack.GetComponent<Backpack_UI>();
                 backpackInfo.AddItem(closetItem);
                 interacting = false;
@@ -156,6 +158,7 @@ public class Interaction_Player : MonoBehaviour
         {
             EnviornmentInteraction_Player enviornment = GetComponent<EnviornmentInteraction_Player>();
             enviornment.Interact(closetItem, interactionType);
+            //Uses the interaction types to determine when to stop the interaction
             if(interactionType == 0 || interactionType == 2)
             {
                 interacting = false;
@@ -168,6 +171,11 @@ public class Interaction_Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Allows the player to interact with items and enviornment by 
+    /// pressing E on the keyboard
+    /// </summary>
+    /// <param name="actionContext"></param>
     public void InteractionAction(InputAction.CallbackContext actionContext)
     {
         if (actionContext.started)
@@ -178,8 +186,14 @@ public class Interaction_Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Allows the player to hold down on W to do a different type of interaction 
+    /// in case enviornmental objects have more than 1 type of interaction
+    /// </summary>
+    /// <param name="actionContext"></param>
     public void SecondaryInteractionAction(InputAction.CallbackContext actionContext)
     {
+
         if (actionContext.performed)
         {
             interactionType = 1;

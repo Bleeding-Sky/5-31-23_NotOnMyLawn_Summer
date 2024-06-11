@@ -152,8 +152,15 @@ public class Inventory_Player : MonoBehaviour
         return -1;
     }
 
+
+    /// <summary>
+    /// Toggles the Radial menu for the player
+    /// </summary>
+    /// <param name="actionContext"></param>
     public void ToggleInventory(InputAction.CallbackContext actionContext)
     {
+        //Determines whether the radial menu is already active or not and then
+        //Decides how to interact with it otherwise
         if(RadialMenu.activeInHierarchy == true)
         {
             invActive = true;
@@ -163,6 +170,7 @@ public class Inventory_Player : MonoBehaviour
             invActive = false;
         }
 
+        //Sets the Backpack and radial menu to their appropriate states
         if (!invActive)
         {
             RadialMenu.SetActive(true);

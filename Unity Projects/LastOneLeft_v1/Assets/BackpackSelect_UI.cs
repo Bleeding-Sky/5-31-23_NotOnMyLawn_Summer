@@ -39,6 +39,12 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
+
+    #region Section Highlighting
+    /// <summary>
+    /// Determines where the mouse is relative to the center of the
+    /// menu so that it can highlight the appropriate section
+    /// </summary>
     private void DetermineDirection()
     {
         //Determines the direction from the center of the radial menu
@@ -47,9 +53,11 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rotZ = rotZ + 180;
     }
+    
 
     private void DetermineSection()
     {
+        //Highlights the right section depending on the angle of the mouse to menu
         if(rotZ <= 225 && rotZ >= 135)
         {
             sections[5].SetActive(true);
@@ -94,6 +102,11 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
+    /// <summary>
+    /// Disables the appropriate section depending on if the player
+    /// is hovering 1 or 0 menu items
+    /// </summary>
+    /// <param name="selectedSection"></param>
     private void DisableSection(GameObject selectedSection)
     {
         int i = 0;
@@ -113,7 +126,13 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 
     }
+    #endregion
+    #region Radial Slot Management
 
+    /// <summary>
+    /// Adds the appropriate slots to the list of of radial slots
+    /// from the parent object
+    /// </summary>
     public void AddSlots()
     {
         int i = 0;
@@ -128,6 +147,10 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
+    /// <summary>
+    /// Copies the slots from the priority slots
+    /// Into the radial slots
+    /// </summary>
     public void CopyRadialSlotInfo()
     {
         for (int i = 0; i < backpack.quickAccessAmount; i++)
@@ -135,17 +158,30 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
             backpack.CopySlots(backpack.slots[i], radialSlots[i],true);
         }
     }
-
+    #endregion
+    #region Radial Menu Events
+    /// <summary>
+    /// Shows that the player is hovering over a slot
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         hoveringRadial = true;
     }
 
+    /// <summary>
+    /// Shows that the player is not hovering over a slot
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
         hoveringRadial= false;
     }
 
+    /// <summary>
+    /// Uses the Item from the slot script
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Clicked");
@@ -154,4 +190,5 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
             currentHoveredSlot.UseItem();
         }
     }
+    #endregion
 }
