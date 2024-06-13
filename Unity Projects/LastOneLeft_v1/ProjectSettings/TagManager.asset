@@ -13,6 +13,7 @@ TagManager:
   - Overhead Window
   - Indoor Window
   - Door
+  - Indoor Environment Parent Object
   layers:
   - Default
   - TransparentFX

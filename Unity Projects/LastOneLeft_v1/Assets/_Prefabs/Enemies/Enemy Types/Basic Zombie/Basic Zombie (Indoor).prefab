@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 1636273120705147034}
   - component: {fileID: 7144671835406309031}
   - component: {fileID: -6568796654622105249}
+  - component: {fileID: 8508984866088338618}
   m_Layer: 9
   m_Name: Basic Zombie (Indoor)
   m_TagString: Zombie
@@ -904,3 +905,18 @@ MonoBehaviour:
   enteredNewRoom: 0
   searchForPlayer: 0
   quickestRoute: []
+--- !u!114 &8508984866088338618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634217409129547592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788ee7b41af2b6a449e373e9d2ad6a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodDecals:
+  - {fileID: 1881140930268621276, guid: 47f80b6c34f477f4ebfc20ce11f1b034, type: 3}
+  indoorEnvironmentParentObject: {fileID: 0}

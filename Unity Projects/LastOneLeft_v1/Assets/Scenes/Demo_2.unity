@@ -44158,7 +44158,7 @@ GameObject:
   - component: {fileID: 2111486793}
   m_Layer: 0
   m_Name: Indoor Environment
-  m_TagString: Untagged
+  m_TagString: Indoor Environment Parent Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
