@@ -12,16 +12,13 @@ public class CameraInitilaizer : MonoBehaviour
     //set this manually in the inspector pls
     [SerializeField] Camera mainCam;
 
-    [Header("DEBUG")]
-    [SerializeField] bool printCullingMask = false;
-
-    [SerializeField] int indoorCullingMask = 536887287;
-    [SerializeField] int windowCullingMask = 1610625015;
+    int indoorCullingMask = 536879095;
+    int windowCullingMask = 1610616823;
 
     void Start()
     {
         //used to identify the culling masks needed for the window/indoor shit
-        if (printCullingMask) { Debug.Log("Culling mask = " + GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().cullingMask); }
+        //Debug.Log("Culling mask = " + GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().cullingMask);
         cameraManager.currentEnum = CameraManagement.Cameras.Indoor;
 
         //BEGIN ON INDOOR VIEW
