@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -4334091110431089390}
   - component: {fileID: -1884367203745079138}
   - component: {fileID: 259008437826081811}
+  - component: {fileID: -5564175982961398276}
   m_Layer: 7
   m_Name: Bullet
   m_TagString: Bullet
@@ -166,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 8936502522062321887}
   bulletStartPosition: {x: 0, y: 0, z: 0}
-  xDirection: -0.99939084
-  yDirection: -0.034899496
+  xDirection: -0.9396926
+  yDirection: -0.34202015
   bulletSpeed: 40
 --- !u!114 &-4334091110431089390
 MonoBehaviour:
@@ -216,3 +217,18 @@ MonoBehaviour:
   armoredPenetrationPenalty: 4
   weakPenetrationPenalty: 2
   myBulletInfo: {fileID: 0}
+--- !u!114 &-5564175982961398276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092487318744206373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788ee7b41af2b6a449e373e9d2ad6a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodDecals:
+  - {fileID: 1881140930268621276, guid: 47f80b6c34f477f4ebfc20ce11f1b034, type: 3}
+  indoorEnvironmentParentObject: {fileID: 0}
