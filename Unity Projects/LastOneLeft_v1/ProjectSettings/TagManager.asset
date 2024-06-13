@@ -13,6 +13,7 @@ TagManager:
   - Overhead Window
   - Indoor Window
   - Door
+  - 3D Environment Geometry
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Props
   - Prop Shaker
   - Paperdoll Enemies
-  - 
+  - Blood
   - 
   - 
   - 
