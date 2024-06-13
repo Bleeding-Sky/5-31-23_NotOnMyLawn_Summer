@@ -43,14 +43,24 @@ public class Backpack_UI : MonoBehaviour
     }
 
     #region Slot Interaction
+
+    /// <summary>
+    /// Passes the item information to the item slots
+    /// </summary>
+    /// <param name="item"></param>
     public void AddItem(GameObject item)
     {
+        //variable that will be used to determine if a spot already associated with 
+        //the item is found
         bool spotFound = false;
         Data_Item itemData = item.GetComponent<Data_Item>();
 
+        //Goes through all the slots to determine whether a slot is already occupied by the
+        //object that is trying to be added into the inventory
         for (int i = 0; i < slots.Count; i++)
         {
-            
+            //Also makes sure that if there is a match with the item and slot
+            //that it wont trigger the spotFound boolean if the slot is full
             if (itemData.itemName == slots[i].itemName && !slots[i].isFull)
             {
                 spotFound = true;
@@ -60,6 +70,8 @@ public class Backpack_UI : MonoBehaviour
             }
         }
         
+        //If an item slot associated with the item isnt found then the nearest
+        //empty item slot will be found
         if (!spotFound)
         {
             for (int i = 0; i < slots.Count; i++)
@@ -72,6 +84,7 @@ public class Backpack_UI : MonoBehaviour
             }
         }
 
+        //updates the radial menu
         backpackQuickMenu.CopyRadialSlotInfo();
 
     }

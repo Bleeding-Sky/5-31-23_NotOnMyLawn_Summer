@@ -18,6 +18,7 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public float rotZ;
     void Start()
     {
+        //Used to automaticaly add all the sections into the list
         foreach(Transform section in sectionParent.transform)
         {
             sections.Add(section.gameObject);
@@ -27,6 +28,8 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
     // Update is called once per frame
     void Update()
     {
+        //Used to determine whether the user is currently hovering over the 
+        //radial menu and if it isn't then the section will be disabled
         if(hoveringRadial)
         {
             DetermineDirection();
@@ -36,6 +39,7 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             GameObject temp = new GameObject();
             DisableSection(temp);
+            Destroy(temp);
         }
     }
 
