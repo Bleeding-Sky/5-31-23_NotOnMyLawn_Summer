@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Backpack_UI : MonoBehaviour
 {
+    public GameObject player;
     public Inventory_Player inventory;
     public List<GameObject> gunInventory;
 
@@ -28,6 +29,7 @@ public class Backpack_UI : MonoBehaviour
     public bool holdingDown;
     private void Start()
     {
+        backpackQuickMenu.player = player;
         backpackQuickMenu.AddSlots();
         AddSlots();
         
@@ -101,6 +103,8 @@ public class Backpack_UI : MonoBehaviour
         {
             ItemSlot_UI childInfo = child.GetComponent<ItemSlot_UI>();
             childInfo.isRadialSlot = false;
+            childInfo.player = player;
+            childInfo.Backpack = this;
             slots.Add(childInfo);
         }
 
@@ -108,6 +112,8 @@ public class Backpack_UI : MonoBehaviour
         foreach (Transform child in inventorySlots.transform)
         {
             ItemSlot_UI childInfo = child.GetComponent<ItemSlot_UI>();
+            childInfo.player = player;
+            childInfo.Backpack = this;
             slots.Add(childInfo);
         }
     }
@@ -124,6 +130,7 @@ public class Backpack_UI : MonoBehaviour
         radialSlot.maxUses = itemSlot.maxUses;
         radialSlot.iconSprite = itemSlot.iconSprite;
         radialSlot.maxAmount = itemSlot.maxAmount;
+        radialSlot.itemSO = itemSlot.itemSO;
         if (setIcon == true)
         {
             radialSlot.SetIcon(radialSlot.iconSprite);

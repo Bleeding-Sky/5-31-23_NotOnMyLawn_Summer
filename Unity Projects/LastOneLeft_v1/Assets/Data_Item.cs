@@ -12,4 +12,5 @@ public class Data_Item : MonoBehaviour
     [SerializeField] public int maxUses;
     [SerializeField] public Sprite iconSprite;
     [SerializeField] public int maxStackable;
+    public UseItem_SO itemSO;
 }

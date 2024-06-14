@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -180,6 +181,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -337,6 +339,7 @@ MonoBehaviour:
   maxUses: 2
   iconSprite: {fileID: 21300000, guid: d233b5b0c6a329746b47aea7bffac5c5, type: 3}
   maxStackable: 2
+  itemSO: {fileID: 11400000, guid: 3e2b12da32338e64a9e408fee5b1d9fb, type: 2}
 --- !u!70 &34218686
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -871,6 +874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -878,6 +882,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -1189,6 +1194,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
     m_ActionName: Indoor/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
+    m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -2849,6 +2858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -2856,6 +2866,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -3514,6 +3525,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
     m_ActionName: Indoor/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
+    m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -3831,6 +3846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -3838,6 +3854,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -3927,6 +3944,92 @@ MonoBehaviour:
   zombieMasterPrefab: {fileID: 7044362648136584179, guid: 360a6ef30fcee274a8adf861827ba2c1, type: 3}
   zombieOverheadPrefab: {fileID: 1406188645345146115, guid: 7cf16c74257a5d84aa72241a80502384, type: 3}
   debug_OverheadSpawnPosition: {x: 2.5, y: 40}
+--- !u!1 &642550182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 642550183}
+  - component: {fileID: 642550184}
+  m_Layer: 0
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &642550183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642550182}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.70516586}
+  m_LocalScale: {x: 0.19, y: 0.19, z: 0.19}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1931977761}
+  - {fileID: 1828462661}
+  m_Father: {fileID: 1728688664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &642550184
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642550182}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &697620201
 GameObject:
   m_ObjectHideFlags: 0
@@ -4840,6 +4943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -4847,6 +4951,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -5064,6 +5169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -5071,6 +5177,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -5201,6 +5308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -5208,6 +5316,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -5782,6 +5891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -5789,6 +5899,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -6145,6 +6256,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
     m_ActionName: Indoor/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
+    m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -6425,6 +6540,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
     m_ActionName: Indoor/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
+    m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -6766,6 +6885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -6773,6 +6893,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -7127,6 +7248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -7134,6 +7256,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -7739,6 +7862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -7746,6 +7870,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -7927,6 +8052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -7934,6 +8060,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -8102,6 +8229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -8109,6 +8237,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -8775,6 +8904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -8782,6 +8912,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -8878,6 +9009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -8885,6 +9017,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -9196,6 +9329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17238333bbd889c4195c074c6115fc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 420412964}
   inventory: {fileID: 545283763}
   gunInventory: []
   slots: []
@@ -9260,6 +9394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -9267,6 +9402,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -39652,6 +39788,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
     m_ActionName: Indoor/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
+    m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -40397,6 +40537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -40404,6 +40545,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -41095,6 +41237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -41102,6 +41245,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -41377,6 +41521,115 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708529412}
   m_CullTransparentMesh: 1
+--- !u!1 &1728688660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1728688664}
+  - component: {fileID: 1728688663}
+  - component: {fileID: 1728688662}
+  - component: {fileID: 1728688661}
+  m_Layer: 8
+  m_Name: Trap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1728688661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728688660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e20175f97cd934888828586ce5a491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isItem: 1
+  isEnviormentObject: 0
+  isWindow: 0
+  isSideDoor: 0
+  isBackgroundDoor: 0
+  isBoardPile: 0
+  isGun: 0
+  isBandage: 1
+  isMeleeWeapon: 0
+  isBullet: 0
+--- !u!114 &1728688662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728688660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0977c1201e385a344bd478ed6f47edb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Trap
+  maxUses: 2
+  iconSprite: {fileID: 21300000, guid: 520ef5ee6438202469f2e5569ee45a18, type: 3}
+  maxStackable: 2
+  itemSO: {fileID: 11400000, guid: 13d91313c32d3ce4dafd9b5588e4109d, type: 2}
+--- !u!70 &1728688663
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728688660}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.18, y: 0.38}
+  m_Direction: 0
+--- !u!4 &1728688664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728688660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.04, y: 0.95, z: 0.70516586}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 642550183}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1729437345
 GameObject:
   m_ObjectHideFlags: 0
@@ -41466,6 +41719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -41473,6 +41727,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -41861,6 +42116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -41868,6 +42124,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -41909,6 +42166,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827079459}
   m_CullTransparentMesh: 1
+--- !u!1 &1828462660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1828462661}
+  - component: {fileID: 1828462662}
+  m_Layer: 0
+  m_Name: Square (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1828462661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828462660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.07, z: 0}
+  m_LocalScale: {x: 0.77, y: 0.36, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 642550183}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1828462662
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828462660}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1835703559
 GameObject:
   m_ObjectHideFlags: 0
@@ -41959,6 +42300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -41966,6 +42308,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -42221,6 +42564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b7b7d064f348c49832da1212a9ed0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   backpack: {fileID: 1445533743}
   radialSlots: []
   radialSlot: {fileID: 148439291}
@@ -42285,6 +42629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -42292,6 +42637,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -42584,6 +42930,90 @@ Transform:
   - {fileID: 1191035558}
   m_Father: {fileID: 722040140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1931977760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1931977761}
+  - component: {fileID: 1931977762}
+  m_Layer: 0
+  m_Name: Square
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1931977761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931977760}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.07, z: 0}
+  m_LocalScale: {x: -0.31, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 642550183}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1931977762
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931977760}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1934975787
 GameObject:
   m_ObjectHideFlags: 0
@@ -42911,6 +43341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -42918,6 +43349,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -43409,6 +43841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -43416,6 +43849,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -43808,6 +44242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25add91a4a93644abffdd7d06402dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 420412964}
   Backpack: {fileID: 0}
   isEmpty: 0
   isFull: 0
@@ -43815,6 +44250,7 @@ MonoBehaviour:
   currentAmount: 0
   slotID: 0
   isRadialSlot: 0
+  itemSO: {fileID: 0}
   itemName: 
   maxUses: 0
   iconSprite: {fileID: 0}
@@ -44338,6 +44774,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
       insertIndex: -1
       addedObject: {fileID: 180563076333826052}
+    - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 180563076333826057}
   m_SourcePrefab: {fileID: 100100000, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
 --- !u!4 &180563076333826051 stripped
 Transform:
@@ -44473,6 +44912,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f6d4e2f5-00d3-4ac7-adbf-da6400e5dc64
     m_ActionName: Indoor/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
+    m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -44540,6 +44983,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.76}
   m_Size: {x: 0.5, y: 1.56}
   m_Direction: 0
+--- !u!114 &180563076333826057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420412964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e6d446e91d19d4da8eab08a8e86b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
 --- !u!1001 &8162525778559978417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44619,3 +45075,4 @@ SceneRoots:
   - {fileID: 1132405815}
   - {fileID: 578694085}
   - {fileID: 34218687}
+  - {fileID: 1728688664}

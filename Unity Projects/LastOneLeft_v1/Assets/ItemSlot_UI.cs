@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandler,IPointerExitHandler,IPointerUpHandler
 {
+    public GameObject player;
     public Backpack_UI Backpack;
     public bool isEmpty;
     public bool isFull;
@@ -16,6 +17,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     public int slotID;
     public bool isRadialSlot;
 
+    public UseItem_SO itemSO;
     public string itemName;
     [SerializeField] public int maxUses;
     [SerializeField] public Sprite iconSprite;
@@ -25,7 +27,6 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     {
         isEmpty = true;
         isFull = false;
-        currentAmount = 0;
     }
 
     #region Item Slot Actions
@@ -42,6 +43,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
             //recieves the incoming item's data and passes it along to slot
             Data_Item itemData = item.GetComponent<Data_Item>();
             itemName = itemData.itemName;
+            itemSO = itemData.itemSO;
             maxUses = itemData.maxUses;
             iconSprite = itemData.iconSprite;
             maxAmount = itemData.maxStackable;
@@ -82,10 +84,52 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     /// </summary>
     public void UseItem()
     {
-        Debug.Log("Use " + itemName);
+        //Checks to make sure that the slot is not cleared
+        if (itemSO != null)
+        {
+            itemSO.player = player;
+
+            //If the slot id is one of the quick access radial slots then it will reduce the amount of
+            //it and its counterpart
+            if (slotID < 5)
+            {
+                Backpack.slots[slotID].currentAmount -= 1;
+                Backpack.backpackQuickMenu.radialSlots[slotID].currentAmount -= 1;
+                Backpack.slots[slotID].isFull = false;
+                Backpack.backpackQuickMenu.radialSlots[slotID].isFull = false;
+            }
+            else
+            {
+                //other wise it will just reduce the current amount by 1
+                currentAmount -= 1;
+                isFull = false;
+
+            }
+            //Uses the item based on the Scriptable object
+            itemSO.UseItem();
+        }
+
+        //checks to make sure that the current amount hasnt hit 0 and if it did then it will clear the slot
+        if (currentAmount <= 0 && itemSO != null)
+        {
+            currentAmount = 0;
+            //if the slot is tied to the quick menu then it needs to clear both the radial and quick menu slot
+            //otherwise it will just clear the standard slot
+            if (slotID < 5)
+            {
+                Backpack.slots[slotID].ClearSlot();
+                Backpack.backpackQuickMenu.radialSlots[slotID].ClearSlot();
+            }
+            else
+            {
+                ClearSlot();
+
+            }
+        }
+        checkFull();
     }
 
-#endregion
+    #endregion
     #region Slot Maintanance
     /// <summary>
     /// A function that checks whether the slot is full or not
@@ -93,7 +137,9 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     /// </summary>
     public void checkFull()
     {
-
+        Debug.Log("Checking Fullness");
+        Debug.Log(currentAmount);
+        Debug.Log(maxAmount);
         //max amount of supplies will be passed down from the item details in Data_Item
         if(currentAmount >= maxAmount)
         {
@@ -109,13 +155,17 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     /// Clears the slot so that it can be used by another item when the
     /// item is used or dropped
     /// </summary>
-    public void clearSlot()
+    public void ClearSlot()
     {
+        itemSO = null;
         itemName = null;
         maxUses = 0;
         iconSprite = null;
+        SetIcon(null);
         maxAmount = 0;
         currentAmount = 0;
+        isFull = false;
+        isEmpty = true;
     }
 
     /// <summary>
@@ -125,10 +175,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     public void SetIcon(Sprite spr)
     {
         Image image = GetComponent<Image>();
-        if (image != null)
-        {
-            image.sprite = spr;
-        }
+        image.sprite = spr;
     }
     #endregion
     #region Slot Interaction Events

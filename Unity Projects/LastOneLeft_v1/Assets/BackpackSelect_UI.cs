@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IPointerDownHandler
 {
+    public GameObject player;
     public Backpack_UI backpack;
     public List<ItemSlot_UI> radialSlots;
     public GameObject radialSlot;
@@ -146,6 +147,8 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
             ItemSlot_UI childInfo = child.GetComponent<ItemSlot_UI>();
             childInfo.isRadialSlot = true;
             childInfo.slotID = i;
+            childInfo.player = player;
+            childInfo.Backpack = backpack;
             radialSlots.Add(childInfo);
             i += 1;
         }
@@ -160,6 +163,18 @@ public class BackpackSelect_UI : MonoBehaviour, IPointerEnterHandler, IPointerEx
         for (int i = 0; i < backpack.quickAccessAmount; i++)
         {
             backpack.CopySlots(backpack.slots[i], radialSlots[i],true);
+        }
+    }
+
+    /// <summary>
+    /// Copies the slots from the priority slots
+    /// Into the radial slots
+    /// </summary>
+    public void CopyItemSlotInfo()
+    {
+        for (int i = 0; i < backpack.quickAccessAmount; i++)
+        {
+            backpack.CopySlots(radialSlots[i], backpack.slots[i], true);
         }
     }
     #endregion
