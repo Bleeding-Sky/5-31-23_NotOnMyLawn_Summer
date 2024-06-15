@@ -129,6 +129,30 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
         checkFull();
     }
 
+    /// <summary>
+    /// Drop item from the the inventory
+    /// </summary>
+    public void DropItem()
+    {
+        //Spawns the item underneath the players feet
+        Instantiate(itemSO.itemPrefab, new Vector3(transform.position.x,0,0), Quaternion.identity);
+        currentAmount -= 1;
+        if (currentAmount <= 0)
+        {
+            //Clears the slots depending on if its a quick access slot or not
+            if (slotID < 5)
+            {
+                Backpack.slots[slotID].ClearSlot();
+                Backpack.backpackQuickMenu.radialSlots[slotID].ClearSlot();
+            }
+            else
+            {
+                ClearSlot();
+
+            }
+        }
+    }
+
     #endregion
     #region Slot Maintanance
     /// <summary>

@@ -11,6 +11,7 @@ using UnityEngine;
 public class UseItem_SO : ScriptableObject
 {
     public GameObject player;
+    public GameObject itemPrefab;
 
     /// <summary>
     /// This function will be the base for all other inhereted classes to override the function logic
