@@ -3,35 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UseButton_UI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler
+public class UseButton_UI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
     public SelectedItem_UI selectedSlot;
+    public bool hoveringButton;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Use the Item");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        hoveringButton = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        hoveringButton = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(hoveringButton == true)
+        {
+            selectedSlot.UseSlotItem();
+        }
     }
 }

@@ -54,5 +54,30 @@ public class SelectedItem_UI : MonoBehaviour
         selectedSlot = null;
         slotID = 0;
         spr = null;
+        SetIcon(null);
+    }
+
+    public void UseSlotItem()
+    {
+        if(selectedSlot != null)
+        {
+            selectedSlot.UseItem();
+            if(selectedSlot.currentAmount <= 0)
+            {
+                ClearSelectedSlot();
+            }
+        }
+    }
+
+    public void DropSlotItem()
+    {
+        if (selectedSlot != null)
+        {
+            selectedSlot.DropItem();
+            if (selectedSlot.currentAmount <= 0)
+            {
+                ClearSelectedSlot();
+            }
+        }
     }
 }

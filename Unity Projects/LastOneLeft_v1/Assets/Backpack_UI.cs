@@ -25,8 +25,8 @@ public class Backpack_UI : MonoBehaviour
 
     public GameObject draggedSlot;
     public GameObject overSlot;
-
     public bool holdingDown;
+    public SelectedItem_UI selectedSlot;
     private void Start()
     {
         backpackQuickMenu.player = player;

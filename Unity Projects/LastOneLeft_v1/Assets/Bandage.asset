@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Bandage
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  itemPrefab: {fileID: 6298973959920411055, guid: 4d9710d5a5ee1db488e3fe705c8fb97a, type: 3}
   heal: 10

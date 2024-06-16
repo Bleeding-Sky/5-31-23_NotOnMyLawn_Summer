@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee574eb6687fc19468f280eadaa6a5b8, type: 3}
   m_Name: Trap
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  itemPrefab: {fileID: 3870464173497120030, guid: 15caaa6da9aa3574eabfb9e6de0c49fd, type: 3}

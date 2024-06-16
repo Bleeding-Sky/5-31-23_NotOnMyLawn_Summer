@@ -135,7 +135,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     public void DropItem()
     {
         //Spawns the item underneath the players feet
-        Instantiate(itemSO.itemPrefab, new Vector3(transform.position.x,0,0), Quaternion.identity);
+        Instantiate(itemSO.itemPrefab, new Vector3(player.transform.position.x,0,0), Quaternion.identity);
         currentAmount -= 1;
         if (currentAmount <= 0)
         {
@@ -249,7 +249,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isRadialSlot)
+        if(!isRadialSlot)
         {
             if (Backpack.overSlot == gameObject)
             {
@@ -268,6 +268,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
     {
         if (!isRadialSlot)
         {
+            bool select = true;
             if (Backpack.overSlot != null && Backpack.draggedSlot != null)
             {
                 //The overslot and the dragged info slots swap information
@@ -276,7 +277,24 @@ public class ItemSlot_UI : MonoBehaviour, IPointerEnterHandler,IPointerDownHandl
                 Backpack.SwapSlots(overSlotInfo, draggedSlotInfo);
             }
             Backpack.draggedSlot = null;
+            
+            if (Backpack.selectedSlot.selectedSlot == this)
+            {
+                UseItem();
+                if (currentAmount <= 0)
+                {
+                    Backpack.selectedSlot.ClearSelectedSlot();
+                    select = false;
+                }
+            }
+
+
+            if(select)
+            {
+                Backpack.selectedSlot.SelectSlot(this);
+            }
         }
+
     }
     #endregion
 }
