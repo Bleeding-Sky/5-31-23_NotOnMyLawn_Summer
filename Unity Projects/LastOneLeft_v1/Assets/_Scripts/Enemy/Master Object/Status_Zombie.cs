@@ -21,6 +21,8 @@ public class Status_Zombie : MonoBehaviour
 
     [SerializeField] float enrageDuration = 2;
 
+    [SerializeField] Animator animator;
+
     [SerializeField] bool printDebugMessages = false;
 
     [Header("DEBUG")]
@@ -44,6 +46,7 @@ public class Status_Zombie : MonoBehaviour
         //checks if status is active, then decrements its timer and checks if it == 0 and should end
         //doesnt update if zombie is crawling because crawling takes priority over all statuses
         if (!isCrawling) { UpdateStandingStatusTimers(); }
+
 
     }
 
@@ -165,7 +168,7 @@ public class Status_Zombie : MonoBehaviour
     }
 
     /// <summary>
-    /// determines if a stun occurs
+    /// determines if a stun occurs, factoring in which damage region was hit
     /// </summary>
     /// <param name="damagedRegion"></param>
     public void AttemptStun(DmgRegionEnum damagedRegion, float statusModifier)
@@ -211,7 +214,7 @@ public class Status_Zombie : MonoBehaviour
     }
 
     /// <summary>
-    /// determines if the zombie falls backward
+    /// determines if the zombie falls backward, considering which region was hit
     /// </summary>
     /// <param name="damagedRegion"></param>
     public void AttemptFallBackward(DmgRegionEnum damagedRegion, float statusModifier)
@@ -332,7 +335,6 @@ public class Status_Zombie : MonoBehaviour
         standingState = ZmbStandingStateEnum.NoStatus;
         stunTimeRemaining = 0;
     }
-
 
     public void StopFallForward()
     {
