@@ -9384,6 +9384,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5239323128900073630, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 0790fc7620f60384e8aa9f7f811bdbba, type: 2}
     - target: {fileID: 6374444048197886529, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
       propertyPath: windowAnchorObject
       value: 
@@ -9399,6 +9403,10 @@ PrefabInstance:
     - target: {fileID: 6413892678650006711, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
       propertyPath: m_Name
       value: Overhead Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598752018994582375, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
+      propertyPath: m_Color.a
+      value: 0.39215687
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
