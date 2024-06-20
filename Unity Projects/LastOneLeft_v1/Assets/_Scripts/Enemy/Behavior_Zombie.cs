@@ -211,7 +211,7 @@ public class Behavior_Zombie : MonoBehaviour
         float currentSpeed = 0;
 
         //crawling overrides all other states
-        if (statusScript.isCrawling)
+        if (statusScript.status == FodderStatus.Crawling)
         {
             currentSpeed = crawlMoveSpeed;
         }
