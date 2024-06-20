@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(  typeof(Status_Zombie), 
-                    typeof(Health_Zombie), 
-                    typeof(SpriteController_Zombie))]
+[RequireComponent( typeof(Status_Zombie), typeof(Health_Zombie) )]
 
 public class LimbLoss_Zombie : MonoBehaviour
 {
@@ -23,94 +21,13 @@ public class LimbLoss_Zombie : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] Health_Zombie healthScript;
-    [SerializeField] SpriteController_Zombie spriteController;
-    [SerializeField] bool headless = false;
-    public bool oneArmBroken = false;
-    public bool armless = false;
-    public bool legless = false;
 
     private void Awake()
     {
         statusScript = GetComponent<Status_Zombie>();
         healthScript = GetComponent<Health_Zombie>();
-        spriteController = GetComponent<SpriteController_Zombie>();
     }
 
-    private void Start()
-    {
-        ChangeSprite();
-    }
-
-
-    #region Attempt Part Break Methods (Deprecated)
-    //no longer necessary as limbs break when at 0 health all the time now
-    /*
-    /// <summary>
-    /// rolls to break the zombie's head if its head health is at 0
-    /// </summary>
-    /// <param name="maxHealth"></param>
-    /// <param name="currentHealth"></param>
-    public void AttemptCritBreak(float maxHealth, float currentHealth)
-    {
-
-        if (RNGRolls_System.RollUnder(headBreakChance))
-        {
-            BreakCritRegion(maxHealth, currentHealth);
-
-            if (printDebugMessages) { Debug.Log("Head Break Success"); }
-        }
-        else
-        {
-            if (printDebugMessages) { Debug.Log("Head Break Failure"); }
-        }
-
-    }
-
-    /// <summary>
-    /// rolls to break a zombie's arm on torso damage
-    /// </summary>
-    /// <param name="bodyHealth"></param>
-    public void AttemptArmLoss(float bodyHealth)
-    {
-        float breakChance;
-        if (bodyHealth > 0)
-        {
-            breakChance = armLossChance;
-        }
-        else
-        {
-            breakChance = bothArmsLossChance;
-        }
-
-        if (RNGRolls_System.RollUnder(breakChance))
-        {
-            LoseArm();
-
-            if (printDebugMessages) { Debug.Log("Break Arm Success"); }
-        }
-        else
-        {
-            if (printDebugMessages) { Debug.Log("Break Arm Failure"); }
-        }
-    }
-
-    /// <summary>
-    /// rolls to break zombie's legs if its legs health is at 0
-    /// </summary>
-    public void AttemptLegBreak()
-    {
-        if (RNGRolls_System.RollUnder(legBreakChance))
-        {
-            BreakLegs();
-
-            if (printDebugMessages) { Debug.Log("Break Legs Success"); }
-        }
-        else
-        {
-            if (printDebugMessages) { Debug.Log("Break Legs Failure"); }
-        }
-    }
-    */
 
     /// <summary>
     /// breaks an arm at half health and at zero health
@@ -122,33 +39,39 @@ public class LimbLoss_Zombie : MonoBehaviour
         //if body is broken, lose an arm.
         if (bodyCurrentHealth <= 0)
         {
-            LoseArm();
+            BreakArm();
         }
-
         //if body is below half health and both arms are intact, lose an arm
         else if (   bodyCurrentHealth < (bodyMaxHealth / 2) &&
-                    !armless && !oneArmBroken
+                    statusScript.LArmCondition == LimbCondition.Intact &&
+                    statusScript.RArmCondition == LimbCondition.Intact
                 )
         {
-            LoseArm();
+            BreakArm();
         }
     }
-    #endregion
 
     #region Break Part Methods
 
     /// <summary>
-    /// breaks the crit region, rolls a chance for the zombie to endure or die,
-    /// and refreshes sprites in child objects
+    /// breaks a limb by changing limb's condition to broken on the status script
+    /// </summary>
+    /// <param name="limbToBreak"></param>
+    void BreakLimb(FodderLimb limbToBreak)
+    {
+        statusScript.ChangeLimbCondition(limbToBreak, LimbCondition.Broken);
+    }
+
+    /// <summary>
+    /// breaks the crit region, rolls a chance for the zombie to endure or die
     /// </summary>
     /// <param name="maxHealth"></param>
     /// <param name="currentHealth"></param>
-    public void BreakCritRegion(float maxHealth, float currentHealth)
+    public void BreakHead(float maxHealth, float currentHealth)
     {
-        headless = true;
+        BreakLimb(FodderLimb.Head);
         AttemptEndureHeadBreak(maxHealth, currentHealth);
 
-        ChangeSprite();
     }
 
     /// <summary>
@@ -185,43 +108,53 @@ public class LimbLoss_Zombie : MonoBehaviour
     }
 
     /// <summary>
-    /// breaks an arm if no arms are broken. breaks other arm if one arm is broken.
-    /// also refreshes sprites of child objects
+    /// breaks a random arm if no arms are broken. breaks remaining arm if one arm is broken.
     /// </summary>
-    public void LoseArm()
+    public void BreakArm()
     {
-        //break one arm if no arms broken, break other arm if one arm broken
-        if (!armless)
+        //bools for readability
+        bool bothArmsIntact = statusScript.LArmCondition == LimbCondition.Intact && statusScript.RArmCondition == LimbCondition.Intact;
+        bool bothArmsBroken = statusScript.LArmCondition == LimbCondition.Broken && statusScript.RArmCondition == LimbCondition.Broken;
+        //left arm or right arm broken, but not both
+        bool oneArmBroken = statusScript.LArmCondition == LimbCondition.Broken || statusScript.RArmCondition == LimbCondition.Broken
+                            && (!bothArmsBroken);
+
+        //break one random arm if no arms broken
+        if (bothArmsIntact)
         {
-            if (oneArmBroken)
+            if (Random.value<0.5f)
             {
-                armless = true;
-                oneArmBroken = false;
+                BreakLimb(FodderLimb.LArm);
             }
-            else if (!oneArmBroken)
+            else
             {
-                oneArmBroken = true;
+                BreakLimb(FodderLimb.RArm);
+            }
+        }
+        //break remaining arm if one arm broken
+        else if (oneArmBroken)
+        {
+            if (statusScript.LArmCondition == LimbCondition.Intact)
+            {
+                BreakLimb(FodderLimb.LArm);
+            }
+            else if (statusScript.RArmCondition == LimbCondition.Intact)
+            {
+                BreakLimb(FodderLimb.RArm);
             }
         }
 
-        ChangeSprite();
     }
 
+    /// <summary>
+    /// breaks legs and applies the crawling status
+    /// </summary>
     public void BreakLegs()
     {
-        legless = true;
+        BreakLimb(FodderLimb.Legs);
         statusScript.StartCrawl();
-
-        ChangeSprite();
     }
     #endregion
 
-    /// <summary>
-    /// calls method on a spritecontroller to change sprite according to limb status booleans
-    /// </summary>
-    public void ChangeSprite()
-    {
-        spriteController.ActivateSpriteChangers(headless, oneArmBroken, armless, legless);
-    }
 
 }

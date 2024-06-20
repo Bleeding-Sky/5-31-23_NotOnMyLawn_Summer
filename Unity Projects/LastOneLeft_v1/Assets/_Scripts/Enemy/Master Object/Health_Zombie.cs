@@ -57,7 +57,7 @@ public class Health_Zombie : MonoBehaviour
         //also attempt to stun again as a bonus for limb breaking
         if (critRegionHealth <= 0)
         {
-            limbLossScript.BreakCritRegion(maxHealth, currentHealth);
+            limbLossScript.BreakHead(maxHealth, currentHealth);
             statusScript.ProcessCritHit(statusMultiplier);
         }
 

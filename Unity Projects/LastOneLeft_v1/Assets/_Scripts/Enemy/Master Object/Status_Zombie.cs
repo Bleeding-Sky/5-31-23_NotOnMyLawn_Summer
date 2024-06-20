@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LimbAnimController))]
+
 public class Status_Zombie : MonoBehaviour
 {
-    [Header("CONFIG")]
-    //calculations for these are roll-under, no meets beats
 
+    [Header("CONFIG")]
+
+    //calculations for these are roll-under, no meets beats
     [SerializeField] float stumbleDuration = 1;
     [SerializeField] float stumbleChance = 30;
 
@@ -21,14 +24,20 @@ public class Status_Zombie : MonoBehaviour
 
     [SerializeField] float enrageDuration = 2;
 
-    [SerializeField] Animator animator;
-
     [SerializeField] bool printDebugMessages = false;
 
     [Header("DEBUG")]
+
+    [SerializeField] LimbAnimController myLimbAnimController;
+
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
-    public ZmbStandingStateEnum standingState = ZmbStandingStateEnum.NoStatus;
+    public FodderStatus status = FodderStatus.Idle;
+
+    [SerializeField] LimbCondition headCondition = LimbCondition.Intact;
+    public LimbCondition LArmCondition = LimbCondition.Intact;
+    public LimbCondition RArmCondition = LimbCondition.Intact;
+    [SerializeField] LimbCondition legsCondition = LimbCondition.Intact;
 
     public bool isCrawling = false;
     public bool isAttacking = false;
@@ -40,6 +49,10 @@ public class Status_Zombie : MonoBehaviour
     [SerializeField] float fallenTimeRemaining;
     [SerializeField] float enrageTimeRemaining;
 
+    private void Awake()
+    {
+        myLimbAnimController = GetComponent<LimbAnimController>();
+    }
 
     private void Update()
     {
@@ -55,7 +68,7 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     private void UpdateStandingStatusTimers()
     {
-        if (standingState == ZmbStandingStateEnum.Stumbling)
+        if (status == FodderStatus.Stumbling)
         {
             stumbleTimeRemaining -= Time.deltaTime;
             if (stumbleTimeRemaining <= 0)
@@ -64,7 +77,7 @@ public class Status_Zombie : MonoBehaviour
             }
         }
 
-        if (standingState == ZmbStandingStateEnum.Stunned)
+        if (status == FodderStatus.Stunned)
         {
             stunTimeRemaining -= Time.deltaTime;
             if (stunTimeRemaining <= 0)
@@ -73,18 +86,18 @@ public class Status_Zombie : MonoBehaviour
             }
         }
 
-        if (standingState == ZmbStandingStateEnum.FallenForward ||
-            standingState == ZmbStandingStateEnum.FallenBackward)
+        if (status == FodderStatus.FallenFaceDown ||
+            status == FodderStatus.FallenFaceUp)
         {
             fallenTimeRemaining -= Time.deltaTime;
             if (fallenTimeRemaining <= 0)
             {
-                if (standingState == ZmbStandingStateEnum.FallenForward) { GetUpFromFallForward(); }
-                else if (standingState == ZmbStandingStateEnum.FallenBackward) { GetUpFromFallBackward(); }
+                if (status == FodderStatus.FallenFaceDown) { GetUpFromFallForward(); }
+                else if (status == FodderStatus.FallenFaceUp) { GetUpFromFallBackward(); }
             }
         }
 
-        if (standingState == ZmbStandingStateEnum.Enraged)
+        if (status == FodderStatus.Enraged)
         {
             enrageTimeRemaining -= Time.deltaTime;
             if (enrageTimeRemaining <= 0)
@@ -94,17 +107,45 @@ public class Status_Zombie : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// updates a limb's condition
+    /// </summary>
+    /// <param name="limb"></param>
+    /// <param name="newCondition"></param>
+    public void ChangeLimbCondition(FodderLimb limb, LimbCondition newCondition)
+    {
+        switch (limb)
+        {
+            case FodderLimb.Head:
+                headCondition = newCondition;
+            break;
+
+            case FodderLimb.LArm:
+                LArmCondition = newCondition;
+            break;
+
+            case FodderLimb.RArm:
+                RArmCondition = newCondition;
+            break;
+
+            case FodderLimb.Legs:
+                legsCondition = newCondition;
+            break;
+        }
+
+    }
+
     //attempts to apply appropriate statuses based on current zombie state and incoming damage region
     #region Incoming Damage Processors
 
     public void ProcessCritHit(float statusModifier)
     {
         //ensure prerequisite state is active, then attempt state change
-        if (standingState == ZmbStandingStateEnum.NoStatus)
+        if (status == FodderStatus.Idle)
         {
             AttemptStun(DmgRegionEnum.Crit, statusModifier);
         }
-        else if (standingState == ZmbStandingStateEnum.Stunned)
+        else if (status == FodderStatus.Stunned)
         {
             AttemptFallBackward(DmgRegionEnum.Crit, statusModifier);
         }
@@ -113,13 +154,13 @@ public class Status_Zombie : MonoBehaviour
     public void ProcessArmoredHit(float statusModifier)
     {
         //ensure prerequisite state is active
-        if (standingState == ZmbStandingStateEnum.NoStatus)
+        if (status == FodderStatus.Idle)
         {
             //attempt proper state change
             AttemptStun(DmgRegionEnum.Armored, statusModifier);
 
         }
-        else if (standingState == ZmbStandingStateEnum.Stunned)
+        else if (status == FodderStatus.Stunned)
         {
             AttemptFallBackward(DmgRegionEnum.Armored, statusModifier);
         }
@@ -132,16 +173,16 @@ public class Status_Zombie : MonoBehaviour
         //if zombie is stunned and recieves leg damage, attempt a stumble
 
         //ensure prerequisite state is active
-        if (standingState == ZmbStandingStateEnum.NoStatus)
+        if (status == FodderStatus.Idle)
         {
             //attempt proper state change
             AttemptStumble(statusModifier);
         }
-        else if (standingState == ZmbStandingStateEnum.Stumbling)
+        else if (status == FodderStatus.Stumbling)
         {
             AttemptFallForward(statusModifier);
         }
-        else if (standingState == ZmbStandingStateEnum.Stunned)
+        else if (status == FodderStatus.Stunned)
         {
             AttemptStumble(statusModifier);
         }
@@ -251,7 +292,7 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void DoStumble()
     {
-        standingState = ZmbStandingStateEnum.Stumbling;
+        status = FodderStatus.Stumbling;
         stumbleTimeRemaining = stumbleDuration;
     }
 
@@ -260,25 +301,25 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void DoStun()
     {
-        standingState = ZmbStandingStateEnum.Stunned;
+        status = FodderStatus.Stunned;
         stunTimeRemaining = stunDuration;
     }
 
     public void StartFallForward()
     {
-        standingState = ZmbStandingStateEnum.FallenForward;
+        status = FodderStatus.FallenFaceDown;
         fallenTimeRemaining = fallenDuration;
     }
 
     public void StartFallBackward()
     {
-        standingState = ZmbStandingStateEnum.FallenBackward;
+        status = FodderStatus.FallenFaceUp;
         fallenTimeRemaining = fallenDuration;
     }
 
     public void StartEnrage()
     {
-        standingState = ZmbStandingStateEnum.Enraged;
+        status = FodderStatus.Enraged;
         enrageTimeRemaining = enrageDuration;
 
     }
@@ -325,7 +366,7 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StopStumble()
     {
-        standingState = ZmbStandingStateEnum.NoStatus;
+        status = FodderStatus.Idle;
     }
 
     /// <summary>
@@ -333,22 +374,22 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StopStun()
     {
-        standingState = ZmbStandingStateEnum.NoStatus;
+        status = FodderStatus.Idle;
     }
 
     public void GetUpFromFallForward()
     {
-        standingState = ZmbStandingStateEnum.NoStatus;
+        status = FodderStatus.Idle;
     }
 
     public void GetUpFromFallBackward()
     {
-        standingState = ZmbStandingStateEnum.NoStatus;
+        status = FodderStatus.Idle;
     }
 
     public void StopEnrage()
     {
-        standingState = ZmbStandingStateEnum.Stumbling;
+        status = FodderStatus.Stumbling;
     }
 
     /// <summary>

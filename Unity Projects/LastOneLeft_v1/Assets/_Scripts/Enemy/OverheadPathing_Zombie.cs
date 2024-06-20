@@ -62,29 +62,29 @@ public class OverheadPathing_Zombie : MonoBehaviour
         else
         {
             //change move speed based on current state
-            switch (statusScript.standingState)
+            switch (statusScript.status)
             {
-                case ZmbStandingStateEnum.NoStatus:
+                case FodderStatus.Idle:
                     currentSpeed = normalSpeed;
                     break;
 
-                case ZmbStandingStateEnum.Stunned:
+                case FodderStatus.Stunned:
                     currentSpeed = stunSpeed;
                     break;
 
-                case ZmbStandingStateEnum.Stumbling:
+                case FodderStatus.Stumbling:
                     currentSpeed = stumbleSpeed;
                     break;
 
-                case ZmbStandingStateEnum.FallenForward:
+                case FodderStatus.FallenFaceDown:
                     currentSpeed = fallenMoveSpeed;
                     break;
 
-                case ZmbStandingStateEnum.FallenBackward:
+                case FodderStatus.FallenFaceUp:
                     currentSpeed = fallenMoveSpeed;
                     break;
 
-                case ZmbStandingStateEnum.Enraged:
+                case FodderStatus.Enraged:
                     currentSpeed = enragedSpeed;
                     break;
             }

@@ -187,13 +187,13 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Break Head")]
     void BreakHead()
     {
-        limbloss.BreakCritRegion(health.maxHealth, health.currentHealth);
+        limbloss.BreakHead(health.maxHealth, health.currentHealth);
     }
 
     [ContextMenu("Break Arm")]
     void BreakArm()
     {
-        limbloss.LoseArm();
+        limbloss.BreakArm();
     }
 
     [ContextMenu("Break Legs")]
