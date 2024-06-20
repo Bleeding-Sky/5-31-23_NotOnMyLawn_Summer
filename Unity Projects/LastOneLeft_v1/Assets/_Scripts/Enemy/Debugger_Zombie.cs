@@ -103,13 +103,13 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Do Fall Forward")]
     void DoFallForward()
     {
-        status.DoFallForward();
+        status.StartFallForward();
     }
 
     [ContextMenu("Stop Fall Forward")]
     void StopFallForward()
     {
-        status.StopFallForward();
+        status.GetUpFromFallForward();
     }
 
     [ContextMenu("Attempt Fall Backward (Head Damage)")]
@@ -127,19 +127,19 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Do Fall Backward")]
     void DoFallBackward()
     {
-        status.DoFallBackward();
+        status.StartFallBackward();
     }
 
     [ContextMenu("Stop Fall Backward")]
     void StopFallBackward()
     {
-        status.StopFallBackward();
+        status.GetUpFromFallBackward();
     }
 
     [ContextMenu("Do Enrage")]
     void DoEnrage()
     {
-        status.DoEnrage();
+        status.StartEnrage();
     }
 
     [ContextMenu("Stop Enrage")]
@@ -151,7 +151,7 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Do Crawl")]
     void DoCrawl()
     {
-        status.DoCrawl();
+        status.StartCrawl();
     }
 
     [ContextMenu("Stop Crawl")]

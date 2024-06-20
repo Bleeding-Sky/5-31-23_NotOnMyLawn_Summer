@@ -79,8 +79,8 @@ public class Status_Zombie : MonoBehaviour
             fallenTimeRemaining -= Time.deltaTime;
             if (fallenTimeRemaining <= 0)
             {
-                if (standingState == ZmbStandingStateEnum.FallenForward) { StopFallForward(); }
-                else if (standingState == ZmbStandingStateEnum.FallenBackward) { StopFallBackward(); }
+                if (standingState == ZmbStandingStateEnum.FallenForward) { GetUpFromFallForward(); }
+                else if (standingState == ZmbStandingStateEnum.FallenBackward) { GetUpFromFallBackward(); }
             }
         }
 
@@ -204,7 +204,7 @@ public class Status_Zombie : MonoBehaviour
     {
         if (RNGRolls_System.RollUnder(fallForwardChance * statusModifier))
         { 
-            DoFallForward();
+            StartFallForward();
             if (printDebugMessages) { Debug.Log("Fall Forward Success"); }
         }
         else
@@ -234,7 +234,7 @@ public class Status_Zombie : MonoBehaviour
 
         if (RNGRolls_System.RollUnder(successCutoff * statusModifier)) 
         {
-            DoFallBackward();
+            StartFallBackward();
             if (printDebugMessages) { Debug.Log("Fall Backward Success"); }
         }
         else
@@ -244,6 +244,7 @@ public class Status_Zombie : MonoBehaviour
     }
     #endregion
 
+    //applies a status by flipping a bool and initializing its duration value
     #region "do status" methods
     /// <summary>
     /// applies the stumble status
@@ -263,19 +264,19 @@ public class Status_Zombie : MonoBehaviour
         stunTimeRemaining = stunDuration;
     }
 
-    public void DoFallForward()
+    public void StartFallForward()
     {
         standingState = ZmbStandingStateEnum.FallenForward;
         fallenTimeRemaining = fallenDuration;
     }
 
-    public void DoFallBackward()
+    public void StartFallBackward()
     {
         standingState = ZmbStandingStateEnum.FallenBackward;
         fallenTimeRemaining = fallenDuration;
     }
 
-    public void DoEnrage()
+    public void StartEnrage()
     {
         standingState = ZmbStandingStateEnum.Enraged;
         enrageTimeRemaining = enrageDuration;
@@ -285,7 +286,7 @@ public class Status_Zombie : MonoBehaviour
     /// <summary>
     /// applies the crawling status
     /// </summary>
-    public void DoCrawl()
+    public void StartCrawl()
     {
         isCrawling = true;
     }
@@ -316,6 +317,7 @@ public class Status_Zombie : MonoBehaviour
 
     #endregion
 
+    //stops a status by changing the state
     #region "stop status" methods
 
     /// <summary>
@@ -324,7 +326,6 @@ public class Status_Zombie : MonoBehaviour
     public void StopStumble()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
-        stumbleTimeRemaining = 0;
     }
 
     /// <summary>
@@ -333,25 +334,21 @@ public class Status_Zombie : MonoBehaviour
     public void StopStun()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
-        stunTimeRemaining = 0;
     }
 
-    public void StopFallForward()
+    public void GetUpFromFallForward()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
-        fallenTimeRemaining = 0;
     }
 
-    public void StopFallBackward()
+    public void GetUpFromFallBackward()
     {
         standingState = ZmbStandingStateEnum.NoStatus;
-        fallenTimeRemaining = 0;
     }
 
     public void StopEnrage()
     {
         standingState = ZmbStandingStateEnum.Stumbling;
-        enrageTimeRemaining = 0;
     }
 
     /// <summary>

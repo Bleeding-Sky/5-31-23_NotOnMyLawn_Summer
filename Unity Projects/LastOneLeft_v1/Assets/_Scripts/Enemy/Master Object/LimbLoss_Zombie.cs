@@ -160,7 +160,7 @@ public class LimbLoss_Zombie : MonoBehaviour
     private void AttemptEndureHeadBreak(float maxHealth, float currentHealth)
     {
         bool isLowHealth = currentHealth < (maxHealth / 3);
-        float endureChance = 0;
+        float endureChance;
         if (isLowHealth)
         {
             endureChance = lowHealthHeadBreakEndureChance;
@@ -210,7 +210,7 @@ public class LimbLoss_Zombie : MonoBehaviour
     public void BreakLegs()
     {
         legless = true;
-        statusScript.DoCrawl();
+        statusScript.StartCrawl();
 
         ChangeSprite();
     }
