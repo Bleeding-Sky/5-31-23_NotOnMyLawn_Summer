@@ -14,11 +14,13 @@ public class States_Player : ScriptableObject
     public int faceDirection;
     public bool lookingThroughWindow;
     public float inputDirection;
+    public bool isGrappled;
 
     //handled by Input_Holster
     public bool gunIsDrawn;
     public int boardsOnPlayer;
 
     public float playerMobility;
+
    
 }

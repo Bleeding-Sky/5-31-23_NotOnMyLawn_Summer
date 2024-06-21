@@ -668,6 +668,7 @@ GameObject:
   - component: {fileID: 7144671835406309031}
   - component: {fileID: -6568796654622105249}
   - component: {fileID: 8508984866088338618}
+  - component: {fileID: 1385915692683695054}
   m_Layer: 9
   m_Name: Basic Zombie (Indoor)
   m_TagString: Zombie
@@ -863,9 +864,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 1
   coolDown: 1
-  windUp: 0.25
+  windUp: 0.2
   moveSpeed: 1
-  attackArea: -0.19
+  attackArea: 0.75
   Player:
     serializedVersion: 2
     m_Bits: 64
@@ -876,15 +877,13 @@ MonoBehaviour:
   enragedSpeed: 2.5
   crawlMoveSpeed: 0.5
   playerPosition: {fileID: 11400000, guid: 7d509ac04ffcf3a4c9682f0dc1339a34, type: 2}
+  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
   statusScript: {fileID: 0}
+  stateScript: {fileID: 0}
   roomTrackingScript: {fileID: 0}
   attackPoint: {fileID: 1465280503353298584}
   zombiePosition: {x: 0, y: 0, z: 0}
-  players: []
   recharging: 0
-  playerInRange: 0
-  playerInRoom: 0
-  scaleFloat: 0
 --- !u!114 &-6568796654622105249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,6 +920,28 @@ MonoBehaviour:
   bloodDecals:
   - {fileID: 1881140930268621276, guid: 47f80b6c34f477f4ebfc20ce11f1b034, type: 3}
   indoorEnvironmentParentObject: {fileID: 0}
+--- !u!114 &1385915692683695054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634217409129547592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14af4667c89c21d4d8c8545a37f20720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  enemyState: 0
+  behaviorScript: {fileID: 0}
+  tracker: {fileID: 0}
+  Player:
+    serializedVersion: 2
+    m_Bits: 64
+  playerInRange: 0
+  playerInRoom: 0
+  grapplingPlayer: 0
 --- !u!1 &8199436539880114859
 GameObject:
   m_ObjectHideFlags: 0

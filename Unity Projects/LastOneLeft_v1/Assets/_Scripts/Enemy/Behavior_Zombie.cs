@@ -22,21 +22,18 @@ public class Behavior_Zombie : MonoBehaviour
 
     [Header("DEBUG")]
     public PositionTracker_Player playerPosition;
+    public States_Player playerStates;
     public Status_Zombie statusScript;
+    public IndoorStates_Enemy stateScript;
     public RoomTracking_Zombie roomTrackingScript;
     public Transform attackPoint;
     public Vector3 zombiePosition;
-    public Collider2D[] players;
     public bool recharging;
-    public bool playerInRange;
-    public bool playerInRoom;
-
-    public float scaleFloat;
 
     private void Start()
     {
-        scaleFloat = transform.localScale.x;
         statusScript = GetComponentInParent<Status_Zombie>();
+        stateScript = GetComponent<IndoorStates_Enemy>();
         roomTrackingScript = GetComponent<RoomTracking_Zombie>();
     }
 
@@ -45,32 +42,11 @@ public class Behavior_Zombie : MonoBehaviour
     {
         //set speed before moving
         UpdateSpeedBasedOnStatus();
-
         zombiePosition = transform.position;
-        DetectPlayer();
-        DetermineState();
-
-        playerInRoom = !roomTrackingScript.findPlayer;
         DetermineAction();
-        
     }
 
-    /// <summary>
-    /// Chooses the direction is facing based on the player's relative position to the zombie
-    /// </summary>
-    private void FacingDirection()
-    {
-        float playerDirection = playerPosition.playerPosition.x - zombiePosition.x;
-        if (playerDirection > 0)
-        {
-            transform.localScale = new Vector3(scaleFloat, transform.localScale.y, transform.localScale.z);
-        }
-        else if (playerDirection <= 0)
-        {
-            transform.localScale = new Vector3(-scaleFloat, transform.localScale.y, transform.localScale.z);
-        }
-    }
-
+    #region Enemy Actions
     /// <summary>
     /// Chases the player through zombie speed and player position
     /// </summary>
@@ -80,6 +56,20 @@ public class Behavior_Zombie : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x,0,0), moveSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Chases the player through zombie speed and player position
+    /// </summary>
+    public void PreAttackChasingPlayer()
+    {
+        statusScript.DoChase();
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x, 0, 0), (moveSpeed) * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Enabled when the player is not in the same room as the enemy
+    /// it will take the closest room from the tracking script and 
+    /// lead the zombie to the player through the door system
+    /// </summary>
     private void TrackingPlayer()
     {
         statusScript.DoTrack();
@@ -89,6 +79,102 @@ public class Behavior_Zombie : MonoBehaviour
         }
     }
 
+    #region Attack Actions
+    /// <summary>
+    /// Starts the Attack 
+    /// </summary>
+    public void InitiateAttack()
+    {
+        //Starts an attack for all of the players in range of the attack
+        //Aka just the single player but you never know amirite
+        foreach (Collider2D player in stateScript.players)
+        {
+            StartCoroutine(WindUp(player));
+        }
+    }
+
+    /// <summary>
+    /// Winds up for an attack based on a timer
+    /// gives the playter a slight chance to dodge an attack if the player is near
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    public IEnumerator WindUp(Collider2D player)
+    {
+        stateScript.preAttackChasing = true;
+        recharging = true;
+        yield return new WaitForSeconds(windUp);
+        stateScript.preAttackChasing = false;
+        //Used to determine the distance from the player to zombie at the time of the attack
+        float distanceFromPlayer = Mathf.Abs(transform.position.x - player.transform.position.x);
+        float grappleDistance = attackArea / 1.5f;
+        //Detertmine if the enemy will commit to the attack or switch to a grapple
+        if (distanceFromPlayer <= grappleDistance)
+        {
+            stateScript.grapplingPlayer = true;
+            recharging = false;
+        }
+        else
+        {
+            StartCoroutine(Attack(player));
+        }
+            
+    }
+
+    public void InitiateGrapple()
+    {
+        
+        foreach (Collider2D player in stateScript.players)
+        {
+            StartCoroutine(Grapple(player));
+        }
+
+        if (stateScript.playerInRange != true)
+        {
+            stateScript.grapplingPlayer = false;
+            playerStates.isGrappled = false;
+        }
+    }
+
+    public IEnumerator Grapple(Collider2D player)
+    {
+        Debug.Log("Grapple");
+        recharging = true;
+        if(stateScript.playerInRange == true)
+        {
+            //Gets the health script of the nearest player and decreases it
+            HealthManager_Player playerHealth = player.GetComponent<HealthManager_Player>();
+            playerHealth.DecreaseHealth(2);
+            playerStates.isGrappled = true; 
+        }
+       
+        yield return new WaitForSeconds(.2f);
+        recharging = false;
+    }
+    /// <summary>
+    /// Attacks once the wind up is over
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    public IEnumerator Attack(Collider2D player)
+    {
+        Debug.Log("Slash Attack");
+        if (stateScript.playerInRange == true)
+        {
+            //Gets the health script of the nearest player and decreases it
+            HealthManager_Player playerHealth = player.GetComponent<HealthManager_Player>();
+            playerHealth.DecreaseHealth(10);
+
+        }
+        yield return new WaitForSeconds(coolDown);
+        recharging = false;
+        
+    }
+
+
+    #endregion
+    #endregion
+    #region Gizmos
     /// <summary>
     /// Draws the attack area so that it is visible
     /// </summary>
@@ -99,110 +185,32 @@ public class Behavior_Zombie : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackArea);
     }
-
-    /// <summary>
-    /// Starts the Attack 
-    /// </summary>
-    public void InitiateAttack()
-    {
-        foreach (Collider2D player in players)
-        {
-            StartCoroutine(WindUp(player));
-        }
-    }
-
-    /// <summary>
-    /// Attacks once the wind up is over
-    /// </summary>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    public IEnumerator Attack(Collider2D player)
-    {
-        if (playerInRange == true)
-        {
-            Debug.Log("attacking");
-
-        }
-        yield return new WaitForSeconds(coolDown);
-        recharging = false;
-    }
-
-    /// <summary>
-    /// Winds up for an attack
-    /// </summary>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    public IEnumerator WindUp(Collider2D player)
-    {
-        recharging = true;
-        yield return new WaitForSeconds(windUp);
-        StartCoroutine(Attack(player));
-    }
-
+    #endregion
+    #region State Handlers
     public void DetermineAction()
     {
-        if (statusScript.isChasing && !recharging)
+        if(!recharging)
         {
-            ChasingPlayer();
-            FacingDirection();
-        }
-        else if (statusScript.isAttacking && !recharging)
-        {
-            InitiateAttack();
-        }
-        else if(statusScript.isTracking && !recharging)
-        {
-            TrackingPlayer();
-        }
-    }
-
-    /// <summary>
-    /// Determines what the zombie is currently doing
-    /// </summary>
-    public void DetermineState()
-    {
-        
-        if (!playerInRange && !recharging && playerInRoom)
-        {
-            statusScript.DoChase();
-            statusScript.StopAttack();
-            statusScript.StopTrack();
-        }
-        else if(!playerInRange && !recharging && !playerInRoom)
-        {
-            statusScript.StopChase();
-            statusScript.StopAttack();
-            statusScript.DoTrack();
-        }
-        else if (playerInRange && playerInRoom)
-        {
-            statusScript.DoAttack();
-            statusScript.StopChase();
-            statusScript.StopTrack();
+            switch(stateScript.enemyState)
+            {
+                case IndoorStates_Enemy.EnemyStates.Chase:
+                    ChasingPlayer();
+                    break;
+                case IndoorStates_Enemy.EnemyStates.Tracking:
+                    TrackingPlayer();
+                    break;
+                case IndoorStates_Enemy.EnemyStates.Attack:
+                    InitiateAttack();
+                    break;
+                case IndoorStates_Enemy.EnemyStates.Grappling:
+                    InitiateGrapple();
+                    break;
+                case IndoorStates_Enemy.EnemyStates.Idle:
+                    break;
+            }
         }
     }
-
-    /// <summary>
-    /// Detects if the player is in the attack range of the player
-    /// </summary>
-    public void DetectPlayer()
-    {
-        players = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackArea, Player);
-        int count = 0;
-        foreach (Collider2D player in players)
-        {
-            count++;
-        }
-        if (count > 0)
-        {
-            playerInRange = true;
-        }
-        else
-        {
-            playerInRange = false;
-        }
-    }
-
+    
     /// <summary>
     /// reads the current state of the zombie and changes speed to appropriate variable
     /// </summary>
@@ -247,5 +255,6 @@ public class Behavior_Zombie : MonoBehaviour
         }
         moveSpeed = currentSpeed;
     }
+    #endregion
 
 }
