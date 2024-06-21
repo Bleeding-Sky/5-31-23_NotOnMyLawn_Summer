@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Debugger_Zombie : MonoBehaviour
 {
+    /*
     [SerializeField] Health_Zombie health;
     [SerializeField] Status_Zombie status;
     [SerializeField] LimbLoss_Zombie limbloss;
@@ -19,7 +20,9 @@ public class Debugger_Zombie : MonoBehaviour
     [SerializeField] float bulletArmoredDamageMultiplier = 1;
     [SerializeField] float bulletWeakDamageMultiplier = 0.5f;
 
+    
     #region Damage
+    
     [ContextMenu("True Damage")]
     void TakeDamage()
     {
@@ -141,13 +144,12 @@ public class Debugger_Zombie : MonoBehaviour
     {
         status.StartEnraging();
     }
-    /*
+
     [ContextMenu("Stop Enrage")]
     void StopEnrage()
     {
         status.StopEnrage();
     }
-    */
 
     [ContextMenu("Do Crawl")]
     void DoCrawl()
@@ -160,7 +162,6 @@ public class Debugger_Zombie : MonoBehaviour
     {
         status.StopCrawl();
     }
-    */
     #endregion
 
     #region Limb Breaks
@@ -183,7 +184,6 @@ public class Debugger_Zombie : MonoBehaviour
     {
         limbloss.AttemptLegBreak();
     }
-    */
 
     [ContextMenu("Break Head")]
     void BreakHead()
@@ -205,4 +205,5 @@ public class Debugger_Zombie : MonoBehaviour
 
     #endregion
 
+    */
 }

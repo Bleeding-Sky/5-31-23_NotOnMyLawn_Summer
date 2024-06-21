@@ -15,38 +15,46 @@ public class HitboxChanger_Zombie : MonoBehaviour
     public GameObject crawlingHitboxObject;
     public GameObject crawlingHeadHitboxObject;
 
+    [Header("DEBUG")]
+    [SerializeField] Status_Zombie parentStatusScript;
+
+    private void Start()
+    {
+        parentStatusScript = GetComponentInParent<Status_Zombie>();
+    }
+
     /// <summary>
     /// changes an object's hitbox to the specified type
     /// </summary>
     /// <param name="hitboxType"></param>
-    public void ChangeHitbox(bool isHeadless, bool isLegless)
+    public void ChangeHitbox(LimbCondition headCondition, LimbCondition legCondition)
     {
         GameObject currentHeadObject = null;
 
         //set body hitbox and save correct head hitbox
-        if (isLegless)
+        if (legCondition == LimbCondition.Broken)
         {
             ActivateCrawlingHitbox();
             currentHeadObject = crawlingHeadHitboxObject;
         }
-        else if (!isLegless)
+        else if (legCondition == LimbCondition.Intact)
         {
             ActivateStandingHitbox();
             currentHeadObject = standingHeadHitboxObject;
         }
 
         //set head hitbox to be active/inactive based on bool
-        UpdateHeadHitbox(isHeadless, currentHeadObject);
+        UpdateHeadHitbox(headCondition, currentHeadObject);
 
     }
 
-    private static void UpdateHeadHitbox(bool isHeadless, GameObject currentHeadObject)
+    private static void UpdateHeadHitbox(LimbCondition headCondition, GameObject currentHeadObject)
     {
-        if (isHeadless)
+        if (headCondition == LimbCondition.Broken)
         {
             currentHeadObject.SetActive(false);
         }
-        else if (!isHeadless)
+        else if (headCondition == LimbCondition.Intact)
         {
             currentHeadObject.SetActive(true);
         }

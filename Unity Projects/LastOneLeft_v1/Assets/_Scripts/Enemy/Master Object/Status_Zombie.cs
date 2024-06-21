@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 [RequireComponent(typeof(LimbAnimController))]
@@ -53,87 +54,88 @@ public class Status_Zombie : MonoBehaviour
     /// <param name="newCondition"></param>
     public void ChangeLimbCondition(FodderLimb limb, LimbCondition newCondition)
     {
+
         switch (limb)
         {
             case FodderLimb.Head:
                 headCondition = newCondition;
-            break;
+                break;
 
             case FodderLimb.LArm:
                 LArmCondition = newCondition;
-            break;
+                break;
 
             case FodderLimb.RArm:
                 RArmCondition = newCondition;
-            break;
+                break;
 
             case FodderLimb.Legs:
                 legsCondition = newCondition;
-            break;
+                break;
         }
 
     }
 
-    //attempts to apply appropriate statuses based on current zombie state and incoming damage region
+    //attempts to apply appropriate statuses based on current zombie state and incoming damage region.
+    //if zombie's legs are broken, no status will be applied
     #region Incoming Damage Processors
 
     public void ProcessCritHit(float statusModifier)
     {
-        if (legsCondition != LimbCondition.Broken)
+        if (legsCondition == LimbCondition.Broken) { return; }
+
+        //ensure prerequisite state is active, then attempt state change
+        if (currentStatus == FodderStatus.Idle)
         {
-            //ensure prerequisite state is active, then attempt state change
-            if (currentStatus == FodderStatus.Idle)
-            {
-                AttemptStun(DmgRegionEnum.Crit, statusModifier);
-            }
-            else if (currentStatus == FodderStatus.Stunned)
-            {
-                AttemptFallBackward(DmgRegionEnum.Crit, statusModifier);
-            }
+            AttemptStun(DmgRegionEnum.Crit, statusModifier);
+        }
+        else if (currentStatus == FodderStatus.Stunned)
+        {
+            AttemptFallBackward(DmgRegionEnum.Crit, statusModifier);
         }
     }
 
     public void ProcessArmoredHit(float statusModifier)
     {
-        if (legsCondition != LimbCondition.Broken)
-        {
-            //ensure prerequisite state is active
-            if (currentStatus == FodderStatus.Idle)
-            {
-                //attempt proper state change
-                AttemptStun(DmgRegionEnum.Armored, statusModifier);
+        if (legsCondition == LimbCondition.Broken) { return; }
 
-            }
-            else if (currentStatus == FodderStatus.Stunned)
-            {
-                AttemptFallBackward(DmgRegionEnum.Armored, statusModifier);
-            }
+        //ensure prerequisite state is active
+        if (currentStatus == FodderStatus.Idle)
+        {
+            //attempt proper state change
+            AttemptStun(DmgRegionEnum.Armored, statusModifier);
+
         }
+        else if (currentStatus == FodderStatus.Stunned)
+        {
+            AttemptFallBackward(DmgRegionEnum.Armored, statusModifier);
+        }
+
     }
 
     public void ProcessWeakHit(float statusModifier)
     {
+        if (legsCondition == LimbCondition.Broken) { return; }
+
         //if zombie has no status, attempt a stumble
         //if zombie is stumbling, attempt a fall forward
         //if zombie is stunned and recieves leg damage, attempt a stumble
 
-        if (legsCondition != LimbCondition.Broken)
+        //ensure prerequisite state is active
+        if (currentStatus == FodderStatus.Idle)
         {
-            //ensure prerequisite state is active
-            if (currentStatus == FodderStatus.Idle)
-            {
-                //attempt proper state change
-                AttemptStumble(statusModifier);
-            }
-            else if (currentStatus == FodderStatus.Stumbling)
-            {
-                AttemptFallForward(statusModifier);
-            }
-            else if (currentStatus == FodderStatus.Stunned)
-            {
-                AttemptStumble(statusModifier);
-            }
+            //attempt proper state change
+            AttemptStumble(statusModifier);
         }
+        else if (currentStatus == FodderStatus.Stumbling)
+        {
+            AttemptFallForward(statusModifier);
+        }
+        else if (currentStatus == FodderStatus.Stunned)
+        {
+            AttemptStumble(statusModifier);
+        }
+
     }
 
     #endregion
@@ -147,7 +149,7 @@ public class Status_Zombie : MonoBehaviour
     {
         if (RNGRolls_System.RollUnder(stumbleChance * statusModifier))
         {
-            DoStumble(); 
+            DoStumble();
             if (printDebugMessages) { Debug.Log("Stumble Sucess"); }
         }
         else
@@ -177,7 +179,7 @@ public class Status_Zombie : MonoBehaviour
 
         if (RNGRolls_System.RollUnder(successCutoff * statusModifier))
         {
-            DoStun(); 
+            DoStun();
             if (printDebugMessages) { Debug.Log("Stun Success"); }
         }
         else
@@ -192,7 +194,7 @@ public class Status_Zombie : MonoBehaviour
     public void AttemptFallForward(float statusModifier)
     {
         if (RNGRolls_System.RollUnder(fallForwardChance * statusModifier))
-        { 
+        {
             FallForward();
             if (printDebugMessages) { Debug.Log("Fall Forward Success"); }
         }
@@ -221,7 +223,7 @@ public class Status_Zombie : MonoBehaviour
         else
         { Debug.Log("Error detected in AttemptFallBackward damagedRegion argument"); }
 
-        if (RNGRolls_System.RollUnder(successCutoff * statusModifier)) 
+        if (RNGRolls_System.RollUnder(successCutoff * statusModifier))
         {
             FallBackward();
             if (printDebugMessages) { Debug.Log("Fall Backward Success"); }
@@ -233,27 +235,41 @@ public class Status_Zombie : MonoBehaviour
     }
     #endregion
 
-    void PlayAnimationOnLimbs()
+    public void PlayAnimationOnLimbs()
     {
-        myLimbAnimController.PlayAnimation(currentStatus);
+        myLimbAnimController.ChangeAnimationState(currentStatus, headCondition, LArmCondition, RArmCondition, legsCondition);
     }
 
-    void ChangeStatus(FodderStatus newStatus)
-    {
-
-    }
-
-    //applies a status by flipping a bool and initializing its duration value
+    //applies a status  if its prerequisite status is met.
+    //also triggers animations on every status change.
     #region "do status" methods
+
+    public void BecomeIdle()
+    {
+        if (    currentStatus == FodderStatus.Stunned
+            ||  currentStatus == FodderStatus.Stumbling
+            ||  currentStatus == FodderStatus.PushUpRecover
+            ||  currentStatus == FodderStatus.SitUpRecover)
+        {
+            currentStatus = FodderStatus.Idle;
+
+            PlayAnimationOnLimbs();
+        }
+    }
+
     /// <summary>
-    /// applies the stumble status
+    /// applies the stumble status 
     /// </summary>
     public void DoStumble()
     {
-        currentStatus = FodderStatus.Stumbling;
-        Invoke(nameof(StopStumble), stumbleDuration);
-        PlayAnimationOnLimbs();
-        
+        if (currentStatus == FodderStatus.Idle
+            || currentStatus == FodderStatus.Enraged)
+        {
+            currentStatus = FodderStatus.Stumbling;
+            Invoke(nameof(BecomeIdle), stumbleDuration);
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     /// <summary>
@@ -261,9 +277,13 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void DoStun()
     {
-        currentStatus = FodderStatus.Stunned;
-        Invoke(nameof(StopStun), stunDuration);
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.Idle)
+        {
+            currentStatus = FodderStatus.Stunned;
+            Invoke(nameof(BecomeIdle), stunDuration);
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     /// <summary>
@@ -272,8 +292,12 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void FallForward()
     {
-        currentStatus = FodderStatus.FallingForward;
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.Stumbling)
+        {
+            currentStatus = FodderStatus.FallingForward;
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     /// <summary>
@@ -281,10 +305,13 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StartFallenFaceDownStatus()
     {
-        currentStatus = FodderStatus.FallenFaceDown;
-        Invoke(nameof(StartPushUpRecover), fallenDuration);
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.FallingForward)
+        {
+            currentStatus = FodderStatus.FallenFaceDown;
+            Invoke(nameof(StartPushUpRecover), fallenDuration);
 
+            PlayAnimationOnLimbs();
+        }
     }
 
     /// <summary>
@@ -293,8 +320,12 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StartPushUpRecover()
     {
-        currentStatus = FodderStatus.PushUpRecover;
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.FallenFaceDown)
+        {
+            currentStatus = FodderStatus.PushUpRecover;
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     /// <summary>
@@ -303,15 +334,23 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void FallBackward()
     {
-        currentStatus = FodderStatus.FallingBackward;
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.Stunned)
+        {
+            currentStatus = FodderStatus.FallingBackward;
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     public void StartFallenFaceUpStatus()
     {
-        currentStatus = FodderStatus.FallenFaceUp;
-        Invoke(nameof(SitUpRecover), fallenDuration);
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.FallingBackward)
+        {
+            currentStatus = FodderStatus.FallenFaceUp;
+            Invoke(nameof(SitUpRecover), fallenDuration);
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     /// <summary>
@@ -320,27 +359,40 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void SitUpRecover()
     {
-        currentStatus = FodderStatus.SitUpRecover;
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.FallenFaceUp)
+        {
+            currentStatus = FodderStatus.SitUpRecover;
+
+            PlayAnimationOnLimbs();
+        }
     }
 
 
     public void StartEnraging()
     {
-        currentStatus = FodderStatus.Enraging;
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.Stunned)
+        {
+            currentStatus = FodderStatus.Enraging;
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     public void BecomeEnraged()
     {
-        currentStatus = FodderStatus.Enraged;
-        Invoke(nameof(DoStumble), enrageDuration);
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.Enraging)
+        {
+            currentStatus = FodderStatus.Enraged;
+            Invoke(nameof(DoStumble), enrageDuration);
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     public void BreakLegs()
     {
         currentStatus = FodderStatus.LegsBreaking;
+
         PlayAnimationOnLimbs();
     }
 
@@ -349,42 +401,15 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StartCrawl()
     {
-        currentStatus = FodderStatus.Crawling;
-        PlayAnimationOnLimbs();
+        if (currentStatus == FodderStatus.LegsBreaking)
+        {
+            currentStatus = FodderStatus.Crawling;
+
+            PlayAnimationOnLimbs();
+        }
     }
 
     #endregion
 
-    //stops a status by changing the state
-    #region "stop status" methods
-
-    /// <summary>
-    /// removes the stumble status
-    /// </summary>
-    public void StopStumble()
-    {
-        currentStatus = FodderStatus.Idle;
-    }
-
-    /// <summary>
-    /// removes the stun status
-    /// </summary>
-    public void StopStun()
-    {
-        currentStatus = FodderStatus.Idle;
-    }
-
-    public void GetUpFromFallForward()
-    {
-        currentStatus = FodderStatus.Idle;
-    }
-
-    public void GetUpFromFallBackward()
-    {
-        currentStatus = FodderStatus.Idle;
-    }
-
-
-    #endregion
 
 }

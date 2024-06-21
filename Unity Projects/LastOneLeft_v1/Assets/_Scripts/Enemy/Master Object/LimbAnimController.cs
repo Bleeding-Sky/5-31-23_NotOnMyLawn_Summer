@@ -6,35 +6,9 @@ using UnityEngine;
 
 public class LimbAnimController : MonoBehaviour
 {
-    [SerializeField] List<Animator> limbAnimators;
+    [Header("DEBUG")]
+    [SerializeField] List<LimbAnimator> limbAnimators;
     [SerializeField] Status_Zombie statusScript;
-
-    //edit these if animation state names are ever changed
-    #region animation state name constants
-    const string idleState = "Idle";
-    const string stumblingState = "Stumbling";
-    const string stunnedState = "Stunned";
-    const string fallingForwardState = "Falling Forward";
-    const string fallenFaceDownState = "Fallen Face Down";
-    const string pushUpRecoverState = "Push Up Recover";
-    const string fallingBackwardState = "Falling Backward";
-    const string fallenFaceUpState = "Fallen Face Up";
-    const string sitUpRecoverState = "Sit Up Recover";
-    const string enragingState = "Enraging";
-    const string enragedState = "Enraged";
-    const string legsBreakingState = "Legs Breaking";
-    const string crawlingState = "Crawling";
-    #endregion
-
-    string[] stateNames = { idleState,
-                            stumblingState, 
-                            stunnedState,
-                            fallingForwardState, fallenFaceDownState, pushUpRecoverState,
-                            fallingBackwardState, fallenFaceUpState, sitUpRecoverState,
-                            enragingState, enragedState,
-                            legsBreakingState, crawlingState};
-
-    [SerializeField] FodderStatus currentStatus;
 
     private void Awake()
     {
@@ -47,51 +21,52 @@ public class LimbAnimController : MonoBehaviour
         FetchLimbAnimators();
     }
 
-    private void Update()
-    {
-        
-    }
-
     /// <summary>
     /// plays an animation on all child limb animators.
     /// if the state is a transition, invokes a delayed method to move to the next state.
     /// </summary>
     /// <param name="status"></param>
-    public void PlayAnimation(FodderStatus status)
+    public void ChangeAnimationState(FodderStatus status,
+                                LimbCondition headCondition,
+                                LimbCondition LArmCondition,
+                                LimbCondition RArmCondition,
+                                LimbCondition legsConsition
+                              )
     {
 
         FetchLimbAnimators();
-        string animStateName = stateNames[((int)status)];
+        //if this^ causes performance issues,move this to other scripts
+        //and make it ONLY trigger when a new view of the enemy is created.
 
-        foreach (Animator animator in limbAnimators)
+        foreach (LimbAnimator limbAnimator in limbAnimators)
         {
-            animator.CrossFade(animStateName, 0, 0);
+            limbAnimator.PlayAnimation(status, headCondition, LArmCondition, RArmCondition, legsConsition);
         }
 
         switch(status)
         {
             case FodderStatus.FallingForward:
-                statusScript.Invoke(nameof(statusScript.StartFallenFaceDownStatus), limbAnimators[0].GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.StartFallenFaceDownStatus), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.PushUpRecover:
-                statusScript.Invoke(nameof(statusScript.StartPushUpRecover), limbAnimators[0].GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.StartPushUpRecover), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.FallingBackward:
-                statusScript.Invoke(nameof(statusScript.StartFallenFaceUpStatus), limbAnimators[0].GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.StartFallenFaceUpStatus), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.SitUpRecover:
-                statusScript.Invoke(nameof(statusScript.StartPushUpRecover), limbAnimators[0].GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.StartPushUpRecover), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.Enraging:
-                statusScript.Invoke(nameof(statusScript.StartEnraging), limbAnimators[0].GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.StartEnraging), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.LegsBreaking:
-                statusScript.Invoke(nameof(statusScript.BreakLegs), limbAnimators[0].GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.BreakLegs), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
         }
 
@@ -102,7 +77,7 @@ public class LimbAnimController : MonoBehaviour
     /// </summary>
     void FetchLimbAnimators()
     {
-        GetComponentsInChildren<Animator>(limbAnimators);
+        GetComponentsInChildren<LimbAnimator>(limbAnimators);
     }
 
 
