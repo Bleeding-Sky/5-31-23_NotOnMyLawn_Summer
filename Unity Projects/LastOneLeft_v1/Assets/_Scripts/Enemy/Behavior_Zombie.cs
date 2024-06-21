@@ -60,7 +60,7 @@ public class Behavior_Zombie : MonoBehaviour
     /// </summary>
     public void PreAttackChasingPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x, 0, 0), (moveSpeed) * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x, 0, 0), (moveSpeed * 2f) * Time.deltaTime);
     }
 
     /// <summary>
@@ -102,30 +102,45 @@ public class Behavior_Zombie : MonoBehaviour
         recharging = true;
         yield return new WaitForSeconds(windUp);
         stateScript.preAttackChasing = false;
-        //Used to determine the distance from the player to zombie at the time of the attack
-        float distanceFromPlayer = Mathf.Abs(transform.position.x - player.transform.position.x);
-        float grappleDistance = attackArea / 1.5f;
-        //Detertmine if the enemy will commit to the attack or switch to a grapple
-        if (distanceFromPlayer <= grappleDistance)
+        //Checks to make sure that the player is not already grappling the player in case
+        //the player runs into the zombie before the wind up is done
+        if (!stateScript.grapplingPlayer)
         {
-            stateScript.grapplingPlayer = true;
-            recharging = false;
+            //Used to determine the distance from the player to zombie at the time of the attack
+            float distanceFromPlayer = Mathf.Abs(transform.position.x - player.transform.position.x);
+            float grappleDistance = attackArea / 1.5f;
+            //Detertmine if the enemy will commit to the attack or switch to a grapple
+            if (distanceFromPlayer <= grappleDistance)
+            {
+                stateScript.grapplingPlayer = true;
+                recharging = false;
+            }
+            else
+            {
+                StartCoroutine(Attack(player));
+            }
         }
         else
         {
-            StartCoroutine(Attack(player));
+            //Resets the recharging as the player is not longer
+            //looking to attack or grapple as he is already in 
+            recharging = false;
         }
             
     }
 
+    /// <summary>
+    /// Starts the grapple procees by taking the players collider and processing it to the Grapple method
+    /// </summary>
     public void InitiateGrapple()
     {
-        
+        //Get the players collider and pass to the grapple method
         foreach (Collider2D player in stateScript.players)
         {
             StartCoroutine(Grapple(player));
         }
 
+        //Checks for if the player is still in grapple range if not stops grappling
         if (stateScript.playerInRange != true)
         {
             stateScript.grapplingPlayer = false;
@@ -133,9 +148,14 @@ public class Behavior_Zombie : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Grapple the player and decreases health with a slight delay 
+    /// in order to make sure damage isnt chipped away to quickly
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
     public IEnumerator Grapple(Collider2D player)
     {
-        Debug.Log("Grapple");
         recharging = true;
         if(stateScript.playerInRange == true)
         {
@@ -148,6 +168,7 @@ public class Behavior_Zombie : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         recharging = false;
     }
+    
     /// <summary>
     /// Attacks once the wind up is over
     /// </summary>

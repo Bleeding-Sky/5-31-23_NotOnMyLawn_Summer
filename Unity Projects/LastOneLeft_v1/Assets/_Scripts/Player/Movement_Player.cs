@@ -22,6 +22,7 @@ public class Movement_Player : MonoBehaviour
     void Start()
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
+        playerStates.isGrappled = false;
     }
 
     // Update is called once per frame

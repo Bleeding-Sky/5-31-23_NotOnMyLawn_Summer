@@ -76,6 +76,7 @@ public class IndoorStates_Enemy : MonoBehaviour
         foreach (Collider2D player in players)
         {
             count++;
+            DetectGrappleRange(player);
         }
 
         if (count > 0)
@@ -85,6 +86,24 @@ public class IndoorStates_Enemy : MonoBehaviour
         else
         {
             playerInRange = false;
+        }
+    }
+
+    /// <summary>
+    /// Checks for if the player is touching the zombie which will invoke the grappling immediately
+    /// </summary>
+    /// <param name="player"></param>
+    private void DetectGrappleRange(Collider2D player)
+    {
+        //Get the dsistance of the zombie from the player and compares it to the 
+        //grapple distance in order to determine if the player should be grapplled 
+        float distanceFromPlayer = Mathf.Abs(transform.position.x - player.transform.position.x);
+        float grappleDistance = behaviorScript.attackArea / 10f;
+
+        if(distanceFromPlayer <= grappleDistance)
+        {
+            grapplingPlayer = true;
+            Debug.Log("Grappling");
         }
     }
     #endregion
