@@ -8,11 +8,6 @@ public class LimbLoss_Zombie : MonoBehaviour
 {
 
     [Header("CONFIG")]
-    //chance out of 100 that the limb will break when it takes damage at 0 limb health
-    //[SerializeField] float armLossChance = 20;
-    //[SerializeField] float bothArmsLossChance = 50;
-    //[SerializeField] float legBreakChance = 60;
-    //[SerializeField] float headBreakChance = 50;
     [SerializeField] float highHealthHeadBreakEndureChance = 70;
     [SerializeField] float lowHealthHeadBreakEndureChance = 50;
 
@@ -152,7 +147,7 @@ public class LimbLoss_Zombie : MonoBehaviour
     public void BreakLegs()
     {
         BreakLimb(FodderLimb.Legs);
-        statusScript.StartCrawl();
+        statusScript.BreakLegs();
     }
     #endregion
 

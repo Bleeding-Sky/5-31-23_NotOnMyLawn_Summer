@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Status_Zombie), typeof(Health_Zombie), typeof (SpriteController_Zombie))]
+[RequireComponent(typeof(Status_Zombie), typeof(Health_Zombie))]
 
 /// <summary>
 /// placed on zombie master object. destroys outdoor views of the zombie when it reaches a window
@@ -24,15 +24,6 @@ public class EnterBuilding_Zombie : MonoBehaviour
     public float enterBuildingTimeRemaining;
 
     public CameraManagement cameraManagerScript; //set w/ persistent scriptable object
-
-    //sprite controller reference needed so that the sprites on the new indoor zombie can be synced
-    [SerializeField] SpriteController_Zombie spriteControllerScript;
-
-    private void Awake()
-    {
-        spriteControllerScript = GetComponent<SpriteController_Zombie>();
-    }
-
 
 
     private void Update()
@@ -125,8 +116,6 @@ public class EnterBuilding_Zombie : MonoBehaviour
         //set zmb pos to the pos of the window inside, like it crawled thru
         newIndoorZombie.transform.position = new Vector3(indoorWindowTransform.position.x, 0, 0);
 
-        //refreshes the sprite controller so the indoor zombie can have correct sprites
-        spriteControllerScript.Refresh();
 
         isEnteringBuilding = false;
     }

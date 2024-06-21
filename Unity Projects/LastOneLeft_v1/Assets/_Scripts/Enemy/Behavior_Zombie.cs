@@ -52,7 +52,6 @@ public class Behavior_Zombie : MonoBehaviour
     /// </summary>
     private void ChasingPlayer()
     {
-        statusScript.DoChase();
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x,0,0), moveSpeed * Time.deltaTime);
     }
 
@@ -61,7 +60,6 @@ public class Behavior_Zombie : MonoBehaviour
     /// </summary>
     public void PreAttackChasingPlayer()
     {
-        statusScript.DoChase();
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.playerPosition.x, 0, 0), (moveSpeed) * Time.deltaTime);
     }
 
@@ -72,7 +70,6 @@ public class Behavior_Zombie : MonoBehaviour
     /// </summary>
     private void TrackingPlayer()
     {
-        statusScript.DoTrack();
         if (roomTrackingScript.doorGoal != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(roomTrackingScript.doorGoal.transform.position.x, 0, 0), moveSpeed * Time.deltaTime);
@@ -219,14 +216,14 @@ public class Behavior_Zombie : MonoBehaviour
         float currentSpeed = 0;
 
         //crawling overrides all other states
-        if (statusScript.status == FodderStatus.Crawling)
+        if (statusScript.currentStatus == FodderStatus.Crawling)
         {
             currentSpeed = crawlMoveSpeed;
         }
         else
         {
             //change move speed based on current state
-            switch (statusScript.status)
+            switch (statusScript.currentStatus)
             {
                 case FodderStatus.Idle:
                     currentSpeed = normalSpeed;

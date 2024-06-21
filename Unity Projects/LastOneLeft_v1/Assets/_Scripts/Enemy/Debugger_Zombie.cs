@@ -103,7 +103,7 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Do Fall Forward")]
     void DoFallForward()
     {
-        status.StartFallForward();
+        status.FallForward();
     }
 
     [ContextMenu("Stop Fall Forward")]
@@ -127,7 +127,7 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Do Fall Backward")]
     void DoFallBackward()
     {
-        status.StartFallBackward();
+        status.FallBackward();
     }
 
     [ContextMenu("Stop Fall Backward")]
@@ -139,27 +139,28 @@ public class Debugger_Zombie : MonoBehaviour
     [ContextMenu("Do Enrage")]
     void DoEnrage()
     {
-        status.StartEnrage();
+        status.StartEnraging();
     }
-
+    /*
     [ContextMenu("Stop Enrage")]
     void StopEnrage()
     {
         status.StopEnrage();
     }
+    */
 
     [ContextMenu("Do Crawl")]
     void DoCrawl()
     {
         status.StartCrawl();
     }
-
+    /*
     [ContextMenu("Stop Crawl")]
     void StopCrawl()
     {
         status.StopCrawl();
     }
-
+    */
     #endregion
 
     #region Limb Breaks

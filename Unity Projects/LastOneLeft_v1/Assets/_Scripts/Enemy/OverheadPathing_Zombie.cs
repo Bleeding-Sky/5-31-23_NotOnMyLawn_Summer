@@ -55,14 +55,14 @@ public class OverheadPathing_Zombie : MonoBehaviour
         float currentSpeed = 0;
 
         //crawling overrides all other states
-        if (statusScript.status == FodderStatus.Crawling)
+        if (statusScript.currentStatus == FodderStatus.Crawling)
         {
             currentSpeed = crawlMoveSpeed;
         }
         else
         {
             //change move speed based on current state
-            switch (statusScript.status)
+            switch (statusScript.currentStatus)
             {
                 case FodderStatus.Idle:
                     currentSpeed = normalSpeed;

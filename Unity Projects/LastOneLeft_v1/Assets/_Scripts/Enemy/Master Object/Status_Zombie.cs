@@ -32,80 +32,19 @@ public class Status_Zombie : MonoBehaviour
 
     //statuses
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
-    public FodderStatus status = FodderStatus.Idle;
+    public FodderStatus currentStatus = FodderStatus.Idle;
 
     [SerializeField] LimbCondition headCondition = LimbCondition.Intact;
     public LimbCondition LArmCondition = LimbCondition.Intact;
     public LimbCondition RArmCondition = LimbCondition.Intact;
     [SerializeField] LimbCondition legsCondition = LimbCondition.Intact;
 
-    public bool isCrawling = false;
-    public bool isAttacking = false;
-    public bool isChasing = false;
-    public bool isTracking = false;
-
-    [SerializeField] float stumbleTimeRemaining;
-    [SerializeField] float stunTimeRemaining;
-    [SerializeField] float fallenTimeRemaining;
-    [SerializeField] float enrageTimeRemaining;
 
     private void Awake()
     {
         myLimbAnimController = GetComponent<LimbAnimController>();
     }
 
-    private void Update()
-    {
-        //checks if status is active, then decrements its timer and checks if it == 0 and should end
-        //doesnt update if zombie is crawling because crawling takes priority over all statuses
-        if (!isCrawling) { UpdateStandingStatusTimers(); }
-
-
-    }
-
-    /// <summary>
-    /// decrements the currently active status effect & removes it when the timer hits 0
-    /// </summary>
-    private void UpdateStandingStatusTimers()
-    {
-        if (status == FodderStatus.Stumbling)
-        {
-            stumbleTimeRemaining -= Time.deltaTime;
-            if (stumbleTimeRemaining <= 0)
-            {
-                StopStumble();
-            }
-        }
-
-        if (status == FodderStatus.Stunned)
-        {
-            stunTimeRemaining -= Time.deltaTime;
-            if (stunTimeRemaining <= 0)
-            {
-                StopStun();
-            }
-        }
-
-        if (status == FodderStatus.FallenFaceDown ||
-            status == FodderStatus.FallenFaceUp)
-        {
-            fallenTimeRemaining -= Time.deltaTime;
-            if (fallenTimeRemaining <= 0)
-            {
-                if (status == FodderStatus.FallenFaceDown) { GetUpFromFallForward(); }
-                else if (status == FodderStatus.FallenFaceUp) { GetUpFromFallBackward(); }
-            }
-        }
-
-        if (status == FodderStatus.Enraged)
-        {
-            enrageTimeRemaining -= Time.deltaTime;
-            if (enrageTimeRemaining <= 0)
-            {
-                StopEnrage();
-            }
-        }
-    }
 
     /// <summary>
     /// updates a limb's condition
@@ -140,29 +79,35 @@ public class Status_Zombie : MonoBehaviour
 
     public void ProcessCritHit(float statusModifier)
     {
-        //ensure prerequisite state is active, then attempt state change
-        if (status == FodderStatus.Idle)
+        if (legsCondition != LimbCondition.Broken)
         {
-            AttemptStun(DmgRegionEnum.Crit, statusModifier);
-        }
-        else if (status == FodderStatus.Stunned)
-        {
-            AttemptFallBackward(DmgRegionEnum.Crit, statusModifier);
+            //ensure prerequisite state is active, then attempt state change
+            if (currentStatus == FodderStatus.Idle)
+            {
+                AttemptStun(DmgRegionEnum.Crit, statusModifier);
+            }
+            else if (currentStatus == FodderStatus.Stunned)
+            {
+                AttemptFallBackward(DmgRegionEnum.Crit, statusModifier);
+            }
         }
     }
 
     public void ProcessArmoredHit(float statusModifier)
     {
-        //ensure prerequisite state is active
-        if (status == FodderStatus.Idle)
+        if (legsCondition != LimbCondition.Broken)
         {
-            //attempt proper state change
-            AttemptStun(DmgRegionEnum.Armored, statusModifier);
+            //ensure prerequisite state is active
+            if (currentStatus == FodderStatus.Idle)
+            {
+                //attempt proper state change
+                AttemptStun(DmgRegionEnum.Armored, statusModifier);
 
-        }
-        else if (status == FodderStatus.Stunned)
-        {
-            AttemptFallBackward(DmgRegionEnum.Armored, statusModifier);
+            }
+            else if (currentStatus == FodderStatus.Stunned)
+            {
+                AttemptFallBackward(DmgRegionEnum.Armored, statusModifier);
+            }
         }
     }
 
@@ -172,19 +117,22 @@ public class Status_Zombie : MonoBehaviour
         //if zombie is stumbling, attempt a fall forward
         //if zombie is stunned and recieves leg damage, attempt a stumble
 
-        //ensure prerequisite state is active
-        if (status == FodderStatus.Idle)
+        if (legsCondition != LimbCondition.Broken)
         {
-            //attempt proper state change
-            AttemptStumble(statusModifier);
-        }
-        else if (status == FodderStatus.Stumbling)
-        {
-            AttemptFallForward(statusModifier);
-        }
-        else if (status == FodderStatus.Stunned)
-        {
-            AttemptStumble(statusModifier);
+            //ensure prerequisite state is active
+            if (currentStatus == FodderStatus.Idle)
+            {
+                //attempt proper state change
+                AttemptStumble(statusModifier);
+            }
+            else if (currentStatus == FodderStatus.Stumbling)
+            {
+                AttemptFallForward(statusModifier);
+            }
+            else if (currentStatus == FodderStatus.Stunned)
+            {
+                AttemptStumble(statusModifier);
+            }
         }
     }
 
@@ -245,7 +193,7 @@ public class Status_Zombie : MonoBehaviour
     {
         if (RNGRolls_System.RollUnder(fallForwardChance * statusModifier))
         { 
-            StartFallForward();
+            FallForward();
             if (printDebugMessages) { Debug.Log("Fall Forward Success"); }
         }
         else
@@ -275,7 +223,7 @@ public class Status_Zombie : MonoBehaviour
 
         if (RNGRolls_System.RollUnder(successCutoff * statusModifier)) 
         {
-            StartFallBackward();
+            FallBackward();
             if (printDebugMessages) { Debug.Log("Fall Backward Success"); }
         }
         else
@@ -285,6 +233,16 @@ public class Status_Zombie : MonoBehaviour
     }
     #endregion
 
+    void PlayAnimationOnLimbs()
+    {
+        myLimbAnimController.PlayAnimation(currentStatus);
+    }
+
+    void ChangeStatus(FodderStatus newStatus)
+    {
+
+    }
+
     //applies a status by flipping a bool and initializing its duration value
     #region "do status" methods
     /// <summary>
@@ -292,8 +250,10 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void DoStumble()
     {
-        status = FodderStatus.Stumbling;
-        stumbleTimeRemaining = stumbleDuration;
+        currentStatus = FodderStatus.Stumbling;
+        Invoke(nameof(StopStumble), stumbleDuration);
+        PlayAnimationOnLimbs();
+        
     }
 
     /// <summary>
@@ -301,27 +261,87 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void DoStun()
     {
-        status = FodderStatus.Stunned;
-        stunTimeRemaining = stunDuration;
+        currentStatus = FodderStatus.Stunned;
+        Invoke(nameof(StopStun), stunDuration);
+        PlayAnimationOnLimbs();
     }
 
-    public void StartFallForward()
+    /// <summary>
+    /// changes state to falling forward.
+    /// relies on limbAnimController to trigger next state when transition anim is done
+    /// </summary>
+    public void FallForward()
     {
-        status = FodderStatus.FallenFaceDown;
-        fallenTimeRemaining = fallenDuration;
+        currentStatus = FodderStatus.FallingForward;
+        PlayAnimationOnLimbs();
     }
 
-    public void StartFallBackward()
+    /// <summary>
+    /// makes enemy fall face down and invokes recovery state after a delay
+    /// </summary>
+    public void StartFallenFaceDownStatus()
     {
-        status = FodderStatus.FallenFaceUp;
-        fallenTimeRemaining = fallenDuration;
+        currentStatus = FodderStatus.FallenFaceDown;
+        Invoke(nameof(StartPushUpRecover), fallenDuration);
+        PlayAnimationOnLimbs();
+
     }
 
-    public void StartEnrage()
+    /// <summary>
+    /// changes state to pushUpRecover.
+    /// relies on limbAnimController to trigger next state when transition anim is done
+    /// </summary>
+    public void StartPushUpRecover()
     {
-        status = FodderStatus.Enraged;
-        enrageTimeRemaining = enrageDuration;
+        currentStatus = FodderStatus.PushUpRecover;
+        PlayAnimationOnLimbs();
+    }
 
+    /// <summary>
+    /// changes state to fallingBackward.
+    /// relies on limbAnimController to trigger next state when transition anim is done
+    /// </summary>
+    public void FallBackward()
+    {
+        currentStatus = FodderStatus.FallingBackward;
+        PlayAnimationOnLimbs();
+    }
+
+    public void StartFallenFaceUpStatus()
+    {
+        currentStatus = FodderStatus.FallenFaceUp;
+        Invoke(nameof(SitUpRecover), fallenDuration);
+        PlayAnimationOnLimbs();
+    }
+
+    /// <summary>
+    /// changes state to sitUpRecover.
+    /// relies on limbAnimController to trigger next state when transition anim is done
+    /// </summary>
+    public void SitUpRecover()
+    {
+        currentStatus = FodderStatus.SitUpRecover;
+        PlayAnimationOnLimbs();
+    }
+
+
+    public void StartEnraging()
+    {
+        currentStatus = FodderStatus.Enraging;
+        PlayAnimationOnLimbs();
+    }
+
+    public void BecomeEnraged()
+    {
+        currentStatus = FodderStatus.Enraged;
+        Invoke(nameof(DoStumble), enrageDuration);
+        PlayAnimationOnLimbs();
+    }
+
+    public void BreakLegs()
+    {
+        currentStatus = FodderStatus.LegsBreaking;
+        PlayAnimationOnLimbs();
     }
 
     /// <summary>
@@ -329,31 +349,8 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StartCrawl()
     {
-        isCrawling = true;
-    }
-
-    /// <summary>
-    /// applies the attack status
-    /// </summary>
-    public void DoAttack()
-    {
-        isAttacking = true;
-    }
-
-    /// <summary>
-    /// applies the chase status
-    /// </summary>
-    public void DoChase()
-    {
-        isChasing = true;
-    }
-
-    /// <summary>
-    /// applies the tracking status
-    /// </summary>
-    public void DoTrack()
-    {
-        isTracking = true;
+        currentStatus = FodderStatus.Crawling;
+        PlayAnimationOnLimbs();
     }
 
     #endregion
@@ -366,7 +363,7 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StopStumble()
     {
-        status = FodderStatus.Idle;
+        currentStatus = FodderStatus.Idle;
     }
 
     /// <summary>
@@ -374,55 +371,19 @@ public class Status_Zombie : MonoBehaviour
     /// </summary>
     public void StopStun()
     {
-        status = FodderStatus.Idle;
+        currentStatus = FodderStatus.Idle;
     }
 
     public void GetUpFromFallForward()
     {
-        status = FodderStatus.Idle;
+        currentStatus = FodderStatus.Idle;
     }
 
     public void GetUpFromFallBackward()
     {
-        status = FodderStatus.Idle;
+        currentStatus = FodderStatus.Idle;
     }
 
-    public void StopEnrage()
-    {
-        status = FodderStatus.Stumbling;
-    }
-
-    /// <summary>
-    /// removes the crawling status
-    /// </summary>
-    public void StopCrawl()
-    {
-        isCrawling = false;
-    }
-
-    /// <summary>
-    /// removes the attack status
-    /// </summary>
-    public void StopAttack()
-    {
-        isAttacking = false;
-    }
-
-    /// <summary>
-    /// removes the chase status
-    /// </summary>
-    public void StopChase()
-    {
-        isChasing = false;
-    }
-
-    /// <summary>
-    /// removes the track status
-    /// </summary>
-    public void StopTrack()
-    {
-        isTracking = false;
-    }
 
     #endregion
 

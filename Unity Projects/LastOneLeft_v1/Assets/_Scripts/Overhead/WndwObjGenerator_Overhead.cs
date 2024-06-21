@@ -14,7 +14,7 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     public float floorYValue = 0;
 
     [Header("DEBUG")]
-    public List<ObjectTracker_Overhead> overheadObjectsList = new List<ObjectTracker_Overhead>();
+    public List<ObjectTracker_Overhead> overheadObjectsList;
     
 
     void Awake()
@@ -61,17 +61,13 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     /// <param name="overheadTrackerScript"></param>
     public void CreateWindowviewObject(ObjectTracker_Overhead overheadTrackerScript)
     {
-        bool isZombie = false;
-
-        GameObject parentObject = null;
+        GameObject parentObject;
 
         //make sure object spawns as child of correct parent in hierarchy
         if (overheadTrackerScript is ZombieTracker_Overhead)
         {
             //set parent object so zombie spawns as child of it's master object
             parentObject = (overheadTrackerScript as ZombieTracker_Overhead).ZmbMasterParentObj;
-            //Debug.Log("ZOMBIE DETECTD AT WINDOW");
-            isZombie = true;
         }
         //if its not a zombie, make it a child of the window view obj
         else
@@ -85,12 +81,6 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
 
         //align bottom edge with ground y level
         wndwObject.transform.position = new Vector3(0, floorYValue, 0);
-
-        //refresh sprites so window zombie has correct sprites
-        if (isZombie) 
-        {
-            parentObject.GetComponent <SpriteController_Zombie>().Refresh();
-        }
 
     }
 
