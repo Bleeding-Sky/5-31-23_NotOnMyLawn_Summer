@@ -9,6 +9,8 @@ public class SpawnDirector : MonoBehaviour
 {
     [Header("CONFIG")]
     [SerializeField] float spawnDelay = 5;
+    [SerializeField] float nightDuration = 240;
+    [SerializeField] float dayDuration = 150;
 
     [Header("DEBUG")]
     [SerializeField] SpriteRenderer walkableGroundSprite;
