@@ -33,7 +33,7 @@ public class Movement_Player : MonoBehaviour
         float newVelocity = inputDirection * currentMoveSpeed * playerStates.playerMobility;
         if (playerStates.isGrappled)
         {
-            newVelocity = inputDirection * .3f;
+            newVelocity = inputDirection * 0f;
         }
         
 

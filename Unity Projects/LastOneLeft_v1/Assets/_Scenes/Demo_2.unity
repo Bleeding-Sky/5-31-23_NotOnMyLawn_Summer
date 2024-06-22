@@ -8323,6 +8323,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329097493}
   m_CullTransparentMesh: 1
+--- !u!1 &1329611624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329611625}
+  m_Layer: 6
+  m_Name: Shove Postion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1329611625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329611624}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.42699993, y: 0.949, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1992530048}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1335454212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43562,7 +43593,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1329611625}
   m_Father: {fileID: 220207125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1992530049
@@ -44379,7 +44411,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.3
+  orthographic size: 2.142857
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -44888,6 +44920,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
       insertIndex: -1
       addedObject: {fileID: 180563076333826057}
+    - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 180563076333826058}
   m_SourcePrefab: {fileID: 100100000, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
 --- !u!4 &180563076333826051 stripped
 Transform:
@@ -45027,6 +45062,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
     m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 180563076333826058}
+        m_TargetAssemblyTypeName: Shove_Player, Assembly-CSharp
+        m_MethodName: ShoveAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a8b76430-a4cc-4e53-8ece-03cc25116932
+    m_ActionName: Indoor/Shove[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -45107,6 +45158,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+--- !u!114 &180563076333826058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420412964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f543608b522f61d459f3c58dc4937d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackArea: 0.5
+  attackPosition: {fileID: 1329611625}
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  enemiesInRange: []
+  closestEnemy: {fileID: 0}
+  shoving: 0
+  coolingDown: 0
 --- !u!1001 &6337235070155125725
 PrefabInstance:
   m_ObjectHideFlags: 0
