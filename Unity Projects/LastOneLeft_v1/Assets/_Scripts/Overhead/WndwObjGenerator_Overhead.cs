@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//detection range, used for spawning window counterparts of overhead objects
+[RequireComponent(typeof(Collider2D))]
+
 /// <summary>
 /// spawns and configures new window view objects when overhead objects are detected
 /// </summary>
@@ -14,16 +17,17 @@ public class WndwObjGenerator_Overhead : MonoBehaviour
     public float floorYValue = 0;
 
     [Header("DEBUG")]
+    //used for ensuring each object only generate one window object
     public List<ObjectTracker_Overhead> overheadObjectsList;
     
 
     void Awake()
     {
         //set collider to be a trigger if not already set
-        BoxCollider2D myBoxCollider = GetComponent<BoxCollider2D>();
-        if (!myBoxCollider.isTrigger)
+        Collider2D myCollider = GetComponent<Collider2D>();
+        if (!myCollider.isTrigger)
         {
-            myBoxCollider.isTrigger = true;
+            myCollider.isTrigger = true;
         }
     }
 

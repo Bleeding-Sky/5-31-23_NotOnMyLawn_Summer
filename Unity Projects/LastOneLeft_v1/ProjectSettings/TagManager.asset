@@ -14,6 +14,7 @@ TagManager:
   - Indoor Window
   - Door
   - Indoor Environment Parent Object
+  - Overhead Walkable Ground
   layers:
   - Default
   - TransparentFX

@@ -3935,6 +3935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613048099}
   - component: {fileID: 613048100}
+  - component: {fileID: 613048101}
   m_Layer: 0
   m_Name: Zombies
   m_TagString: Untagged
@@ -3972,7 +3973,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieMasterPrefab: {fileID: 7044362648136584179, guid: 360a6ef30fcee274a8adf861827ba2c1, type: 3}
   zombieOverheadPrefab: {fileID: 1406188645345146115, guid: 7cf16c74257a5d84aa72241a80502384, type: 3}
-  debug_OverheadSpawnPosition: {x: 2.5, y: 40}
+--- !u!114 &613048101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613048098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc227da5d9a8e54d839ba44e70869b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDelay: 5
+  walkableGroundSprite: {fileID: 0}
+  spawnerScript: {fileID: 0}
 --- !u!1 &718187971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9346,6 +9361,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 907347360179687142, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 101.02962
+      objectReference: {fileID: 0}
+    - target: {fileID: 907347360179687142, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.0132
+      objectReference: {fileID: 0}
     - target: {fileID: 4413688822916514419, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9390,6 +9413,10 @@ PrefabInstance:
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 0790fc7620f60384e8aa9f7f811bdbba, type: 2}
+    - target: {fileID: 5406608751991591905, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
+      propertyPath: m_TagString
+      value: Overhead Walkable Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 6374444048197886529, guid: 31e5569d0b920fb48a79153aa249d863, type: 3}
       propertyPath: windowAnchorObject
       value: 
