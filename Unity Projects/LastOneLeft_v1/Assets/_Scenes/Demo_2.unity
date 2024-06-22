@@ -3162,6 +3162,7 @@ MonoBehaviour:
   mediumAmmo: 100
   smallAmmo: 100
   maxInventorySize: 2
+  currentMaxInventorySize: 0
   ItemInteractionScript: {fileID: 1632706289}
   itemAssignment: {fileID: 1632706288}
   handInv: {fileID: 1857353533}
@@ -3170,6 +3171,8 @@ MonoBehaviour:
   numberPressed: 0
   lastInventorySlotChosen: 0
   invActive: 0
+  equipped: 0
+  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
 --- !u!114 &545283764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3208,7 +3211,19 @@ MonoBehaviour:
     m_ActionId: 07845674-d881-41fc-8d32-63fde041731d
     m_ActionName: Indoor/Secondary Interaction[/Keyboard/w]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 545283763}
+        m_TargetAssemblyTypeName: Inventory_Player, Assembly-CSharp
+        m_MethodName: EquipItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f4f44d66-4fe6-46d2-9390-cfad7b8e41b8
     m_ActionName: Indoor/Holster/Draw[/Keyboard/leftShift]
   - m_PersistentCalls:
@@ -3235,6 +3250,42 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
     m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8b76430-a4cc-4e53-8ece-03cc25116932
+    m_ActionName: Indoor/Shove[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 545283763}
+        m_TargetAssemblyTypeName: Inventory_Player, Assembly-CSharp
+        m_MethodName: ChooseFirstSlot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 98c2be6e-3e64-46cc-a49b-61b8561f9e50
+    m_ActionName: Indoor/Slot 1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 545283763}
+        m_TargetAssemblyTypeName: Inventory_Player, Assembly-CSharp
+        m_MethodName: ChooseSecondSlot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f3d3b88c-1308-47c8-a439-f4cf7e5f1209
+    m_ActionName: Indoor/Slot 2[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -4463,6 +4514,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3fd72bba-b97c-420a-9a20-fe99a6c8764f
     m_ActionName: Indoor/Toggle Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8b76430-a4cc-4e53-8ece-03cc25116932
+    m_ActionName: Indoor/Shove[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor
@@ -44991,9 +45046,6 @@ PrefabInstance:
       addedObject: {fileID: 180563076333826053}
     - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 180563076333826052}
-    - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 180563076333826057}
     - targetCorrespondingSourceObject: {fileID: 3939152620962786611, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
       insertIndex: -1
@@ -45004,19 +45056,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4172715063924391137, guid: d4f859edd3ce2aa4bb0c77a033d1aa33, type: 3}
   m_PrefabInstance: {fileID: 180563076333826050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &180563076333826052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420412964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133c26360ef45564799ad132420d6e89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStates: {fileID: 11400000, guid: c2c84abf154b72448a47b31070c99c6b, type: 2}
 --- !u!114 &180563076333826053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45111,7 +45150,7 @@ MonoBehaviour:
     m_ActionName: Indoor/Secondary Interaction[/Keyboard/w]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 180563076333826052}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: HolsterDrawToggle_Player, Assembly-CSharp
         m_MethodName: OnHolsterDraw
         m_Mode: 0
@@ -45153,6 +45192,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a8b76430-a4cc-4e53-8ece-03cc25116932
     m_ActionName: Indoor/Shove[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98c2be6e-3e64-46cc-a49b-61b8561f9e50
+    m_ActionName: Indoor/Slot 1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f3d3b88c-1308-47c8-a439-f4cf7e5f1209
+    m_ActionName: Indoor/Slot 2[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Indoor

@@ -14,7 +14,7 @@ public class Inventory_Player : MonoBehaviour
 
     [Header("CONFIG")]
     public int maxInventorySize;
-    private int currentMaxInventorySize;
+    [SerializeField]private int currentMaxInventorySize;
 
     [Header("DEBUG")]
     public Interaction_Player ItemInteractionScript;
@@ -25,6 +25,8 @@ public class Inventory_Player : MonoBehaviour
     public int numberPressed;
     public int lastInventorySlotChosen;
     public bool invActive;
+    public bool equipped;
+    public States_Player playerStates;
     /*
     * The item list essentially acts as the abstract version of 
     * the inventory. The order and way that the inventory looks in 
@@ -37,19 +39,7 @@ public class Inventory_Player : MonoBehaviour
     {
         //Sets what the current MaxInventory size is so that it can be changed later with upgrades
         currentMaxInventorySize = maxInventorySize;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        //gets what inventory slot is chosen and runs it through a function to select the item
-        numberPressed = GetPressedNumber();
-        if (numberPressed > 0)
-        {
-            ChosenInventorySlot(numberPressed);
-        }
-    }
+    } 
 
     /// <summary>
     /// Stores the item in the item list
@@ -113,6 +103,8 @@ public class Inventory_Player : MonoBehaviour
         if (!putItemInHand.itemInHand)
         {
             putItemInHand.PlaceObjectInHand(item[inventorySlot]);
+            equipped = true;
+            Debug.Log("Item to equip");
         }
         //if there is an object in the players hand it swaps it out for the chosen inventory slot
         else if (putItemInHand.itemInHand && lastInventorySlotChosen != inventorySlot)
@@ -122,36 +114,30 @@ public class Inventory_Player : MonoBehaviour
             if (item[inventorySlot] == null)
             {
                 Debug.Log("No item to swap");
-                putItemInHand.UnequipItem();
             }
             else
             {
                 putItemInHand.SwapItemInHand(item[inventorySlot]);
+                equipped = true;
+                Debug.Log("swap");
             }
         }
-        //if  the player chooses the same inventory slot that is already selected it unequips the item
-        else if (putItemInHand.itemInHand && lastInventorySlotChosen == inventorySlot)
-        {
-            putItemInHand.UnequipItem();
-        }
+
         lastInventorySlotChosen = inventorySlot;
     }
 
-    /// <summary>
-    /// function that gets the inputted number and returns it 
-    /// to the numberPressed variable to select the inventory slot
-    /// </summary>
-    /// <returns></returns>
-    public int GetPressedNumber()
+    
+    public void HolsterDrawToggler()
     {
-        for (int number = 0; number <= 9; number++)
+        if(equipped)
         {
-            if (Input.GetKeyDown(number.ToString()))
-                return number;
+            playerStates.gunIsDrawn = true;
         }
-        return -1;
+        else if(!equipped)
+        {
+            playerStates.gunIsDrawn = false;
+        }
     }
-
 
     /// <summary>
     /// Toggles the Radial menu for the player
@@ -185,4 +171,46 @@ public class Inventory_Player : MonoBehaviour
         }
         
     }
+
+    public void EquipItem(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.started && !equipped && (item[0] != null || item[1] != null))
+        {
+            if(item[0] != null)
+            {
+                ChosenInventorySlot(1);
+            }
+            else if(item[1] != null)
+            {
+                ChosenInventorySlot(2);
+            }
+            
+        }
+        else if(actionContext.started && equipped)
+        {
+            HandInventory_Player putItemInHand = handInv.GetComponent<HandInventory_Player>();
+            putItemInHand.UnequipItem();
+            equipped = false;
+        }
+        HolsterDrawToggler();
+    }
+
+    public void ChooseFirstSlot(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.started && equipped)
+        {
+            ChosenInventorySlot(1);
+        }
+        HolsterDrawToggler();
+    }
+
+    public void ChooseSecondSlot(InputAction.CallbackContext actionContext)
+    {
+        if (actionContext.started && equipped)
+        {
+            ChosenInventorySlot(2);
+        }
+        HolsterDrawToggler();
+    }
+
 }

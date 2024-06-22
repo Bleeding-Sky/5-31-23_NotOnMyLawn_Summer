@@ -167,9 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletRB: {fileID: 8936502522062321887}
   bulletStartPosition: {x: 0, y: 0, z: 0}
-  xDirection: -0.9396926
-  yDirection: -0.34202015
-  bulletSpeed: 40
+  xDirection: -0.98768836
+  yDirection: -0.15643446
+  bulletSpeed: 30
 --- !u!114 &-4334091110431089390
 MonoBehaviour:
   m_ObjectHideFlags: 0
