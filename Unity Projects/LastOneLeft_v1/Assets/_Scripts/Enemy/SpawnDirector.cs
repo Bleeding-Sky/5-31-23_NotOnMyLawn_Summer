@@ -20,6 +20,8 @@ public class SpawnDirector : MonoBehaviour
 
     [SerializeField] Spawner_Zombie spawnerScript;
 
+    [SerializeField] bool isNight = true;
+
     private void Awake()
     {
         spawnerScript = GetComponent<Spawner_Zombie>();
@@ -33,8 +35,7 @@ public class SpawnDirector : MonoBehaviour
         spawnAreaXMin = walkableGroundSprite.transform.position.x - walkableGroundSprite.bounds.extents.x;
         spawnAreaXMax = walkableGroundSprite.transform.position.x + walkableGroundSprite.bounds.extents.x;
         spawnAreaTop = walkableGroundSprite.transform.position.y + walkableGroundSprite.bounds.extents.y;
-
-        SpawnEnemy();
+        StartNight();
     }
 
     void SpawnEnemy()
@@ -43,6 +44,24 @@ public class SpawnDirector : MonoBehaviour
         Vector2 spawnPosition = new Vector2(Random.Range(spawnAreaXMin, spawnAreaXMax), spawnAreaTop);
         spawnerScript.SpawnZmb(spawnPosition);
 
-        Invoke(nameof(SpawnEnemy), spawnDelay);
+        if (isNight)
+        {
+            Invoke(nameof(SpawnEnemy), spawnDelay);
+        }
+        
     }
+
+    void StartNight()
+    {
+        isNight = true;
+        Invoke(nameof(StartDay), nightDuration);
+        SpawnEnemy();
+    }
+
+    void StartDay()
+    { 
+        isNight = false;
+        Invoke(nameof(StartNight), dayDuration);
+    }
+
 }
