@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6275653137760607717}
   - component: {fileID: 7604626001148646087}
   - component: {fileID: 3270469239815769488}
+  - component: {fileID: 5423834308770840503}
   m_Layer: 0
   m_Name: Basic Zombie (Master)
   m_TagString: Zombie
@@ -54,6 +55,7 @@ MonoBehaviour:
   weakRegionHealth: 30
   statusScript: {fileID: 0}
   limbLossScript: {fileID: 0}
+  itemDropperScript: {fileID: 0}
   currentHealth: 0
   armoredRegionCurrentHealth: 0
 --- !u!114 &4513625182986771571
@@ -84,6 +86,7 @@ MonoBehaviour:
   headCondition: 0
   LArmCondition: 0
   RArmCondition: 0
+  bodyCondition: 0
   legsCondition: 0
 --- !u!114 &6275653137760607717
 MonoBehaviour:
@@ -134,3 +137,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limbAnimators: []
   statusScript: {fileID: 0}
+--- !u!114 &5423834308770840503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c1f91dfd9de5c4790a8f5cb0062df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropBandage: 1
+  dropAmmoPack: 0
+  bandageDropChance: 15
+  ammoDropChance: 10
+  bandagePrefab: {fileID: 6298973959920411055, guid: 4d9710d5a5ee1db488e3fe705c8fb97a, type: 3}
+  ammoPackPrefab: {fileID: 0}

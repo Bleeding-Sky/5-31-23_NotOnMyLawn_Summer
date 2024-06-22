@@ -4,7 +4,8 @@ using UnityEngine;
 
 [RequireComponent(
     typeof(Status_Zombie),
-    typeof(LimbLoss_Zombie)
+    typeof(LimbLoss_Zombie),
+    typeof(ItemDropper)
     )]
 
 public class Health_Zombie : MonoBehaviour
@@ -20,6 +21,7 @@ public class Health_Zombie : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] Status_Zombie statusScript;
     [SerializeField] LimbLoss_Zombie limbLossScript;
+    [SerializeField] ItemDropper itemDropperScript;
 
     public float currentHealth;
     public float armoredRegionCurrentHealth;
@@ -31,6 +33,8 @@ public class Health_Zombie : MonoBehaviour
         limbLossScript = GetComponent <LimbLoss_Zombie>();
         currentHealth = maxHealth;
         armoredRegionCurrentHealth = armoredRegionMaxHealth;
+
+        itemDropperScript = GetComponent<ItemDropper>();
     }
 
     private void Update()
@@ -112,6 +116,7 @@ public class Health_Zombie : MonoBehaviour
     /// </summary>
     public void Die()
     {
+        itemDropperScript.AttemptDrop();
         Destroy(gameObject);
     }
 
