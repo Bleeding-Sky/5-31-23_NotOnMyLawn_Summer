@@ -36,9 +36,12 @@ public class LimbAnimController : MonoBehaviour
     {
 
         FetchLimbAnimators();
+        
         //if this^ causes performance issues,move this to other scripts
         //and make it ONLY trigger when a new view of the enemy is created.
 
+        //OCCASIONALLY this will cause an error due to missing references in the list.
+        //i do not know why this happens. maybe fetch method taking too long? idk.
         foreach (LimbAnimator limbAnimator in limbAnimators)
         {
             limbAnimator.PlayAnimation(status, headCondition, LArmCondition, RArmCondition, bodyCondition, legsConsition);
@@ -81,6 +84,7 @@ public class LimbAnimController : MonoBehaviour
     void FetchLimbAnimators()
     {
         limbAnimators.Clear();
+        //Debug.Log("Fetching animators...");
         GetComponentsInChildren<LimbAnimator>(limbAnimators);
     }
 
