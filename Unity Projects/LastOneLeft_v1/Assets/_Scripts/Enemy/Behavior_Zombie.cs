@@ -26,6 +26,7 @@ public class Behavior_Zombie : MonoBehaviour
     public Status_Zombie statusScript;
     public IndoorStates_Enemy stateScript;
     public RoomTracking_Zombie roomTrackingScript;
+    public Shove_Enemy shoveScript;
     public Transform attackPoint;
     public Vector3 zombiePosition;
     public bool recharging;
@@ -35,6 +36,7 @@ public class Behavior_Zombie : MonoBehaviour
         statusScript = GetComponentInParent<Status_Zombie>();
         stateScript = GetComponent<IndoorStates_Enemy>();
         roomTrackingScript = GetComponent<RoomTracking_Zombie>();
+        shoveScript = GetComponent<Shove_Enemy>();
     }
 
     // Update is called once per frame
@@ -104,7 +106,7 @@ public class Behavior_Zombie : MonoBehaviour
         stateScript.preAttackChasing = false;
         //Checks to make sure that the player is not already grappling the player in case
         //the player runs into the zombie before the wind up is done
-        if (!stateScript.grapplingPlayer)
+        if (!stateScript.grapplingPlayer && !shoveScript.shoved)
         {
             //Used to determine the distance from the player to zombie at the time of the attack
             float distanceFromPlayer = Mathf.Abs(transform.position.x - player.transform.position.x);
@@ -207,7 +209,7 @@ public class Behavior_Zombie : MonoBehaviour
     #region State Handlers
     public void DetermineAction()
     {
-        if(!recharging)
+        if(!recharging && !shoveScript.stunned)
         {
             switch(stateScript.enemyState)
             {
@@ -222,6 +224,9 @@ public class Behavior_Zombie : MonoBehaviour
                     break;
                 case IndoorStates_Enemy.EnemyStates.Grappling:
                     InitiateGrapple();
+                    break;
+                case IndoorStates_Enemy.EnemyStates.Shoved:
+                    shoveScript.Shove();
                     break;
                 case IndoorStates_Enemy.EnemyStates.Idle:
                     break;

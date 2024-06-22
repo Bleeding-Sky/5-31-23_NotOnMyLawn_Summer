@@ -6,12 +6,13 @@ public class IndoorStates_Enemy : MonoBehaviour
 {
     [Header("STATE HANDLER")]
     public Collider2D[] players;
-    public enum EnemyStates { Idle, Attack, Chase, Tracking, Grappling};
+    public enum EnemyStates { Idle, Attack, Chase, Tracking, Grappling, Shoved};
     public EnemyStates enemyState;
 
     [Header("SCRIPTS")]
     public Behavior_Zombie behaviorScript;
     public RoomTracking_Zombie tracker;
+    public Shove_Enemy shoveScript;
 
     [Header("PLAYER STATES")]
     public LayerMask Player;
@@ -26,6 +27,7 @@ public class IndoorStates_Enemy : MonoBehaviour
         enemyState = EnemyStates.Idle;
         behaviorScript = GetComponent<Behavior_Zombie>();
         tracker = GetComponent<RoomTracking_Zombie>();
+        shoveScript = GetComponent<Shove_Enemy>();
     }
 
     // Update is called once per frame
@@ -47,8 +49,11 @@ public class IndoorStates_Enemy : MonoBehaviour
     /// </summary>
     public void DetermineState()
     {
-
-        if (!playerInRange && !behaviorScript.recharging && playerInRoom)
+        if(shoveScript.shoved)
+        {
+            enemyState = EnemyStates.Shoved;
+        }
+        else if(!playerInRange && !behaviorScript.recharging && playerInRoom)
         {
             enemyState = EnemyStates.Chase;
         }
@@ -100,7 +105,7 @@ public class IndoorStates_Enemy : MonoBehaviour
         float distanceFromPlayer = Mathf.Abs(transform.position.x - player.transform.position.x);
         float grappleDistance = behaviorScript.attackArea / 10f;
 
-        if(distanceFromPlayer <= grappleDistance)
+        if(distanceFromPlayer <= grappleDistance && !shoveScript.stunned && !shoveScript.shoved)
         {
             grapplingPlayer = true;
             Debug.Log("Grappling");
