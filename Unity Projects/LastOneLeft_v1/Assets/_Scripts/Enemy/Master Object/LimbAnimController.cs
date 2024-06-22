@@ -30,6 +30,7 @@ public class LimbAnimController : MonoBehaviour
                                 LimbCondition headCondition,
                                 LimbCondition LArmCondition,
                                 LimbCondition RArmCondition,
+                                LimbCondition bodyCondition,
                                 LimbCondition legsConsition
                               )
     {
@@ -40,9 +41,11 @@ public class LimbAnimController : MonoBehaviour
 
         foreach (LimbAnimator limbAnimator in limbAnimators)
         {
-            limbAnimator.PlayAnimation(status, headCondition, LArmCondition, RArmCondition, legsConsition);
+            limbAnimator.PlayAnimation(status, headCondition, LArmCondition, RArmCondition, bodyCondition, legsConsition);
         }
 
+        //invokes a method that transitions to the next state.
+        //the methods (on the status script) check for prerequisite states in order to transition
         switch(status)
         {
             case FodderStatus.FallingForward:
@@ -50,7 +53,7 @@ public class LimbAnimController : MonoBehaviour
                 break;
 
             case FodderStatus.PushUpRecover:
-                statusScript.Invoke(nameof(statusScript.StartPushUpRecover), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.BecomeIdle), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.FallingBackward:
@@ -58,15 +61,15 @@ public class LimbAnimController : MonoBehaviour
                 break;
 
             case FodderStatus.SitUpRecover:
-                statusScript.Invoke(nameof(statusScript.StartPushUpRecover), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.BecomeIdle), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.Enraging:
-                statusScript.Invoke(nameof(statusScript.StartEnraging), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.BecomeEnraged), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
 
             case FodderStatus.LegsBreaking:
-                statusScript.Invoke(nameof(statusScript.BreakLegs), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
+                statusScript.Invoke(nameof(statusScript.StartCrawl), limbAnimators[0].myAnimator.GetCurrentAnimatorStateInfo(0).length);
                 break;
         }
 
@@ -77,6 +80,7 @@ public class LimbAnimController : MonoBehaviour
     /// </summary>
     void FetchLimbAnimators()
     {
+        limbAnimators.Clear();
         GetComponentsInChildren<LimbAnimator>(limbAnimators);
     }
 

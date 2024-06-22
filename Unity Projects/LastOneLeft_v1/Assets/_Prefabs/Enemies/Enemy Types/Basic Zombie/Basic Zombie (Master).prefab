@@ -80,14 +80,11 @@ MonoBehaviour:
   enrageDuration: 2
   printDebugMessages: 0
   myLimbAnimController: {fileID: 0}
-  status: 0
+  currentStatus: 0
   headCondition: 0
   LArmCondition: 0
   RArmCondition: 0
   legsCondition: 0
-  isAttacking: 0
-  isChasing: 0
-  isTracking: 0
 --- !u!114 &6275653137760607717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +133,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limbAnimators: []
+  statusScript: {fileID: 0}

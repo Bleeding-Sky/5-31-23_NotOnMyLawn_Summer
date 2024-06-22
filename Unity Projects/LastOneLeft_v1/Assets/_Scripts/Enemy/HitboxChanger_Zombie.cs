@@ -23,21 +23,26 @@ public class HitboxChanger_Zombie : MonoBehaviour
         parentStatusScript = GetComponentInParent<Status_Zombie>();
     }
 
+    private void Update()
+    {
+        ChangeHitbox(parentStatusScript.headCondition, parentStatusScript.legsCondition);
+    }
+
     /// <summary>
     /// changes an object's hitbox to the specified type
     /// </summary>
     /// <param name="hitboxType"></param>
-    public void ChangeHitbox(LimbCondition headCondition, LimbCondition legCondition)
+    public void ChangeHitbox(LimbCondition headCondition, LimbCondition legsCondition)
     {
         GameObject currentHeadObject = null;
 
         //set body hitbox and save correct head hitbox
-        if (legCondition == LimbCondition.Broken)
+        if (legsCondition == LimbCondition.Broken)
         {
             ActivateCrawlingHitbox();
             currentHeadObject = crawlingHeadHitboxObject;
         }
-        else if (legCondition == LimbCondition.Intact)
+        else if (legsCondition == LimbCondition.Intact)
         {
             ActivateStandingHitbox();
             currentHeadObject = standingHeadHitboxObject;

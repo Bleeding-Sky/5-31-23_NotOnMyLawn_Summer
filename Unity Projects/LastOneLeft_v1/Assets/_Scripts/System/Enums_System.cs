@@ -16,7 +16,7 @@ public enum FodderStatus {
         Enraging, Enraged, 
         LegsBreaking, Crawling};
 
-public enum FodderLimb { Head, LArm, RArm, Legs };
+public enum FodderLimb { Head, LArm, RArm, Body, Legs };
 
 public enum LimbCondition { Intact, Broken };
 

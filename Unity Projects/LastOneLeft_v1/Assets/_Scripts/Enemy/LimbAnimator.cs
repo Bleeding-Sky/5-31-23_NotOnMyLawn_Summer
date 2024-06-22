@@ -21,19 +21,19 @@ public class LimbAnimator : MonoBehaviour
     const string legsBreakingState = "Legs Breaking";
     const string crawlingState = "Crawling";
 
-    const string idleState_Broken = "Idle";
-    const string stumblingState_Broken = "Stumbling";
-    const string stunnedState_Broken = "Stunned";
-    const string fallingForwardState_Broken = "Falling Forward";
-    const string fallenFaceDownState_Broken = "Fallen Face Down";
-    const string pushUpRecoverState_Broken = "Push Up Recover";
-    const string fallingBackwardState_Broken = "Falling Backward";
-    const string fallenFaceUpState_Broken = "Fallen Face Up";
-    const string sitUpRecoverState_Broken = "Sit Up Recover";
-    const string enragingState_Broken = "Enraging";
-    const string enragedState_Broken = "Enraged";
-    const string legsBreakingState_Broken = "Legs Breaking";
-    const string crawlingState_Broken = "Crawling";
+    const string idleState_Broken = "Idle (Broken)";
+    const string stumblingState_Broken = "Stumbling (Broken)";
+    const string stunnedState_Broken = "Stunned (Broken)";
+    const string fallingForwardState_Broken = "Falling Forward (Broken)";
+    const string fallenFaceDownState_Broken = "Fallen Face Down (Broken)";
+    const string pushUpRecoverState_Broken = "Push Up Recover (Broken)";
+    const string fallingBackwardState_Broken = "Falling Backward (Broken)";
+    const string fallenFaceUpState_Broken = "Fallen Face Up (Broken)";
+    const string sitUpRecoverState_Broken = "Sit Up Recover (Broken)";
+    const string enragingState_Broken = "Enraging (Broken)";
+    const string enragedState_Broken = "Enraged (Broken)";
+    const string legsBreakingState_Broken = "Legs Breaking (Broken)";
+    const string crawlingState_Broken = "Crawling (Broken)";
     #endregion
 
     string[] intactStateNames = { idleState,
@@ -53,7 +53,8 @@ public class LimbAnimator : MonoBehaviour
                             legsBreakingState_Broken, crawlingState_Broken};
 
     [Header("CONFIG")]
-    [SerializeField] FodderLimb limbType;
+    [SerializeField] FodderLimb myLimbType;
+    [SerializeField] bool showDebugMessages = false;
 
     [Header("DEBUG")]
     public Animator myAnimator;
@@ -73,45 +74,91 @@ public class LimbAnimator : MonoBehaviour
                         LimbCondition headCondition,
                         LimbCondition LArmCondition,
                         LimbCondition RArmCondition,
+                        LimbCondition bodyCondition,
                         LimbCondition legsCondition)
     {
+        if (showDebugMessages) { Debug.Log("Playing animation"); }
 
-        bool isBroken = false;
+        //check if limb is broken
+        bool isBroken = CheckBrokenStatus(headCondition, LArmCondition, RArmCondition, bodyCondition, legsCondition);
 
-        isBroken = CheckBrokenStatus(headCondition, LArmCondition, RArmCondition, legsCondition, isBroken);
-
-
+        //use correct animation state array depending on if the limb is broken
         string animStateName;
         if (isBroken)
         {
-            animStateName = intactStateNames[((int)status)];
+            animStateName = brokenStateNames[((int)status)];
         }
         else
         {
-            animStateName = brokenStateNames[((int)status)];
+            animStateName = intactStateNames[((int)status)];
         }
 
         myAnimator.CrossFade(animStateName, 0, 0);
     }
 
-    private bool CheckBrokenStatus(LimbCondition headCondition, LimbCondition LArmCondition, LimbCondition RArmCondition, LimbCondition legsCondition, bool isBroken)
+    /// <summary>
+    /// checks all limb statuses against its own limb type to see if it is broken
+    /// </summary>
+    /// <param name="headCondition"></param>
+    /// <param name="LArmCondition"></param>
+    /// <param name="RArmCondition"></param>
+    /// <param name="legsCondition"></param>
+    /// <returns></returns>
+    private bool CheckBrokenStatus( LimbCondition headCondition, 
+                                    LimbCondition LArmCondition, 
+                                    LimbCondition RArmCondition, 
+                                    LimbCondition bodyCondition, 
+                                    LimbCondition legsCondition)
     {
-        switch (limbType)
+        bool isBroken = false;
+
+        switch (myLimbType)
         {
             case FodderLimb.Head:
-                if (headCondition == LimbCondition.Broken) { isBroken = true; }
+                if (headCondition == LimbCondition.Broken) 
+                { 
+                    isBroken = true;
+                    if (showDebugMessages) { Debug.Log("Head detected as broken"); }
+                }
+                
+                
                 break;
 
             case FodderLimb.LArm:
-                if (LArmCondition == LimbCondition.Broken) { isBroken = true; }
+                if (LArmCondition == LimbCondition.Broken) 
+                { 
+                    isBroken = true;
+                    if (showDebugMessages) { Debug.Log("Left Arm detected as broken"); }
+                }
+                
+
                 break;
 
             case FodderLimb.RArm:
-                if (RArmCondition == LimbCondition.Broken) { isBroken = true; }
+                if (RArmCondition == LimbCondition.Broken)
+                { 
+                    isBroken = true;
+                    if (showDebugMessages) { Debug.Log("Right Arm detected as broken"); }
+                }
+                
+                break;
+
+            case FodderLimb.Body:
+                if (bodyCondition == LimbCondition.Broken)
+                {
+                    isBroken = true;
+                    if (showDebugMessages) { Debug.Log("Body detected as broken"); }
+                }
+
                 break;
 
             case FodderLimb.Legs:
-                if (legsCondition == LimbCondition.Broken) { isBroken = true; }
+                if (legsCondition == LimbCondition.Broken)
+                { 
+                    isBroken = true;
+                    if (showDebugMessages) { Debug.Log("Legs detected as broken"); }
+                }
+                
                 break;
         }
 

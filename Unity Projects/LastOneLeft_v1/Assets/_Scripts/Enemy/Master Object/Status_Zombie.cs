@@ -35,10 +35,11 @@ public class Status_Zombie : MonoBehaviour
     //DO NOT EDIT THESE DIRECTLY- PLEASE USE METHODS BELOW
     public FodderStatus currentStatus = FodderStatus.Idle;
 
-    [SerializeField] LimbCondition headCondition = LimbCondition.Intact;
+    public LimbCondition headCondition = LimbCondition.Intact;
     public LimbCondition LArmCondition = LimbCondition.Intact;
     public LimbCondition RArmCondition = LimbCondition.Intact;
-    [SerializeField] LimbCondition legsCondition = LimbCondition.Intact;
+    public LimbCondition bodyCondition = LimbCondition.Intact;
+    public LimbCondition legsCondition = LimbCondition.Intact;
 
 
     private void Awake()
@@ -54,6 +55,7 @@ public class Status_Zombie : MonoBehaviour
     /// <param name="newCondition"></param>
     public void ChangeLimbCondition(FodderLimb limb, LimbCondition newCondition)
     {
+        if (printDebugMessages) { Debug.Log("Limb status changed"); }
 
         switch (limb)
         {
@@ -69,10 +71,17 @@ public class Status_Zombie : MonoBehaviour
                 RArmCondition = newCondition;
                 break;
 
+            case FodderLimb.Body:
+                bodyCondition = newCondition;
+                break;
+
             case FodderLimb.Legs:
                 legsCondition = newCondition;
                 break;
         }
+
+        //refresh animations to account for new limb loss
+        PlayAnimationOnLimbs();
 
     }
 
@@ -237,7 +246,7 @@ public class Status_Zombie : MonoBehaviour
 
     public void PlayAnimationOnLimbs()
     {
-        myLimbAnimController.ChangeAnimationState(currentStatus, headCondition, LArmCondition, RArmCondition, legsCondition);
+        myLimbAnimController.ChangeAnimationState(currentStatus, headCondition, LArmCondition, RArmCondition, bodyCondition, legsCondition);
     }
 
     //applies a status  if its prerequisite status is met.
