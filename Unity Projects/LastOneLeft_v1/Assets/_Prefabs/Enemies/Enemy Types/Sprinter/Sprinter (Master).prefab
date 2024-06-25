@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7044362648136584179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7052477186205695649}
+  - component: {fileID: 7761295868456820334}
+  - component: {fileID: 4513625182986771571}
+  - component: {fileID: 6275653137760607717}
+  - component: {fileID: 7604626001148646087}
+  - component: {fileID: 3270469239815769488}
+  - component: {fileID: 5423834308770840503}
+  m_Layer: 0
+  m_Name: Sprinter (Master)
+  m_TagString: Zombie
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7052477186205695649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7761295868456820334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5362f6536f00a4444a4701e2e7de5648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 25
+  critRegionHealth: 10
+  armoredRegionMaxHealth: 20
+  weakRegionHealth: 15
+  statusScript: {fileID: 0}
+  limbLossScript: {fileID: 0}
+  itemDropperScript: {fileID: 0}
+  currentHealth: 0
+  armoredRegionCurrentHealth: 0
+--- !u!114 &4513625182986771571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e8782ba95c234479a03a5231eaec6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stumbleDuration: 1
+  stumbleChance: 30
+  stunDuration: 3
+  headshotStunChance: 40
+  bodyshotStunChance: 20
+  fallenDuration: 5
+  fallForwardChance: 50
+  headshotFallBackwardChance: 60
+  bodyshotFallBackwardChance: 30
+  enrageDuration: 2
+  printDebugMessages: 0
+  myLimbAnimController: {fileID: 0}
+  currentStatus: 0
+  headCondition: 0
+  LArmCondition: 0
+  RArmCondition: 0
+  bodyCondition: 0
+  legsCondition: 0
+--- !u!114 &6275653137760607717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f002ecc480f35249ba816a22960c556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highHealthHeadBreakEndureChance: 70
+  lowHealthHeadBreakEndureChance: 50
+  printDebugMessages: 0
+  statusScript: {fileID: 0}
+  healthScript: {fileID: 0}
+--- !u!114 &7604626001148646087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a7727230e788a48b817e691c591907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indoorZmbPrefab: {fileID: 7634217409129547592, guid: ff8b923b13ca5784485bb9414c4c89e6, type: 3}
+  enterBuildingDuration: 1
+  localcopy_indoorWindowTranform: {fileID: 0}
+  isEnteringBuilding: 0
+  enterBuildingTimeRemaining: 0
+  cameraManagerScript: {fileID: 11400000, guid: 7425d387cc03aa2488ae816a84191c0b, type: 2}
+--- !u!114 &3270469239815769488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fb1244a52eadf4dbc0a8af0ad5f7d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limbAnimators: []
+  statusScript: {fileID: 0}
+--- !u!114 &5423834308770840503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044362648136584179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c1f91dfd9de5c4790a8f5cb0062df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropBandage: 1
+  dropAmmoPack: 0
+  bandageDropChance: 15
+  ammoDropChance: 10
+  bandagePrefab: {fileID: 6298973959920411055, guid: 4d9710d5a5ee1db488e3fe705c8fb97a, type: 3}
+  ammoPackPrefab: {fileID: 0}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,18 @@ using UnityEngine.U2D;
 
 public class SpawnDirector : MonoBehaviour
 {
+    [Serializable]
+    public struct EnemySpawnPrefabs
+    {
+        public GameObject masterPrefab;
+        public GameObject overheadPrefab;
+    }
+
     [Header("CONFIG")]
     [SerializeField] float spawnDelay = 5;
     [SerializeField] float nightDuration = 240;
     [SerializeField] float dayDuration = 150;
+    [SerializeField] List<EnemySpawnPrefabs> spawnableEnemies;
 
     [Header("DEBUG")]
     [SerializeField] SpriteRenderer walkableGroundSprite;
@@ -40,15 +49,30 @@ public class SpawnDirector : MonoBehaviour
 
     void SpawnEnemy()
     {
+
+        EnemySpawnPrefabs enemyToSpawn = ChooseEnemyToSpawn();
+
         //spawns an enemy at a random x coordinate at the farthest y of the walkable area
-        Vector2 spawnPosition = new Vector2(Random.Range(spawnAreaXMin, spawnAreaXMax), spawnAreaTop);
-        spawnerScript.SpawnZmb(spawnPosition);
+        Vector2 spawnPosition = new Vector2(UnityEngine.Random.Range(spawnAreaXMin, spawnAreaXMax), spawnAreaTop);
+        spawnerScript.SpawnZmb(spawnPosition, enemyToSpawn.masterPrefab, enemyToSpawn.overheadPrefab);
 
         if (isNight)
         {
             Invoke(nameof(SpawnEnemy), spawnDelay);
         }
         
+    }
+
+    /// <summary>
+    /// selects an enemy to spawn from the SpawnableEnemies list.
+    /// </summary>
+    /// <returns></returns>
+    EnemySpawnPrefabs ChooseEnemyToSpawn()
+    {
+        //randomly pick an enemy to spawn from all in list. equal chance of each
+        EnemySpawnPrefabs enemyToSpawn = spawnableEnemies[UnityEngine.Random.Range(0, spawnableEnemies.Count)];
+
+        return enemyToSpawn;
     }
 
     void StartNight()

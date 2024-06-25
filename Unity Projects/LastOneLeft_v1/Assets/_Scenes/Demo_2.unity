@@ -4022,8 +4022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4ea6545003cd24da4920890cb2f431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieMasterPrefab: {fileID: 7044362648136584179, guid: 360a6ef30fcee274a8adf861827ba2c1, type: 3}
-  zombieOverheadPrefab: {fileID: 1406188645345146115, guid: 7cf16c74257a5d84aa72241a80502384, type: 3}
 --- !u!114 &613048101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4039,8 +4037,16 @@ MonoBehaviour:
   spawnDelay: 4
   nightDuration: 240
   dayDuration: 150
+  spawnableEnemies:
+  - masterPrefab: {fileID: 7044362648136584179, guid: 360a6ef30fcee274a8adf861827ba2c1, type: 3}
+    overheadPrefab: {fileID: 1406188645345146115, guid: 7cf16c74257a5d84aa72241a80502384, type: 3}
+  - masterPrefab: {fileID: 7044362648136584179, guid: b908b97b1767b054886dd70478655abe, type: 3}
+    overheadPrefab: {fileID: 1406188645345146115, guid: eff7b4b7b3daa814f94f2f6fd7c2d9f3, type: 3}
+  - masterPrefab: {fileID: 7044362648136584179, guid: 14c42227bd770c9458efe91938987bab, type: 3}
+    overheadPrefab: {fileID: 1406188645345146115, guid: 83ec6f1a9f37e594aa3192c21946931e, type: 3}
   walkableGroundSprite: {fileID: 0}
   spawnerScript: {fileID: 0}
+  isNight: 1
 --- !u!1 &718187971
 GameObject:
   m_ObjectHideFlags: 0
