@@ -197,7 +197,7 @@ public class Inventory_Player : MonoBehaviour
 
     public void ChooseFirstSlot(InputAction.CallbackContext actionContext)
     {
-        if (actionContext.started && equipped)
+        if (actionContext.started && equipped && item[0] != null)
         {
             ChosenInventorySlot(1);
         }
@@ -206,7 +206,7 @@ public class Inventory_Player : MonoBehaviour
 
     public void ChooseSecondSlot(InputAction.CallbackContext actionContext)
     {
-        if (actionContext.started && equipped)
+        if (actionContext.started && equipped && item[1] != null)
         {
             ChosenInventorySlot(2);
         }
